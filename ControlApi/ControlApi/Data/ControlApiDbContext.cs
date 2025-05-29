@@ -1,7 +1,7 @@
-using ControlApi.ControlApi.Data.Entities;
+using ControlApi.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace ControlApi.ControlApi.Data;
+namespace ControlApi.Data;
 
 public class ControlApiDbContext : DbContext
 {

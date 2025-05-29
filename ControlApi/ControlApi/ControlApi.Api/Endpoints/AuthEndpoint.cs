@@ -1,1 +1,0 @@
-namespace ControlApi.ControlApi.Api.Endpoints;
