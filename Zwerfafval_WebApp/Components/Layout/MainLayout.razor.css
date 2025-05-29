@@ -20,6 +20,13 @@ main {
     display: flex;
     align-items: center;
 }
+    .top-row a {
+        flex: 1; /* Verdeel gelijke ruimte */
+        text-align: center; /* Optioneel: tekst centreren */
+        text-decoration: none;
+        color: #006bb7;
+    }
+
 
     .top-row ::deep a, .top-row ::deep .btn-link {
         white-space: nowrap;
