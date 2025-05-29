@@ -1,4 +1,5 @@
 using ControlApi;
+using ControlApi.ControlApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql;
 

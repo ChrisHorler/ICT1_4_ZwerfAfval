@@ -1,8 +1,8 @@
+using ControlApi.ControlApi.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ControlApi.Entities;
 
-namespace ControlApi.Configuration;
+namespace ControlApi.ControlApi.Data.Configuration;
 
 public class UserConfig : IEntityTypeConfiguration<User>
 {

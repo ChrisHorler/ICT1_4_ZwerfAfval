@@ -1,8 +1,8 @@
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ControlApi.ControlApi.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using ControlApi.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ControlApi.Configuration;
+namespace ControlApi.ControlApi.Data.Configuration;
 
 public class POIConfig : IEntityTypeConfiguration<POI>
 {

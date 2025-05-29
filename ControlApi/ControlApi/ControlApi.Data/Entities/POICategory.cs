@@ -1,4 +1,4 @@
-namespace ControlApi.Entities;
+namespace ControlApi.ControlApi.Data.Entities;
 
 public class POICategory
 {
