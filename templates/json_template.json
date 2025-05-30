@@ -1,0 +1,24 @@
+[
+    {
+        "timestamp": "2025-05-27T14:00:00Z", // date object parsed to string
+        "type": "blikje", // string
+        "confidence": 0.95, // float
+        "longitude": 52.23, // float
+        "latitude": 54.67, // float
+        "feels_like_temp_celsius": null, // datatype from your api
+        "actual_temp_celsius": null, // datatype from your api
+        "wind_force_bft": null, // datatype from your api
+        "wind_direction": null // datatype from your api
+    },
+    {
+        "timestamp": "2025-05-27T15:00:00Z", // date object parsed to string
+        "type": "peuk", // string
+        "confidence": 0.75, // float
+        "longitude": 52.23, // float
+        "latitude": 54.67, // float
+        "feels_like_temp_celsius": null, // datatype from your api
+        "actual_temp_celsius": null, // datatype from your api
+        "wind_force_bft": null, // datatype from your api
+        "wind_direction": null // datatype from your api
+    }
+]
