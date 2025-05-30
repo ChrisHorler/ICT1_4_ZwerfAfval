@@ -1,0 +1,17 @@
+name: Deploy ControlApi to VPS
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    
+jobs:
+  notify_portainer:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Call Portainer webhook
+        run: |
+          curl -fsSLk "$PORTAINER_WEBHOOK"
+        env:
+          PORTAINER_WEBHOOK: ${{ secrets.PORTAINER_WEBHOOK }}
