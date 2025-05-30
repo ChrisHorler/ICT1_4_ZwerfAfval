@@ -1,0 +1,44 @@
+﻿@using System.Globalization
+
+@code {
+    private int currentYear = DateTime.Today.Year;
+    private int currentMonth = DateTime.Today.Month;
+    //private int nextMonth = DateTime.Today.Month == 12 ? 1 : DateTime.Today.Month + 1;
+    private int FirstDayOffset => ((int)DaysInMonth[0].DayOfWeek + 8 - (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek) % 7;
+    //Implement choosing the month (and year)
+    private readonly string[] DayNames = CultureInfo.CurrentCulture.DateTimeFormat
+    .AbbreviatedDayNames;
+
+
+    private List<DateTime> DaysInMonth => Enumerable.Range(1, DateTime.DaysInMonth(currentYear, currentMonth))
+        .Select(day => new DateTime(currentYear, currentMonth, day))
+        .ToList();
+
+    private string GetColorForDay(DateTime day)
+    {
+        return "lightgray"; // Will return other colours (red, yellow and green) when the data is shared. Mock data with array?
+    }
+}
+
+<h4>@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(currentMonth) @currentYear</h4>
+
+<div class="calendar-weekdays">
+    @foreach (var dayName in DayNames)
+    {
+        <div>@dayName</div>
+    }
+</div>
+
+
+<div class="calendar-grid">
+    @for (int i = 0; i < FirstDayOffset; i++)
+    {
+        <div class="calendar-day empty"></div>
+    }
+    @foreach (var day in DaysInMonth)
+    {
+        <div class="calendar-day" style="background-color:@GetColorForDay(day)">
+            <div>@day.Day</div>
+        </div>
+    }
+</div>

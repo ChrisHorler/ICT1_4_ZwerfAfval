@@ -21,8 +21,8 @@ main {
     align-items: center;
 }
     .top-row a {
-        flex: 1; /* Verdeel gelijke ruimte */
-        text-align: center; /* Optioneel: tekst centreren */
+        flex: 1; /* Distributes over equal space */
+        text-align: center; /* Centers text */
         text-decoration: none;
         color: #006bb7;
     }
