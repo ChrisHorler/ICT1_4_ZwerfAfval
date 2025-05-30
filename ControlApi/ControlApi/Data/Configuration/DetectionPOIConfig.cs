@@ -1,8 +1,8 @@
-using ControlApi.ControlApi.Data.Entities;
+using ControlApi.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ControlApi.ControlApi.Data.Configuration;
+namespace ControlApi.Data.Configuration;
 
 public class DetectionPOIConfig : IEntityTypeConfiguration<DetectionPOI>
 {
