@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: Call Portainer webhook
         run: |
-          curl -fsSLk "$PORTAINER_WEBHOOK"
+          curl -fsSLk -X POST -d '{}' "$PORTAINER_WEBHOOK"
         env:
           PORTAINER_WEBHOOK: ${{ secrets.PORTAINER_WEBHOOK }}
