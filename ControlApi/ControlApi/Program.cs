@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DB_CONNECTION");
+var connectionString = builder.Configuration.GetConnectionString("Default");
 
 if (string.IsNullOrEmpty(connectionString))
     throw new InvalidOperationException("No connection string supplied");
