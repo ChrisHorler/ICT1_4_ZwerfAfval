@@ -4,10 +4,10 @@
     private int currentYear = DateTime.Today.Year;
     private int currentMonth = DateTime.Today.Month;
     //private int nextMonth = DateTime.Today.Month == 12 ? 1 : DateTime.Today.Month + 1;
-    private int FirstDayOffset => ((int)DaysInMonth[0].DayOfWeek + 8 - (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek) % 7;
+    private int FirstDayOffset => ((int)DaysInMonth[0].DayOfWeek + 6) % 7;
     //Implement choosing the month (and year)
-    private readonly string[] DayNames = CultureInfo.CurrentCulture.DateTimeFormat
-    .AbbreviatedDayNames;
+    private readonly string[] DayNames = new[] { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+    private readonly CultureInfo englishCulture = new CultureInfo("en-GB");
 
 
     private List<DateTime> DaysInMonth => Enumerable.Range(1, DateTime.DaysInMonth(currentYear, currentMonth))
@@ -20,7 +20,7 @@
     }
 }
 
-<h4>@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(currentMonth) @currentYear</h4>
+<h4>@englishCulture.DateTimeFormat.GetMonthName(currentMonth) @currentYear</h4>
 
 <div class="calendar-weekdays">
     @foreach (var dayName in DayNames)
