@@ -9,8 +9,18 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Default");
 
+var config = new ConfigurationBuilder()
+    .AddUserSecrets<Program>()
+    .Build();
 if (string.IsNullOrEmpty(connectionString))
-    throw new InvalidOperationException("No connection string supplied");
+{
+    if (string.IsNullOrEmpty(config["CONN_STRING"]))
+    {
+        throw new InvalidOperationException("No connection string supplied");
+    }
+    connectionString = config["CONN_STRING"];
+}
+    
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -24,8 +34,16 @@ builder.Services.AddDbContext<ControlApiDbContext>(options =>
 
 // --- Authorization ---
 var jwtKey = builder.Configuration["Jwt:Key"]
-    ?? Environment.GetEnvironmentVariable("JWT_KEY")
-    ?? throw new InvalidOperationException("No JWT_KEY supplied");
+             ?? Environment.GetEnvironmentVariable("JWT_KEY");
+
+if (string.IsNullOrEmpty(jwtKey))
+{
+    if (string.IsNullOrEmpty(config["JWT_KEY"]))
+    {
+        throw new InvalidOperationException("No JWT_KEY supplied");
+    }
+    jwtKey = config["JWT_KEY"];
+}
 
 var keyBytes = Encoding.UTF8.GetBytes(jwtKey);
 builder.Services
