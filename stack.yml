@@ -2,10 +2,7 @@ version: "3.9"
 
 services:
   api:
-    build:
-      context: ./ControlApi
-      dockerfile: Dockerfile
-    image: controlapi:local
+    image: ${IMAGE_TAG}
     environment:
       ConnectionStrings__Default: ${DB_CONNECTION}
       Jwt__Key: ${JWT_KEY}

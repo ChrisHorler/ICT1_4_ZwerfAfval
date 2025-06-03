@@ -1,0 +1,58 @@
+name: Build & Deploy ControlApi
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: 
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE_NAME: ghcr.io/${{ github.repository }}/controlapi
+  
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      
+      - name: Log-in to ghcr.io
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build & Push ControlApi image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./ControlApi
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.IMAGE_NAME }}:latest
+          
+      - name: Build variable list for Portainer
+        run: |
+          echo 'PT_VARS='\
+          '{"IMAGE_TAG":"'"${{ env.IMAGE_NAME }}:${{ github.sha }}"'",'\
+          '"DB_CONNECTION":"'"${{ secrets.DB_CONNECTION }}"'",'\
+          '"JWT_KEY":"'"${{ secrets.JWT_KEY }}"'"}' >> $GITHUB_ENV
+      
+      - name: Update stack in Portainer
+        uses: carlrygart/portainer-stack-deploy@v1
+        with:
+          portainer-host: ${{ secrets.PORTAINER_HOST }}
+          username: ${{ secrets.PORTAINER_USERNAME }}
+          password: ${{ secrets.PORTAINER_PASSWORD }}
+          endpoint-id: ${{ secrets.PORTAINER_ENDPOINT_ID }}
+          stack-name: controlapi
+          stack-definition: stack.yml        
+          image: ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          template-variables: ${{ env.PT_VARS }}
+          prune-stack: true               
+          pull-image: true
