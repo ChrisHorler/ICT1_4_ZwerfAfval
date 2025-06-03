@@ -49,6 +49,8 @@ jobs:
       
       - name: Update stack in Portainer
         uses: carlrygart/portainer-stack-deploy@v1
+        env:
+          NODE_TLS_REJECT_UNAUTHORIZED: '0'
         with:
           portainer-host: ${{ secrets.PORTAINER_HOST }}
           username: ${{ secrets.PORTAINER_USERNAME }}
@@ -58,5 +60,4 @@ jobs:
           stack-definition: stack.yml        
           image: ${{ env.IMAGE_NAME }}:${{ github.sha }}
           template-variables: ${{ env.PT_VARS }}
-          prune-stack: true               
-          pull-image: true
+          
