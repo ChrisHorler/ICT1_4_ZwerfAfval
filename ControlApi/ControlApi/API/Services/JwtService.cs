@@ -17,7 +17,8 @@ public class JwtService : IJwtService
 
     public JwtService(IConfiguration config)
     {
-        _key = config["Jwt:Key"]
+        _key = config["Jwt:Key"] 
+            ?? config["JWT_KEY"]
             ?? Environment.GetEnvironmentVariable("JWT_KEY")
             ?? throw new InvalidOperationException("JWT_KEY not found");
     }
