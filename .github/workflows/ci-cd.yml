@@ -67,11 +67,16 @@ jobs:
               Env: [] }')
 
           # 3. Create or update the stack
-          curl -sSk \
+          HTTP_CODE=$(curl -sSk -w '%{http_code}' \
             -H "X-API-Key: ${PORTAINER_TOKEN}" \
             -H "Content-Type: application/json" \
             -X POST "${PORTAINER_HOST}/api/stacks/deploy" \
-            --data-binary "$STACK_JSON"
+            --data-binary "$STACK_JSON" \
+            -o /tmp/resp.json)
+
+          echo "Portainer answered: $HTTP_CODE"
+          cat /tmp/resp.json
+
 
         env:
           IMAGE_TAG: ${{ env.IMAGE_NAME }}:${{ github.sha }}
