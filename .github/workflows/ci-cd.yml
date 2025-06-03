@@ -42,22 +42,41 @@ jobs:
           
       - name: Build variable list for Portainer
         run: |
-          echo 'PT_VARS='\
-          '{"IMAGE_TAG":"'"${{ env.IMAGE_NAME }}:${{ github.sha }}"'",'\
-          '"DB_CONNECTION":"'"${{ secrets.DB_CONNECTION }}"'",'\
-          '"JWT_KEY":"'"${{ secrets.JWT_KEY }}"'"}' >> $GITHUB_ENV
-      
-      - name: Update stack in Portainer
-        uses: carlrygart/portainer-stack-deploy@v1
+          echo "IMAGE_TAG=${{ env.IMAGE_NAME }}:${{ github.sha }}" >> $GITHUB_ENV
+
+      - name: Deploy stack via Portainer API
+        run: |
+          set -eu
+
+          # 1. Read stack.yml and substitute the three vars
+          STACK_CONTENT=$(sed \
+            -e "s|\${IMAGE_TAG}|${IMAGE_TAG}|g" \
+            -e "s|\${DB_CONNECTION}|${DB_CONNECTION}|g" \
+            -e "s|\${JWT_KEY}|${JWT_KEY}|g" \
+            stack.yml | base64 -w0)
+
+          # 2. Build the JSON payload Portainer expects
+          STACK_JSON=$(jq -n \
+            --arg name "controlapi" \
+            --arg content "$STACK_CONTENT" \
+            --arg endpoint "${PORTAINER_ENDPOINT_ID}" '
+            { Name: $name,
+              StackFileContent: ($content|@base64d),
+              EndpointID: ($endpoint|tonumber),
+              ComposeFormat: true,
+              Env: [] }')
+
+          # 3. Create or update the stack
+          curl -sSk \
+            -H "X-API-Key: ${PORTAINER_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -X POST "${PORTAINER_HOST}/api/stacks/deploy" \
+            --data-binary "$STACK_JSON"
+
         env:
-          NODE_TLS_REJECT_UNAUTHORIZED: '0'
-        with:
-          portainer-host: ${{ secrets.PORTAINER_HOST }}
-          username: ${{ secrets.PORTAINER_USERNAME }}
-          password: ${{ secrets.PORTAINER_PASSWORD }}
-          endpoint-id: ${{ secrets.PORTAINER_ENDPOINT_ID }}
-          stack-name: controlapi
-          stack-definition: stack.yml        
-          image: ${{ env.IMAGE_NAME }}:${{ github.sha }}
-          template-variables: ${{ env.PT_VARS }}
-          
+          IMAGE_TAG: ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
+          JWT_KEY: ${{ secrets.JWT_KEY }}
+          PORTAINER_HOST: ${{ secrets.PORTAINER_HOST }}
+          PORTAINER_TOKEN: ${{ secrets.PORTAINER_TOKEN }}
+          PORTAINER_ENDPOINT_ID: ${{ secrets.PORTAINER_ENDPOINT_ID }}
