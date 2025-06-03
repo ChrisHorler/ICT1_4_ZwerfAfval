@@ -7,9 +7,23 @@
 
 <div class="overview-layout">
 	<div class="map-container">
-    </div>
+		<RealTimeMap @ref = "realTimeMap" Parameters = "@parameters" height="400px" width="300px"></RealTimeMap>
+	</div>
 
 	<div class="calendar-container">
 		<WasteCalendar />
 	</div>
 </div>
+
+@code{
+	RealTimeMap? realTimeMap;
+	RealTimeMap.LoadParameters parameters = new RealTimeMap.LoadParameters()
+		{
+			location = new RealTimeMap.Location()
+			{
+				latitude = 51.571915,
+				longitude = 4.768323
+			},
+			zoomLevel = 12,
+		};
+}
