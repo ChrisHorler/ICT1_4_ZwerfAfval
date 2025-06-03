@@ -48,36 +48,48 @@ jobs:
         run: |
           set -eu
 
-          # 1. Read stack.yml and substitute the three vars
+          # 0. Helpers
+          api() {
+            curl -sSk -H "X-API-Key: ${PORTAINER_TOKEN}" -H "Content-Type: application/json" "$@"
+          }
+
+          # 1. Render stack.yml with placeholders replaced
           STACK_CONTENT=$(sed \
             -e "s|\${IMAGE_TAG}|${IMAGE_TAG}|g" \
             -e "s|\${DB_CONNECTION}|${DB_CONNECTION}|g" \
             -e "s|\${JWT_KEY}|${JWT_KEY}|g" \
-            stack.yml | base64 -w0)
+            stack.yml)
 
-          # 2. Build the JSON payload Portainer expects
-          STACK_JSON=$(jq -n \
-            --arg name "controlapi" \
-            --arg content "$STACK_CONTENT" \
-            --arg endpoint "${PORTAINER_ENDPOINT_ID}" '
-            { Name: $name,
-              StackFileContent: ($content|@base64d),
-              EndpointID: ($endpoint|tonumber),
-              ComposeFormat: true,
-              Env: [] }')
+          # 2. Does the stack already exist?
+          STACK_ID=$(api "${PORTAINER_HOST}/api/stacks" | jq -r \
+            --arg name "controlapi" '.[] | select(.Name==$name) | .Id' || true)
 
-          # 3. Create or update the stack
-          HTTP_CODE=$(curl -sSk -w '%{http_code}' \
-            -H "X-API-Key: ${PORTAINER_TOKEN}" \
-            -H "Content-Type: application/json" \
-            -X POST "${PORTAINER_HOST}/api/stacks/deploy" \
-            --data-binary "$STACK_JSON" \
-            -o /tmp/resp.json)
-
-          echo "Portainer answered: $HTTP_CODE"
-          cat /tmp/resp.json
-
-
+          if [ -z "$STACK_ID" ]; then
+            echo "Creating new stack…"
+            RESP=$(api -X POST \
+              "${PORTAINER_HOST}/api/stacks?type=2&method=string&endpointId=${PORTAINER_ENDPOINT_ID}" \
+              --data-binary @- <<EOF
+          {
+          "Name": "controlapi",
+          "StackFileContent": $(jq -Rs <<<"$STACK_CONTENT")
+          }
+          EOF
+          )
+          else
+          echo "Updating existing stack id=${STACK_ID}…"
+          RESP=$(api -X PUT \
+          "${PORTAINER_HOST}/api/stacks/${STACK_ID}?endpointId=${PORTAINER_ENDPOINT_ID}" \
+          --data-binary @- <<EOF
+          {
+          "StackFileContent": $(jq -Rs <<<"$STACK_CONTENT")
+          }
+          EOF
+          )
+          fi
+      
+          echo "Portainer response:"
+          echo "$RESP" | jq .
+          
         env:
           IMAGE_TAG: ${{ env.IMAGE_NAME }}:${{ github.sha }}
           DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
