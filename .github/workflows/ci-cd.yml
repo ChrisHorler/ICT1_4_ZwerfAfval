@@ -10,13 +10,17 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository }}/controlapi
+  IMAGE_ROOT: ghcr.io/${{ github.repository }}/controlapi
   
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Normalise Image Name
+        run: |
+          echo "IMAGE_NAME=$(echo '${{ env.IMAGE_ROOT }}' | tr 'A-Z' 'a-z')" >> $GITHUB_ENV      
+      
       - name: Checkout Repo
         uses: actions/checkout@v4
       
