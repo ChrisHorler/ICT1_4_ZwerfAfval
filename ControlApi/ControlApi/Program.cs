@@ -22,6 +22,7 @@ if (string.IsNullOrEmpty(connectionString))
     connectionString = config["CONN_STRING"];
 }
     
+builder.Services.AddHttpClient();
 builder.Services.AddHostedService<DailyGatheringService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
