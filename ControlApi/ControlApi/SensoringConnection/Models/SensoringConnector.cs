@@ -1,3 +1,6 @@
+using ControlApi.API.DTOs;
+using Newtonsoft.Json;
+
 namespace ControlApi.SensoringConnection.Models;
 
 public class SensoringConnector
@@ -24,8 +27,16 @@ public class SensoringConnector
         var response = await client.GetAsync(this._apiUrl, cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            var data = await response.Content.ReadAsStringAsync(cancellationToken);
-            _logger.LogInformation("Received data from external API: {Data}", data);
+            string data = await response.Content.ReadAsStringAsync(cancellationToken);
+            try
+            {
+                ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data);
+                _logger.LogInformation("Received data from external API: {parsedResponse}", data);
+            }
+            catch (JsonException exception)
+            {
+                _logger.LogError("Received data from external API, it is NOT Deserializable: {Data}", data);
+            }
         }
         else
         {
