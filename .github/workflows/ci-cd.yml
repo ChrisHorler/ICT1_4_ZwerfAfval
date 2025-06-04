@@ -11,6 +11,9 @@ permissions:
 
 env:
   IMAGE_ROOT: ghcr.io/${{ github.repository }}/controlapi
+  CONTAINER_NAME: controlapi
+  INTERNAL_PORT: 8080
+  HOST_PORT: 8080
   
 jobs:
   build-and-deploy:
@@ -39,57 +42,39 @@ jobs:
           tags: |
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
             ${{ env.IMAGE_NAME }}:latest
-          
-      - name: Build variable list for Portainer
-        run: |
-          echo "IMAGE_TAG=${{ env.IMAGE_NAME }}:${{ github.sha }}" >> $GITHUB_ENV
+     
+      - name: Deploy on VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_SSH_PORT }}
+          script: |
+            set -euo pipefail
+            
+            echo '${{ secrets.GHCR_PAT }}' | docker login ghcr.io -u '${{ github.repository_owner }}' --password-stdin
+            IMAGE='${{ env.IMAGE_NAME }}:${{ github.sha }}'
 
-      - name: Deploy stack via Portainer API
-        run: |
-          set -eu
+            echo "⬇Pulling $IMAGE"
+            docker pull "$IMAGE"
 
-          # 0. Helpers
-          api() {
-            curl -sSk -H "X-API-Key: ${PORTAINER_TOKEN}" -H "Content-Type: application/json" "$@"
-          }
+            echo "Stopping old container (if any)…"
+            docker stop  ${{ env.CONTAINER_NAME }} || true
+            docker rm    ${{ env.CONTAINER_NAME }} || true
 
-          # 1. Render stack.yml with placeholders replaced
-          STACK_CONTENT=$(sed \
-            -e "s|\${IMAGE_TAG}|${IMAGE_TAG}|g" \
-            -e "s|\${DB_CONNECTION}|${DB_CONNECTION}|g" \
-            -e "s|\${JWT_KEY}|${JWT_KEY}|g" \
-            stack.yml)
+            echo "Starting new container…"
+            docker run -d \
+            --name ${{ env.CONTAINER_NAME }} \
+            -p 127.0.0.1:${{ env.HOST_PORT }}:${{ env.INTERNAL_PORT }} \
+            --restart unless-stopped \
+            -e ConnectionStrings__Default='${{ secrets.DB_CONNECTION }}' \
+            -e Jwt__Key='${{ secrets.JWT_KEY }}' \
+            "$IMAGE"
 
-          # 2. Does the stack already exist?
-          STACK_ID=$(api "${PORTAINER_HOST}/api/stacks" | jq -r \
-            --arg name "controlapi" '.[] | select(.Name==$name) | .Id' || true)
-
-          if [ -z "$STACK_ID" ]; then
-            echo "Creating new stack…"
-            RESP=$(api -X POST \
-              "${PORTAINER_HOST}/api/stacks?type=2&method=string&endpointId=${PORTAINER_ENDPOINT_ID}" \
-              --data-binary @- <<EOF
-          {
-          "Name": "controlapi",
-          "StackFileContent": $(jq -Rs <<<"$STACK_CONTENT")
-          }
-          EOF
-          )
-          else
-          echo "Updating existing stack id=${STACK_ID}…"
-          RESP=$(api -X PUT \
-          "${PORTAINER_HOST}/api/stacks/${STACK_ID}?endpointId=${PORTAINER_ENDPOINT_ID}" \
-          --data-binary @- <<EOF
-          {
-          "StackFileContent": $(jq -Rs <<<"$STACK_CONTENT")
-          }
-          EOF
-          )
-          fi
-      
-          echo "Portainer response:"
-          echo "$RESP" | jq .
-          
+            echo "Removing dangling images…"
+            docker image prune -f || true 
+     
         env:
           IMAGE_TAG: ${{ env.IMAGE_NAME }}:${{ github.sha }}
           DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
