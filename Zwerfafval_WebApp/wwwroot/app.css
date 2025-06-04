@@ -98,3 +98,15 @@ h1:focus {
     background-color: transparent;
     border: none;
 }
+
+.barChart {
+    flex: 2;
+    min-height: 400px;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.graph {
+    flex: 1;
+    min-width: 300px;
+}
