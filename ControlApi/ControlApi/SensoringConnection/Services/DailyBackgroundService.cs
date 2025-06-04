@@ -1,10 +1,10 @@
 namespace ControlApi.SensoringConnection.Services;
 
-public class DailyGatheringService : BackgroundService
+public class DailyBackgroundService : BackgroundService
 {
     private readonly IHttpClientFactory _httpClientFactory;
-    private readonly ILogger<DailyGatheringService> _logger;
-    public DailyGatheringService(IHttpClientFactory httpClientFactory, ILogger<DailyGatheringService> logger)
+    private readonly ILogger<DailyBackgroundService> _logger;
+    public DailyBackgroundService(IHttpClientFactory httpClientFactory, ILogger<DailyBackgroundService> logger)
     {
         _httpClientFactory = httpClientFactory;
         _logger = logger;
@@ -21,8 +21,7 @@ public class DailyGatheringService : BackgroundService
             {
                 if (firstLoop)
                 {
-                    _logger.LogInformation("Running daily gathering.");
-                    // I'll add future logic here
+                    await RunBackgroundAsync(stoppingToken);
                 }
                 targetTime = targetTime.AddDays(1);
             }
@@ -34,8 +33,12 @@ public class DailyGatheringService : BackgroundService
 
             if (stoppingToken.IsCancellationRequested) break;
             
-            _logger.LogInformation("Running daily gathering.");
-            // I'll add future logic here
+            await RunBackgroundAsync(stoppingToken);
         }
+    }
+
+    private async Task RunBackgroundAsync(CancellationToken stoppingToken)
+    {
+        _logger.LogInformation("Running daily gathering.");
     }
 }

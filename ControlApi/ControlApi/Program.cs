@@ -23,7 +23,7 @@ if (string.IsNullOrEmpty(connectionString))
 }
     
 builder.Services.AddHttpClient();
-builder.Services.AddHostedService<DailyGatheringService>();
+builder.Services.AddHostedService<DailyBackgroundService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
