@@ -1,8 +1,40 @@
 ﻿@using System.Globalization
 @using MudBlazor
-@using System.Linq
+@using System.Linq	
 
 @code {
+    // Mock data
+    private List<DetectionData> _items = new List<DetectionData>
+    {
+        new DetectionData { Timestamp = DateTime.Parse("2025-05-27T14:00:00Z"), Type = "blikje", Confidence = 0.95, Longitude = 52.23, Latitude = 54.67 },
+        new DetectionData { Timestamp = DateTime.Parse("2025-05-27T15:00:00Z"), Type = "peuk", Confidence = 0.75, Longitude = 52.23, Latitude = 54.67 },
+        new DetectionData { Timestamp = DateTime.Parse("2025-05-27T16:00:00Z"), Type = "blikje", Confidence = 0.90, Longitude = 52.23, Latitude = 54.67 },
+        new DetectionData { Timestamp = DateTime.Parse("2025-05-27T17:00:00Z"), Type = "peuk", Confidence = 0.80, Longitude = 52.23, Latitude = 54.67 },
+        new DetectionData { Timestamp = DateTime.Parse("2025-05-27T18:00:00Z"), Type = "blikje", Confidence = 0.85, Longitude = 52.23, Latitude = 54.67 }
+    };
 
+    // Variables for the chart
+    private List<ChartSeries> _typeCountSeries;
+    private string[] _typeLabels;
+
+    // OnInitialized method to process data and prepare it for the chart
+    protected override void OnInitialized()
+    {
+        // Group the data by "Type" and count how many of each type
+        var grouped = _items
+            .GroupBy(item => item.Type)
+            .Select(group => new { Type = group.Key, Count = group.Count() })
+            .ToList();
+
+        // Prepare labels (types) and data (counts) for the chart
+        _typeLabels = grouped.Select(g => g.Type).ToArray();
+        double[] counts = grouped.Select(g => (double)g.Count).ToArray();
+
+        // Create chart series
+        _typeCountSeries = new List<ChartSeries>
+        {
+            new ChartSeries { Name = "Type Count", Data = counts }
+        };
+    }
 }
 <BarChart />
