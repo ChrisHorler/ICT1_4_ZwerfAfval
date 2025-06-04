@@ -5,10 +5,13 @@
         "confidence": 0.95, // float
         "longitude": 52.23, // float
         "latitude": 54.67, // float
-        "feels_like_temp_celsius": null, // datatype from your api
-        "actual_temp_celsius": null, // datatype from your api
-        "wind_force_bft": null, // datatype from your api
-        "wind_direction": null // datatype from your api
+        "feels_like_temp_celsius": 3.14, // float
+        "actual_temp_celsius": 3.14, // float
+        "wind_force_bft": 3.14, // float
+        "wind_direction": {
+            "degrees": 270, // float
+            "compass": "W" // string
+        }
     },
     {
         "timestamp": "2025-05-27T15:00:00Z", // date object parsed to string
@@ -16,9 +19,12 @@
         "confidence": 0.75, // float
         "longitude": 52.23, // float
         "latitude": 54.67, // float
-        "feels_like_temp_celsius": null, // datatype from your api
-        "actual_temp_celsius": null, // datatype from your api
-        "wind_force_bft": null, // datatype from your api
-        "wind_direction": null // datatype from your api
+        "feels_like_temp_celsius": 3.14, // float
+        "actual_temp_celsius": 3.14, // float
+        "wind_force_bft": 3.14, // float
+        "wind_direction": {
+            "degrees": 270, // float
+            "compass": "W" // string
+        }
     }
 ]
