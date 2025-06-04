@@ -1,5 +1,17 @@
-﻿@using System.Globalization
+﻿@using MudBlazor
+
+<MudChart ChartType="ChartType.Line"
+          ChartSeries="@runs"
+          XAxisLabel="@XAxisLabels"
+          Width="650"
+          Height="350"
+          LegendPosition="Position.Bottom">
+</MudChart>
 
 @code {
+    [Parameter]
+    public List<ChartSeries> runs { get; set; }
 
+    [Parameter]
+    public string[] XAxisLabels { get; set; }
 }

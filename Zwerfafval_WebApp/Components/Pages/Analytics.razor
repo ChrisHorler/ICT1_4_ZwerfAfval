@@ -7,15 +7,14 @@
 
 <div class="analytics-layout">
 	<div class="barChart">
-		 <BarChart/>  
-		<!--Code for barchart-->
+		<BarChart />
 	</div>
 	<div class="graph">
-		<MudChart ChartType="ChartType.Line" ChartSeries="@runs" XAxisLabel="@XAxisLabels" Width="650" Height="350" LegendPosition="Position.Bottom"></MudChart>
+		<Graph runs="@runs" XAxisLabels="@XAxisLabels" />
 	</div>
 </div>
 
-@code{
+@code {
 	public List<ChartSeries> runs = new List<ChartSeries>()
 	{
 		new ChartSeries(){ Name="BAN", Data=new double[]{ 10,15,9,12,13,18,8,8,10,7}},
