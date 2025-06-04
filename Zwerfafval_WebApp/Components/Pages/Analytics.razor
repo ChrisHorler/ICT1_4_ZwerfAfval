@@ -17,9 +17,17 @@
 @code {
 	public List<ChartSeries> runs = new List<ChartSeries>()
 	{
-		new ChartSeries(){ Name="BAN", Data=new double[]{ 10,15,9,12,13,18,8,8,10,7}},
-		new ChartSeries(){ Name="IND", Data = new double[] { 8,14,10,11,14,19,7,6,8,6}}
+		new ChartSeries()
+		{
+			Name = "Peuk",
+			Data = new double[] {5, 12, 7, 10, 3} //amount of trash mockdata
+		},
+		new ChartSeries()
+	{
+		Name = "Papier",
+		Data = new double[] { 2, 7, 5, 4, 2 }
+	}
 	};
 
-	public string[] XAxisLabels = { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00" };
+	public string[] XAxisLabels = { "08:00", "10:00", "12:00", "14:00", "16:00" }; // mock-timestamps
 }
