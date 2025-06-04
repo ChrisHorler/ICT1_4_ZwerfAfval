@@ -1,4 +1,5 @@
 using Zwerfafval_WebApp.Components;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
