@@ -1,13 +1,20 @@
+using ControlApi.SensoringConnection.Models;
+
 namespace ControlApi.SensoringConnection.Services;
 
 public class DailyBackgroundService : BackgroundService
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger<DailyBackgroundService> _logger;
-    public DailyBackgroundService(IHttpClientFactory httpClientFactory, ILogger<DailyBackgroundService> logger)
+    private readonly SensoringConnector _sensoringConnector;
+    public DailyBackgroundService(
+        IHttpClientFactory httpClientFactory, ILogger<DailyBackgroundService> logger, 
+        ILogger<SensoringConnector> modelLogger,  IConfiguration config
+        )
     {
         _httpClientFactory = httpClientFactory;
         _logger = logger;
+        _sensoringConnector= new SensoringConnector(_httpClientFactory, modelLogger, config);
     }
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -16,12 +23,12 @@ public class DailyBackgroundService : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             var now = DateTime.Now;
-            var targetTime = DateTime.Today.AddHours(18); // 18 PM
+            var targetTime = DateTime.Today.AddHours(15); // 18 PM
             if (now > targetTime)
             {
                 if (firstLoop)
                 {
-                    await RunBackgroundAsync(stoppingToken);
+                    await RunBackgroundTaskAsync(stoppingToken);
                 }
                 targetTime = targetTime.AddDays(1);
             }
@@ -33,12 +40,13 @@ public class DailyBackgroundService : BackgroundService
 
             if (stoppingToken.IsCancellationRequested) break;
             
-            await RunBackgroundAsync(stoppingToken);
+            await RunBackgroundTaskAsync(stoppingToken);
         }
     }
 
-    private async Task RunBackgroundAsync(CancellationToken stoppingToken)
+    private async Task RunBackgroundTaskAsync(CancellationToken stoppingToken)
     {
         _logger.LogInformation("Running daily gathering.");
+        await _sensoringConnector.PullAsync(stoppingToken);
     }
 }
