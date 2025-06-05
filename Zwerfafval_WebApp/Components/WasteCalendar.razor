@@ -9,6 +9,15 @@
     private readonly string[] DayNames = new[] { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
     private readonly CultureInfo englishCulture = new CultureInfo("en-GB");
 
+    private List<int> DetectionCounts = new();
+
+    protected override void OnInitialized()
+    {
+        var random = new Random();
+        DetectionCounts = Enumerable.Range(1, 30)
+    .Select(_ => random.Next(1, 51)) //numbers from 1 to 51
+    .ToList();
+    }
 
     private List<DateTime> DaysInMonth => Enumerable.Range(1, DateTime.DaysInMonth(currentYear, currentMonth))
         .Select(day => new DateTime(currentYear, currentMonth, day))
@@ -16,7 +25,31 @@
 
     private string GetColorForDay(DateTime day)
     {
-        return "lightgray"; // Will return other colours (red, yellow and green) when the data is shared. Mock data with array?
+        int index = day.Day - 1;
+        if (index >= DetectionCounts.Count)
+        {
+            return "lightgray";
+        }
+
+        int value = DetectionCounts[index];
+
+        if (value <= 15)
+        {
+            return "lightgreen";
+        }
+
+        else if (value <= 30)
+        {
+            return "yellow";
+        }
+
+        else
+        {
+            return "red";
+        }
+
+           
+        // return "lightgray"; Will return other colours (red, yellow and green) when the data is shared. Mock data with array?
     }
 }
 
