@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  api:
+    image: ${IMAGE_TAG}
+    environment:
+      ConnectionStrings__Default: ${DB_CONNECTION}
+      Jwt__Key: ${JWT_KEY}
+      ASPNETCORE_ENVIRONMENT: Production
+    networks: [backend-network]
+    ports:
+      - "80:8080"
+    restart: unless-stopped
+    
+networks:
+  backend-network:
+    external: true

@@ -1,0 +1,84 @@
+name: Build & Deploy ControlApi
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: 
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE_ROOT: ghcr.io/${{ github.repository }}/controlapi
+  CONTAINER_NAME: controlapi
+  INTERNAL_PORT: 8080
+  HOST_PORT: 8080
+  
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Normalise Image Name
+        run: |
+          echo "IMAGE_NAME=$(echo '${{ env.IMAGE_ROOT }}' | tr 'A-Z' 'a-z')" >> $GITHUB_ENV      
+      
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      
+      - name: Log-in to ghcr.io
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build & Push ControlApi image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./ControlApi
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.IMAGE_NAME }}:latest
+     
+      - name: Deploy on VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_SSH_PORT }}
+          script: |
+            set -euo pipefail
+            
+            echo '${{ secrets.GHCR_PAT }}' | docker login ghcr.io -u '${{ github.repository_owner }}' --password-stdin
+            IMAGE='${{ env.IMAGE_NAME }}:${{ github.sha }}'
+
+            echo "⬇Pulling $IMAGE"
+            docker pull "$IMAGE"
+
+            echo "Stopping old container (if any)…"
+            docker stop  ${{ env.CONTAINER_NAME }} || true
+            docker rm    ${{ env.CONTAINER_NAME }} || true
+
+            echo "Starting new container…"
+            docker run -d \
+            --name ${{ env.CONTAINER_NAME }} \
+            -p 127.0.0.1:${{ env.HOST_PORT }}:${{ env.INTERNAL_PORT }} \
+            --restart unless-stopped \
+            -e ConnectionStrings__Default='${{ secrets.DB_CONNECTION }}' \
+            -e Jwt__Key='${{ secrets.JWT_KEY }}' \
+            "$IMAGE"
+
+            echo "Removing dangling images…"
+            docker image prune -f || true 
+     
+        env:
+          IMAGE_TAG: ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
+          JWT_KEY: ${{ secrets.JWT_KEY }}
+          PORTAINER_HOST: ${{ secrets.PORTAINER_HOST }}
+          PORTAINER_TOKEN: ${{ secrets.PORTAINER_TOKEN }}
+          PORTAINER_ENDPOINT_ID: ${{ secrets.PORTAINER_ENDPOINT_ID }}
