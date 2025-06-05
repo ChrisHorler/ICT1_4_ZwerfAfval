@@ -1,3 +1,5 @@
+using ControlApi.API.Services;
+using ControlApi.Data;
 using ControlApi.SensoringConnection.Models;
 
 namespace ControlApi.SensoringConnection.Services;
@@ -9,12 +11,13 @@ public class DailyBackgroundService : BackgroundService
     private readonly SensoringConnector _sensoringConnector;
     public DailyBackgroundService(
         IHttpClientFactory httpClientFactory, ILogger<DailyBackgroundService> logger, 
-        ILogger<SensoringConnector> modelLogger,  IConfiguration config
+        ILogger<SensoringConnector> modelLogger,  IConfiguration config,
+        ControlApiDbContext db, IJwtService jwt
         )
     {
         _httpClientFactory = httpClientFactory;
         _logger = logger;
-        _sensoringConnector= new SensoringConnector(_httpClientFactory, modelLogger, config);
+        _sensoringConnector= new SensoringConnector(_httpClientFactory, modelLogger, config, db, jwt);
     }
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {

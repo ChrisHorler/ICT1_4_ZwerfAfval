@@ -1,4 +1,6 @@
 using ControlApi.API.DTOs;
+using ControlApi.API.Services;
+using ControlApi.Data;
 using Newtonsoft.Json;
 
 namespace ControlApi.SensoringConnection.Models;
@@ -7,10 +9,20 @@ public class SensoringConnector
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger<SensoringConnector> _logger;
+    private readonly ControlApiDbContext _db;
+    private readonly IJwtService _jwt;
     private readonly string _apiUrl;
 
-    public SensoringConnector(IHttpClientFactory httpClientFactory, ILogger<SensoringConnector> logger, IConfiguration config)
+    public SensoringConnector(
+        IHttpClientFactory httpClientFactory, 
+        ILogger<SensoringConnector> logger, 
+        IConfiguration config,
+        ControlApiDbContext db,
+        IJwtService jwt
+        )
     {
+        _db = db;
+        _jwt = jwt;
         _httpClientFactory = httpClientFactory;
         _logger = logger;
         _apiUrl = config["SENSORING_API"]
