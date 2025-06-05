@@ -16,13 +16,9 @@ public class SensoringConnector
     public SensoringConnector(
         IHttpClientFactory httpClientFactory, 
         ILogger<SensoringConnector> logger, 
-        IConfiguration config,
-        ControlApiDbContext db,
-        IJwtService jwt
+        IConfiguration config
         )
     {
-        _db = db;
-        _jwt = jwt;
         _httpClientFactory = httpClientFactory;
         _logger = logger;
         _apiUrl = config["SENSORING_API"]

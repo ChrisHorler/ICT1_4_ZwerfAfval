@@ -23,7 +23,6 @@ if (string.IsNullOrEmpty(connectionString))
 }
     
 builder.Services.AddHttpClient();
-builder.Services.AddHostedService<DailyBackgroundService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -64,7 +63,7 @@ builder.Services
 
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IJwtService, JwtService>();
-
+builder.Services.AddHostedService<DailyBackgroundService>();
 var app = builder.Build();
 
 app.UseAuthentication();
