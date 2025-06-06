@@ -10,34 +10,36 @@ public class DailyBackgroundService : BackgroundService
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger<DailyBackgroundService> _logger;
     private readonly SensoringConnector _sensoringConnector;
-    private readonly IServiceProvider _serviceProvider;
+    private readonly IServiceScopeFactory _scopeFactory;
     public DailyBackgroundService(
         IHttpClientFactory httpClientFactory, ILogger<DailyBackgroundService> logger, 
         ILogger<SensoringConnector> modelLogger,  IConfiguration config,
-        IServiceProvider serviceProvider
+        IServiceScopeFactory scopeFactory
         )
     {
-        _serviceProvider = serviceProvider;
+        _scopeFactory = scopeFactory;
         _httpClientFactory = httpClientFactory;
         _logger = logger;
         _sensoringConnector= new SensoringConnector(_httpClientFactory, modelLogger, config);
     }
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        using (var scope = _serviceProvider.CreateScope())
+        try
         {
-            try
+            // Create a new IServiceScope
+            using (var scope = _scopeFactory.CreateScope())
             {
+                // Resolve your scoped DbContext inside the scope
                 var dbContext = scope.ServiceProvider.GetRequiredService<ControlApiDbContext>();
-                var users = await dbContext.users.ToListAsync(stoppingToken);
-                _logger.LogInformation($"Fetched {users.Count} users at {DateTime.UtcNow}.");
-                // …do whatever work you need…
+
+                // Now you can use dbContext safely
+                var users = await dbContext.users.ToListAsync();
+                _logger.LogInformation($"Gotten all users: {users}");
             }
-            catch (Exception ex)
-            {
-                // Something went wrong (e.g. DB not reachable). Log and wait, then retry.
-                _logger.LogWarning(ex, "Could not reach the database. Will retry in 30 seconds.");
-            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while running background task.");
         }
         bool firstLoop = true;
         _logger.LogInformation("DailyGathering Service is running.");
