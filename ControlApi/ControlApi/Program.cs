@@ -22,8 +22,10 @@ if (string.IsNullOrEmpty(connectionString))
     }
     connectionString = config["CONN_STRING"];
 }
+
+
     
-builder.Services.AddHttpClient();
+// builder.Services.AddHttpClient();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -81,6 +83,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// using (var scope = app.Services.CreateScope())
+// {
+//     var db = scope.ServiceProvider.GetRequiredService<ControlApiDbContext>();
+//     db.Database.Migrate();
+// }
 
 var summaries = new[]
 {
