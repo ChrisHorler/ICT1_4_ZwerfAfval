@@ -1,5 +1,7 @@
 namespace ControlApi.API.DTOs;
 
+public record GatheringResponse(bool willStart, string message);
+
 public record ApiWindDirection(
     float degrees, string compass
     );
