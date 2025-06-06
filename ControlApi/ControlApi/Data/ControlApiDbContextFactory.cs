@@ -7,7 +7,6 @@ public class ControlApiDbContextFactory : IDesignTimeDbContextFactory<ControlApi
 {
     public ControlApiDbContext CreateDbContext(string[] args)
     {
-        // Expect connection string as CLI argument (first argument)
         var connectionString = args.FirstOrDefault();
         if (string.IsNullOrEmpty(connectionString))
             throw new InvalidOperationException("Connection string must be passed as a CLI argument.");
