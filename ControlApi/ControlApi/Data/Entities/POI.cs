@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ControlApi.Data.Entities;
 
 public class POI
@@ -9,9 +11,11 @@ public class POI
     public string? name { get; set; }
     public float latitude { get; set; }
     public float longitude { get; set; }
-    public Dictionary<string, string>? tags { get; set; }
     public string source { get; set; } = "overpass";
     public DateTime retrievedAt { get; set; }
+    
+    [NotMapped]
+    public Dictionary<string, string>? tags { get; set; }
     
     public POICategory? category { get; set; }
     public ICollection<DetectionPOI> detectionPOIs { get; set; } = new List<DetectionPOI>();
