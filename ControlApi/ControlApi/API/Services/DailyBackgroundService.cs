@@ -1,7 +1,5 @@
-using ControlApi.API.Services;
-using ControlApi.Data;
-using ControlApi.SensoringConnection.Models;
-using Microsoft.EntityFrameworkCore;
+using ControlApi.API.DTOs;
+using Newtonsoft.Json;
 
 namespace ControlApi.SensoringConnection.Services;
 
@@ -9,38 +7,20 @@ public class DailyBackgroundService : BackgroundService
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger<DailyBackgroundService> _logger;
-    private readonly SensoringConnector _sensoringConnector;
-    private readonly IServiceScopeFactory _scopeFactory;
+    private readonly string _apiUrl;
     public DailyBackgroundService(
         IHttpClientFactory httpClientFactory, ILogger<DailyBackgroundService> logger, 
-        ILogger<SensoringConnector> modelLogger,  IConfiguration config,
-        IServiceScopeFactory scopeFactory
+        IConfiguration config
         )
     {
-        _scopeFactory = scopeFactory;
         _httpClientFactory = httpClientFactory;
         _logger = logger;
-        _sensoringConnector= new SensoringConnector(_httpClientFactory, modelLogger, config);
+        _apiUrl = config["SELF_API_BASE"]
+                  ?? Environment.GetEnvironmentVariable("SELF_API_BASE")
+                  ?? throw new InvalidOperationException("SELF_API_BASE not found");
     }
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        try
-        {
-            // Create a new IServiceScope
-            using (var scope = _scopeFactory.CreateScope())
-            {
-                // Resolve your scoped DbContext inside the scope
-                var dbContext = scope.ServiceProvider.GetRequiredService<ControlApiDbContext>();
-
-                // Now you can use dbContext safely
-                var users = await dbContext.users.ToListAsync();
-                _logger.LogInformation($"Gotten all users: {users}");
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error occurred while running background task.");
-        }
         bool firstLoop = true;
         _logger.LogInformation("DailyGathering Service is running.");
         while (!stoppingToken.IsCancellationRequested)
@@ -69,7 +49,26 @@ public class DailyBackgroundService : BackgroundService
 
     private async Task RunBackgroundTaskAsync(CancellationToken stoppingToken)
     {
-        _logger.LogInformation("Running daily gathering.");
-        await _sensoringConnector.PullAsync(stoppingToken);
+        this._logger.LogInformation("Updating our Trash Collection with the Sensoring API.");
+        var client = _httpClientFactory.CreateClient();
+        
+        var response = await client.GetAsync(this._apiUrl, stoppingToken);
+        if (response.IsSuccessStatusCode)
+        {
+            string data = await response.Content.ReadAsStringAsync(stoppingToken);
+            try
+            {
+                ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data);
+                _logger.LogInformation("Received data from external API: {parsedResponse}", data);
+            }
+            catch (JsonException exception)
+            {
+                _logger.LogError("Received data from external API, it is NOT Deserializable: {Data}", data);
+            }
+        }
+        else
+        {
+            _logger.LogWarning("Failed to fetch data from external API. Status code: {StatusCode}", response.StatusCode);
+        }
     }
 }

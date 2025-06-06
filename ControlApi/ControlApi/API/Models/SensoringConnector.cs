@@ -26,7 +26,7 @@ public class SensoringConnector
                   ?? throw new InvalidOperationException("SENSORING_API not found");
         
     }
-    
+
     public async Task PullAsync(CancellationToken cancellationToken)
     {
         this._logger.LogInformation("Updating our Trash Collection with the Sensoring API.");
