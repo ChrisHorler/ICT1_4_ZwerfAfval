@@ -26,15 +26,10 @@ public class DailyBackgroundService : BackgroundService
     {
         try
         {
-            // Create a new IServiceScope
             using (var scope = _scopeFactory.CreateScope())
             {
-                // Resolve your scoped DbContext inside the scope
-                var dbContext = scope.ServiceProvider.GetRequiredService<ControlApiDbContext>();
-
-                // Now you can use dbContext safely
-                var users = await dbContext.users.ToListAsync();
-                _logger.LogInformation($"Gotten all users: {users}");
+                var executor = scope.ServiceProvider.GetRequiredService<IDailyTaskExecutor>();
+                await executor.ExecuteAsync(stoppingToken);
             }
         }
         catch (Exception ex)

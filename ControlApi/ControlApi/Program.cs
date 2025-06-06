@@ -2,6 +2,7 @@ using System.Text;
 using ControlApi;
 using ControlApi.API.Services;
 using ControlApi.Data;
+using ControlApi.SensoringConnection.Models;
 using ControlApi.SensoringConnection.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -63,6 +64,8 @@ builder.Services
 
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<SensoringConnector>();
+builder.Services.AddScoped<IDailyTaskExecutor, DailyTaskExecutor>();
 builder.Services.AddHostedService<DailyBackgroundService>();
 var app = builder.Build();
 
