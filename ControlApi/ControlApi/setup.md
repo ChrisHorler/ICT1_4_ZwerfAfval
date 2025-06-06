@@ -10,7 +10,7 @@ Tools -> .NET User Secrets
 A `secrets.json` should open, add the following:
 ```json
 {
-    "CONN_STRING":"Server=<IPADRESS>:Port=<PORT>;Database=<DB_NAME>;User=<DB_USER>;Password=<DB_PASSWORD>;",
+    "CONN_STRING":"Server=<IPADRESS>;Port=<PORT>;Database=<DB_NAME>;User=<DB_USER>;Password=<DB_PASSWORD>;",
     "JWT_KEY": "a string of 35+ ascii chars",
     "SENSORING_API": "https://api.example.com/api"
 }
