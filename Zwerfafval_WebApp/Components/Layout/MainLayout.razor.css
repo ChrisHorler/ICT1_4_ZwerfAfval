@@ -20,6 +20,10 @@ main {
     display: flex;
     align-items: center;
 }
+
+.mud-input-input {
+    color: #f7f9fa !important;
+}
     .top-row a {
         flex: 1; /* Distributes over equal space */
         text-align: center; /* Centers text */

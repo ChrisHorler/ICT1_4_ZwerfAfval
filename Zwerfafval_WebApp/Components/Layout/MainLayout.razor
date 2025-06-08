@@ -1,4 +1,10 @@
 ﻿@inherits LayoutComponentBase
+@* @using BlazorComponentDemo.Shared.Components *@
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
 
 <HeadContent>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
@@ -12,10 +18,9 @@
 
     <main>
         <div class="top-row px-4">
-            <MudItem xs="12" sm="4" md="4">
-                <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="Change Date" @bind-Date="@dt1" HelperText="date picker" DateFormat="dd/MM/yyyy"></MudDatePicker>
-            </MudItem>
             <a href="">Zwerfafval_WebApp</a>
+            <MudDatePicker Label="Choose a Date" @bind-Date="_date" />
+            @*<DatePicker InitialDate="DefaultDate" DateSelected="OnDateSelected"></DatePicker>*@
             <a href="overview">Overview</a>
             <a href="analytics">Analytics</a>
             <a href="settings">Settings</a>
@@ -35,7 +40,18 @@
 </div>
 
 @code{
-    string errorMessage = "test";
+    private DateTime? _date = DateTime.Today;
+    // public DateTime DefaultDate { get; set; }
+    // public DateTime SelectedDate { get; set; }
 
-    DateTime? dt1 = new System.DateTime();
+    // protected override void OnInitialized()
+    // {
+    //     DefaultDate = new DateTime(2025, 6, 8);
+    // }
+
+    // public void OnSelectedDate(DateTime dt)
+    // {
+    //     SelectedDate = dt;
+    // }
+
 }
