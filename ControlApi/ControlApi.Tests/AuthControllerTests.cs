@@ -41,7 +41,7 @@ public class AuthControllerTests
     {
         // Arrange
         var (ctrl, _, _) = CreateSut();
-        var dto = new RegisterRequest("new@ex.com", "pass");
+        var dto = new RegisterRequest{email = "new@ex.com", password = "pass" };
 
         // Act
         var result = await ctrl.Register(dto);
@@ -61,7 +61,7 @@ public class AuthControllerTests
         db.users.Add(new User { email = "dupe@ex.com", passwordHash = "x" });
         await db.SaveChangesAsync();
 
-        var dto = new RegisterRequest ("dupe@ex.com","pass");
+        var dto = new RegisterRequest {email = "dupe@ex.com", password = "pass"};
 
         // Act
         var result = await ctrl.Register(dto);
@@ -78,7 +78,7 @@ public class AuthControllerTests
         var hash = BCrypt.Net.BCrypt.HashPassword("secret");
         db.users.Add(new User { email = "me@ex.com", passwordHash = hash });
         await db.SaveChangesAsync();
-        var dto = new LoginRequest ("me@ex.com","secret");
+        var dto = new LoginRequest {email = "me@ex.com", password = "secret"};
 
         // Act
         var result = await ctrl.Login(dto);
@@ -97,7 +97,7 @@ public class AuthControllerTests
         var hash = BCrypt.Net.BCrypt.HashPassword("secret");
         db.users.Add(new User { email = "me@ex.com", passwordHash = hash });
         await db.SaveChangesAsync();
-        var dto = new LoginRequest ( "me@ex.com", "wrong");
+        var dto = new LoginRequest {email = "me@ex.com", password = "wrong"};
 
         // Act
         var result = await ctrl.Login(dto);
@@ -111,7 +111,7 @@ public class AuthControllerTests
     {
         // Arrange
         var (ctrl, _, _) = CreateSut();
-        var dto = new RegisterRequest("test@example.com", "weakpass1");
+        var dto = new RegisterRequest{email = "test@example.com", password = "weakpass1"};
         
         // Manually validate model
         var validationResults = new List<ValidationResult>();
