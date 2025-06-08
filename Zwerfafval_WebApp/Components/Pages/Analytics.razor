@@ -30,8 +30,8 @@
 	}
 	}; 
 
-	public string[] XAxisLabels = { "08:00", "10:00", "12:00", "14:00", "16:00" }; // mock-timestamps
-	*/
+	public string[] XAxisLabels = { "08:00", "10:00", "12:00", "14:00", "16:00" }; // mock-timestamps */
+	
 	// Barchart
 	public List<ChartSeries> barseries = new List<ChartSeries>()
 	{
@@ -43,6 +43,11 @@
 		new ChartSeries()
 		{ 
 			Name = "Series 2", 
+			Data = new double[] { 5, 6, 7, 8 }
+		},
+		new ChartSeries()
+		{
+			Name = "Series 3",
 			Data = new double[] { 5, 6, 7, 8 }
 		}
 	};
