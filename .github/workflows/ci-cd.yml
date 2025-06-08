@@ -74,7 +74,7 @@ jobs:
             --network backend-network \
             -p 8080:8080 \
             --restart unless-stopped \
-            -e ConnectionStrings__Default='Server=mariadb;Port=3306;Database=Control;Uid=user;Pwd=${{ secrets.DB_PASSWORD }};' \
+            -e ConnectionStrings__Default='${{ secrets.DB_CONNECTION }}' \
             -e Jwt__Key='${{ secrets.JWT_KEY }}' \
             "$IMAGE"
 
