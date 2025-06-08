@@ -1,0 +1,33 @@
+﻿@page "/analytics"
+@using MudBlazor
+
+<PageTitle>Analytics</PageTitle>
+
+<h1>Analytics</h1>
+
+<div class="analytics-layout">
+	<div class="barChart">
+		<BarChart />
+	</div>
+	<div class="graph">
+		<Graph runs="@runs" XAxisLabels="@XAxisLabels" />
+	</div>
+</div>
+
+@code {
+	public List<ChartSeries> runs = new List<ChartSeries>()
+	{
+		new ChartSeries()
+		{
+			Name = "Peuk",
+			Data = new double[] {5, 12, 7, 10, 3} //amount of trash mockdata
+		},
+		new ChartSeries()
+	{
+		Name = "Papier",
+		Data = new double[] { 2, 7, 5, 4, 2 }
+	}
+	};
+
+	public string[] XAxisLabels = { "08:00", "10:00", "12:00", "14:00", "16:00" }; // mock-timestamps
+}

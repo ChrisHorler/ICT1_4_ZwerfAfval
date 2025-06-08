@@ -1,0 +1,61 @@
+﻿@using System.Globalization
+@using MudBlazor
+@using System.Linq	
+@using Zwerfafval_WebApp.Components
+@inject IJSRuntime JSRuntime
+
+
+<MudPaper Class="d-flex justify-center" Style="height: 500px; width: 100%">
+    <MudChart @ref="MudChartRef" ChartType="ChartType.Bar">
+        <MudChartData>
+            <MudChartDataset Data="chartData" Label="Confidence">
+                <MudChartDatasetOptions Fill="true" BorderColor="rgb(75, 192, 192)" BackgroundColor="rgba(75, 192, 192, 0.2)" />
+            </MudChartDataset>
+        </MudChartData>
+    </MudChart>
+</MudPaper>
+
+@code {
+    private MudChart MudChartRef;
+    private List<ChartData> chartData = new List<ChartData>();
+
+    protected override void OnInitialized()
+    {
+        // Mock data (you could replace this with a real API call)
+        var jsonData = new List<DetectionData>
+        {
+            new DetectionData
+            {
+                Timestamp = DateTime.Parse("2025-05-27T14:00:00Z"),
+                Type = "blikje",
+                Confidence = 0.95,
+                Longitude = 52.23,
+                Latitude = 54.67
+            },
+            new DetectionData
+            {
+                Timestamp = DateTime.Parse("2025-05-27T15:00:00Z"),
+                Type = "peuk",
+                Confidence = 0.75,
+                Longitude = 52.23,
+                Latitude = 54.67
+            }
+        };
+
+        // Map the DetectionData to ChartData
+        chartData = jsonData.Select(item => new ChartData
+        {
+            Label = item.Type,          // Using 'Type' for the label (e.g., blikje, peuk)
+            Value = item.Confidence     // Using 'Confidence' for the chart's value
+        }).ToList();
+
+        base.OnInitialized();
+    }
+
+    // ChartData for rendering on the chart
+    public class ChartData
+    {
+        public string Label { get; set; }
+        public double Value { get; set; }
+    }
+}
