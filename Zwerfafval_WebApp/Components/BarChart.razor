@@ -1,17 +1,37 @@
 ﻿@using MudBlazor
 
-	<Mudchart 
-		ChartType="ChartType.Bar"
-		ChartSeries="@barseries"
-		XAxisLabels="@barChartXAxisLabels"
-		width="100%" Height="350px">
-	</Mudchart>
+<MudChart 
+    ChartType="ChartType.Bar"
+    ChartSeries="@TrashSeries"
+    XAxisLabels="@TrashXAxisLabels"
+    Width="100%" Height="350px">
+</MudChart>
 
+@code {
+    [Parameter]
+    public List<ChartSeries> TrashSeries { get; set; }
 
-    @code {
-	[Parameter]
-	public List<ChartSeries> barseries { get; set; }
+    [Parameter]
+    public string[] TrashXAxisLabels { get; set; }
 
-	[Parameter]
-	public string[] barChartXAxisLabels { get; set; }
+    protected override void OnInitialized()
+    {
+        // Points of Interest in Breda as X-axis labels
+        TrashXAxisLabels ??= new[] 
+        { 
+            "Grote Markt", 
+            "Breda Station", 
+            "Chassé Theater", 
+            "Breda Castle", 
+            "Wilhelminapark" 
+        };
+        TrashSeries ??= new List<ChartSeries>
+        {
+            new ChartSeries
+            {
+                Name = "Hoeveelheid afval in aantal",
+                Data = new double[] { 10, 30, 20, 50, 40 }
+            }
+        };
     }
+}
