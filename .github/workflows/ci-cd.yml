@@ -33,7 +33,7 @@ jobs:
           dotnet-version: '8.0.x'
         
       - name: Restore Dependencies
-        run: dotnet restore
+        run: dotnet restore ./ControlApi.sln
         
       - name: Run Unit Tests
         run: dotnet test --no-restore --verbosity normal
