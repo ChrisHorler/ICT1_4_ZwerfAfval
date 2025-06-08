@@ -7,7 +7,7 @@
 
 <div class="analytics-layout">
 	<div class="barChart">
-		<BarChart />
+		 <BarChart barseries="@barseries" barChartXAxisLabels="@barChartXAxisLabels"/> 
 	</div>
 	<div class="graph">
 		<Graph runs="@runs" XAxisLabels="@XAxisLabels" />
@@ -15,7 +15,8 @@
 </div>
 
 @code {
-	public List<ChartSeries> runs = new List<ChartSeries>()
+	// Graph
+	/* public List<ChartSeries> runs = new List<ChartSeries>()
 	{
 		new ChartSeries()
 		{
@@ -27,7 +28,24 @@
 		Name = "Papier",
 		Data = new double[] { 2, 7, 5, 4, 2 }
 	}
-	};
+	}; 
 
 	public string[] XAxisLabels = { "08:00", "10:00", "12:00", "14:00", "16:00" }; // mock-timestamps
+	*/
+	// Barchart
+	public List<ChartSeries> barseries = new List<ChartSeries>()
+	{
+		new ChartSeries() 
+		{ 
+			Name = "Series 1", 
+			Data = new double[] { 1, 2, 3, 4 } 
+		},
+		new ChartSeries()
+		{ 
+			Name = "Series 2", 
+			Data = new double[] { 5, 6, 7, 8 }
+		}
+	};
+	public string[] barChartXAxisLabels = { "Vlaszak", "LovensdijkStraat", "Hogeschoollaan", "Claudus Prinsenlaan" }; 
+
 }
