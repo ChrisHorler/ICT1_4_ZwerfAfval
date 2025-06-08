@@ -12,9 +12,9 @@
 
     <main>
         <div class="top-row px-4">
-            <div class="ms-3">
-                <DateInput TValue="DateOnly" @ bind-Value="@date1" Placeholder="Enter Date" />
-            </div>
+            <MudItem xs="12" sm="4" md="4">
+                <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="Change Date" @bind-Date="@dt1" HelperText="date picker" DateFormat="dd/MM/yyyy"></MudDatePicker>
+            </MudItem>
             <a href="">Zwerfafval_WebApp</a>
             <a href="overview">Overview</a>
             <a href="analytics">Analytics</a>
@@ -35,5 +35,7 @@
 </div>
 
 @code{
-    private DateOnly date1 = DateOnly.FromDateTime(DateTime.Now);
+    string errorMessage = "test";
+
+    DateTime? dt1 = new System.DateTime();
 }
