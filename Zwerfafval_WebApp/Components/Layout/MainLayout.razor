@@ -1,16 +1,21 @@
 ﻿@inherits LayoutComponentBase
+
 <HeadContent>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
         <script src="js/map.js"></script>
 </HeadContent>
 <div class="page">
-    <div class="sidebar">
+    @* <div class="sidebar">
         <NavMenu />
-    </div>
+    </div> *@
 
     <main>
         <div class="top-row px-4">
+            <div class="ms-3">
+                <DateInput TValue="DateOnly" @ bind-Value="@date1" Placeholder="Enter Date" />
+            </div>
+            <a href="">Zwerfafval_WebApp</a>
             <a href="overview">Overview</a>
             <a href="analytics">Analytics</a>
             <a href="settings">Settings</a>
@@ -28,3 +33,7 @@
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>
 </div>
+
+@code{
+    private DateOnly date1 = DateOnly.FromDateTime(DateTime.Now);
+}
