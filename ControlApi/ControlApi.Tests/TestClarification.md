@@ -31,3 +31,12 @@ Confirms the hashing + verification logic and success response.
 
 Why it matters?
 Makes sure invalid creds don't accidentally log a user in.
+
+### Unit Test 5 (Register_WeakPassword_ReturnBadRequest)
+- Calls `POST /api/auth/register` with a valid email but a weak password `"weakpass1"`
+- Manually triggers validation and injects model errors into the controller
+- Expects `400 Bad Request` and a message that includes `"password"`
+
+Why it matters?
+Enforces password strength rules, ensuring weak passwords are rejected before user creation.
+This helps maintain security and avoid poor credential practices.

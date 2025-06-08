@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using ControlApi.API.Controllers;
 using ControlApi.API.DTOs;
@@ -103,5 +104,33 @@ public class AuthControllerTests
 
         // Assert
         Assert.IsType<ConflictObjectResult>(result.Result);
+    }
+
+    [Fact]
+    public async Task Register_WeakPassword_ReturnBadRequest()
+    {
+        // Arrange
+        var (ctrl, _, _) = CreateSut();
+        var dto = new RegisterRequest("test@example.com", "weakpass1");
+        
+        // Manually validate model
+        var validationResults = new List<ValidationResult>();
+        var validationContext = new ValidationContext(dto, null, null);
+        Validator.TryValidateObject(dto, validationContext, validationResults, true);
+
+        foreach (var result in validationResults)
+        {
+            ctrl.ModelState.AddModelError(result.MemberNames.First(), result.ErrorMessage);
+        }
+        
+        // Act
+        var response = await ctrl.Register(dto);
+        
+        // Assert
+        var badRequest = Assert.IsType<BadRequestObjectResult>(response.Result);
+        var errors = Assert.IsType<SerializableError>(badRequest.Value);
+
+        Assert.True(errors.ContainsKey("password"), "Expected validation error for password.");
+
     }
 }
