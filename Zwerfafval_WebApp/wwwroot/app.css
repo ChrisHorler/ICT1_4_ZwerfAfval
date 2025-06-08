@@ -110,3 +110,11 @@ h1:focus {
     flex: 1;
     min-width: 300px;
 }
+
+#map{
+    position:relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
