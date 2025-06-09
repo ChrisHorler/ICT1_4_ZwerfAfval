@@ -8,6 +8,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddMudServices();
+builder.Services.AddSingleton<DateService>();
+
 
 var app = builder.Build();
 
