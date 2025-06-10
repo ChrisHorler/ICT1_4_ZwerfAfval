@@ -23,14 +23,13 @@ def preprocess_df(df):
     return df
 
 def group_for_calendar(df):
-    df_grouped = df.groupby(df['timestamp'].dt.floor('d')).agg({ #groeperen over de tijd en aggregeren over al de dictionary hieronder.
-        'type': 'count',
+    df_grouped = df.groupby(df['timestamp'].dt.floor('d')).agg({ #grouping over the time and aggregating dictionary below here. 
         'feels_like_temp_celsius': 'mean',
         'actual_temp_celsius': 'mean',
         'wind_force_bft': 'mean',
         'day_of_week': 'min',
         'month': 'min',
-    }).reset_index(False) #hetgene waarop je groepeert was voorheen de index, dus nu even gereset naar die nummers. 
+    }).reset_index(False) #It takes the timestamp as index, I reset with this. 
     df_grouped = df_grouped.rename(columns={'type': 'amount'})
     return df_grouped
 
@@ -60,7 +59,7 @@ def train_calendar_classifier(df, max_depth = 2):
 
 def group_for_heatmap(df):
     pass
-    # df_grouped = df.groupby(df['timestamp'].dt.floor('MS')).agg({ #groeperen over de tijd en aggregeren over al de dictionary hieronder.
+    # df_grouped = df.groupby(df['timestamp'].dt.floor('MS')).agg({ 
     #     'type': 'count',
     #     'feels_like_temp_celsius': 'mean',
     #     'actual_temp_celsius': 'mean',
@@ -68,7 +67,7 @@ def group_for_heatmap(df):
     #     'longitude': 'min',
     #     'latitude': 'min',
     #     'month': 'min',
-    # }).reset_index(False) #hetgene waarop je groepeert was voorheen de index, dus nu even gereset naar die nummers. 
+    # }).reset_index(False)  
     # df_grouped = df_grouped.rename(columns={'type': 'amount'})
     # return df_grouped
 
