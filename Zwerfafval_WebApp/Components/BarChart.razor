@@ -36,3 +36,24 @@
     }
 }
 *@
+
+@using BlazorBootstrap.Components
+@using System.Collections.Generic
+
+<BarChart TItem="ChartSeries" 
+          Items="ChartData"
+          XAxisLabels="TrashXAxisLabels"
+          Title="Afvalanalyse"
+          XAxisTitle="Locaties"
+          YAxisTitle="Aantal"
+          ShowXAxisTitle="true"
+          ShowYAxisTitle="true"
+          Height="400" />
+
+@code {
+    [Parameter]
+    public string[] TrashXAxisLabels { get; set; } = Array.Empty<string>();
+
+    [Parameter]
+    public List<ChartSeries> ChartData { get; set; } = new();
+}

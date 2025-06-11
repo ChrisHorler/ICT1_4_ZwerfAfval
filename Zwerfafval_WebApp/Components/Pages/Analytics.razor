@@ -9,9 +9,8 @@
 <h1>Analytics</h1>
 
 <div class="analytics-layout">
-	<div class="barChart">
-		 @* <BarChart Trashseries="@Trashseries" TrashXAxisLabels="@TrashXAxisLabels"/>  *@
-	</div>
+	<BarChart TrashXAxisLabels="TrashXAxisLabels" ChartData="TrashSeries" />
+
     <Graph />
 
 </div>
@@ -216,6 +215,23 @@
     // }
 
     // #endregion Data Preparation
+    private string[] TrashXAxisLabels = new[]
+{
+        "Grote Markt",
+        "Breda Station",
+        "Chassé Theater",
+        "Breda Castle",
+        "Wilhelminapark"
+    };
+
+    private List<ChartSeries> TrashSeries = new()
+    {
+        new ChartSeries
+        {
+            Name = "Hoeveelheid afval in aantal",
+            Data = new double[] { 10, 30, 20, 50, 40 }
+        }
+    };
 
 }
 
