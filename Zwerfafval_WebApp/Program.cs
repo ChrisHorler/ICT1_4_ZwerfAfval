@@ -9,7 +9,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddMudServices();
 builder.Services.AddSingleton<DateService>();
-
+builder.Services.AddBlazorBootstrap();
 
 var app = builder.Build();
 
