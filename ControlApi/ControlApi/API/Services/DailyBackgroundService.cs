@@ -10,32 +10,18 @@ public class DailyBackgroundService : BackgroundService
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger<DailyBackgroundService> _logger;
     private readonly SensoringConnector _sensoringConnector;
-    private readonly IServiceScopeFactory _scopeFactory;
     public DailyBackgroundService(
         IHttpClientFactory httpClientFactory, ILogger<DailyBackgroundService> logger, 
         ILogger<SensoringConnector> modelLogger,  IConfiguration config,
         IServiceScopeFactory scopeFactory
         )
     {
-        _scopeFactory = scopeFactory;
         _httpClientFactory = httpClientFactory;
         _logger = logger;
-        _sensoringConnector= new SensoringConnector(_httpClientFactory, modelLogger, config);
+        _sensoringConnector= new SensoringConnector(_httpClientFactory, modelLogger, config, scopeFactory);
     }
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        try
-        {
-            using (var scope = _scopeFactory.CreateScope())
-            {
-                var dbContext = scope.ServiceProvider.GetRequiredService<ControlApiDbContext>();
-                this._sensoringConnector.SetDbContext(dbContext);
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error occurred while running background task.");
-        }
         bool firstLoop = true;
         _logger.LogInformation("DailyGathering Service is running.");
         while (!stoppingToken.IsCancellationRequested)
