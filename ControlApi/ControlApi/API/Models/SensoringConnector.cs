@@ -9,7 +9,7 @@ public class SensoringConnector
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger<SensoringConnector> _logger;
-    private readonly ControlApiDbContext _db;
+    private ControlApiDbContext? _db;
     private readonly IJwtService _jwt;
     private readonly string _apiUrl;
 
@@ -26,9 +26,19 @@ public class SensoringConnector
                   ?? throw new InvalidOperationException("SENSORING_API not found");
         
     }
+
+    public void SetDbContext(ControlApiDbContext db)
+    {
+        this._logger.LogInformation("DbContext Provided to SensoringConnector");
+        this._db = db;
+    }
     
     public async Task PullAsync(CancellationToken cancellationToken)
     {
+        if (this._db == null)
+        {
+            this._logger.LogInformation("Tried to pull data from Sensoring API without DbContext.");
+        }
         this._logger.LogInformation("Updating our Trash Collection with the Sensoring API.");
         var client = _httpClientFactory.CreateClient();
         
