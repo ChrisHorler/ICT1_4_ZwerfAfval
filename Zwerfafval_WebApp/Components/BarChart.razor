@@ -40,7 +40,7 @@
 @using BlazorBootstrap.Components
 @using System.Collections.Generic
 
-<BarChart TItem="ChartSeries" 
+@* <BarChart TItem="ChartSeries" 
           Items="ChartData"
           XAxisLabels="TrashXAxisLabels"
           Title="Afvalanalyse"
@@ -48,12 +48,12 @@
           YAxisTitle="Aantal"
           ShowXAxisTitle="true"
           ShowYAxisTitle="true"
-          Height="400" />
+          Height="400" /> *@
 
 @code {
     [Parameter]
     public string[] TrashXAxisLabels { get; set; } = Array.Empty<string>();
 
-    [Parameter]
-    public List<ChartSeries> ChartData { get; set; } = new();
+    // [Parameter]
+    // public List<ChartSeries> ChartData { get; set; } = new();
 }

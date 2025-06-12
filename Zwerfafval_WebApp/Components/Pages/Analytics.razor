@@ -9,7 +9,7 @@
 <h1>Analytics</h1>
 
 <div class="analytics-layout">
-	<BarChart TrashXAxisLabels="TrashXAxisLabels" ChartData="TrashSeries" />
+	@* <BarChart TrashXAxisLabels="TrashXAxisLabels" ChartData="TrashSeries" /> *@
 
     <Graph />
 
@@ -224,14 +224,14 @@
         "Wilhelminapark"
     };
 
-    private List<ChartSeries> TrashSeries = new()
-    {
-        new ChartSeries
-        {
-            Name = "Hoeveelheid afval in aantal",
-            Data = new double[] { 10, 30, 20, 50, 40 }
-        }
-    };
+    // private List<ChartSeries> TrashSeries = new()
+    // {
+    //     new ChartSeries
+    //     {
+    //         Name = "Hoeveelheid afval in aantal",
+    //         Data = new double[] { 10, 30, 20, 50, 40 }
+    //     }
+    // };
 
 }
 
