@@ -1,6 +1,7 @@
 ﻿@page "/analytics"
 @using BlazorBootstrap.Components
 @using Zwerfafval_WebApp.Components
+@rendermode InteractiveServer
 @inject DateService DateService
 
 
@@ -9,7 +10,8 @@
 <h1>Analytics</h1>
 
 <div class="analytics-layout">
-    <TrashBarChart />
+    <BarChart @ref="barChart" Width="800" Class="mb-4" />
+
 	@* <BaChart TrashXAxisLabels="TrashXAxisLabels" ChartData="TrashSeries" /> *@
 
     <Graph />
@@ -17,43 +19,43 @@
 </div>
 
 @code {
-	// Graph
-	// public List<ChartSeries> runs = new List<ChartSeries>()
-	// {
-	// 	new ChartSeries()
-	// 	{
-	// 		Name = "Peuk",
-	// 		Data = new double[] {5, 12, 7, 10, 3} amount of trash mockdata
-	// 	},
-	// 	new ChartSeries()
-	// {
-	// 	Name = "Papier",
-	// 	Data = new double[] { 2, 7, 5, 4, 2 }
-	// }
-	// }; 
+    // Graph
+    // public List<ChartSeries> runs = new List<ChartSeries>()
+    // {
+    // 	new ChartSeries()
+    // 	{
+    // 		Name = "Peuk",
+    // 		Data = new double[] {5, 12, 7, 10, 3} amount of trash mockdata
+    // 	},
+    // 	new ChartSeries()
+    // {
+    // 	Name = "Papier",
+    // 	Data = new double[] { 2, 7, 5, 4, 2 }
+    // }
+    // }; 
 
-	// public string[] XAxisLabels = { "08:00", "10:00", "12:00", "14:00", "16:00" }; mock-timestamps 
+    // public string[] XAxisLabels = { "08:00", "10:00", "12:00", "14:00", "16:00" }; mock-timestamps 
 
-	// Barchart
-	// public List<ChartSeries> Trashseries = new List<ChartSeries>()
-	// {
-	// 	new ChartSeries() 
-	// 	{ 
-	// 		Name = "Series 1", 
-	// 		Data = new double[] { 1, 2, 3, 4 } 
-	// 	},
-	// 	new ChartSeries()
-	// 	{ 
-	// 		Name = "Series 2", 
-	// 		Data = new double[] { 5, 6, 7, 8 }
-	// 	},
-	// 	new ChartSeries()
-	// 	{
-	// 		Name = "Series 3",
-	// 		Data = new double[] { 5, 6, 7, 8 }
-	// 	}
-	// };
-	// public string[] TrashXAxisLabels = { "Vlaszak", "LovensdijkStraat", "Hogeschoollaan", "Claudus Prinsenlaan" };
+    // Barchart
+    // public List<ChartSeries> Trashseries = new List<ChartSeries>()
+    // {
+    // 	new ChartSeries() 
+    // 	{ 
+    // 		Name = "Series 1", 
+    // 		Data = new double[] { 1, 2, 3, 4 } 
+    // 	},
+    // 	new ChartSeries()
+    // 	{ 
+    // 		Name = "Series 2", 
+    // 		Data = new double[] { 5, 6, 7, 8 }
+    // 	},
+    // 	new ChartSeries()
+    // 	{
+    // 		Name = "Series 3",
+    // 		Data = new double[] { 5, 6, 7, 8 }
+    // 	}
+    // };
+    // public string[] TrashXAxisLabels = { "Vlaszak", "LovensdijkStraat", "Hogeschoollaan", "Claudus Prinsenlaan" };
 
     // private LineChart lineChart = default!;
     // private LineChartOptions lineChartOptions = default!;
@@ -216,14 +218,14 @@
     // }
 
     // #endregion Data Preparation
-    private string[] TrashXAxisLabels = new[]
-{
-        "Grote Markt",
-        "Breda Station",
-        "Chassé Theater",
-        "Breda Castle",
-        "Wilhelminapark"
-    };
+    //     private string[] TrashXAxisLabels = new[]
+    // {
+    //         "Grote Markt",
+    //         "Breda Station",
+    //         "Chassé Theater",
+    //         "Breda Castle",
+    //         "Wilhelminapark"
+    //     };
 
     // private List<ChartSeries> TrashSeries = new()
     // {
@@ -233,6 +235,52 @@
     //         Data = new double[] { 10, 30, 20, 50, 40 }
     //     }
     // };
+
+    private BarChart barChart = default!;
+    private BarChartOptions barChartOptions = default!;
+    private ChartData chartData = default!;
+
+    protected override void OnInitialized()
+    {
+        var myLabels = new List<string> { "Grote Markt", "Breda Station", "Chassé Theater", "Breda Castle", "Wilhelmina Park" };
+        var myDataSets = new List<IChartDataset>
+        {
+            new BarChartDataset()
+            {
+            Label = $"Team RED",
+            Data = new List<double?> { 40, 20, 66, 49, 66},
+            BackgroundColor = new List<string> { System.Drawing.Color.OrangeRed.ToRgbString()},
+            BorderColor = new List<string> { System.Drawing.Color.OrangeRed.ToRgbString()},
+            BorderWidth = new List<double> { 0 },
+            },
+            new BarChartDataset()
+            {
+            Label = $"Team BLUE",
+            Data = new List<double?> { 40, 20, 66, 49, 66},
+            BackgroundColor = new List<string> { System.Drawing.Color.Cyan.ToRgbString()},
+            BorderColor = new List<string> { System.Drawing.Color.Cyan.ToRgbString()},
+            BorderWidth = new List<double> { 0 },
+            },
+        };
+
+        chartData = new ChartData { Labels = myLabels, Datasets = myDataSets };
+        barChartOptions = new BarChartOptions
+            {
+                Responsive = true,
+                Interaction = new Interaction { Mode = InteractionMode.Index }
+            };
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await barChart.InitializeAsync(chartData, barChartOptions);
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+
 
 }
 
