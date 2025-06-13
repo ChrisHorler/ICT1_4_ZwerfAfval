@@ -27,6 +27,17 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
       
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+        
+      - name: Restore Dependencies
+        run: dotnet restore ControlApi/ControlApi.sln
+        
+      - name: Run Unit Tests
+        run: dotnet test ControlApi/ControlApi.sln --no-restore --verbosity normal
+      
       - name: Log-in to ghcr.io
         uses: docker/login-action@v3
         with:
@@ -72,9 +83,9 @@ jobs:
             docker run -d \
             --name  ${{ env.CONTAINER_NAME }} \
             --network backend-network \
-            -p ${{ env.HOST_PORT }}:${{ env.INTERNAL_PORT }} \
+            -p 8080:8080 \
             --restart unless-stopped \
-            -e ConnectionStrings__Default='Server=mariadb;Port=3306;Database=Control;Uid=user;Pwd=${{ secrets.DB_PASSWORD }};' \
+            -e ConnectionStrings__Default='${{ secrets.DB_CONNECTION }}' \
             -e Jwt__Key='${{ secrets.JWT_KEY }}' \
             "$IMAGE"
 

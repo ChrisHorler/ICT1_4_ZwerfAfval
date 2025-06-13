@@ -1,12 +1,20 @@
 ﻿@inherits LayoutComponentBase
+@using MudBlazor
+@inject DateService DateService
+
+<MudThemeProvider />
+<MudSnackbarProvider />
+<MudDialogProvider />
+<MudPopoverProvider />
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
     <main>
-        <div class="top-row px-4">
+        <div class="top-row px-4" style="display: flex; align-items: center; gap: 16px;">
+            <a href="">Zwerfafval_WebApp</a>
+            <MudDatePicker Label="Input date" Editable="true" @bind-Date="SelectedDate" Placeholder="Select Date" />
+            <a href="overview">Overview</a>
+            <a href="analytics">Analytics</a>
+            <a href="settings">Settings</a>
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
         </div>
 
@@ -21,3 +29,17 @@
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>
 </div>
+
+@code{
+    private DateTime? SelectedDate
+    {
+        get => DateService.SelectedDate;
+        set
+        {
+            if (value.HasValue)
+            {
+                DateService.SelectedDate = value.Value;
+            }
+        }
+    }
+}
