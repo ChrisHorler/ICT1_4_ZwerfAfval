@@ -30,12 +30,6 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Show Dockerfile Sanity Check (debug - remove later)
-        run: |
-          echo "----- Zwerfafval_WebApp/Dockerfile -----"
-          cat Zwerfafval_WebApp/Dockerfile.server
-          echo "---------------------------------------"
-
       - name: Log-in to GHCR
         uses: docker/login-action@v3
         with:
@@ -47,9 +41,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: Zwerfafval_WebApp
-          file: Zwerfafval_WebApp/Dockerfile.server
           push: true
-          no-cache: true
           tags: |
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
             ${{ env.IMAGE_NAME }}:latest
