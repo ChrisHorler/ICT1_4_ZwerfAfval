@@ -15,6 +15,7 @@ namespace Zwerfafval_WebApp.Components.Services
 
         public async Task<List<DetectionData>> GetDetectionDataAsync()
         {
+            // Api endpoint naam hieronder veranderen wanneer deze bekend is 
             var response = await _httpClient.GetFromJsonAsync<List<DetectionData>>("control-api/collection");
             return response ?? new List<DetectionData>();
         }

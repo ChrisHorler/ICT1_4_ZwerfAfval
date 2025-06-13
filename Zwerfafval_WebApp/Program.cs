@@ -14,7 +14,7 @@ builder.Services.AddScoped<HttpClient>(sp =>
 {
     return new HttpClient
     {
-        BaseAddress = new Uri("https://your-api-url.com/") // 
+        BaseAddress = new Uri("builder.HostEnvironment.BaseAddress") // 
     };
 });
 
