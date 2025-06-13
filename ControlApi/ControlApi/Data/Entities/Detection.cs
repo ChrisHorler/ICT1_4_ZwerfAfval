@@ -2,6 +2,7 @@ namespace ControlApi.Data.Entities;
 
 public class RawDetection
 {
+    public int? detectionId { get; set; }
     public DateTime timeStamp { get; set; }
     
     public float confidence { get; set; }
@@ -18,14 +19,12 @@ public class RawDetection
 
 public class TempDetection: RawDetection
 {
-    public int? detectionId { get; set; }
     public ICollection<Prediction>? predictions { get; set; } = new List<Prediction>();
     public ICollection<DetectionPOI>? detectionPOIs { get; set; } = new List<DetectionPOI>();
 }
 
 public class Detection: RawDetection
 {
-    public int? detectionId { get; set; }
     public ICollection<Prediction> predictions { get; set; } = new List<Prediction>();
     public ICollection<DetectionPOI> detectionPOIs { get; set; } = new List<DetectionPOI>();
 
