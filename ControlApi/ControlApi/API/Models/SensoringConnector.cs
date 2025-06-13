@@ -65,6 +65,13 @@ public class SensoringConnector
                     ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data);
                     _logger.LogInformation("Received data from external API: {parsedResponse}", data);
                     List<TempDetection> trashDetections = SensoringConvertor.ConvertFullModel(parsedResponse);
+                    _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
+                    foreach (var trashDetection in trashDetections)
+                    {
+                        
+                        var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, 1000);
+                        _logger.LogInformation("Response: {responseObj}", responseObj);
+                    }
                     // now populate it with locationdata, 50m radius
 
                     // we doen een prediction based op front-end request.
@@ -93,31 +100,42 @@ public class SensoringConnector
     /// <summary>
     /// Queries the Overpass API for restaurants, bus stops, and train stations near the given point.
     /// </summary>
-    static async Task<List<JObject>> QueryNearbyElementsAsync(double lat, double lon, int radius)
+    async Task<List<JObject>> QueryNearbyElementsAsync(double lat, double lon, int radius)
     {
         string overpassQuery = $@"
-[out:json];
+[out:json][timeout:2500];
+// gather nodes, ways & relations in one set
 (
-  node[""amenity""=""restaurant""](around:{radius},{lat},{lon});
-  node[""highway""=""bus_stop""](around:{radius},{lat},{lon});
-  node[""railway""=""station""](around:{radius},{lat},{lon});
+  node[amenity=restaurant](around:{radius},{lat},{lon});
+  way[amenity=restaurant](around:{radius},{lat},{lon});
+  relation[amenity=restaurant](around:{radius},{lat},{lon});
+
+  node[highway=bus_stop](around:{radius},{lat},{lon});
+  way[highway=bus_stop](around:{radius},{lat},{lon});
+  relation[highway=bus_stop](around:{radius},{lat},{lon});
+
+  node[railway=station](around:{radius},{lat},{lon});
+  way[railway=station](around:{radius},{lat},{lon});
+  relation[railway=station](around:{radius},{lat},{lon});
 );
-out body;
+// for ways & relations return a center point
+out center;
 ";
 
 
         using (var client = new HttpClient())
         {
-            var content = new StringContent($"data={Uri.EscapeDataString(overpassQuery)}",
-                Encoding.UTF8,
-                "application/x-www-form-urlencoded");
+            _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
+            string url = "https://overpass-api.de/api/interpreter?data=" 
+                         + Uri.EscapeDataString(overpassQuery);
+            var response = await client.GetAsync(url);
 
-            // Send the POST
-            var response = await client.PostAsync("https://overpass-api.de/api/interpreter", content);
+
             response.EnsureSuccessStatusCode();
 
             // Parse JSON
             var json = await response.Content.ReadAsStringAsync();
+            _logger.LogInformation("Response: {json}", json);
             var root = JObject.Parse(json);
             var elements = (JArray)root["elements"];
 
