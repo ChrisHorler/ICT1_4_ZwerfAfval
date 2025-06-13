@@ -1,18 +1,17 @@
-﻿# ------- Build Stage -------
+﻿# ---------- Build stage ----------
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY ControlApi/ControlApi.csproj ControlApi/
-RUN dotnet restore "ControlApi/ControlApi.csproj"
-
+# copy the whole project and restore/publish
 COPY . .
-WORKDIR /src/ControlApi
-RUN dotnet publish ControlApi.csproj -c Release -o /app/out
+RUN dotnet publish Zwerfafval_WebApp.csproj -c Release -o /app/out
 
-# ------- Runtime -------
+# ---------- Runtime stage ----------
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/out .
+
+# Blazor Server runs on Kestrel
 ENV ASPNETCORE_URLS=http://+:8080
 EXPOSE 8080
-ENTRYPOINT ["dotnet", "ControlApi.dll"]
+ENTRYPOINT ["dotnet", "Zwerfafval_WebApp.dll"]
