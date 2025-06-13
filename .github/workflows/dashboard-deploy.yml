@@ -74,28 +74,30 @@ jobs:
              # ----- write vhost file -----
             mkdir -p /opt/nginx/conf/conf.d /opt/nginx/ssl
             
-            cat >/opt/nginx/conf/conf.d/dashboard.conf <<'EOF'
+            VHOST=$(cat <<'HERE'
             # redirect HTTP → HTTPS
             server {
               listen 80  default_server;
               return 301 https://$host$request_uri;
             }
-
+  
             server {
               listen 443 ssl default_server;
-
+  
               ssl_certificate     /etc/nginx/ssl/selfsigned.crt;
               ssl_certificate_key /etc/nginx/ssl/selfsigned.key;
-
+  
               location / {
-                proxy_pass         http://dashboard:80;
-                proxy_set_header   Host $host;
-                proxy_set_header   X-Real-IP $remote_addr;
-                proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header   X-Forwarded-Proto $scheme;
+              proxy_pass         http://dashboard:80;
+              proxy_set_header   Host $host;
+              proxy_set_header   X-Real-IP $remote_addr;
+              proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header   X-Forwarded-Proto $scheme;
                 }
               }
-            EOF
+            HERE
+            )
+            printf "%s\n" "$VHOST" > /opt/nginx/conf/conf.d/dashboard.conf
 
             # ----- create self-signed cert once -----
             if [ ! -f /opt/nginx/ssl/selfsigned.crt ]; then
