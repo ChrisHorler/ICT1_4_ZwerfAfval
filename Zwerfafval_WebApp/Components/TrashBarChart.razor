@@ -1,5 +1,8 @@
-﻿@using BlazorBootstrap
+﻿@inject IDetectionDataService DetectionService
+@using Zwerfafval_WebApp.Components.Models
+@using BlazorBootstrap
 @using System.Collections.Generic
+@using Zwerfafval_WebApp.Components.Services
 
 <BlazorBootstrap.BarChart @ref="barChart" Width="500" Height="300" />
 
