@@ -11,4 +11,4 @@ In `ControlApi/` is where you will find the ASP.NET Backend
 In `Zwerfafval_WebApp/` is where you will find our Blazor Frontend
 In `trash_prediction_api/` is where you will find the AI that will run predictions based on our data.
 
-// Add instructions for setup here...
+To run the backend you'll first have to setup your user secrets, which is explained [here](./ControlApi/ControlApi/setup.md).
