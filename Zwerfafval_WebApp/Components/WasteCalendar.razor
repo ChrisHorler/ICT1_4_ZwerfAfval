@@ -1,6 +1,9 @@
 ﻿@using System.Globalization
+@* @inject HttpClient http*@
 
 @code {
+    // private Dictionary<DateTime, WasteDetectionData> DetectionData = new(); for API Data
+
     private int currentYear = DateTime.Today.Year;
     private int currentMonth = DateTime.Today.Month;
     //private int nextMonth = DateTime.Today.Month == 12 ? 1 : DateTime.Today.Month + 1;
@@ -17,6 +20,17 @@
         DetectionCounts = Enumerable.Range(1, 30)
     .Select(_ => random.Next(1, 51)) //numbers from 1 to 51
     .ToList();
+
+    @*var data = await Http.GetFromJsonAsync<List<WasteDetectionData>>("https://your-api.com/wastecalendar");
+if (data != null)
+{
+    DetectionData = data
+        .Where(d => d.Date.Month == currentMonth && d.Date.Year == currentYear)
+        .ToDictionary(d => d.Date.Date, d => d);
+}
+Code for Data
+*@
+
     }
 
     private List<DateTime> DaysInMonth => Enumerable.Range(1, DateTime.DaysInMonth(currentYear, currentMonth))
@@ -49,7 +63,21 @@
         }
 
            
-        // return "lightgray"; Will return other colours (red, yellow and green) when the data is shared. Mock data with array?
+        // for data from API
+    //     private string GetColorForDay(DateTime day)
+    // {
+    //     if (!DetectionData.TryGetValue(day.Date, out var data))
+    //         return "lightgray"; Geen data voor deze dag
+
+    //     return data.Category.ToLowerInvariant() switch
+    //     {
+    //         "low" => "#5a9f6e",
+    //         "medium" => "#fac059",
+    //         "high" => "#f37453",
+    //         _ => "lightgray"
+    //     };
+    // }
+
     }
 }
 
