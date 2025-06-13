@@ -1,5 +1,8 @@
 ﻿@using System.Globalization
-@* @inject HttpClient http*@
+@inject IWasteCalendarService WasteCalendarService
+@using Zwerfafval_WebApp.Components.Models
+@using System.Collections.Generic
+@using Zwerfafval_WebApp.Components.Services
 
 @code {
     // private Dictionary<DateTime, WasteDetectionData> DetectionData = new(); for API Data
