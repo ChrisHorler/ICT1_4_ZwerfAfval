@@ -73,6 +73,7 @@ jobs:
             
              # ----- write vhost file -----
             mkdir -p /opt/nginx/conf/conf.d /opt/nginx/ssl
+            rm -f /opt/nginx/conf/conf.d/default.conf
             
             VHOST=$(cat <<'HERE'
             # redirect HTTP → HTTPS
