@@ -16,3 +16,9 @@ A `secrets.json` should open, add the following:
 }
 ```
 And replace `<IPADRESS>`, `<PORT>`, `<DB_NAME>`, `<DB_USER>` and `<DB_PASSWORD>` inside your connection string. Also change the JWT key and Sensoring API URL. Make sure that the API URL does not end with a `/`, these will be added by our own logic.
+
+
+
+## Change POI
+
+We are working with an API that gets us points of interests. If you would want to change the kinds of POIs that we are gathering, go to [their website](https://overpass-turbo.eu/#) to test your API query.

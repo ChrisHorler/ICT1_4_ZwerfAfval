@@ -69,7 +69,7 @@ public class SensoringConnector
                     foreach (var trashDetection in trashDetections)
                     {
                         
-                        var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, 1000);
+                        var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, 50);
                         _logger.LogInformation("Response: {responseObj}", responseObj);
                     }
                     // now populate it with locationdata, 50m radius
@@ -103,23 +103,40 @@ public class SensoringConnector
     async Task<List<JObject>> QueryNearbyElementsAsync(double lat, double lon, int radius)
     {
         string overpassQuery = $@"
-[out:json][timeout:2500];
-// gather nodes, ways & relations in one set
+[out:json][timeout:25];
+// verzamel nodes, ways & relations in één set
 (
-  node[amenity=restaurant](around:{radius},{lat},{lon});
-  way[amenity=restaurant](around:{radius},{lat},{lon});
-  relation[amenity=restaurant](around:{radius},{lat},{lon});
+  node[amenity=restaurant](around:{radius},{lon},{lat});
+  way[amenity=restaurant](around:{radius},{lon},{lat});
+  relation[amenity=restaurant](around:{radius},{lon},{lat});
 
-  node[highway=bus_stop](around:{radius},{lat},{lon});
-  way[highway=bus_stop](around:{radius},{lat},{lon});
-  relation[highway=bus_stop](around:{radius},{lat},{lon});
+  node[highway=bus_stop](around:{radius},{lon},{lat});
+  way[highway=bus_stop](around:{radius},{lon},{lat});
+  relation[highway=bus_stop](around:{radius},{lon},{lat});
 
-  node[railway=station](around:{radius},{lat},{lon});
-  way[railway=station](around:{radius},{lat},{lon});
-  relation[railway=station](around:{radius},{lat},{lon});
+  node[railway=station](around:{radius},{lon},{lat});
+  way[railway=station](around:{radius},{lon},{lat});
+  relation[railway=station](around:{radius},{lon},{lat});
+
+  node[amenity=cafe](around:{radius},{lon},{lat});
+  way[amenity=cafe](around:{radius},{lon},{lat});
+  relation[amenity=cafe](around:{radius},{lon},{lat});
+
+  node[amenity=nightclub](around:{radius},{lon},{lat});
+  way[amenity=nightclub](around:{radius},{lon},{lat});
+  relation[amenity=nightclub](around:{radius},{lon},{lat});
+
+  node[amenity=waste_basket](around:{radius},{lon},{lat});
+  way[amenity=waste_basket](around:{radius},{lon},{lat});
+  relation[amenity=waste_basket](around:{radius},{lon},{lat});
+
+  node[amenity=fast_food](around:{radius},{lon},{lat});
+  way[amenity=fast_food](around:{radius},{lon},{lat});
+  relation[amenity=fast_food](around:{radius},{lon},{lat});
 );
-// for ways & relations return a center point
+// voor ways & relations geef een centrum terug
 out center;
+
 ";
 
 
@@ -135,7 +152,7 @@ out center;
 
             // Parse JSON
             var json = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation("Response: {json}", json);
+            // _logger.LogInformation("Response: {json}", json);
             var root = JObject.Parse(json);
             var elements = (JArray)root["elements"];
 
