@@ -31,6 +31,9 @@ main {
         color: #f7f9fa;
     }
 
+    .top-row label{
+        color: #f7f9fa;
+    }
 
     .top-row ::deep a, .top-row ::deep .btn-link {
         white-space: nowrap;

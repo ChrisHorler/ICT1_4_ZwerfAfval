@@ -1,5 +1,4 @@
 using Zwerfafval_WebApp.Components;
-using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,9 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddMudServices();
 builder.Services.AddSingleton<DateService>();
-
+builder.Services.AddBlazorBootstrap();
 
 var app = builder.Build();
 
