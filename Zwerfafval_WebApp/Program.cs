@@ -10,8 +10,17 @@ builder.Services.AddRazorComponents()
 builder.Services.AddSingleton<DateService>();
 builder.Services.AddBlazorBootstrap();
 builder.Services.AddScoped<IDetectionDataService, DetectionDataService>();
+builder.Services.AddScoped<HttpClient>(sp =>
+{
+    return new HttpClient
+    {
+        BaseAddress = new Uri("https://your-api-url.com/") // 
+    };
+});
+
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
