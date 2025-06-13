@@ -33,7 +33,7 @@ jobs:
       - name: Show Dockerfile Sanity Check (debug - remove later)
         run: |
           echo "----- Zwerfafval_WebApp/Dockerfile -----"
-          cat Zwerfafval_WebApp/Dockerfile
+          cat Zwerfafval_WebApp/Dockerfile.server
           echo "---------------------------------------"
 
       - name: Log-in to GHCR
