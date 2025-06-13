@@ -1,17 +1,86 @@
-﻿@using MudBlazor
+﻿@using BlazorBootstrap.Components
 
-<MudChart ChartType="ChartType.Line"
-          ChartSeries="@runs"
-          XAxisLabels ="@XAxisLabels"
-          Width="650"
-          Height="350"
-          LegendPosition="Position.Bottom">
-</MudChart>
+<div class="container-fluid overflow-x-auto">
+    <LineChart @ref="lineChart" Width="800" Height="400" />
+</div>
+
+<p>Labels: @string.Join(", ", chartData?.Labels ?? new())</p>
+<p>Datasets: @chartData?.Datasets?.Count</p>
+<pre>@System.Text.Json.JsonSerializer.Serialize(GetDebugChartData(), new System.Text.Json.JsonSerializerOptions { WriteIndented = true })</pre>
 
 @code {
-    [Parameter]
-    public List<ChartSeries> runs { get; set; }
+    private LineChart lineChart = default!;
+    private LineChartOptions lineChartOptions = default!;
+    private ChartData chartData = default!;
 
-    [Parameter]
-    public string[] XAxisLabels { get; set; }
+    protected override void OnInitialized()
+    {
+        chartData = new ChartData
+        {
+            Labels = GetDefaultDataLabels(),
+            Datasets = GetDefaultDataSets().Cast<IChartDataset>().ToList()
+        };
+
+        lineChartOptions = new LineChartOptions
+        {
+            IndexAxis = "x",
+            Interaction = new Interaction
+            {
+                Mode = InteractionMode.Index,
+                Intersect = false
+            },
+            Responsive = true
+        };
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await lineChart.InitializeAsync(chartData, lineChartOptions);
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private List<string> GetDefaultDataLabels()
+    {
+        return new List<string> { "08:00", "10:00", "12:00", "14:00", "16:00" };
+    }
+
+    private List<LineChartDataset> GetDefaultDataSets()
+    {
+        return new List<LineChartDataset>
+        {
+            new()
+            {
+                Label = "Peuk",
+                Data = new List<double?> { 5, 12, 7, 10, 3 },
+                BackgroundColor = "rgba(255, 99, 132, 0.2)",
+                BorderColor = "rgb(255, 99, 132)",
+                BorderWidth = 2,
+                PointRadius = new List<double> { 5, 5, 5, 5, 5 },
+                PointHoverRadius = new List<double> { 8, 8, 8, 8, 8 }
+            },
+            new()
+            {
+                Label = "Papier",
+                Data = new List<double?> { 2, 7, 5, 4, 2 },
+                BackgroundColor = "rgba(54, 162, 235, 0.2)",
+                BorderColor = "rgb(54, 162, 235)",
+                BorderWidth = 2,
+                PointRadius = new List<double> { 5, 5, 5, 5, 5 },
+                PointHoverRadius = new List<double> { 8, 8, 8, 8, 8 }
+            }
+        };
+    }
+
+    private object GetDebugChartData()
+    {
+        return new
+        {
+            chartData.Labels,
+            Datasets = chartData.Datasets.OfType<LineChartDataset>().ToList()
+        };
+    }
 }
