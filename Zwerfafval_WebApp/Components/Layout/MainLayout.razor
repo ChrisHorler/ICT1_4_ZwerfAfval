@@ -1,26 +1,17 @@
 ﻿@inherits LayoutComponentBase
-@* @using BlazorComponentDemo.Shared.Components *@
+@using MudBlazor
+@inject DateService DateService
 
 <MudThemeProvider />
-<MudPopoverProvider />
-<MudDialogProvider />
 <MudSnackbarProvider />
+<MudDialogProvider />
+<MudPopoverProvider />
 
-<HeadContent>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-        <script src="js/map.js"></script>
-</HeadContent>
 <div class="page">
-    @* <div class="sidebar">
-        <NavMenu />
-    </div> *@
-
     <main>
-        <div class="top-row px-4">
+        <div class="top-row px-4" style="display: flex; align-items: center; gap: 16px;">
             <a href="">Zwerfafval_WebApp</a>
-            <MudDatePicker Label="Choose a Date" @bind-Date="_date" />
-            @*<DatePicker InitialDate="DefaultDate" DateSelected="OnDateSelected"></DatePicker>*@
+            <MudDatePicker Label="Input date" Editable="true" @bind-Date="SelectedDate" Placeholder="Select Date" />
             <a href="overview">Overview</a>
             <a href="analytics">Analytics</a>
             <a href="settings">Settings</a>
@@ -40,18 +31,15 @@
 </div>
 
 @code{
-    private DateTime? _date = DateTime.Today;
-    // public DateTime DefaultDate { get; set; }
-    // public DateTime SelectedDate { get; set; }
-
-    // protected override void OnInitialized()
-    // {
-    //     DefaultDate = new DateTime(2025, 6, 8);
-    // }
-
-    // public void OnSelectedDate(DateTime dt)
-    // {
-    //     SelectedDate = dt;
-    // }
-
+    private DateTime? SelectedDate
+    {
+        get => DateService.SelectedDate;
+        set
+        {
+            if (value.HasValue)
+            {
+                DateService.SelectedDate = value.Value;
+            }
+        }
+    }
 }
