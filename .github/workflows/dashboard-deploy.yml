@@ -16,8 +16,7 @@ permissions:
 env:
   IMAGE_ROOT: ghcr.io/${{ github.repository }}/dashboard
   CONTAINER_NAME: dashboard
-  INTERNAL_PORT: 80
-
+  
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
