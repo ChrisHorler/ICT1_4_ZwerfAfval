@@ -35,17 +35,17 @@
 
         if (value <= 15)
         {
-            return "lightgreen";
+            return "#5a9f6e";
         }
 
         else if (value <= 30)
         {
-            return "yellow";
+            return "#fac059";
         }
 
         else
         {
-            return "red";
+            return "#f37453";
         }
 
            
@@ -74,4 +74,22 @@
             <div>@day.Day</div>
         </div>
     }
+</div>
+
+<div class="calendar-legend" style="margin-top: 1rem;">
+    <strong>Legenda:</strong>
+    <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 20px; background-color: #5a9f6e; border: 1px solid #ccc; margin-right: 0.5rem;"></div>
+            <span>Low detection of trash</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 20px; background-color: #fac059; border: 1px solid #ccc; margin-right: 0.5rem;"></div>
+            <span>Medium detection of trash</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 20px; background-color: #f37453; border: 1px solid #ccc; margin-right: 0.5rem;"></div>
+            <span>High detection of trash</span>
+        </div>
+    </div>
 </div>
