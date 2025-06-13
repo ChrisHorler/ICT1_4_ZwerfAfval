@@ -12,9 +12,8 @@ public class DetectionConfig : IEntityTypeConfiguration<Detection>
         e.HasKey(d => d.detectionId);
         e.Property(d => d.latitude).HasColumnType("float");
         e.Property(d => d.longitude).HasColumnType("float");
-        e.HasOne(d => d.trashType)
-            .WithMany(t => t.detections)
-            .HasForeignKey(d => d.trashTypeId)
-            .OnDelete(DeleteBehavior.Restrict);
+        e.Property(d => d.trashType)
+            .HasMaxLength(100)
+            .IsRequired();
     }
 }
