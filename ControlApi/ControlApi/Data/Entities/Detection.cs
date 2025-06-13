@@ -18,6 +18,7 @@ public class RawDetection
 
 public class Detection: RawDetection
 {
+    public int detectionId { get; set; }
 
     public ICollection<Prediction> predictions { get; set; } = new List<Prediction>();
     public ICollection<DetectionPOI> detectionPOIs { get; set; } = new List<DetectionPOI>();
