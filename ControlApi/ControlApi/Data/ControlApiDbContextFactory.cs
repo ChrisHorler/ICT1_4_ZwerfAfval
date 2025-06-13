@@ -7,10 +7,15 @@ public class ControlApiDbContextFactory : IDesignTimeDbContextFactory<ControlApi
 {
     public ControlApiDbContext CreateDbContext(string[] args)
     {
-        var connectionString = args.FirstOrDefault();
-        if (string.IsNullOrEmpty(connectionString))
-            throw new InvalidOperationException("Connection string must be passed as a CLI argument.");
+        var config = new ConfigurationBuilder()
+            .AddUserSecrets<ControlApiDbContext>()
+            .Build();
+        
+        var connectionString = config.GetConnectionString("Default");
 
+        if (string.IsNullOrEmpty(connectionString))
+            throw new InvalidOperationException("Connection string is missing in user secrets.");
+            
         var optionsBuilder = new DbContextOptionsBuilder<ControlApiDbContext>();
         optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
