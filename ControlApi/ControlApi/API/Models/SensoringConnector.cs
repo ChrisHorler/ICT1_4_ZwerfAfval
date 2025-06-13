@@ -60,7 +60,16 @@ public class SensoringConnector
                 {
                     ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data);
                     _logger.LogInformation("Received data from external API: {parsedResponse}", data);
-                    SensoringConvertor.ConvertFullModel(parsedResponse);
+                    List<TempDetection> trashDetections = SensoringConvertor.ConvertFullModel(parsedResponse);
+                    // now populate it with locationdata
+                    
+                    // now populate it with prediction data
+                    
+                    
+                    
+                    
+                    // dbContext.detections.AddRange(trashDetections);
+                    // dbContext.SaveChanges();
                 }
                 catch (JsonException exception)
                 {

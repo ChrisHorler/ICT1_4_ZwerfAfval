@@ -5,15 +5,16 @@ namespace ControlApi.SensoringConnection.Models;
 
 public static class SensoringConvertor
 {
-    public static List<RawDetection> ConvertFullModel(ApiResponse data)
+    public static List<TempDetection> ConvertFullModel(ApiResponse data)
     {
-        
-        return new List<RawDetection>();
+        return data.projectData
+            .Select(DetectionParser)
+            .ToList();
     }
 
-    private static RawDetection DetectionParser(ApiResponseData data)
+    private static TempDetection DetectionParser(ApiResponseData data)
     {
-        return new RawDetection()
+        return new TempDetection()
         {
             actualTempC = data.attributes.actual_temp_celsius,
             confidence = data.attributes.confidence,
@@ -23,7 +24,7 @@ public static class SensoringConvertor
             longitude = data.attributes.longitude,
             timeStamp = DateTime.Parse(data.attributes.timestamp),
             windDirection = data.attributes.wind_direction,
-            windForceBft = data.attributes.wind_force_bft,
+            windForceBft = data.attributes.wind_force_bft
         };
     }
 }
