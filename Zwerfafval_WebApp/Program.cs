@@ -1,4 +1,5 @@
 using Zwerfafval_WebApp.Components;
+using Zwerfafval_WebApp.Components.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddSingleton<DateService>();
 builder.Services.AddBlazorBootstrap();
+builder.Services.AddScoped<IDetectionDataService, DetectionDataService>();
 
 var app = builder.Build();
 
