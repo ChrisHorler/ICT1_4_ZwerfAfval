@@ -111,7 +111,7 @@ jobs:
               --name nginx \
               --network backend-network \
               -p 80:80 -p 443:443 \
-              -v /opt/nginx/conf/conf.d:/etc/nginx/conf.d \          # RW mount
+              -v /opt/nginx/conf/conf.d:/etc/nginx/conf.d \
               -v /opt/nginx/ssl:/etc/nginx/ssl:ro \
               -v /opt/nginx/empty-templates:/etc/nginx/templates:ro \
             nginx:alpine
