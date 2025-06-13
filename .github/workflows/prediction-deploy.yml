@@ -16,7 +16,7 @@ env:
   IMAGE_ROOT: ghcr.io/${{ github.repository }}/predictionapi
   CONTAINER_NAME: predictionapi
   INTERNAL_PORT: 8000
-  HOST_PORT: 8000
+  HOST_PORT: 8100
     
 jobs:
   build-and-deploy:
@@ -74,7 +74,7 @@ jobs:
             docker run -d \
               --name ${{ env.CONTAINER_NAME }} \
               --network backend-network \
-              -p 8000:8000 \
+              -p ${{ env.HOST_PORT }}:${{ env.INTERNAL_PORT }} \
               --restart unless-stopped \
               "$IMAGE"
 
