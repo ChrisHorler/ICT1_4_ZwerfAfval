@@ -1,9 +1,7 @@
 namespace ControlApi.Data.Entities;
 
-public class Detection
+public class RawDetection
 {
-    public int detectionId { get; set; }
-    public int trashTypeId { get; set; }
     public DateTime timeStamp { get; set; }
     
     public float confidence { get; set; }
@@ -15,7 +13,13 @@ public class Detection
     public float? windForceBft { get; set; }
     public float? windDirection { get; set; }
     
-    public TrashType? trashType { get; set; }
+    public string trashType { get; set; } = string.Empty;
+}
+
+public class Detection: RawDetection
+{
+    public int detectionId { get; set; }
+
     public ICollection<Prediction> predictions { get; set; } = new List<Prediction>();
     public ICollection<DetectionPOI> detectionPOIs { get; set; } = new List<DetectionPOI>();
 

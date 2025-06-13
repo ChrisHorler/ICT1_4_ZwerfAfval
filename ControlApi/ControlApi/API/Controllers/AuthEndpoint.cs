@@ -24,6 +24,9 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<ActionResult<AuthResponse>> Register(RegisterRequest dto)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
         if (await _db.users.AnyAsync(u => u.email == dto.email))
             return Conflict("Invalid Email or Password");
 
@@ -44,6 +47,9 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<ActionResult<AuthResponse>> Login(LoginRequest dto)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
         var user = await _db.users.SingleOrDefaultAsync(u => u.email == dto.email);
         if (user is null || !BCrypt.Net.BCrypt.Verify(dto.password, user.passwordHash))
             return Conflict ("Invalid Email or Password");
