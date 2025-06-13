@@ -1,9 +1,9 @@
 ﻿# build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY Zwervfafval_WebApp/Zwervfafval_WebApp.csproj .
+COPY Zwerfafval_WebApp.csproj .
 RUN dotnet restore
-COPY Zwervfafval_WebApp/ .
+COPY . .
 RUN dotnet publish -c Release -o /app/out
 
 # runtime
