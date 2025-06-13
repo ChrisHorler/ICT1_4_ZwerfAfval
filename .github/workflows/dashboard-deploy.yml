@@ -47,6 +47,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: Zwerfafval_WebApp
+          file: Zwerfafval_WebApp/Dockerfile.server
           push: true
           no-cache: true
           tags: |
