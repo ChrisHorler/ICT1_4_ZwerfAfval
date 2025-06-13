@@ -8,7 +8,6 @@ public class ControlApiDbContext : DbContext
     public ControlApiDbContext(DbContextOptions<ControlApiDbContext> options) : base(options) { }
     
     public DbSet<User> users => Set<User>();
-    public DbSet<TrashType> trashTypes => Set<TrashType>();
     public DbSet<Detection> detections => Set<Detection>();
     public DbSet<Prediction> predictions => Set<Prediction>();
     public DbSet<POICategory> POICategories => Set<POICategory>();
