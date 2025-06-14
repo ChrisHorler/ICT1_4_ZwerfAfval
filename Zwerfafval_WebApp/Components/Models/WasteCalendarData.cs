@@ -2,6 +2,7 @@
 {
     public class WasteCalendarData
     {
+        public DateTime Date { get; set; }
         public string DetectionCategory { get; set; }
  
     }
