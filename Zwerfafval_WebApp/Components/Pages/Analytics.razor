@@ -16,7 +16,9 @@
 
 <div class="analytics-layout">
     <BarChart @ref="barChart" Width="800" Class="mb-4" />
-
+    <Button Color="Primary" @onclick="LoadDataIntoChart">
+        Laad API-data
+    </Button>
 
     <Graph />
 
@@ -76,6 +78,38 @@
         await base.OnAfterRenderAsync(firstRender);
     }
 
+    private async Task LoadDataIntoChart()
+    {
+        var data = await DetectionService.GetDetectionDataAsync();
+
+        var grouped = data
+            .Where(d => d.Confidence.HasValue)
+            .GroupBy(d => d.Type)
+            .Select(g => new
+            {
+                Type = g.Key,
+                AvgConfidence = g.Average(x => x.Confidence.Value)
+            })
+            .ToList();
+
+        var chartData = new ChartData
+            {
+                Labels = grouped.Select(g => g.Type).ToList(),
+                Datasets = new List<IChartDataset>
+        {
+            new BarChartDataset
+            {
+                Label = "Gemiddelde Confidence",
+                Data = grouped.Select(g => (double?)g.AvgConfidence).ToList(),
+                BackgroundColor = new List<string> { "#4e73df" }
+            }
+        }
+            };
+
+        var options = new BarChartOptions { Responsive = true };
+
+        await barChart.UpdateAsync(chartData, options);
+    }
 
 
 }
