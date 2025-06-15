@@ -1,4 +1,6 @@
 ﻿@using BlazorBootstrap.Components
+@using Zwerfafval_WebApp.Components.Models
+@using Microsoft.AspNetCore.Components
 
 <div class="container-fluid overflow-x-auto">
     <LineChart @ref="lineChart" Width="800" Height="400" />
@@ -8,7 +10,25 @@
 <p>Datasets: @chartData?.Datasets?.Count</p>
 <pre>@System.Text.Json.JsonSerializer.Serialize(GetDebugChartData(), new System.Text.Json.JsonSerializerOptions { WriteIndented = true })</pre>
 
+@if (Data != null && Data.Any())
+{
+    <ul>
+        @foreach (var item in Data)
+        {
+            <li>@item.Type - @item.Confidence</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No data available..</p>
+}
+
+
 @code {
+    [Parameter]
+    public List<DetectionData> Data { get; set; } = new();
+
     private LineChart lineChart = default!;
     private LineChartOptions lineChartOptions = default!;
     private ChartData chartData = default!;

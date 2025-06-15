@@ -19,7 +19,7 @@
     <BarChart @ref="barChart" Width="800" Class="mb-4" />
     <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadDataIntoChart">Load data</Button>
 
-    <Graph />
+    <Graph Data="graphData" />
 
 </div>
 
@@ -91,6 +91,8 @@
             })
             .ToList();
 
+        graphData = data;
+
         var chartData = new ChartData
             {
                 Labels = grouped.Select(g => g.Type).ToList(),
@@ -110,7 +112,7 @@
         await barChart.UpdateAsync(chartData, options);
     }
 
-
+    private List<DetectionData> graphData = new();
 }
 
 
