@@ -5,6 +5,7 @@
 @using BlazorBootstrap
 @using System.Collections.Generic
 @using Zwerfafval_WebApp.Components.Services
+@using System.Linq
 @rendermode InteractiveServer
 @inject IDetectionDataService DetectionService
 @inject DateService DateService
@@ -16,9 +17,7 @@
 
 <div class="analytics-layout">
     <BarChart @ref="barChart" Width="800" Class="mb-4" />
-    <Button Color="Primary" @onclick="LoadDataIntoChart">
-        Laad API-data
-    </Button>
+    <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadDataIntoChart">Load data</Button>
 
     <Graph />
 
