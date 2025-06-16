@@ -71,6 +71,11 @@ public class SensoringConnector
                     _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
                     foreach (var trashDetection in trashDetections)
                     {
+                        if (await dbContext.detections.AnyAsync(d => 
+                                d.timeStamp.Date <= latestItem.timeStamp))
+                        {
+                            continue;
+                        }
                         const int DETECTION_RADIUS = 50;
                         var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
                         _logger.LogInformation("Response: {responseObj}", responseObj);
