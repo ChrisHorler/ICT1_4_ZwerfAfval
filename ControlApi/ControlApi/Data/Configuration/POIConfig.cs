@@ -10,6 +10,5 @@ public class POIConfig : IEntityTypeConfiguration<POI>
     {
         e.ToTable("POI");
         e.HasKey(p => p.POIID);
-        e.HasOne(p => p.category);
     }
 }
