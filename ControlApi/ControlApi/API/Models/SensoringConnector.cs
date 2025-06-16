@@ -67,47 +67,26 @@ public class SensoringConnector
                     ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data);
                     _logger.LogInformation("Received data from external API: {parsedResponse}", data);
                     List<TempDetection> trashDetections = SensoringConvertor.ConvertFullModel(parsedResponse);
+                    List<Detection> trashDets = new List<Detection>();
                     _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
                     foreach (var trashDetection in trashDetections)
                     {
                         const int DETECTION_RADIUS = 50;
                         var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
                         _logger.LogInformation("Response: {responseObj}", responseObj);
-                        var det = trashDetection.ConvertToDetection();
+                        Detection det = trashDetection.ConvertToDetection();
                         foreach (var poiObj in responseObj)
                         {
-                            trashDetection.detectionPOIs.Add(new DetectionPOI()
+                            det.detectionPOIs.Add(new DetectionPOI()
                             {
-                                POI = poiObj,               // or just set POIID = poi.POIID
-                                distanceM = DETECTION_RADIUS,
-                                detectionRadiusM = 5.0f,
-                                isNearest = false // nothing is nearest by default
+                                POIID = poiObj.POIID,
+                                detectionRadiusM = DETECTION_RADIUS
                             });
                         }
-                        
-                        
-                        var nearestPOI = trashDetection.detectionPOIs
-                            .OrderBy(poi => poi.distanceM)
-                            .FirstOrDefault();
-
-                        if (nearestPOI != null)
-                        {
-                            nearestPOI.isNearest = true;
-                        }
-                        
+                        trashDets.Add(det);
                     }
-                    // now populate it with locationdata, 50m radius
-                    
-
-                    // we doen een prediction based op front-end request.
-                    // een prediction haalt alle data op uit de db, en stuurt het naar de AI
-                    // caching the output in the db. (want we willen maar 1 prediction per X min.
-                    
-                    
-
-
-                    // dbContext.detections.AddRange(trashDetections);
-                    // dbContext.SaveChanges();
+                    dbContext.detections.AddRange(trashDets);
+                    dbContext.SaveChanges();
                 }
                 catch (JsonException exception)
                 {
