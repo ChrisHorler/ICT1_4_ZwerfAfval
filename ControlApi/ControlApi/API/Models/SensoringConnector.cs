@@ -70,10 +70,30 @@ public class SensoringConnector
                     _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
                     foreach (var trashDetection in trashDetections)
                     {
-                        
-                        var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, 50, dbContext);
+                        const int DETECTION_RADIUS = 50;
+                        var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
                         _logger.LogInformation("Response: {responseObj}", responseObj);
                         var det = trashDetection.ConvertToDetection();
+                        foreach (var poiObj in responseObj)
+                        {
+                            trashDetection.detectionPOIs.Add(new DetectionPOI()
+                            {
+                                POI = poiObj,               // or just set POIID = poi.POIID
+                                distanceM = DETECTION_RADIUS,
+                                detectionRadiusM = 5.0f,
+                                isNearest = false // nothing is nearest by default
+                            });
+                        }
+                        
+                        
+                        var nearestPOI = trashDetection.detectionPOIs
+                            .OrderBy(poi => poi.distanceM)
+                            .FirstOrDefault();
+
+                        if (nearestPOI != null)
+                        {
+                            nearestPOI.isNearest = true;
+                        }
                         
                     }
                     // now populate it with locationdata, 50m radius
