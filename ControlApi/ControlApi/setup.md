@@ -21,4 +21,4 @@ And replace `<IPADRESS>`, `<PORT>`, `<DB_NAME>`, `<DB_USER>` and `<DB_PASSWORD>`
 
 ## Change POI
 
-We are working with an API that gets us points of interests. If you would want to change the kinds of POIs that we are gathering, go to [their website](https://overpass-turbo.eu/#) to test your API query.
+We are working with an API that gets us points of interest. If you would want to change the kinds of POIs that we are gathering, go to [their website](https://overpass-turbo.eu/#) to test your API query.
