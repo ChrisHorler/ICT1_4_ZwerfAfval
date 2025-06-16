@@ -72,7 +72,7 @@ public class SensoringConnector
                     {
                         
                         var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, 50, dbContext);
-                        // _logger.LogInformation("Response: {responseObj}", responseObj);
+                        _logger.LogInformation("Response: {responseObj}", responseObj);
                         var det = trashDetection.ConvertToDetection();
                         
                     }
@@ -122,7 +122,7 @@ public class SensoringConnector
     /// <summary>
     /// Queries the Overpass API for restaurants, bus stops, and train stations near the given point.
     /// </summary>
-    async Task<List<JObject>> QueryNearbyElementsAsync(double lat, double lon, int radius, ControlApiDbContext db)
+    async Task<List<POI>> QueryNearbyElementsAsync(double lat, double lon, int radius, ControlApiDbContext db)
     {
         string overpassQuery = $@"
 [out:json][timeout:25];
@@ -174,7 +174,6 @@ out center;
 
             // Parse JSON
             var json = await response.Content.ReadAsStringAsync();
-            // _logger.LogInformation("Response: {json}", json);
             var root = JObject.Parse(json);
             var elements = (JArray)root["elements"];
 
@@ -186,17 +185,36 @@ out center;
             var formattedList = new List<POI>();
             foreach (var poi in list)
             {
-                var category = poi["tags"];
-                _logger.LogInformation("category: {category}", category);
-                
-                // var poiObj = await GetOrCreatePoiAsync(db, new POI
-                // {
-                //     
-                // });
-                // formattedList.Add(poiObj);
+                // _logger.LogInformation("Response: {poi}", poi);
+                var tags = poi["tags"] as JObject;
+                string? highway = tags?["highway"]?.ToString();
+                string category = "";
+                if (highway == null)
+                {
+                    string? amenity = tags?["amenity"]?.ToString();
+                    category = amenity;
+                }
+                else
+                {
+                    category = highway;
+                }
+                var poiObj = await GetOrCreatePoiAsync(db, new POI
+                {
+                    POIID = 0,
+                    category = category,
+                    osmId = poi["id"]?.Value<long>() ?? 0,
+                    name = tags?["name"]
+                        ?.ToString(),
+                    latitude = poi["lat"]?.Value<double>() ?? 0.0,
+                    longitude = poi["lon"]?.Value<double>() ?? 0.0,
+                    source = "overpass",
+                    retrievedAt = DateTime.Now,
+                    detectionPOIs = new List<DetectionPOI>(),
+                });
+                formattedList.Add(poiObj);
             }
 
-            return list;
+            return formattedList;
         }
     }
 }
