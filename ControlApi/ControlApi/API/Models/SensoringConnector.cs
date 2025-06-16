@@ -5,6 +5,8 @@ using ControlApi.Data;
 using ControlApi.Data.Entities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace ControlApi.SensoringConnection.Models;
 
@@ -71,8 +73,17 @@ public class SensoringConnector
                         
                         var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, 50);
                         _logger.LogInformation("Response: {responseObj}", responseObj);
+                        var det = trashDetection.ConvertToDetection();
+                        foreach (var poi in responseObj)
+                        {
+                            await GetOrCreatePoiAsync(dbContext, new POI
+                            {
+                                
+                            });
+                        }
                     }
                     // now populate it with locationdata, 50m radius
+                    
 
                     // we doen een prediction based op front-end request.
                     // een prediction haalt alle data op uit de db, en stuurt het naar de AI
@@ -96,6 +107,23 @@ public class SensoringConnector
             }
         }
     }
+    
+    public async Task<POI> GetOrCreatePoiAsync(ControlApiDbContext db, POI newPoi)
+    {
+        var poi = await db.POIs
+            .FirstOrDefaultAsync(p =>
+                p.latitude == newPoi.latitude &&
+                p.longitude == newPoi.longitude);
+        if (poi != null)
+        {
+            return poi;
+        }
+        poi = newPoi;
+        db.POIs.Add(poi);
+        await db.SaveChangesAsync();
+        return poi;
+    }
+
 
     /// <summary>
     /// Queries the Overpass API for restaurants, bus stops, and train stations near the given point.
