@@ -38,8 +38,8 @@ public class SensoringConnector
 
     public async Task PullAsync(CancellationToken cancellationToken)
     {
-        // we need to load all this inside the scope otherwise we cant use the dbcontext
-        // and no we can't use dependencie injection for the dbcontext, because we are running this from a backgroundservice
+        // We need to load all this inside the scope otherwise we cant use the dbcontext
+        // and no we can't use dependency injection for the dbcontext, because we are running this from a BackgroundService.
         using (var scope = _scopeFactory.CreateScope())
         {
             // load the dbcontext from the scope
@@ -222,7 +222,7 @@ out center;
             var root = JObject.Parse(json);
             var elements = (JArray)root["elements"];
 
-            // Convert to list of JObject for easier handling (this is like JSON equivellent in c#, but then with typing
+            // Convert to list of JObject for easier handling (this is like JSON equivalent in c#, but then with typing).
             var list = new List<JObject>();
             foreach (var el in elements)
                 list.Add((JObject)el);

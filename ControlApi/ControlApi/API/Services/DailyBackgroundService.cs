@@ -39,7 +39,6 @@ public class DailyBackgroundService : BackgroundService
 
             firstLoop = false;
             var delay = targetTime - now;
-            Console.WriteLine(delay);
             await Task.Delay(delay, stoppingToken);
 
             if (stoppingToken.IsCancellationRequested) break;
