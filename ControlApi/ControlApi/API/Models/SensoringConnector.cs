@@ -71,16 +71,10 @@ public class SensoringConnector
                     foreach (var trashDetection in trashDetections)
                     {
                         
-                        var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, 50);
-                        _logger.LogInformation("Response: {responseObj}", responseObj);
+                        var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, 50, dbContext);
+                        // _logger.LogInformation("Response: {responseObj}", responseObj);
                         var det = trashDetection.ConvertToDetection();
-                        foreach (var poi in responseObj)
-                        {
-                            await GetOrCreatePoiAsync(dbContext, new POI
-                            {
-                                
-                            });
-                        }
+                        
                     }
                     // now populate it with locationdata, 50m radius
                     
@@ -128,7 +122,7 @@ public class SensoringConnector
     /// <summary>
     /// Queries the Overpass API for restaurants, bus stops, and train stations near the given point.
     /// </summary>
-    async Task<List<JObject>> QueryNearbyElementsAsync(double lat, double lon, int radius)
+    async Task<List<JObject>> QueryNearbyElementsAsync(double lat, double lon, int radius, ControlApiDbContext db)
     {
         string overpassQuery = $@"
 [out:json][timeout:25];
@@ -188,6 +182,19 @@ out center;
             var list = new List<JObject>();
             foreach (var el in elements)
                 list.Add((JObject)el);
+
+            var formattedList = new List<POI>();
+            foreach (var poi in list)
+            {
+                var category = poi["tags"];
+                _logger.LogInformation("category: {category}", category);
+                
+                // var poiObj = await GetOrCreatePoiAsync(db, new POI
+                // {
+                //     
+                // });
+                // formattedList.Add(poiObj);
+            }
 
             return list;
         }
