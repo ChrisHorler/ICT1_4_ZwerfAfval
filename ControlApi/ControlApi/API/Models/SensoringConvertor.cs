@@ -5,6 +5,11 @@ namespace ControlApi.SensoringConnection.Models;
 
 public static class SensoringConvertor
 {
+    /// <summary>
+    /// Converts the full api response structure from the sensoring api into usable objects.
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     public static List<TempDetection> ConvertFullModel(ApiResponse data)
     {
         return data.projectData
@@ -12,6 +17,11 @@ public static class SensoringConvertor
             .ToList();
     }
 
+    /// <summary>
+    /// the actual brain of this class.
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     private static TempDetection DetectionParser(ApiResponseData data)
     {
         return new TempDetection()

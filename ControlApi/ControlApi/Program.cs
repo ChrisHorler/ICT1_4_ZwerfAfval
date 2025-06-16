@@ -65,7 +65,7 @@ builder.Services
 
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IJwtService, JwtService>();
-// builder.Services.AddHostedService<DailyBackgroundService>();
+builder.Services.AddHostedService<DailyBackgroundService>();
 var app = builder.Build();
 
 app.UseAuthentication();
