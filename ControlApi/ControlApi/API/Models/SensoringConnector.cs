@@ -17,6 +17,8 @@ public class SensoringConnector
     private readonly IJwtService _jwt;
     private readonly string _apiUrl;
     private readonly IServiceScopeFactory _scopeFactory;
+    
+    const int DETECTION_RADIUS = 50;
 
     public SensoringConnector(
         IHttpClientFactory httpClientFactory,
@@ -36,8 +38,11 @@ public class SensoringConnector
 
     public async Task PullAsync(CancellationToken cancellationToken)
     {
+        // we need to load all this inside the scope otherwise we cant use the dbcontext
+        // and no we can't use dependencie injection for the dbcontext, because we are running this from a backgroundservice
         using (var scope = _scopeFactory.CreateScope())
         {
+            // load the dbcontext from the scope
             var dbContext = scope.ServiceProvider.GetRequiredService<ControlApiDbContext>();
             if (dbContext == null)
             {
@@ -45,6 +50,7 @@ public class SensoringConnector
                 return;
             }
 
+            // this will be used again later on
             var latestItem = dbContext.detections
                 .OrderByDescending(e => e.timeStamp)
                 .FirstOrDefault();
@@ -58,13 +64,18 @@ public class SensoringConnector
                 latestItem.timeStamp);
             var client = _httpClientFactory.CreateClient();
 
+            // THIS IS THE QUERY TO THE API URL.
+            // ONCE WE CHANGE THE API FROM MY PRIVATE API TO THE ACTUAL SENSORING ONE, WE'LL HAVE TO CHANGE A BIT OF CODE BELOW.
+            // luckily most is handled in 2 classes, `SensoringApiDtos.cs` + `SensoringConvertor.cs`
             var response = await client.GetAsync(this._apiUrl, cancellationToken);
             if (response.IsSuccessStatusCode)
             {
                 string data = await response.Content.ReadAsStringAsync(cancellationToken);
                 try
                 {
-                    ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data);
+                    // this should still work when the api changes if I were to change the Dtos correctly.
+                    ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data); 
+                    
                     _logger.LogInformation("Received data from external API: {parsedResponse}", data);
                     List<TempDetection> trashDetections = SensoringConvertor.ConvertFullModel(parsedResponse);
                     List<Detection> trashDets = new List<Detection>();
@@ -76,7 +87,6 @@ public class SensoringConnector
                         {
                             continue;
                         }
-                        const int DETECTION_RADIUS = 50;
                         var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
                         _logger.LogInformation("Response: {responseObj}", responseObj);
                         Detection det = trashDetection.ConvertToDetection();
@@ -106,7 +116,7 @@ public class SensoringConnector
         }
     }
     
-    public async Task<POI> GetOrCreatePoiAsync(ControlApiDbContext db, POI newPoi)
+    private async Task<POI> GetOrCreatePoiAsync(ControlApiDbContext db, POI newPoi)
     {
         var poi = await db.POIs
             .FirstOrDefaultAsync(p =>
@@ -123,10 +133,11 @@ public class SensoringConnector
 
 
     /// <summary>
-    /// Queries the Overpass API for restaurants, bus stops, and train stations near the given point.
+    /// Queries the Overpass API for restaurants, bus stops, etc
     /// </summary>
-    async Task<List<POI>> QueryNearbyElementsAsync(double lat, double lon, int radius, ControlApiDbContext db)
+    private async Task<List<POI>> QueryNearbyElementsAsync(double lat, double lon, int radius, ControlApiDbContext db)
     {
+        // following here is the massive ass query that our api requires.
         string overpassQuery = $@"
 [out:json][timeout:25];
 // verzamel nodes, ways & relations in één set
@@ -172,7 +183,6 @@ out center;
                          + Uri.EscapeDataString(overpassQuery);
             var response = await client.GetAsync(url);
 
-
             response.EnsureSuccessStatusCode();
 
             // Parse JSON
@@ -180,7 +190,7 @@ out center;
             var root = JObject.Parse(json);
             var elements = (JArray)root["elements"];
 
-            // Convert to list of JObject for easier handling
+            // Convert to list of JObject for easier handling (this is like JSON equivellent in c#, but then with typing
             var list = new List<JObject>();
             foreach (var el in elements)
                 list.Add((JObject)el);
