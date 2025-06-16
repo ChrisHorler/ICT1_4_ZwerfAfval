@@ -106,8 +106,7 @@ public class SensoringConnector
     {
         var poi = await db.POIs
             .FirstOrDefaultAsync(p =>
-                p.latitude == newPoi.latitude &&
-                p.longitude == newPoi.longitude);
+                p.osmId == newPoi.osmId);
         if (poi != null)
         {
             return poi;
