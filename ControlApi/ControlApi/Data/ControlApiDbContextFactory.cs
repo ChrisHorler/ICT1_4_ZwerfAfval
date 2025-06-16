@@ -12,6 +12,14 @@ public class ControlApiDbContextFactory : IDesignTimeDbContextFactory<ControlApi
             .Build();
         
         var connectionString = config.GetConnectionString("Default");
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            if (string.IsNullOrEmpty(config["CONN_STRING"]))
+            {
+                throw new InvalidOperationException("No connection string supplied");
+            }
+            connectionString = config["CONN_STRING"];
+        }
 
         if (string.IsNullOrEmpty(connectionString))
             throw new InvalidOperationException("Connection string is missing in user secrets.");
