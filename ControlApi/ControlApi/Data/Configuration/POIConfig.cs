@@ -10,9 +10,6 @@ public class POIConfig : IEntityTypeConfiguration<POI>
     {
         e.ToTable("POI");
         e.HasKey(p => p.POIID);
-        e.HasOne(p => p.category)
-            .WithMany(c => c.POIS)
-            .HasForeignKey(p => p.categoryId)
-            .OnDelete(DeleteBehavior.Restrict);
+        e.HasOne(p => p.category);
     }
 }
