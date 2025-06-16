@@ -140,7 +140,6 @@ public class SensoringConnector
         // following here is the massive ass query that our api requires.
         string overpassQuery = $@"
 [out:json][timeout:25];
-// verzamel nodes, ways & relations in één set
 (
   node[amenity=restaurant](around:{radius},{lon},{lat});
   way[amenity=restaurant](around:{radius},{lon},{lat});
@@ -169,8 +168,41 @@ public class SensoringConnector
   node[amenity=fast_food](around:{radius},{lon},{lat});
   way[amenity=fast_food](around:{radius},{lon},{lat});
   relation[amenity=fast_food](around:{radius},{lon},{lat});
+
+  // Ice‑cream shops & gelaterias
+  node[shop=ice_cream](around:{radius},{lon},{lat});
+  way[shop=ice_cream](around:{radius},{lon},{lat});
+  relation[shop=ice_cream](around:{radius},{lon},{lat});
+
+  node[shop=bakery](around:{radius},{lon},{lat});
+  way[shop=bakery](around:{radius},{lon},{lat});
+  relation[shop=bakery](around:{radius},{lon},{lat});
+  
+  node[shop=butcher](around:{radius},{lon},{lat});
+  way[shop=butcher](around:{radius},{lon},{lat});
+  relation[shop=butcher](around:{radius},{lon},{lat});
+  
+  node[shop=greengrocer](around:{radius},{lon},{lat});
+  way[shop=greengrocer](around:{radius},{lon},{lat});
+  relation[shop=greengrocer](around:{radius},{lon},{lat});
+  
+  node[shop=delicatessen](around:{radius},{lon},{lat});
+  way[shop=delicatessen](around:{radius},{lon},{lat});
+  relation[shop=delicatessen](around:{radius},{lon},{lat});
+  
+  // Supermarkets & convenience stores
+  node[shop=supermarket](around:{radius},{lon},{lat});
+  way[shop=supermarket](around:{radius},{lon},{lat});
+  relation[shop=supermarket](around:{radius},{lon},{lat});
+  
+  node[shop=convenience](around:{radius},{lon},{lat});
+  way[shop=convenience](around:{radius},{lon},{lat});
+  relation[shop=convenience](around:{radius},{lon},{lat});
+
+  node[amenity=marketplace](around:{radius},{lon},{lat});
+  way[amenity=marketplace](around:{radius},{lon},{lat});
+  relation[amenity=marketplace](around:{radius},{lon},{lat});
 );
-// voor ways & relations geef een centrum terug
 out center;
 
 ";
@@ -198,19 +230,13 @@ out center;
             var formattedList = new List<POI>();
             foreach (var poi in list)
             {
-                // _logger.LogInformation("Response: {poi}", poi);
                 var tags = poi["tags"] as JObject;
-                string? highway = tags?["highway"]?.ToString();
-                string category = "";
-                if (highway == null)
-                {
-                    string? amenity = tags?["amenity"]?.ToString();
-                    category = amenity;
-                }
-                else
-                {
-                    category = highway;
-                }
+
+                string category = tags?["highway"]?.ToString()
+                                  ?? tags?["amenity"]?.ToString()
+                                  ?? tags?["shop"]?.ToString()
+                                  ?? "";
+
                 var poiObj = await GetOrCreatePoiAsync(db, new POI
                 {
                     POIID = 0,
