@@ -14,6 +14,7 @@ env:
   CONTAINER_NAME: controlapi
   INTERNAL_PORT: 8080
   HOST_PORT: 8080
+  PREDICTION_API_BASE_URL: ${ secrets.PREDICTION_API }}
   
 jobs:
   build-and-deploy:
@@ -87,6 +88,7 @@ jobs:
             --restart unless-stopped \
             -e ConnectionStrings__Default='${{ secrets.DB_CONNECTION }}' \
             -e Jwt__Key='${{ secrets.JWT_KEY }}' \
+            -e PREDICTION_API='${{ secrets.PREDICTION_API_BASE_URL }}' \
             "$IMAGE"
 
             echo "Removing dangling images…"
