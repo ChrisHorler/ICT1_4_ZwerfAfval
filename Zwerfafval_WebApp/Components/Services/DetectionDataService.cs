@@ -15,9 +15,17 @@ namespace Zwerfafval_WebApp.Components.Services
 
         public async Task<List<DetectionData>> GetDetectionDataAsync()
         {
-            // Api endpoint naam hieronder veranderen wanneer deze bekend is 
-            var response = await _httpClient.GetFromJsonAsync<List<DetectionData>>("control-api/collection");
-            return response ?? new List<DetectionData>();
+            try
+            {
+                // Api endpoint naam hieronder veranderen wanneer deze bekend is 
+                var response = await _httpClient.GetFromJsonAsync<List<DetectionData>>("control-api/collection");
+                return response ?? new List<DetectionData>();
+            }
+            catch (Exception ex)
+            {
+                Console.Write($"[DetectionDataService] Error while fetching data");
+                return new List<DetectionData>();
+            }
         }
     }
 }
