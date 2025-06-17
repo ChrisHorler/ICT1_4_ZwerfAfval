@@ -27,7 +27,7 @@ public class DailyBackgroundService : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             var now = DateTime.Now;
-            var targetTime = DateTime.Today.AddHours(15); // 18 PM
+            var targetTime = DateTime.Today.AddHours(18); // 18 PM
             if (now > targetTime)
             {
                 if (firstLoop)
@@ -39,7 +39,6 @@ public class DailyBackgroundService : BackgroundService
 
             firstLoop = false;
             var delay = targetTime - now;
-            Console.WriteLine(delay);
             await Task.Delay(delay, stoppingToken);
 
             if (stoppingToken.IsCancellationRequested) break;

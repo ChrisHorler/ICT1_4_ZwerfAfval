@@ -1,16 +1,16 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 from typing import List
-import joblib
+import joblib 
 import numpy as np
 import os
 from typing import Literal
 from sklearn.tree import DecisionTreeClassifier
 
-# load the model from disk
+# aangepastte manier van path loaden
 DIR = os.path.dirname(__file__)
 
-modelfile = os.path.join(DIR, 'models', 'trash_model.pkl')
+modelfile = os.path.join(DIR, 'models', 'calendar_model.pkl')
 
 # Joblib is an open-source library for the Python programming language that facilitates parallel processing, result caching and task distribution.
 model: DecisionTreeClassifier = joblib.load(modelfile)[0]
@@ -48,3 +48,21 @@ def predict(input: FeaturesCalendar) -> Prediction:
     # print(prediction)
     return Prediction(prediction=predictions[0])
     # return {"prediction": prediction.tolist()}
+
+    #### to host ->    fastapi dev trash_prediction_api\application.py
+
+
+# @app.post("/predict/heatmap")
+# def predict_heatmap(location: LocationInput) -> HeatmapPrediction:
+#     input_data = [[location.latitude, location.longitude]]
+#     predicted_amount = heatmap_model.predict(input_data)[0]
+#     
+#     grid_size = 0.01
+#     lat_zone = chr(65 + math.floor((location.latitude - min_lat) / grid_size))
+#     lon_zone = str(math.floor((location.longitude - min_lon) / grid_size) + 1)
+#     grid_zone = f"{lat_zone}{lon_zone}"
+#     
+#     return HeatmapPrediction(
+#         grid_zone=grid_zone,
+#         predicted_amount=predicted_amount
+#     )
