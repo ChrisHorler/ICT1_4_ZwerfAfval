@@ -2,6 +2,7 @@ using System.Text;
 using ControlApi;
 using ControlApi.API.Services;
 using ControlApi.Data;
+using ControlApi.SensoringConnection.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,7 +21,20 @@ if (string.IsNullOrEmpty(connectionString))
     }
     connectionString = config["CONN_STRING"];
 }
+
+
+
     
+builder.Services.AddHttpClient();
+
+// --- Prediction-API typed client ---
+builder.Services.AddHttpClient<IPredictionApiClient, PredictionApiClient>(client =>
+{
+    client.BaseAddress = new Uri(
+        Environment.GetEnvironmentVariable("PREDICTION_API"));
+    client.Timeout = TimeSpan.FromSeconds(5);
+});
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -62,7 +76,7 @@ builder.Services
 
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IJwtService, JwtService>();
-
+builder.Services.AddHostedService<DailyBackgroundService>();
 var app = builder.Build();
 
 app.UseAuthentication();
@@ -78,32 +92,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy" //, "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-    {
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
-        return forecast;
-    })
-    .WithName("GetWeatherForecast")
-    .WithOpenApi();
+// using (var scope = app.Services.CreateScope())
+// {
+//     var db = scope.ServiceProvider.GetRequiredService<ControlApiDbContext>();
+//     db.Database.Migrate();
+// }
 
 app.Run();
 
 namespace ControlApi
 {
-    record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-    {
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-    }
+    
 }

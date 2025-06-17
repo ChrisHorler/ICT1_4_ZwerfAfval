@@ -1,0 +1,33 @@
+﻿@page "/overview"
+@inject IJSRuntime JS
+@using LeafletForBlazor
+@inject DateService DateService
+
+<PageTitle>Overview</PageTitle>
+
+<h1>Overview</h1>
+
+<div class="overview-layout">
+	<div class="map-container">
+		<div id="map" style="height: 500px;"></div>
+		@* <script>var map = L.map('map').SetView([0,0], 1);
+					L.tileLayer('https://api.maptiler.com/maps/nl-cartiqo-topo/{z}/{x}/{y}.png?key=mvRA2CGG1T8gvSWGDugz', {
+								attribution: '<a href="https://cartiqo.nl/" target="_blank">© Cartiqo</a> <a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>',
+					}).addTo(map
+					</script>*@
+	</div>
+
+	<div class="calendar-container">
+		<WasteCalendar />
+	</div>
+</div>
+
+@code{
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await JS.InvokeVoidAsync("initMap");
+		}
+	}
+}
