@@ -23,8 +23,19 @@ if (string.IsNullOrEmpty(connectionString))
 }
 
 
+
     
 builder.Services.AddHttpClient();
+
+// --- Prediction-API typed client ---
+builder.Services.AddHttpClient<IPredictionApiClient, PredictionApiClient>(client =>
+{
+    client.BaseAddress = new Uri(
+        Environment.GetEnvironmentVariable("PREDICTION_API"));
+    client.Timeout = TimeSpan.FromSeconds(5);
+});
+
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
