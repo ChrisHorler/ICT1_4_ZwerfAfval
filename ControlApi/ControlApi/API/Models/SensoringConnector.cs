@@ -18,6 +18,7 @@ public class SensoringConnector
     private readonly string _apiUrl;
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly bool _isTest;
+    private readonly string _apiToken;
     
     const int DETECTION_RADIUS = 50;
 
@@ -37,11 +38,15 @@ public class SensoringConnector
             _apiUrl = config["TESTING_SENSORING_API"]
                       ?? Environment.GetEnvironmentVariable("TESTING_SENSORING_API")
                       ?? throw new InvalidOperationException("TESTING_SENSORING_API not found");
+            _apiToken = "NONE";
         } else
         {
             _apiUrl = config["SENSORING_API"]
                       ?? Environment.GetEnvironmentVariable("SENSORING_API")
                       ?? throw new InvalidOperationException("SENSORING_API not found");
+            _apiToken = config["SENSORING_API_AUTH"]
+                        ?? Environment.GetEnvironmentVariable("SENSORING_API_AUTH")
+                        ?? throw new InvalidOperationException("SENSORING_API_AUTH not found");
         }
 
     }
