@@ -1,3 +1,4 @@
+using System.Data;
 using System.Text;
 using ControlApi.API.DTOs;
 using ControlApi.API.Services;
@@ -105,6 +106,13 @@ public class SensoringConnector
                 // SOMEHOW ATTACH THE TOKEN AS BEARER TOKEN
                 // 
                 // IF TIMEOUT ERROR / WHATEVER ERROR IT WAS, SEND SIGNAL BACK TO RETRY IN 1M
+                HttpResponseMessage jwtResponse = await client.GetAsync($"{this._apiUrl}/Jwt?key={this._apiToken}", cancellationToken);
+                if (!jwtResponse.IsSuccessStatusCode)
+                {
+                    _logger.LogError("Failed to fetch JWT from external API. Status code: {StatusCode}",
+                        jwtResponse.StatusCode);
+                    throw new DataException($"Failed to fetch JWT from external API. Status code: {jwtResponse.StatusCode}");
+                }
                 
                 response = await client.GetAsync($"{this._apiUrl}/Trash?dateLeft={1}&dateRight={2}", cancellationToken);
                 if (response.IsSuccessStatusCode)

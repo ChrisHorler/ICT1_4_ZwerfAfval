@@ -1,3 +1,4 @@
+using System.Data;
 using ControlApi.API.Services;
 using ControlApi.Data;
 using ControlApi.SensoringConnection.Models;
@@ -56,6 +57,13 @@ public class DailyBackgroundService : BackgroundService
     private async Task RunBackgroundTaskAsync(CancellationToken stoppingToken)
     {
         _logger.LogInformation("Running daily gathering.");
-        await _sensoringConnector.PullAsync(stoppingToken);
+        try
+        {
+            await _sensoringConnector.PullAsync(stoppingToken);
+        }
+        catch (DataException excpt)
+        {
+            _logger.LogWarning($"Error whilst calling SensoringAPI: {excpt}");
+        }
     }
 }
