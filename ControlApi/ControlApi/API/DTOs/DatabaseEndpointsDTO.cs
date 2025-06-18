@@ -1,10 +1,5 @@
 namespace ControlApi.API.DTOs;
 
-public record Calendar(
-    string date,
-    string prediction
-);
-
 public record FunFacts(
     string locationName,
     int totalTrashCount,
