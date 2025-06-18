@@ -24,4 +24,4 @@ public record ApiTrashItem(
     float wind_direction
 );
 
-public record ApiResponse(List<ApiTrashItem> projectData)
+public record ApiResponse(List<ApiTrashItem> projectData);
