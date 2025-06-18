@@ -2,7 +2,7 @@ namespace ControlApi.API.DTOs;
 
 public record TestModeApiTrashItem(
     string timestamp, string type,
-    float confidence, float longitude, float latitude,
+    float confidence, float? longitude, float? latitude,
     float feels_like_temp_celsius,
     float actual_temp_celsius, float wind_force_bft,
     float wind_direction

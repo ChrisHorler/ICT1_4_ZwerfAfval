@@ -11,8 +11,8 @@ public class RawDetection
     public DateTime timeStamp { get; set; }
     
     public float confidence { get; set; }
-    public float latitude { get; set; }
-    public float longitude { get; set; }
+    public double? latitude { get; set; }
+    public double? longitude { get; set; }
     
     public float? feelsLikeTempC { get; set; }
     public float? actualTempC { get; set; }

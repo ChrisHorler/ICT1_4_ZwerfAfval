@@ -135,8 +135,20 @@ public class SensoringConnector
                 {
                     continue;
                 }
-                var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
-                _logger.LogInformation("Response: {responseObj}", responseObj);
+
+                List<POI> responseObj;
+                if (trashDetection.latitude != null && trashDetection.longitude != null)
+                {
+                    double lat = trashDetection.latitude.Value;
+                    double lon = trashDetection.longitude.Value;
+    
+                    responseObj = await this.QueryNearbyElementsAsync(lat, lon, DETECTION_RADIUS, dbContext);
+                    _logger.LogInformation("Response: {responseObj}", responseObj);
+                }
+                else
+                {
+                    responseObj = new List<POI>();
+                }
                 Detection det = trashDetection.ConvertToDetection();
                 foreach (var poiObj in responseObj)
                 {
