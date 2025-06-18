@@ -29,7 +29,7 @@ public class DatabaseEndpoints : ControllerBase
     [HttpGet("facts")]
     public async Task<ActionResult<FunFacts>> GetFunFacts([FromQuery] DateTime selectedDay)
     {
-
+        //MONTH
         var detections = await _db.detections
             .Where(d => d.timeStamp.Year == year && d.timeStamp.Month == month)
             .ToListAsync();
@@ -80,7 +80,8 @@ public class DatabaseEndpoints : ControllerBase
     [HttpGet("barchart")]
     public async Task<ActionResult<List<BarchartInfo>>> GetBarchart([FromQuery] DateTime selectedDay)
     {
-        
+
+        //MONTH
         var detections = await _db.detections
             .Where(d => d.timeStamp.Year == year && d.timeStamp.Month == month)
             .ToListAsync();
