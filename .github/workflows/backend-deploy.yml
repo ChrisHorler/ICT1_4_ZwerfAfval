@@ -14,7 +14,7 @@ env:
   CONTAINER_NAME: controlapi
   INTERNAL_PORT: 8080
   HOST_PORT: 8080
-  PREDICTION_API_BASE_URL: ${ secrets.PREDICTION_API }}
+  PREDICTION_API_BASE_URL: ${{ secrets.PREDICTION_API }}
   
 jobs:
   build-and-deploy:
