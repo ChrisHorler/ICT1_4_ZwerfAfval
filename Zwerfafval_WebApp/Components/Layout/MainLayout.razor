@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject DateService DateService
+@inject IJSRuntime JSRuntime
 @using System.Globalization
 
 <div class="page">
@@ -9,6 +10,7 @@
             <div class="mb-3">
                 <DateInput TValue="DateOnly" Value="DateService.SelectedDate" ValueExpression="() => DateService.SelectedDate" ValueChanged="(value) => DateChanged(value)" />
             </div>
+            <button type="button" class="btn btn-success" @onclick="ReloadPage">Search 🔎</button>
             <a href="overview">Overview</a>
             <a href="analytics">Analytics</a>
             <a href="settings">Settings</a>
@@ -28,8 +30,13 @@
 </div>
 
 @code {
-    private void DateChanged(DateOnly dateOnly)
+    private async void DateChanged(DateOnly dateOnly)
     {
         DateService.SelectedDate = dateOnly;
+    }
+
+    private async Task ReloadPage()
+    {
+        await JSRuntime.InvokeVoidAsync("reloadPage");
     }
 }

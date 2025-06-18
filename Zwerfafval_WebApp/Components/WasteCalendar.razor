@@ -6,6 +6,8 @@
 @inject DateService DateService
 @implements IDisposable
 
+<DateInput TValue="DateOnly" Value="DateService.SelectedDate" ValueExpression="() => DateService.SelectedDate" ValueChanged="(value) => DateChanged(value)" />
+
 @code {
     // private Dictionary<DateTime, WasteDetectionData> DetectionData = new(); for API Data
 
@@ -18,6 +20,10 @@
     private readonly CultureInfo englishCulture = new CultureInfo("en-GB");
 
     private List<int> DetectionCounts = new();
+    private async void DateChanged(DateOnly dateOnly)
+    {
+        DateService.SelectedDate = dateOnly;
+    }
 
     protected override void OnInitialized()
     {
