@@ -131,7 +131,7 @@ public class SensoringConnector
             _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
             foreach (var trashDetection in trashDetections)
             {
-                if (trashDetection.timeStamp < latestItem.timeStamp)
+                if (trashDetection.timeStamp <= latestItem.timeStamp)
                 {
                     continue;
                 }
