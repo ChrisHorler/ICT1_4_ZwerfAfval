@@ -85,43 +85,33 @@ public class SensoringConnector
                 response = await client.GetAsync(this._apiUrl, cancellationToken);
                 if (response.IsSuccessStatusCode)
                 {
-                    string data = await response.Content.ReadAsStringAsync(cancellationToken);
-                    try
+                    TestModeSenseringDataGrabber grabber = new TestModeSenseringDataGrabber();
+                    List<TempDetection> trashDetections = await grabber.HandleAndConvert(response, cancellationToken, this._logger);
+                    List<Detection> trashDets = new List<Detection>();
+                    _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
+                    foreach (var trashDetection in trashDetections)
                     {
-                        // this should still work when the api changes if I were to change the Dtos correctly.
-                        ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data); 
-                        
-                        _logger.LogInformation("Received data from external API: {parsedResponse}", data);
-                        List<TempDetection> trashDetections = SensoringConvertor.ConvertFullModel(parsedResponse);
-                        List<Detection> trashDets = new List<Detection>();
-                        _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
-                        foreach (var trashDetection in trashDetections)
+                        if (await dbContext.detections.AnyAsync(d => 
+                                d.timeStamp.Date <= latestItem.timeStamp))
                         {
-                            if (await dbContext.detections.AnyAsync(d => 
-                                    d.timeStamp.Date <= latestItem.timeStamp))
-                            {
-                                continue;
-                            }
-                            var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
-                            _logger.LogInformation("Response: {responseObj}", responseObj);
-                            Detection det = trashDetection.ConvertToDetection();
-                            foreach (var poiObj in responseObj)
-                            {
-                                det.detectionPOIs.Add(new DetectionPOI()
-                                {
-                                    POIID = poiObj.POIID,
-                                    detectionRadiusM = DETECTION_RADIUS
-                                });
-                            }
-                            trashDets.Add(det);
+                            continue;
                         }
-                        dbContext.detections.AddRange(trashDets);
-                        dbContext.SaveChanges();
+                        var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
+                        _logger.LogInformation("Response: {responseObj}", responseObj);
+                        Detection det = trashDetection.ConvertToDetection();
+                        foreach (var poiObj in responseObj)
+                        {
+                            det.detectionPOIs.Add(new DetectionPOI()
+                            {
+                                POIID = poiObj.POIID,
+                                detectionRadiusM = DETECTION_RADIUS
+                            });
+                        }
+                        trashDets.Add(det);
                     }
-                    catch (JsonException exception)
-                    {
-                        _logger.LogError("Received data from external API, it is NOT Deserializable: {Data}", data);
-                    }
+                    dbContext.detections.AddRange(trashDets);
+                    dbContext.SaveChanges();
+                    
                 }
                 else
                 {
