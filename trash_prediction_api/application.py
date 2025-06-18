@@ -48,3 +48,5 @@ def predict(input: FeaturesCalendar) -> Prediction:
     # print(prediction)
     return Prediction(prediction=predictions[0])
     # return {"prediction": prediction.tolist()}
+
+    # to host  fastapi dev trash_prediction_api\application.py
