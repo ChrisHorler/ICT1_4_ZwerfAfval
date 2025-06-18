@@ -122,7 +122,7 @@ public class SensoringConnector
                 response = await client.GetAsync($"{this._apiUrl}Trash?dateLeft={date1}&dateRight={date2}", cancellationToken);
                 if (response.IsSuccessStatusCode)
                 {
-                    TestModeSenseringDataGrabber grabber = new TestModeSenseringDataGrabber();
+                    ActualSenseringDataGrabber grabber = new ActualSenseringDataGrabber();
                     trashDetections = await grabber.HandleAndConvert(response, cancellationToken, this._logger);
                 }
                 else

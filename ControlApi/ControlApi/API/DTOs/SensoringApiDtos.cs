@@ -15,3 +15,13 @@ public record TestModeApiResponseData(
     ); // can be removed once we have the real api
     
 public record TestModeApiResponse(List<TestModeApiResponseData> projectData);
+
+public record ApiTrashItem(
+    string timestamp, string type,
+    float confidence, float? longitude, float? latitude,
+    float feels_like_temp_celsius,
+    float actual_temp_celsius, float wind_force_bft,
+    float wind_direction
+);
+
+public record ApiResponse(List<ApiTrashItem> projectData)
