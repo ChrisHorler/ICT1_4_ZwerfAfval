@@ -160,7 +160,8 @@ public class SensoringConnector
                     det.detectionPOIs.Add(new DetectionPOI()
                     {
                         POIID = poiObj.POIID,
-                        detectionRadiusM = DETECTION_RADIUS
+                        detectionRadiusM = DETECTION_RADIUS,
+                        timeStamp = det.timeStamp
                     });
                 }
                 trashDets.Add(det);
