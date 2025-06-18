@@ -80,47 +80,39 @@ public class SensoringConnector
             var client = _httpClientFactory.CreateClient();
             
             HttpResponseMessage response;
+            List<TempDetection> trashDetections;
             if (this._isTest)
             {
                 response = await client.GetAsync(this._apiUrl, cancellationToken);
                 if (response.IsSuccessStatusCode)
                 {
                     TestModeSenseringDataGrabber grabber = new TestModeSenseringDataGrabber();
-                    List<TempDetection> trashDetections = await grabber.HandleAndConvert(response, cancellationToken, this._logger);
-                    List<Detection> trashDets = new List<Detection>();
-                    _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
-                    foreach (var trashDetection in trashDetections)
-                    {
-                        if (await dbContext.detections.AnyAsync(d => 
-                                d.timeStamp.Date <= latestItem.timeStamp))
-                        {
-                            continue;
-                        }
-                        var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
-                        _logger.LogInformation("Response: {responseObj}", responseObj);
-                        Detection det = trashDetection.ConvertToDetection();
-                        foreach (var poiObj in responseObj)
-                        {
-                            det.detectionPOIs.Add(new DetectionPOI()
-                            {
-                                POIID = poiObj.POIID,
-                                detectionRadiusM = DETECTION_RADIUS
-                            });
-                        }
-                        trashDets.Add(det);
-                    }
-                    dbContext.detections.AddRange(trashDets);
-                    dbContext.SaveChanges();
+                    trashDetections = await grabber.HandleAndConvert(response, cancellationToken, this._logger);
+                    
                     
                 }
                 else
                 {
                     _logger.LogWarning("Failed to fetch data from external API. Status code: {StatusCode}",
                         response.StatusCode);
+                    trashDetections = new List<TempDetection>();
                 }
             }
             else
             {
+                response = await client.GetAsync($"{this._apiUrl}/Trash?dateLeft={1}&dateRight={2}", cancellationToken);
+                if (response.IsSuccessStatusCode)
+                {
+                    TestModeSenseringDataGrabber grabber = new TestModeSenseringDataGrabber();
+                    trashDetections = await grabber.HandleAndConvert(response, cancellationToken, this._logger);
+                }
+                else
+                {
+                    _logger.LogWarning("Failed to fetch data from external API. Status code: {StatusCode}",
+                        response.StatusCode);
+                    trashDetections = new List<TempDetection>();
+                }
+                
                 // TODO
                 //
                 // GET JWT TOKEN
@@ -128,9 +120,31 @@ public class SensoringConnector
                 // SOMEHOW ATTACH THE TOKEN AS BEARER TOKEN
                 // 
                 // IF TIMEOUT ERROR / WHATEVER ERROR IT WAS, SEND SIGNAL BACK TO RETRY IN 1M
-                
-                response = await client.GetAsync($"{this._apiUrl}/Trash?dateLeft={1}&dateRight={2}", cancellationToken);
             }
+            List<Detection> trashDets = new List<Detection>();
+            _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
+            foreach (var trashDetection in trashDetections)
+            {
+                if (await dbContext.detections.AnyAsync(d => 
+                        d.timeStamp.Date <= latestItem.timeStamp))
+                {
+                    continue;
+                }
+                var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
+                _logger.LogInformation("Response: {responseObj}", responseObj);
+                Detection det = trashDetection.ConvertToDetection();
+                foreach (var poiObj in responseObj)
+                {
+                    det.detectionPOIs.Add(new DetectionPOI()
+                    {
+                        POIID = poiObj.POIID,
+                        detectionRadiusM = DETECTION_RADIUS
+                    });
+                }
+                trashDets.Add(det);
+            }
+            dbContext.detections.AddRange(trashDets);
+            dbContext.SaveChanges();
             
         }
     }
