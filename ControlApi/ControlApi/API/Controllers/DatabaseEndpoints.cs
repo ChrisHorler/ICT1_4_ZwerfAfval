@@ -41,29 +41,45 @@ public class DetectionsController : ControllerBase
     [HttpGet("barchart")]
     public async Task<ActionResult<IEnumerable<object>>> GetBarchartRawData()
     {
-        var barchartData = await _db.detections
-            .Include(d => d.detectionPOIs)
-            .Select(d => new    
-            {
-                d.detectionId,
-                d.latitude,
-                d.longitude,
-                d.trashType,
-                d.timeStamp,
+        var startTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        var endTime = DateTime.UtcNow.AddYears(1);
 
-                POIs = d.detectionPOIs.Select(p => new
-                {
-                    p.POI.name,
-                    p.POI.category,
-                    p.POI.,
-                    p.POI.osmId,
-                    p.POI.osmId,
-                    p.POI.osmId,
-                })
+        var windowPOIs = await _db.detectionPOIs
+            .Include(dp => dp.POI)
+            .Include(dp => dp.detection)
+            .Where(dp =>
+                dp.timeStamp >= startTime &&
+                dp.timeStamp <= endTime &&
+                dp.detection.timeStamp >= startTime &&
+                dp.detection.timeStamp <= endTime
+            )
+            .Select(dp => new
+            {
+                PoiId = dp.POIID,
+                PoiName = dp.POI!.name,
+                PoiCat = dp.POI!.category,
+                TrashType = dp.detection!.trashType
             })
             .ToListAsync();
 
-        return Ok(barchartData);
+        // 2) Group in memory by POI, then build your dictionary of trash‑type counts
+        var result = windowPOIs
+            .GroupBy(x => new { x.PoiId, x.PoiName, x.PoiCat })
+            .Select(g => new
+            {
+                Name = g.Key.PoiName,
+                Category = g.Key.PoiCat,
+                TrashTypeCounts = g
+                    .GroupBy(x => x.TrashType)
+                    .ToDictionary(
+                        grp => grp.Key,
+                        grp => grp.Count()
+                    )
+            })
+            .ToList();
+
+
+        return Ok(result);
     }
   
     [HttpGet("linegraphData")]
