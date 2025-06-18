@@ -88,7 +88,7 @@ jobs:
             --restart unless-stopped \
             -e ConnectionStrings__Default='${{ secrets.DB_CONNECTION }}' \
             -e Jwt__Key='${{ secrets.JWT_KEY }}' \
-            -e PREDICTION_API='${{ secrets.PREDICTION_API_BASE_URL }}' \
+            -e PREDICTION_API='${{ secrets.PREDICTION_API }}' \
             "$IMAGE"
 
             echo "Removing dangling images…"
