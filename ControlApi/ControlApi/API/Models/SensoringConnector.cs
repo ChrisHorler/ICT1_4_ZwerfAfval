@@ -131,8 +131,7 @@ public class SensoringConnector
             _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
             foreach (var trashDetection in trashDetections)
             {
-                if (await dbContext.detections.AnyAsync(d => 
-                        d.timeStamp.Date <= latestItem.timeStamp))
+                if (trashDetection.timeStamp < latestItem.timeStamp)
                 {
                     continue;
                 }
