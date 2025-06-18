@@ -27,7 +27,7 @@ public class DatabaseEndpoints : ControllerBase
 
     // FUN FACT PART WOO
     [HttpGet("facts")]
-    public async Task<ActionResult<FunFactDTO>> GetFunFacts([FromQuery] DateTime selectedDay)
+    public async Task<ActionResult<FunFacts>> GetFunFacts([FromQuery] DateTime selectedDay)
     {
         //checks in which week the selectedDay falls into 
         var weekStart = selectedDay.AddDays(-(int)selectedDay.DayOfWeek);
@@ -77,7 +77,7 @@ public class DatabaseEndpoints : ControllerBase
 
     // 📊 BARCHARTYEEE
     [HttpGet("barchart")]
-    public async Task<ActionResult<List<BarchartEntryDTO>>> GetBarchart([FromQuery] DateTime selectedDay)
+    public async Task<ActionResult<List<BarchartInfo>>> GetBarchart([FromQuery] DateTime selectedDay)
     {
         // The same thing for used in funfacts to calculate the week range
         var weekStart = selectedDay.AddDays(-(int)selectedDay.DayOfWeek);
@@ -124,7 +124,7 @@ public class DatabaseEndpoints : ControllerBase
 
     // 📈 LINEGRAPHHHHH
     [HttpGet("linegraph")]
-    public async Task<ActionResult<List<LineGraphEntryDTO>>> GetLineGraph([FromQuery] int year, [FromQuery] int month)
+    public async Task<ActionResult<List<LineGraphInfo>>> GetLineGraph([FromQuery] int year, [FromQuery] int month)
     {
         // Slightly different from the other endpoints, it looks at the year and month 
         var detections = await _db.detections
