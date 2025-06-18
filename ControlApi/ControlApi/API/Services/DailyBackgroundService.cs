@@ -10,6 +10,7 @@ public class DailyBackgroundService : BackgroundService
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger<DailyBackgroundService> _logger;
     private readonly SensoringConnector _sensoringConnector;
+    private readonly bool _isTest;
     public DailyBackgroundService(
         IHttpClientFactory httpClientFactory, ILogger<DailyBackgroundService> logger, 
         ILogger<SensoringConnector> modelLogger,  IConfiguration config,
@@ -19,6 +20,11 @@ public class DailyBackgroundService : BackgroundService
         _httpClientFactory = httpClientFactory;
         _logger = logger;
         _sensoringConnector= new SensoringConnector(_httpClientFactory, modelLogger, config, scopeFactory);
+        _isTest = config.GetValue<bool>("Testing");
+        if (_isTest)
+        {
+            _logger.LogWarning("The backend is running in TEST MODE. Is this correct? Read setup.md to change this.");
+        }
     }
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {

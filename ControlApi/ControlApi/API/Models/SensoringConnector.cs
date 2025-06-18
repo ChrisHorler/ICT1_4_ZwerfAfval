@@ -17,6 +17,7 @@ public class SensoringConnector
     private readonly IJwtService _jwt;
     private readonly string _apiUrl;
     private readonly IServiceScopeFactory _scopeFactory;
+    private readonly bool _isTest;
     
     const int DETECTION_RADIUS = 50;
 
@@ -30,9 +31,18 @@ public class SensoringConnector
         _scopeFactory = scopeFactory;
         _httpClientFactory = httpClientFactory;
         _logger = logger;
-        _apiUrl = config["SENSORING_API"]
-                  ?? Environment.GetEnvironmentVariable("SENSORING_API")
-                  ?? throw new InvalidOperationException("SENSORING_API not found");
+        _isTest = config.GetValue<bool>("Testing");
+        if (_isTest)
+        {
+            _apiUrl = config["TESTING_SENSORING_API"]
+                      ?? Environment.GetEnvironmentVariable("TESTING_SENSORING_API")
+                      ?? throw new InvalidOperationException("TESTING_SENSORING_API not found");
+        } else
+        {
+            _apiUrl = config["SENSORING_API"]
+                      ?? Environment.GetEnvironmentVariable("SENSORING_API")
+                      ?? throw new InvalidOperationException("SENSORING_API not found");
+        }
 
     }
 

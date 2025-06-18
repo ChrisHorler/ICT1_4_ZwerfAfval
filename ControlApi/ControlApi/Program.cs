@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
+const bool TESTING = true;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Default");
 
@@ -76,6 +78,10 @@ builder.Services
 
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Configuration.AddInMemoryCollection(new Dictionary<string, string>
+{
+    ["Testing"] = $"{TESTING}"  // or "false"
+});
 builder.Services.AddHostedService<DailyBackgroundService>();
 var app = builder.Build();
 
