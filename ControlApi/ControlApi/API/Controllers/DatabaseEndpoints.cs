@@ -25,13 +25,14 @@ public class DatabaseEndpoints : ControllerBase
 // date filter toevoegen 
 
 
-    // FUN FACT PART WOO
+    // FUN FACT PART WOO // change to month 
     [HttpGet("facts")]
     public async Task<ActionResult<FunFacts>> GetFunFacts([FromQuery] DateTime selectedDay)
     {
-        //checks in which week the selectedDay falls into 
-        var weekStart = selectedDay.AddDays(-(int)selectedDay.DayOfWeek);
-        var weekEnd = weekStart.AddDays(7);
+
+        var detections = await _db.detections
+            .Where(d => d.timeStamp.Year == year && d.timeStamp.Month == month)
+            .ToListAsync();
 
         //queries database foor POI and decetionPOI, checks if it falls within that week
         var detections = await _db.detections
@@ -79,9 +80,10 @@ public class DatabaseEndpoints : ControllerBase
     [HttpGet("barchart")]
     public async Task<ActionResult<List<BarchartInfo>>> GetBarchart([FromQuery] DateTime selectedDay)
     {
-        // The same thing for used in funfacts to calculate the week range
-        var weekStart = selectedDay.AddDays(-(int)selectedDay.DayOfWeek);
-        var weekEnd = weekStart.AddDays(7);
+        
+        var detections = await _db.detections
+            .Where(d => d.timeStamp.Year == year && d.timeStamp.Month == month)
+            .ToListAsync();
 
         //The same fetching thing related to the POI
         var detections = await _db.detections
