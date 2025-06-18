@@ -7,7 +7,7 @@
         <div class="top-row px-4" style="display: flex; align-items: center; gap: 16px;">
             <a href="">Zwerfafval_WebApp</a>
             <div class="mb-3">
-                <DateInput TValue="DateOnly" Value="date1" ValueExpression="() => date1" ValueChanged="(value) => DateChanged(value)" />
+                <DateInput TValue="DateOnly" Value="DateService.SelectedDate" ValueExpression="() => DateService.SelectedDate" ValueChanged="(value) => DateChanged(value)" />
             </div>
             <a href="overview">Overview</a>
             <a href="analytics">Analytics</a>
@@ -28,10 +28,8 @@
 </div>
 
 @code {
-    private DateOnly date1 = DateOnly.FromDateTime(DateTime.Now);
-
     private void DateChanged(DateOnly dateOnly)
     {
-        date1 = dateOnly;
+        DateService.SelectedDate = dateOnly;
     }
 }

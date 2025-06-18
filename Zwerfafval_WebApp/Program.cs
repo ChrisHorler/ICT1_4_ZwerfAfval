@@ -1,4 +1,5 @@
 using Zwerfafval_WebApp.Components;
+using Zwerfafval_WebApp.Components.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

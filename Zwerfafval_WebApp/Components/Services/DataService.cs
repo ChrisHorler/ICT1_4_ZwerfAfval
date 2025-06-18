@@ -1,10 +1,10 @@
 ﻿public class DateService
 {
+    private DateOnly _selectedDate = DateOnly.FromDateTime(DateTime.Now);
+
     public event Action? OnDateChanged;
 
-    private DateTime _selectedDate = DateTime.Today;
-
-    public DateTime SelectedDate
+    public DateOnly SelectedDate
     {
         get => _selectedDate;
         set

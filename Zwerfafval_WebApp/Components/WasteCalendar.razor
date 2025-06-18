@@ -1,16 +1,18 @@
 ﻿@using System.Globalization
-@inject IWasteCalendarService WasteCalendarService
+@*@inject IWasteCalendarService WasteCalendarService*@
 @using Zwerfafval_WebApp.Components.Models
 @using System.Collections.Generic
 @using Zwerfafval_WebApp.Components.Services
+@inject DateService DateService
+@implements IDisposable
 
 @code {
     // private Dictionary<DateTime, WasteDetectionData> DetectionData = new(); for API Data
 
-    private int currentYear = DateTime.Today.Year;
-    private int currentMonth = DateTime.Today.Month;
+    private int currentYear;
+    private int currentMonth;
     //private int nextMonth = DateTime.Today.Month == 12 ? 1 : DateTime.Today.Month + 1;
-    private int FirstDayOffset => ((int)DaysInMonth[0].DayOfWeek + 6) % 7;
+    private int FirstDayOffset => DaysInMonth.Count == 0 ? 0 : ((int)DaysInMonth[0].DayOfWeek + 6) % 7;
     //Implement choosing the month (and year)
     private readonly string[] DayNames = new[] { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
     private readonly CultureInfo englishCulture = new CultureInfo("en-GB");
@@ -19,6 +21,9 @@
 
     protected override void OnInitialized()
     {
+        UpdateFromDate(DateService.SelectedDate);
+
+        DateService.OnDateChanged += HandleDateChanged;
         var random = new Random();
         DetectionCounts = Enumerable.Range(1, 30)
     .Select(_ => random.Next(1, 51)) //numbers from 1 to 51
@@ -34,6 +39,33 @@ if (data != null)
 Code for Data
 *@
 
+    }
+
+    private void HandleDateChanged()
+    {
+        InvokeAsync(() =>
+        {
+            UpdateFromDate(DateService.SelectedDate);
+            StateHasChanged();
+        });
+    }
+
+    private void UpdateFromDate(DateOnly date)
+    {
+        currentYear = date.Year;
+        currentMonth = date.Month;
+
+        var daysInMonth = DateTime.DaysInMonth(currentYear, currentMonth);
+
+        var random = new Random();
+        DetectionCounts = Enumerable.Range(1, daysInMonth)
+        .Select(_ => random.Next(1, 51))
+        .ToList();
+    }
+
+    public void Dispose()
+    {
+        DateService.OnDateChanged -= HandleDateChanged;
     }
 
     private List<DateTime> DaysInMonth => Enumerable.Range(1, DateTime.DaysInMonth(currentYear, currentMonth))
