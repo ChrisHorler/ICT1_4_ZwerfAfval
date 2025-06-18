@@ -88,8 +88,6 @@ public class SensoringConnector
                 {
                     TestModeSenseringDataGrabber grabber = new TestModeSenseringDataGrabber();
                     trashDetections = await grabber.HandleAndConvert(response, cancellationToken, this._logger);
-                    
-                    
                 }
                 else
                 {
@@ -100,6 +98,14 @@ public class SensoringConnector
             }
             else
             {
+                // TODO
+                //
+                // GET JWT TOKEN
+                //
+                // SOMEHOW ATTACH THE TOKEN AS BEARER TOKEN
+                // 
+                // IF TIMEOUT ERROR / WHATEVER ERROR IT WAS, SEND SIGNAL BACK TO RETRY IN 1M
+                
                 response = await client.GetAsync($"{this._apiUrl}/Trash?dateLeft={1}&dateRight={2}", cancellationToken);
                 if (response.IsSuccessStatusCode)
                 {
@@ -112,14 +118,6 @@ public class SensoringConnector
                         response.StatusCode);
                     trashDetections = new List<TempDetection>();
                 }
-                
-                // TODO
-                //
-                // GET JWT TOKEN
-                //
-                // SOMEHOW ATTACH THE TOKEN AS BEARER TOKEN
-                // 
-                // IF TIMEOUT ERROR / WHATEVER ERROR IT WAS, SEND SIGNAL BACK TO RETRY IN 1M
             }
             List<Detection> trashDets = new List<Detection>();
             _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);

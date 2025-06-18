@@ -15,7 +15,7 @@ public class TestModeSenseringDataGrabber : ISensoringDataGrabber {
         string data = await response.Content.ReadAsStringAsync(cancellationToken);
         try
         {
-            ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data);
+            TestModeApiResponse parsedResponse = JsonConvert.DeserializeObject<TestModeApiResponse>(data);
 
             _logger.LogInformation("Received data from external API: {parsedResponse}", data);
             List<TempDetection> trashDetections = SensoringConvertor.ConvertFullModel(parsedResponse);
@@ -25,5 +25,22 @@ public class TestModeSenseringDataGrabber : ISensoringDataGrabber {
             _logger.LogError("Received data from external API, it is NOT Deserializable: {Data}", data);
             return new List<TempDetection>();
         }
+    }
+}
+
+public class ActualSenseringDataGrabber : ISensoringDataGrabber {
+    public async Task<List<TempDetection>> HandleAndConvert(HttpResponseMessage response, CancellationToken cancellationToken, ILogger<SensoringConnector> _logger)
+    {
+        string data = await response.Content.ReadAsStringAsync(cancellationToken);
+        try
+        {
+            // ...
+            return new List<TempDetection>();
+        }
+        catch (JsonException exception) {
+            _logger.LogError("Received data from external API, it is NOT Deserializable: {Data}", data);
+            return new List<TempDetection>();
+        }
+        return new List<TempDetection>();
     }
 }
