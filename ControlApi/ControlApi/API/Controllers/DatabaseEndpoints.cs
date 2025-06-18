@@ -13,7 +13,7 @@ namespace ControlApi.API.Controllers;
 public class DatabaseEndpoints : ControllerBase
 {
     private readonly ControlApiDbContext _db;
-    // private readonly ILogger<DatabaseEndpoints> _logger; geen idee of we dit nodig hebben 
+    private readonly ILogger<DatabaseEndpoints> _logger; // geen idee of we dit nodig hebben 
 
     public DatabaseEndpoints(ControlApiDbContext db, ILogger<DatabaseEndpoints> logger)
     {
@@ -62,7 +62,7 @@ public class DatabaseEndpoints : ControllerBase
             .Select(g => g.Key)
             .FirstOrDefault() ?? "Unknown";
 
-        return Ok(new FunFactDTO(
+        return Ok(new FunFacts(
             locationName: mostCommonLocation,
             totalTrashCount: totalTrash,
             mostCommonTrashType: mostCommonTrash
@@ -96,7 +96,7 @@ public class DatabaseEndpoints : ControllerBase
         var result = detections
             .Where(d => d.detectionPOIs.Any())
             .GroupBy(d => d.detectionPOIs.First().POI?.name ?? "Unknown")
-            .Select(g => new BarchartEntryDTO(
+            .Select(g => new BarchartInfo(
                 poiName: g.Key,
                 trashTypeCounts: g.GroupBy(x => x.trashType)
                                    .ToDictionary(tg => tg.Key, tg => tg.Count())
@@ -135,7 +135,7 @@ public class DatabaseEndpoints : ControllerBase
 
         var result = detections
             .GroupBy(d => d.timeStamp.Date)
-            .Select(g => new LineGraphEntryDTO(
+            .Select(g => new LineGraphInfo(
                 date: g.Key.ToString("yyyy-MM-dd"),
                 totalTrashCount: g.Count()
             )).ToList();
