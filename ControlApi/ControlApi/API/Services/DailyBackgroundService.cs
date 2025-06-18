@@ -33,7 +33,7 @@ public class DailyBackgroundService : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             var now = DateTime.Now;
-            var targetTime = DateTime.Today.AddHours(18); // 18 PM
+            var targetTime = DateTime.Today.AddHours(3); // 18 PM
             if (now > targetTime)
             {
                 if (firstLoop)

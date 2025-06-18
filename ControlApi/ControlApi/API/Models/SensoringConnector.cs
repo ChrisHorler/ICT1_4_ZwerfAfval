@@ -73,56 +73,70 @@ public class SensoringConnector
             this._logger.LogInformation("Updating our Trash Collection with the Sensoring API.\nLastUpdate: {item}",
                 latestItem.timeStamp);
             var client = _httpClientFactory.CreateClient();
-
-            // THIS IS THE QUERY TO THE API URL.
-            // ONCE WE CHANGE THE API FROM MY PRIVATE API TO THE ACTUAL SENSORING ONE, WE'LL HAVE TO CHANGE A BIT OF CODE BELOW.
-            // luckily most is handled in 2 classes, `SensoringApiDtos.cs` + `SensoringConvertor.cs`
-            var response = await client.GetAsync(this._apiUrl, cancellationToken);
-            if (response.IsSuccessStatusCode)
+            
+            HttpResponseMessage response;
+            if (this._isTest)
             {
-                string data = await response.Content.ReadAsStringAsync(cancellationToken);
-                try
+                response = await client.GetAsync(this._apiUrl, cancellationToken);
+                if (response.IsSuccessStatusCode)
                 {
-                    // this should still work when the api changes if I were to change the Dtos correctly.
-                    ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data); 
-                    
-                    _logger.LogInformation("Received data from external API: {parsedResponse}", data);
-                    List<TempDetection> trashDetections = SensoringConvertor.ConvertFullModel(parsedResponse);
-                    List<Detection> trashDets = new List<Detection>();
-                    _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
-                    foreach (var trashDetection in trashDetections)
+                    string data = await response.Content.ReadAsStringAsync(cancellationToken);
+                    try
                     {
-                        if (await dbContext.detections.AnyAsync(d => 
-                                d.timeStamp.Date <= latestItem.timeStamp))
+                        // this should still work when the api changes if I were to change the Dtos correctly.
+                        ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data); 
+                        
+                        _logger.LogInformation("Received data from external API: {parsedResponse}", data);
+                        List<TempDetection> trashDetections = SensoringConvertor.ConvertFullModel(parsedResponse);
+                        List<Detection> trashDets = new List<Detection>();
+                        _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
+                        foreach (var trashDetection in trashDetections)
                         {
-                            continue;
-                        }
-                        var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
-                        _logger.LogInformation("Response: {responseObj}", responseObj);
-                        Detection det = trashDetection.ConvertToDetection();
-                        foreach (var poiObj in responseObj)
-                        {
-                            det.detectionPOIs.Add(new DetectionPOI()
+                            if (await dbContext.detections.AnyAsync(d => 
+                                    d.timeStamp.Date <= latestItem.timeStamp))
                             {
-                                POIID = poiObj.POIID,
-                                detectionRadiusM = DETECTION_RADIUS
-                            });
+                                continue;
+                            }
+                            var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
+                            _logger.LogInformation("Response: {responseObj}", responseObj);
+                            Detection det = trashDetection.ConvertToDetection();
+                            foreach (var poiObj in responseObj)
+                            {
+                                det.detectionPOIs.Add(new DetectionPOI()
+                                {
+                                    POIID = poiObj.POIID,
+                                    detectionRadiusM = DETECTION_RADIUS
+                                });
+                            }
+                            trashDets.Add(det);
                         }
-                        trashDets.Add(det);
+                        dbContext.detections.AddRange(trashDets);
+                        dbContext.SaveChanges();
                     }
-                    dbContext.detections.AddRange(trashDets);
-                    dbContext.SaveChanges();
+                    catch (JsonException exception)
+                    {
+                        _logger.LogError("Received data from external API, it is NOT Deserializable: {Data}", data);
+                    }
                 }
-                catch (JsonException exception)
+                else
                 {
-                    _logger.LogError("Received data from external API, it is NOT Deserializable: {Data}", data);
+                    _logger.LogWarning("Failed to fetch data from external API. Status code: {StatusCode}",
+                        response.StatusCode);
                 }
             }
             else
             {
-                _logger.LogWarning("Failed to fetch data from external API. Status code: {StatusCode}",
-                    response.StatusCode);
+                // TODO
+                //
+                // GET JWT TOKEN
+                //
+                // SOMEHOW ATTACH THE TOKEN AS BEARER TOKEN
+                // 
+                // IF TIMEOUT ERROR / WHATEVER ERROR IT WAS, SEND SIGNAL BACK TO RETRY IN 1M
+                
+                response = await client.GetAsync($"{this._apiUrl}/Trash?dateLeft={1}&dateRight={2}", cancellationToken);
             }
+            
         }
     }
     
