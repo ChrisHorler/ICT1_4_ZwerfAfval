@@ -1,17 +1,22 @@
-namespace ControlApi.API.DTOs;
-
-public record FunFacts(
-    string locationName,
-    int totalTrashCount,
-    string mostCommonTrashType
+public record DetectionDto(
+    int detectionId,
+    DateTime timeStamp,
+    string trashType,
+    double? feelsLikeTempC,
+    List<PoiDto>? pois = null 
 );
 
-public record BarchartInfo(
-    string poiName,
-    Dictionary<string, int> trashTypeCounts // e.g. { "plastic bottles": 20, "cigarette booties": 40 }
+// For POI data if needed
+public record PoiDto(
+    int POIID,
+    string name,
+    double latitude,
+    double longitude
 );
 
-public record LineGraphInfo(
-    string date,
-    int totalTrashCount
+public record FilteredDetectionsResponse(
+    List<DetectionDto> detections,
+    int totalCount,
+    DateTime? minDate = null,
+    DateTime? maxDate = null
 );
