@@ -1,5 +1,3 @@
-// dit moet gecomment blijven, anders is het niet runnable
-
 using ControlApi.API.DTOs;
 using ControlApi.API.Services;
 using ControlApi.Data;
