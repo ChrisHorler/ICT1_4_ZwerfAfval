@@ -1,3 +1,4 @@
+using System.Data;
 using ControlApi.API.Services;
 using ControlApi.Data;
 using ControlApi.SensoringConnection.Models;
@@ -10,6 +11,7 @@ public class DailyBackgroundService : BackgroundService
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger<DailyBackgroundService> _logger;
     private readonly SensoringConnector _sensoringConnector;
+    private readonly bool _isTest;
     public DailyBackgroundService(
         IHttpClientFactory httpClientFactory, ILogger<DailyBackgroundService> logger, 
         ILogger<SensoringConnector> modelLogger,  IConfiguration config,
@@ -19,6 +21,11 @@ public class DailyBackgroundService : BackgroundService
         _httpClientFactory = httpClientFactory;
         _logger = logger;
         _sensoringConnector= new SensoringConnector(_httpClientFactory, modelLogger, config, scopeFactory);
+        _isTest = config.GetValue<bool>("Testing");
+        if (_isTest)
+        {
+            _logger.LogWarning("The backend is running in TEST MODE. Is this correct? Read setup.md to change this.");
+        }
     }
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -27,7 +34,7 @@ public class DailyBackgroundService : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             var now = DateTime.Now;
-            var targetTime = DateTime.Today.AddHours(18); // 18 PM
+            var targetTime = DateTime.Today.AddHours(3); // 18 PM
             if (now > targetTime)
             {
                 if (firstLoop)
@@ -50,6 +57,13 @@ public class DailyBackgroundService : BackgroundService
     private async Task RunBackgroundTaskAsync(CancellationToken stoppingToken)
     {
         _logger.LogInformation("Running daily gathering.");
-        await _sensoringConnector.PullAsync(stoppingToken);
+        try
+        {
+            await _sensoringConnector.PullAsync(stoppingToken);
+        }
+        catch (DataException excpt)
+        {
+            _logger.LogWarning($"Error whilst calling SensoringAPI: {excpt}");
+        }
     }
 }

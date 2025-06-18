@@ -10,7 +10,7 @@ public static class SensoringConvertor
     /// </summary>
     /// <param name="data"></param>
     /// <returns></returns>
-    public static List<TempDetection> ConvertFullModel(ApiResponse data)
+    public static List<TempDetection> ConvertFullModel(TestModeApiResponse data)
     {
         return data.projectData
             .Select(DetectionParser)
@@ -22,7 +22,7 @@ public static class SensoringConvertor
     /// </summary>
     /// <param name="data"></param>
     /// <returns></returns>
-    private static TempDetection DetectionParser(ApiResponseData data)
+    private static TempDetection DetectionParser(TestModeApiResponseData data)
     {
         return new TempDetection()
         {
