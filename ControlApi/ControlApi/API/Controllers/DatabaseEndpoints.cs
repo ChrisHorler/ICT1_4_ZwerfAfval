@@ -25,43 +25,6 @@ public class DatabaseEndpoints : ControllerBase
 // date filter toevoegen 
 
 
-    // 📅 CALENDAR & PREDICTIONS (precomputed, from DB) DIT KLOPT NIET MEER EN IS NIET COMPATIBLE MET DE PYTHON CODE 
-    [HttpGet("calendar")] 
-    public async Task<ActionResult<List<CalendarPredictionDTO>>> GetCalendarPredictions([FromQuery] int year, [FromQuery] int month)
-    {
-        var client = new HttpClient();
-        var request = new
-        {
-            feels_like_temp_celsius = feels,
-            actual_temp_celsius = actual,
-            wind_force_bft = wind,
-            day_of_week = day,
-            month = month
-        };
-
-        var response = await client.PostAsJsonAsync("http://localhost:8000/predict/calendar", request);
-        if (!response.IsSuccessStatusCode)
-        {
-            // handle error, maybe fallback to "unknown"
-            return "unknown";
-        }
-
-    // var json = await response.Content.ReadFromJsonAsync<PredictionResponse>();
-    //     var predictions = await _db.predictions
-    //         .Where(p => p.predictedFor.Year == year && p.predictedFor.Month == month) //filters on year/month
-    //         .GroupBy(p => p.predictedFor.Date) //groups by date
-
-    //         .Select(g => new CalendarPredictionDTO(
-    //             date: g.Key.ToString("yyyy-MM-dd"),
-    //             prediction: g.OrderByDescending(p => p.confidence).Select(p =>
-    //                 p.predictedFillLevel < 0.33 ? "low" :
-    //                 p.predictedFillLevel < 0.66 ? "medium" : "high").FirstOrDefault() ?? "unknown"
-    //         ))
-    //         .ToListAsync();
-
-        return Ok(response);
-    }
-
     // FUN FACT PART WOO
     [HttpGet("facts")]
     public async Task<ActionResult<FunFactDTO>> GetFunFacts([FromQuery] DateTime selectedDay)
