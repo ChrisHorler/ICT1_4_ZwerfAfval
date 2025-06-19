@@ -1,4 +1,5 @@
 using Zwerfafval_WebApp.Components;
+using Zwerfafval_WebApp.Components.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +9,20 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddSingleton<DateService>();
 builder.Services.AddBlazorBootstrap();
+builder.Services.AddScoped<IDetectionDataService, DetectionDataService>();
+builder.Services.AddHttpClient("BackendApi", client =>
+{
+    var baseUrl = builder.Configuration["API_BASE_URL"];
+    if (string.IsNullOrEmpty(baseUrl))
+        throw new Exception("API_BASE_URL enviromental variable not detected");
+
+    client.BaseAddress = new Uri(baseUrl);
+});
+    
+
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

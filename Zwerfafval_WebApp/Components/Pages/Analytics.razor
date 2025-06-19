@@ -1,9 +1,14 @@
 ﻿@page "/analytics"
 @using BlazorBootstrap.Components
 @using Zwerfafval_WebApp.Components
+@using Zwerfafval_WebApp.Components.Models
+@using BlazorBootstrap
+@using System.Collections.Generic
+@using Zwerfafval_WebApp.Components.Services
+@using System.Linq
 @rendermode InteractiveServer
+@inject IDetectionDataService DetectionService
 @inject DateService DateService
-
 
 <PageTitle>Analytics</PageTitle>
 
@@ -11,267 +16,30 @@
 
 <div class="analytics-layout">
     <BarChart @ref="barChart" Width="800" Class="mb-4" />
+    <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadDataIntoChart">Load data</Button>
 
-	@* <BaChart TrashXAxisLabels="TrashXAxisLabels" ChartData="TrashSeries" /> *@
-
-    <Graph />
-
+    <Graph Data="graphData" />
 </div>
 
 @code {
-    // Graph
-    // public List<ChartSeries> runs = new List<ChartSeries>()
-    // {
-    // 	new ChartSeries()
-    // 	{
-    // 		Name = "Peuk",
-    // 		Data = new double[] {5, 12, 7, 10, 3} amount of trash mockdata
-    // 	},
-    // 	new ChartSeries()
-    // {
-    // 	Name = "Papier",
-    // 	Data = new double[] { 2, 7, 5, 4, 2 }
-    // }
-    // }; 
-
-    // public string[] XAxisLabels = { "08:00", "10:00", "12:00", "14:00", "16:00" }; mock-timestamps 
-
-    // Barchart
-    // public List<ChartSeries> Trashseries = new List<ChartSeries>()
-    // {
-    // 	new ChartSeries() 
-    // 	{ 
-    // 		Name = "Series 1", 
-    // 		Data = new double[] { 1, 2, 3, 4 } 
-    // 	},
-    // 	new ChartSeries()
-    // 	{ 
-    // 		Name = "Series 2", 
-    // 		Data = new double[] { 5, 6, 7, 8 }
-    // 	},
-    // 	new ChartSeries()
-    // 	{
-    // 		Name = "Series 3",
-    // 		Data = new double[] { 5, 6, 7, 8 }
-    // 	}
-    // };
-    // public string[] TrashXAxisLabels = { "Vlaszak", "LovensdijkStraat", "Hogeschoollaan", "Claudus Prinsenlaan" };
-
-    // private LineChart lineChart = default!;
-    // private LineChartOptions lineChartOptions = default!;
-    // private ChartData chartData = default!;
-
-    // private int datasetsCount;
-    // private int labelsCount;
-
-    // private Random random = new();
-
-    // protected override void OnInitialized()
-    // {
-    //     labelsCount = 6; 
-    //     chartData = new ChartData
-    //     {
-    //         Labels = GetDefaultDataLabels(labelsCount),
-    //         Datasets = GetDefaultDataSets(3)
-    //     };
-
-    //     lineChartOptions = new()
-    //     {
-    //         IndexAxis = "x",
-    //         Interaction = new Interaction { Mode = InteractionMode.Index, Intersect = false },
-    //         Responsive = true,
-    //     };
-    // }
-
-
-    // protected override async Task OnAfterRenderAsync(bool firstRender)
-    // {
-    //     if (firstRender)
-    //     {
-    //         await lineChart.InitializeAsync(chartData, lineChartOptions);
-    //     }
-    //     await base.OnAfterRenderAsync(firstRender);
-    // }
-
-    // private async Task RandomizeAsync()
-    // {
-    //     if (chartData is null || chartData.Datasets is null || !chartData.Datasets.Any()) return;
-
-    //     var newDatasets = new List<IChartDataset>();
-
-    //     foreach (var dataset in chartData.Datasets)
-    //     {
-    //         if (dataset is LineChartDataset lineChartDataset
-    //             && lineChartDataset is not null
-    //             && lineChartDataset.Data is not null)
-    //         {
-    //             var count = lineChartDataset.Data.Count;
-
-    //             var newData = new List<double?>();
-    //             for (var i = 0; i < count; i++)
-    //             {
-    //                 newData.Add(random.Next(200));
-    //             }
-
-    //             lineChartDataset.Data = newData;
-    //             newDatasets.Add(lineChartDataset);
-    //         }
-    //     }
-
-    //     chartData.Datasets = newDatasets;
-
-    //     await lineChart.UpdateValuesAsync(chartData);
-    // }
-
-    // private async Task AddDatasetAsync()
-    // {
-    //     if (chartData is null || chartData.Datasets is null) return;
-
-    //     var chartDataset = GetRandomLineChartDataset();
-    //     chartData = await lineChart.AddDatasetAsync(chartData, chartDataset, lineChartOptions);
-    // }
-
-    // private async Task AddDataAsync()
-    // {
-    //     if (chartData is null || chartData.Datasets is null)
-    //         return;
-
-    //     var data = new List<IChartDatasetData>();
-    //     foreach (var dataset in chartData.Datasets)
-    //     {
-    //         if (dataset is LineChartDataset lineChartDataset)
-    //             data.Add(new LineChartDatasetData(lineChartDataset.Label, random.Next(200)));
-    //     }
-
-    //     chartData = await lineChart.AddDataAsync(chartData, GetNextDataLabel(), data);
-    // }
-
-    // private async Task ShowHorizontalLineChartAsync()
-    // {
-    //     lineChartOptions.IndexAxis = "y";
-    //     await lineChart.UpdateAsync(chartData, lineChartOptions);
-    // }
-
-    // private async Task ShowVerticalLineChartAsync()
-    // {
-    //     lineChartOptions.IndexAxis = "x";
-    //     await lineChart.UpdateAsync(chartData, lineChartOptions);
-    // }
-
-    // #region Data Preparation
-
-    // private List<IChartDataset> GetDefaultDataSets(int numberOfDatasets)
-    // {
-    //     var datasets = new List<IChartDataset>();
-
-    //     for (var index = 0; index < numberOfDatasets; index++)
-    //     {
-    //         datasets.Add(GetRandomLineChartDataset());
-    //     }
-
-    //     return datasets;
-    // }
-
-    // private LineChartDataset GetRandomLineChartDataset()
-    // {
-    //     var c = ColorUtility.CategoricalTwelveColors[datasetsCount].ToColor();
-
-    //     datasetsCount += 1;
-
-    //     return new LineChartDataset
-    //     {
-    //         Label = $"Team {datasetsCount}",
-    //         Data = GetRandomData(),
-    //         BackgroundColor = c.ToRgbaString(),
-    //         BorderColor = c.ToRgbString(),
-    //         PointRadius = new List<double> { 5 },
-    //         PointHoverRadius = new List<double> { 8 },
-    //     };
-    // }
-
-    // private List<double?> GetRandomData()
-    // {
-    //     var data = new List<double?>();
-    //     for (var index = 0; index < labelsCount; index++)
-    //     {
-    //         data.Add(random.Next(200));
-    //     }
-
-    //     return data;
-    // }
-
-    // private List<string> GetDefaultDataLabels(int numberOfLabels)
-    // {
-    //     var labels = new List<string>();
-    //     for (var index = 0; index < numberOfLabels; index++)
-    //     {
-    //         labels.Add(GetNextDataLabel());
-    //     }
-
-    //     return labels;
-    // }
-
-    // private string GetNextDataLabel()
-    // {
-    //     labelsCount += 1;
-    //     return $"Day {labelsCount}";
-    // }
-
-    // #endregion Data Preparation
-    //     private string[] TrashXAxisLabels = new[]
-    // {
-    //         "Grote Markt",
-    //         "Breda Station",
-    //         "Chassé Theater",
-    //         "Breda Castle",
-    //         "Wilhelminapark"
-    //     };
-
-    // private List<ChartSeries> TrashSeries = new()
-    // {
-    //     new ChartSeries
-    //     {
-    //         Name = "Hoeveelheid afval in aantal",
-    //         Data = new double[] { 10, 30, 20, 50, 40 }
-    //     }
-    // };
-
     private BarChart barChart = default!;
     private BarChartOptions barChartOptions = default!;
     private ChartData chartData = default!;
+    private List<DetectionData> graphData = new();
+
+    private readonly string[] defaultColors = new[]
+    {
+        "rgba(255, 99, 132, 0.5)",
+        "rgba(54, 162, 235, 0.5)",
+        "rgba(255, 206, 86, 0.5)",
+        "rgba(75, 192, 192, 0.5)",
+        "rgba(153, 102, 255, 0.5)",
+        "rgba(255, 159, 64, 0.5)"
+    };
 
     protected override void OnInitialized()
     {
-        var myLabels = new List<string> { "Grote Markt", "Breda Station", "Chassé Theater", "Breda Castle", "Wilhelmina Park" };
-        var myDataSets = new List<IChartDataset>
-        {
-            new BarChartDataset()
-            {
-            Label = $"Cigarette butt",
-            Data = new List<double?> { 40, 20, 66, 49, 66},
-            BackgroundColor = new List<string> { System.Drawing.Color.OrangeRed.ToRgbString()},
-            BorderColor = new List<string> { System.Drawing.Color.OrangeRed.ToRgbString()},
-            BorderWidth = new List<double> { 0 },
-            },
-            new BarChartDataset()
-            {
-            Label = $"Can",
-            Data = new List<double?> { 20, 18, 27, 2, 40},
-            BackgroundColor = new List<string> { System.Drawing.Color.Cyan.ToRgbString()},
-            BorderColor = new List<string> { System.Drawing.Color.Cyan.ToRgbString()},
-            BorderWidth = new List<double> { 0 },
-            },
-            new BarChartDataset()
-            {
-            Label = $"Plastic Bottle",
-            Data = new List<double?> { 2, 7, 22, 13, 8},
-            BackgroundColor = new List<string> { System.Drawing.Color.BlueViolet.ToRgbString()},
-            BorderColor = new List<string> { System.Drawing.Color.BlueViolet.ToRgbString()},
-            BorderWidth = new List<double> { 0 },
-            },
-        };
-
-        chartData = new ChartData { Labels = myLabels, Datasets = myDataSets };
+        chartData = new ChartData { Labels = new List<string>(), Datasets = new List<IChartDataset>() };
         barChartOptions = new BarChartOptions
             {
                 Responsive = true,
@@ -288,8 +56,55 @@
         await base.OnAfterRenderAsync(firstRender);
     }
 
+    private async Task LoadDataIntoChart()
+    {
+        var data = await DetectionService.GetDetectionDataAsync();
 
+        var grouped = data
+            .GroupBy(d => new { d.Latitude, d.Longitude, d.Type })
+            .Select(g => new
+            {
+                Location = $"{g.Key.Latitude:F4}, {g.Key.Longitude:F4}",
+                Type = g.Key.Type,
+                Count = g.Count()
+            })
+            .ToList();
 
+        var topLocations = grouped
+            .GroupBy(g => g.Location)
+            .Select(g => new
+            {
+                Location = g.Key,
+                Total = g.Sum(x => x.Count)
+            })
+            .OrderByDescending(x => x.Total)
+            .Take(5)
+            .Select(x => x.Location)
+            .ToList();
+
+        var filtered = grouped.Where(g => topLocations.Contains(g.Location)).ToList();
+
+        var labels = topLocations;
+
+        var types = filtered.Select(f => f.Type).Distinct().ToList();
+
+        var datasets = types.Select((type, index) => new BarChartDataset
+            {
+                Label = type,
+                Data = labels.Select(label => (double?)filtered.FirstOrDefault(x => x.Type == type && x.Location == label)?.Count ?? (double?)0).ToList(),
+                BackgroundColor = new List<string> { defaultColors[index % defaultColors.Length] },
+                BorderColor = new List<string> { "#333" },
+                BorderWidth = new List<double> { 1 }
+            }).Cast<IChartDataset>().ToList();
+
+        chartData = new ChartData
+            {
+                Labels = labels,
+                Datasets = datasets
+            };
+
+        graphData = data;
+
+        await barChart.UpdateAsync(chartData, barChartOptions);
+    }
 }
-
-
