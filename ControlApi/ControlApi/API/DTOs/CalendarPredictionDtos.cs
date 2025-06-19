@@ -4,6 +4,9 @@ namespace ControlApi.API.DTOs;
 
 public sealed class CalendarFeaturesRequest
 {
+    [JsonPropertyName("timestamp")]
+    public DateOnly Timestamp { get; set; }  
+    
     [JsonPropertyName("feels_like_temp_celsius")]
     public float FeelsLikeTempCelsius { get; set; }
 
@@ -22,7 +25,7 @@ public sealed class CalendarFeaturesRequest
 
 public sealed class CalendarPredictionBatchResponse
 {
-    [JsonPropertyName("prediction")]
+    [JsonPropertyName("predictions")]
     public List<string> Prediction { get; set; } = new();
 }
 

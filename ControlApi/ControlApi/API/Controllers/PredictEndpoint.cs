@@ -54,6 +54,7 @@ public sealed class PredictEndpoint : ControllerBase
         
         var features = rows.Select(d => new CalendarFeaturesRequest
         {
+            Timestamp            = DateOnly.FromDateTime(d.timeStamp),
             FeelsLikeTempCelsius = d.feelsLikeTempC!.Value,
             ActualTempCelsius    = d.actualTempC!.Value,
             WindForceBft         = d.windForceBft!.Value,
