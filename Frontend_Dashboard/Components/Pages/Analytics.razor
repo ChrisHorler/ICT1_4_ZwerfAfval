@@ -1,3 +1,110 @@
 @page "/analytics"
+@using BlazorBootstrap.Components
+@using Frontend_Dashboard.Components
+@using Frontend_Dashboard.Components.Models
+@using BlazorBootstrap
+@using System.Collections.Generic
+@using Frontend_Dashboard.Components.Services
+@using System.Linq
 @rendermode InteractiveServer
+@inject IDetectionDataService DetectionService
+@inject DateService DateService
 
+<PageTitle>Analytics</PageTitle>
+
+<h1>Analytics</h1>
+
+<div class="analytics-layout">
+    <BarChart @ref="barChart" Width="800" Class="mb-4" />
+    <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadDataIntoChart">Load data</Button>
+
+    <Graph Data="graphData" />
+</div>
+
+@code {
+    private BarChart barChart = default!;
+    private BarChartOptions barChartOptions = default!;
+    private ChartData chartData = default!;
+    private List<DetectionData> graphData = new();
+
+    private readonly string[] defaultColors = new[]
+    {
+        "rgba(255, 99, 132, 0.5)",
+        "rgba(54, 162, 235, 0.5)",
+        "rgba(255, 206, 86, 0.5)",
+        "rgba(75, 192, 192, 0.5)",
+        "rgba(153, 102, 255, 0.5)",
+        "rgba(255, 159, 64, 0.5)"
+    };
+
+    protected override void OnInitialized()
+    {
+        chartData = new ChartData { Labels = new List<string>(), Datasets = new List<IChartDataset>() };
+        barChartOptions = new BarChartOptions
+            {
+                Responsive = true,
+                Interaction = new Interaction { Mode = InteractionMode.Index }
+            };
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await barChart.InitializeAsync(chartData, barChartOptions);
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async Task LoadDataIntoChart()
+    {
+        var data = await DetectionService.GetDetectionDataAsync();
+
+        var grouped = data
+            .GroupBy(d => new { d.Latitude, d.Longitude, d.Type })
+            .Select(g => new
+            {
+                Location = $"{g.Key.Latitude:F4}, {g.Key.Longitude:F4}",
+                Type = g.Key.Type,
+                Count = g.Count()
+            })
+            .ToList();
+
+        var topLocations = grouped
+            .GroupBy(g => g.Location)
+            .Select(g => new
+            {
+                Location = g.Key,
+                Total = g.Sum(x => x.Count)
+            })
+            .OrderByDescending(x => x.Total)
+            .Take(5)
+            .Select(x => x.Location)
+            .ToList();
+
+        var filtered = grouped.Where(g => topLocations.Contains(g.Location)).ToList();
+
+        var labels = topLocations;
+
+        var types = filtered.Select(f => f.Type).Distinct().ToList();
+
+        var datasets = types.Select((type, index) => new BarChartDataset
+            {
+                Label = type,
+                Data = labels.Select(label => (double?)filtered.FirstOrDefault(x => x.Type == type && x.Location == label)?.Count ?? (double?)0).ToList(),
+                BackgroundColor = new List<string> { defaultColors[index % defaultColors.Length] },
+                BorderColor = new List<string> { "#333" },
+                BorderWidth = new List<double> { 1 }
+            }).Cast<IChartDataset>().ToList();
+
+        chartData = new ChartData
+            {
+                Labels = labels,
+                Datasets = datasets
+            };
+
+        graphData = data;
+
+        await barChart.UpdateAsync(chartData, barChartOptions);
+    }
+}
