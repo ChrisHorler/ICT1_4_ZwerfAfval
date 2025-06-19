@@ -29,7 +29,7 @@ This test api is built against [oldmartijntje's api](https://api.oldmartijntje.n
 ## TEST MODE
 
 TEST MODE is there as an backup for if the real **sensoring api** decides to fail at a critical moment. 
-TEST MODE connects to [oldmartijntje's api](https://api.oldmartijntje.nl/) debug api insted of the **Sensoring api**. TEST MODE is toggled in program.cs on line 10:
+TEST MODE connects to [oldmartijntje's api](https://api.oldmartijntje.nl/) debug api instead of the **Sensoring api**. TEST MODE is toggled in program.cs on line 10:
 ```cs
 const bool TESTING = true;
 ```
