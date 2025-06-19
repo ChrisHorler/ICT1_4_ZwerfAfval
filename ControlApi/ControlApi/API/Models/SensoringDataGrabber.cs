@@ -34,13 +34,14 @@ public class ActualSenseringDataGrabber : ISensoringDataGrabber {
         string data = await response.Content.ReadAsStringAsync(cancellationToken);
         try
         {
-            // ...
-            return new List<TempDetection>();
+            List<ApiTrashItem> parsedResponse = JsonConvert.DeserializeObject<List<ApiTrashItem>>(data);
+            _logger.LogInformation("Received data from external API: {parsedResponse}", data);
+            List<TempDetection> trashDetections = SensoringConvertor.ConvertFullModel(parsedResponse);
+            return trashDetections;
         }
         catch (JsonException exception) {
             _logger.LogError("Received data from external API, it is NOT Deserializable: {Data}", data);
             return new List<TempDetection>();
         }
-        return new List<TempDetection>();
     }
 }
