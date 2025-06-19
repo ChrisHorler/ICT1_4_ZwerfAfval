@@ -1,19 +1,16 @@
 ﻿@inherits LayoutComponentBase
+<PageTitle>Frontend_Dashboard</PageTitle>
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu/>
-    </div>
+<!-- top navigation bar -->
+<NavMenu />
 
-    <main>
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+<!-- main page content -->
+<main class="container mt-4">
+    @Body
+</main>
 
-<div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
-</div>
+<!-- Chart.js (required by the chart components) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+<!-- Blazor Bootstrap’s JS interop code -->
+<script src="_content/Blazor.Bootstrap/blazor.bootstrap.js"></script>
