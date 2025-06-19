@@ -23,5 +23,3 @@ public record ApiTrashItem(
     float actual_temp_celsius, float wind_force_bft,
     float wind_direction
 );
-
-public record ApiResponse(List<ApiTrashItem> projectData);
