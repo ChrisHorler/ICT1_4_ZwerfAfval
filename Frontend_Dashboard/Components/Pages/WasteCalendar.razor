@@ -1,2 +1,111 @@
 @page "/waste-calendar"
 @rendermode InteractiveServer
+
+<div class="dashboard-layout">
+
+    <!-- LEFT: Calendar -->
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button class="nav" @onclick="GoToPreviousMonth">&lt;</button>
+            <span class="month-label">@currentMonth.ToString("MMMM yyyy")</span>
+            <button class="nav" @onclick="GoToNextMonth">&gt;</button>
+        </div>
+
+        <div class="calendar-grid">
+            @foreach (var day in CalendarDays)
+            {
+                <div class="calendar-cell">
+                    @if (day.HasValue)
+                    {
+                        <div class="day-number">@day</div>
+
+                        @if (ShouldShowBadge(day.Value))
+                        {
+                            <span class="@GetBadgeClass(day.Value)">
+                                @day
+                            </span>
+                        }
+                    }
+                </div>
+            }
+        </div>
+
+        
+        <!-- Legend -->
+        <div class="calendar-legend">
+            <div class="legend-item">
+                <span class="legend-color red"></span>
+                High amount of trash
+            </div>
+            <div class="legend-item">
+                <span class="legend-color yellow"></span>
+                Medium amount of trash
+            </div>
+            <div class="legend-item">
+                <span class="legend-color green"></span>
+                Low amount of trash
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <!-- RIGHT: Info box -->
+    <div class="info-panel">
+        <div class="info-item">
+            <span class="icon">📍</span>
+            <p>Where the most trash is found:<br><strong>McDonalds Breda Centrum</strong></p>
+        </div>
+
+        <div class="info-item">
+            <span class="icon">🗑️</span>
+            <p>Estimated amount of trash in Breda:<br><strong>420</strong></p>
+        </div>
+
+        <div class="info-item">
+            <span class="icon">🧺</span>
+            <p>The most common trash type in Breda:<br><strong>Cigarette booties</strong></p>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom right -->
+<div class="temperature-box">
+    Today's temperature: 28°C
+</div>
+
+
+
+
+@code{
+
+    private DateTime currentMonth = new DateTime(2025, 6, 1);
+
+    private int DaysInMonth => DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
+    private int StartDayOffset => (int)new DateTime(currentMonth.Year, currentMonth.Month, 1).DayOfWeek;
+
+    private List<int?> CalendarDays => Enumerable
+        .Repeat<int?>(null, StartDayOffset)
+        .Concat(Enumerable.Range(1, DaysInMonth).Cast<int?>())
+        .ToList();
+
+    private void GoToPreviousMonth() => currentMonth = currentMonth.AddMonths(-1);
+    private void GoToNextMonth() => currentMonth = currentMonth.AddMonths(1);
+
+    private string GetBadgeClass(int day)
+    {
+        return day switch
+        {
+            4 or 28 => "badge red",
+            6 or 27 => "badge green",
+            29 => "badge yellow",
+            _ => ""
+        };
+    }
+
+    private bool ShouldShowBadge(int day)
+    {
+        return day is 4 or 6 or 27 or 28 or 29;
+    }
+
+}
