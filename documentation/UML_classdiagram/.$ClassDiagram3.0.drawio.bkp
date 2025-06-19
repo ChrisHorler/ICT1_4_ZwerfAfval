@@ -405,22 +405,22 @@
         <mxCell id="iMFxXNbG9mVQUTvpo4ha-87" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=0;endSize=22;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontColor=#FF0000;" parent="1" source="iMFxXNbG9mVQUTvpo4ha-80" target="iMFxXNbG9mVQUTvpo4ha-63" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="iMFxXNbG9mVQUTvpo4ha-80" value="AuthController" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;fontColor=#FF0000;" parent="1" vertex="1">
+        <mxCell id="iMFxXNbG9mVQUTvpo4ha-80" value="AuthController" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;fontColor=#FFFFFF;" parent="1" vertex="1">
           <mxGeometry x="-1440" y="200" width="360" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="iMFxXNbG9mVQUTvpo4ha-81" value="-_db:&amp;nbsp;ControlApiDbContext" style="text;whiteSpace=wrap;html=1;fontColor=#FF0000;" parent="iMFxXNbG9mVQUTvpo4ha-80" vertex="1">
+        <mxCell id="iMFxXNbG9mVQUTvpo4ha-81" value="-_db:&amp;nbsp;ControlApiDbContext" style="text;whiteSpace=wrap;html=1;fontColor=#FFFFFF;" parent="iMFxXNbG9mVQUTvpo4ha-80" vertex="1">
           <mxGeometry y="30" width="360" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iMFxXNbG9mVQUTvpo4ha-84" value="-_jwt:&amp;nbsp;IJwtService" style="text;whiteSpace=wrap;html=1;fontColor=#FF0000;" parent="iMFxXNbG9mVQUTvpo4ha-80" vertex="1">
+        <mxCell id="iMFxXNbG9mVQUTvpo4ha-84" value="-_jwt:&amp;nbsp;IJwtService" style="text;whiteSpace=wrap;html=1;fontColor=#FFFFFF;" parent="iMFxXNbG9mVQUTvpo4ha-80" vertex="1">
           <mxGeometry y="60" width="360" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iMFxXNbG9mVQUTvpo4ha-83" value="AuthController(ControlApiDbContext,&amp;nbsp;IJwtService): string" style="text;whiteSpace=wrap;html=1;fontColor=#FF0000;" parent="iMFxXNbG9mVQUTvpo4ha-80" vertex="1">
+        <mxCell id="iMFxXNbG9mVQUTvpo4ha-83" value="AuthController(ControlApiDbContext,&amp;nbsp;IJwtService): string" style="text;whiteSpace=wrap;html=1;fontColor=#FFFFFF;" parent="iMFxXNbG9mVQUTvpo4ha-80" vertex="1">
           <mxGeometry y="90" width="360" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iMFxXNbG9mVQUTvpo4ha-85" value="+Register(RegisterRequest):&amp;nbsp;Task&amp;lt;ActionResult&amp;lt;AuthResponse&amp;gt;&amp;gt;" style="text;whiteSpace=wrap;html=1;fontColor=#FF0000;" parent="iMFxXNbG9mVQUTvpo4ha-80" vertex="1">
+        <mxCell id="iMFxXNbG9mVQUTvpo4ha-85" value="+Register(RegisterRequest):&amp;nbsp;Task&amp;lt;ActionResult&amp;lt;AuthResponse&amp;gt;&amp;gt;" style="text;whiteSpace=wrap;html=1;fontColor=#FFFFFF;" parent="iMFxXNbG9mVQUTvpo4ha-80" vertex="1">
           <mxGeometry y="120" width="360" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iMFxXNbG9mVQUTvpo4ha-86" value="+Login(LoginRequest):&amp;nbsp;Task&amp;lt;ActionResult&amp;lt;AuthResponse&amp;gt;&amp;gt;" style="text;whiteSpace=wrap;html=1;fontColor=#FF0000;" parent="iMFxXNbG9mVQUTvpo4ha-80" vertex="1">
+        <mxCell id="iMFxXNbG9mVQUTvpo4ha-86" value="+Login(LoginRequest):&amp;nbsp;Task&amp;lt;ActionResult&amp;lt;AuthResponse&amp;gt;&amp;gt;" style="text;whiteSpace=wrap;html=1;fontColor=#FFFFFF;" parent="iMFxXNbG9mVQUTvpo4ha-80" vertex="1">
           <mxGeometry y="150" width="360" height="30" as="geometry" />
         </mxCell>
         <mxCell id="iMFxXNbG9mVQUTvpo4ha-115" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=0;entryDy=0;fontSize=12;strokeWidth=2;endArrow=open;endFill=0;endSize=22;dashed=1;fontColor=#FF0000;" parent="1" source="iMFxXNbG9mVQUTvpo4ha-98" target="e_NueUDCwhWNqrkMhHox-15" edge="1">
@@ -764,6 +764,39 @@
               <mxPoint x="-1870" y="120" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="iwyEC6983UlKEHwNcQ2G-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#60a917;strokeColor=#2D7600;strokeWidth=2;endSize=22;endArrow=diamondThin;endFill=1;" edge="1" parent="1" source="iwyEC6983UlKEHwNcQ2G-1" target="iMFxXNbG9mVQUTvpo4ha-80">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1480" y="680" />
+              <mxPoint x="-1480" y="450" />
+              <mxPoint x="-1260" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iwyEC6983UlKEHwNcQ2G-1" value="AuthControllerTests" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;fontColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-2080" y="560" width="400" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="iwyEC6983UlKEHwNcQ2G-2" value="-CreateInMemoryDb(): ControlApiDbContext" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="iwyEC6983UlKEHwNcQ2G-1">
+          <mxGeometry y="30" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iwyEC6983UlKEHwNcQ2G-3" value="-CreateSut():&amp;nbsp;(AuthController, Mock&amp;lt;IJwtService&amp;gt;, ControlApiDbContext)" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="iwyEC6983UlKEHwNcQ2G-1">
+          <mxGeometry y="60" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iwyEC6983UlKEHwNcQ2G-8" value="+Register_NewEmail_ReturnsOkWithToken():&amp;nbsp;Task" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="iwyEC6983UlKEHwNcQ2G-1">
+          <mxGeometry y="90" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iwyEC6983UlKEHwNcQ2G-7" value="+Register_DuplicateEmail_ReturnsConflict():&amp;nbsp;Task" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="iwyEC6983UlKEHwNcQ2G-1">
+          <mxGeometry y="120" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iwyEC6983UlKEHwNcQ2G-9" value="+Login_CorrectCreds_ReturnsOkWithToken():&amp;nbsp;Task" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="iwyEC6983UlKEHwNcQ2G-1">
+          <mxGeometry y="150" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iwyEC6983UlKEHwNcQ2G-15" value="+Login_WrongPassword_ReturnsConflict():&amp;nbsp;Task" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="iwyEC6983UlKEHwNcQ2G-1">
+          <mxGeometry y="180" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iwyEC6983UlKEHwNcQ2G-17" value="+Register_WeakPassword_ReturnBadRequest():&amp;nbsp;Task" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="iwyEC6983UlKEHwNcQ2G-1">
+          <mxGeometry y="210" width="400" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
