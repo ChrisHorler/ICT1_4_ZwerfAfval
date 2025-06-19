@@ -105,7 +105,7 @@ public class SensoringConnector
                 {
                     _logger.LogError("Failed to fetch JWT from external API. Status code: {StatusCode}",
                         jwtResponse.StatusCode);
-                    throw new DataException($"Failed to fetch JWT from external API. Status code: {jwtResponse}");
+                    throw new DataException($"Failed to fetch JWT from external API. Status code: {jwtResponse.StatusCode}");
                 }
                 string jwtData = await jwtResponse.Content.ReadAsStringAsync(cancellationToken);
                 string date1 = latestItem.timeStamp.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
