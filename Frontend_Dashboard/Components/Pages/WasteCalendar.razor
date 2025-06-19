@@ -28,21 +28,20 @@
                 <div class="calendar-cell">
                     @if (day.HasValue)
                     {
+                        var date = new DateOnly(currentMonth.Year, currentMonth.Month, day.Value);
+                        var prediction = GetTrashLevelBadge(date);
+
                         <div class="day-number @(IsToday(day.Value) ? "today" : "")">@day</div>
 
-                        @if (ShouldShowBadge(day.Value))
+                        @if (!string.IsNullOrEmpty(prediction))
                         {
-                            <span class="@GetBadgeClass(day.Value)">
-                                @day
-                            </span>
+                            <span class="badge @prediction">@day</span>
                         }
                     }
-
                 </div>
             }
         </div>
 
-        
         <!-- Legend -->
         <div class="calendar-legend">
             <div class="legend-item">
@@ -59,8 +58,6 @@
             </div>
         </div>
     </div>
-    
-    
 
     <!-- RIGHT: Info box -->
     <div class="info-panel">
@@ -86,41 +83,28 @@
     Today's temperature: 28°C
 </div>
 
-
-
-
-@code{
-
+@code {
     private DateTime currentMonth = new DateTime(2025, 6, 1);
 
     private int DaysInMonth => DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
     private int StartDayOffset =>
         ((int)new DateTime(currentMonth.Year, currentMonth.Month, 1).DayOfWeek + 6) % 7;
 
-
     private List<int?> CalendarDays => Enumerable
         .Repeat<int?>(null, StartDayOffset)
         .Concat(Enumerable.Range(1, DaysInMonth).Cast<int?>())
         .ToList();
 
-    private void GoToPreviousMonth() => currentMonth = currentMonth.AddMonths(-1);
-    private void GoToNextMonth() => currentMonth = currentMonth.AddMonths(1);
-
-    private string GetBadgeClass(int day)
+    private async void GoToPreviousMonth()
     {
-        return day switch
-        {
-            4 or 28 => "badge red",
-            6 or 27 => "badge green",
-            29 => "badge yellow",
-            _ => ""
-        };
+        currentMonth = currentMonth.AddMonths(-1);
+        await LoadPredictions();
     }
-    
 
-    private bool ShouldShowBadge(int day)
+    private async void GoToNextMonth()
     {
-        return day is 4 or 6 or 27 or 28 or 29;
+        currentMonth = currentMonth.AddMonths(1);
+        await LoadPredictions();
     }
 
     private bool IsToday(int day)
@@ -131,23 +115,21 @@
                today.Year == currentMonth.Year;
     }
 
-
     private Dictionary<DateOnly, string> _trashPredictions = new();
 
     protected override async Task OnInitializedAsync()
     {
-      //  await LoadPredictions();
+        await LoadPredictions();
     }
-/*
+
     private async Task LoadPredictions()
     {
-        _trashPredictions = await CalendarService.GetPredictionsForMonthAsync(currentMonth.Year, currentMonth.Month);
-    }*/
+        _trashPredictions = await calendarService.GetPredictionsForMonthAsync(currentMonth.Year, currentMonth.Month);
+        StateHasChanged();
+    }
 
     private string? GetTrashLevelBadge(DateOnly date)
     {
         return _trashPredictions.TryGetValue(date, out var result) ? result : null;
     }
-
-
 }
