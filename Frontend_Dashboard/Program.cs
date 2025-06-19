@@ -1,5 +1,5 @@
-using Zwerfafval_WebApp.Components;
-using Zwerfafval_WebApp.Components.Services;
+using Frontend_Dashboard.Components;
+using Frontend_Dashboard.Components.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,11 +18,10 @@ builder.Services.AddHttpClient("BackendApi", client =>
 
     client.BaseAddress = new Uri(baseUrl);
 });
-    
 
+builder.Services.AddScoped<CalendarService>();
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

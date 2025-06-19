@@ -1,10 +1,10 @@
-﻿@page "/analytics"
+@page "/analytics"
 @using BlazorBootstrap.Components
-@using Zwerfafval_WebApp.Components
-@using Zwerfafval_WebApp.Components.Models
+@using Frontend_Dashboard.Components
+@using Frontend_Dashboard.Components.Models
 @using BlazorBootstrap
 @using System.Collections.Generic
-@using Zwerfafval_WebApp.Components.Services
+@using Frontend_Dashboard.Components.Services
 @using System.Linq
 @rendermode InteractiveServer
 @inject IDetectionDataService DetectionService
@@ -14,12 +14,15 @@
 
 <h1>Analytics</h1>
 
-<div class="analytics-layout">
-    <BarChart @ref="barChart" Width="800" Class="mb-4" />
-    <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadDataIntoChart">Load data</Button>
+<div class="analytics-container">
+    <div class="analytics-layout">
+        <BarChart @ref="barChart" Width="800" Class="mb-4 barChart"></BarChart>
+        <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadDataIntoChart">Load data</Button>
 
-    <Graph Data="graphData" />
+        <Graph Data="graphData" />
+    </div>
 </div>
+
 
 @code {
     private BarChart barChart = default!;
@@ -105,6 +108,14 @@
 
         graphData = data;
 
+        Console.WriteLine($"Data count: {data.Count}");
+        Console.WriteLine($"Grouped count: {grouped.Count}");
+        Console.WriteLine($"Top locations: {string.Join(", ", topLocations)}");
+        Console.WriteLine($"Types: {string.Join(", ", types)}");
+        
         await barChart.UpdateAsync(chartData, barChartOptions);
+        
+        
+
     }
 }
