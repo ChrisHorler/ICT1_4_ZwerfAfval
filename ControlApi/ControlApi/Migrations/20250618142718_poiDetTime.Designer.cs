@@ -4,6 +4,7 @@ using ControlApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ControlApi.Migrations
 {
     [DbContext(typeof(ControlApiDbContext))]
-    partial class ControlApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250618142718_poiDetTime")]
+    partial class poiDetTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,9 +132,8 @@ namespace ControlApi.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("predictionId"));
 
-                    b.Property<string>("confidence")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<float>("confidence")
+                        .HasColumnType("float");
 
                     b.Property<int>("detectionId")
                         .HasColumnType("int");
@@ -139,6 +141,9 @@ namespace ControlApi.Migrations
                     b.Property<string>("modelVersion")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<float>("predictedFillLevel")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("predictedFor")
                         .HasColumnType("datetime(6)");

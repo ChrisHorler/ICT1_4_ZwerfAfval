@@ -58,38 +58,6 @@ def train_calendar_classifier(df, max_depth = 2):
     model.fit(X,y)
     return model
 
-# def assign_grid_zone(latitude, longitude, grid_size=0.01):
-#     min_lat, max_lat = df['latitude'].min(), df['latitude'].max()
-#     min_lon, max_lon = df['longitude'].min(), df['longitude'].max()
-#     lat_zone = chr(65 + math.floor((latitude - min_lat) / grid_size))
-#     lon_zone = str(math.floor((longitude - min_lon) / grid_size) + 1)
-#     return f"{lat_zone}{lon_zone}"
-
-# def group_for_heatmap(df):
-#     min_lat, max_lat = df['latitude'].min(), df['latitude'].max()
-#     min_lon, max_lon = df['longitude'].min(), df['longitude'].max()
-    
-#     df['grid_zone'] = df.apply(
-#         lambda row: assign_grid_zone(row['latitude'], row['longitude']), 
-#         axis=1
-#     )
-
-#     df_heatmap = df.groupby('grid_zone').agg({
-#         'amount': 'sum',
-#         'latitude': 'mean',
-#         'longitude': 'mean',
-#     }).reset_index()
-
-#     return df_heatmap
-
-# def train_heatmap_model(df_heatmap):
-#     features = ['latitude', 'longitude']
-#     X = df_heatmap[features]
-#     y = df_heatmap['amount']
-
-#     model = RandomForestRegressor()
-#     model.fit(X, y)
-#     return model
 
 
 def save_model(model, file_name):
@@ -105,6 +73,3 @@ if __name__ == '__main__':
     model = train_calendar_classifier(df_calendar)
     save_model(model, 'calendar_model.pkl')
 
-    # df_heatmap = group_for_heatmap(df.copy())
-    # heatmap_model = train_heatmap_model(df_heatmap)
-    # save_model(heatmap_model, 'heatmap_model.pkl')

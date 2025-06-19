@@ -1,3 +1,5 @@
+using System.Data;
+using System.Net.Http.Headers;
 using System.Text;
 using ControlApi.API.DTOs;
 using ControlApi.API.Services;
@@ -17,6 +19,8 @@ public class SensoringConnector
     private readonly IJwtService _jwt;
     private readonly string _apiUrl;
     private readonly IServiceScopeFactory _scopeFactory;
+    private readonly bool _isTest;
+    private readonly string _apiToken;
     
     const int DETECTION_RADIUS = 50;
 
@@ -30,9 +34,22 @@ public class SensoringConnector
         _scopeFactory = scopeFactory;
         _httpClientFactory = httpClientFactory;
         _logger = logger;
-        _apiUrl = config["SENSORING_API"]
-                  ?? Environment.GetEnvironmentVariable("SENSORING_API")
-                  ?? throw new InvalidOperationException("SENSORING_API not found");
+        _isTest = config.GetValue<bool>("Testing");
+        if (_isTest)
+        {
+            _apiUrl = config["TESTING_SENSORING_API"]
+                      ?? Environment.GetEnvironmentVariable("TESTING_SENSORING_API")
+                      ?? throw new InvalidOperationException("TESTING_SENSORING_API not found");
+            _apiToken = "NONE";
+        } else
+        {
+            _apiUrl = config["SENSORING_API"]
+                      ?? Environment.GetEnvironmentVariable("SENSORING_API")
+                      ?? throw new InvalidOperationException("SENSORING_API not found");
+            _apiToken = config["SENSORING_API_AUTH"]
+                        ?? Environment.GetEnvironmentVariable("SENSORING_API_AUTH")
+                        ?? throw new InvalidOperationException("SENSORING_API_AUTH not found");
+        }
 
     }
 
@@ -63,56 +80,88 @@ public class SensoringConnector
             this._logger.LogInformation("Updating our Trash Collection with the Sensoring API.\nLastUpdate: {item}",
                 latestItem.timeStamp);
             var client = _httpClientFactory.CreateClient();
-
-            // THIS IS THE QUERY TO THE API URL.
-            // ONCE WE CHANGE THE API FROM MY PRIVATE API TO THE ACTUAL SENSORING ONE, WE'LL HAVE TO CHANGE A BIT OF CODE BELOW.
-            // luckily most is handled in 2 classes, `SensoringApiDtos.cs` + `SensoringConvertor.cs`
-            var response = await client.GetAsync(this._apiUrl, cancellationToken);
-            if (response.IsSuccessStatusCode)
+            
+            HttpResponseMessage response;
+            List<TempDetection> trashDetections;
+            if (this._isTest)
             {
-                string data = await response.Content.ReadAsStringAsync(cancellationToken);
-                try
+                response = await client.GetAsync(this._apiUrl, cancellationToken);
+                if (response.IsSuccessStatusCode)
                 {
-                    // this should still work when the api changes if I were to change the Dtos correctly.
-                    ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data); 
-                    
-                    _logger.LogInformation("Received data from external API: {parsedResponse}", data);
-                    List<TempDetection> trashDetections = SensoringConvertor.ConvertFullModel(parsedResponse);
-                    List<Detection> trashDets = new List<Detection>();
-                    _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
-                    foreach (var trashDetection in trashDetections)
-                    {
-                        if (await dbContext.detections.AnyAsync(d => 
-                                d.timeStamp.Date <= latestItem.timeStamp))
-                        {
-                            continue;
-                        }
-                        var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
-                        _logger.LogInformation("Response: {responseObj}", responseObj);
-                        Detection det = trashDetection.ConvertToDetection();
-                        foreach (var poiObj in responseObj)
-                        {
-                            det.detectionPOIs.Add(new DetectionPOI()
-                            {
-                                POIID = poiObj.POIID,
-                                detectionRadiusM = DETECTION_RADIUS
-                            });
-                        }
-                        trashDets.Add(det);
-                    }
-                    dbContext.detections.AddRange(trashDets);
-                    dbContext.SaveChanges();
+                    TestModeSenseringDataGrabber grabber = new TestModeSenseringDataGrabber();
+                    trashDetections = await grabber.HandleAndConvert(response, cancellationToken, this._logger);
                 }
-                catch (JsonException exception)
+                else
                 {
-                    _logger.LogError("Received data from external API, it is NOT Deserializable: {Data}", data);
+                    _logger.LogWarning("Failed to fetch data from external API. Status code: {StatusCode}",
+                        response.StatusCode);
+                    trashDetections = new List<TempDetection>();
                 }
             }
             else
             {
-                _logger.LogWarning("Failed to fetch data from external API. Status code: {StatusCode}",
-                    response.StatusCode);
+                HttpResponseMessage jwtResponse = await client.GetAsync($"{this._apiUrl}Jwt?key={this._apiToken}", cancellationToken);
+                if (!jwtResponse.IsSuccessStatusCode)
+                {
+                    _logger.LogError("Failed to fetch JWT from external API. Status code: {StatusCode}",
+                        jwtResponse.StatusCode);
+                    throw new DataException($"Failed to fetch JWT from external API. Status code: {jwtResponse.StatusCode}");
+                }
+                string jwtData = await jwtResponse.Content.ReadAsStringAsync(cancellationToken);
+                string date1 = latestItem.timeStamp.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
+                DateTime nextYear = DateTime.UtcNow.AddYears(1);
+                string date2 = nextYear.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtData);
+                response = await client.GetAsync($"{this._apiUrl}Trash?dateLeft={date1}&dateRight={date2}", cancellationToken);
+                if (response.IsSuccessStatusCode)
+                {
+                    ActualSenseringDataGrabber grabber = new ActualSenseringDataGrabber();
+                    trashDetections = await grabber.HandleAndConvert(response, cancellationToken, this._logger);
+                }
+                else
+                {
+                    _logger.LogWarning("Failed to fetch data from external API. Status code: {StatusCode}",
+                        response.StatusCode);
+                    trashDetections = new List<TempDetection>();
+                }
             }
+            List<Detection> trashDets = new List<Detection>();
+            _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
+            foreach (var trashDetection in trashDetections)
+            {
+                if (trashDetection.timeStamp <= latestItem.timeStamp)
+                {
+                    continue;
+                }
+
+                List<POI> responseObj;
+                if (trashDetection.latitude != null && trashDetection.longitude != null)
+                {
+                    double lat = trashDetection.latitude.Value;
+                    double lon = trashDetection.longitude.Value;
+    
+                    responseObj = await this.QueryNearbyElementsAsync(lat, lon, DETECTION_RADIUS, dbContext);
+                    _logger.LogInformation("Response: {responseObj}", responseObj);
+                }
+                else
+                {
+                    responseObj = new List<POI>();
+                }
+                Detection det = trashDetection.ConvertToDetection();
+                foreach (var poiObj in responseObj)
+                {
+                    det.detectionPOIs.Add(new DetectionPOI()
+                    {
+                        POIID = poiObj.POIID,
+                        detectionRadiusM = DETECTION_RADIUS,
+                        timeStamp = det.timeStamp
+                    });
+                }
+                trashDets.Add(det);
+            }
+            dbContext.detections.AddRange(trashDets);
+            dbContext.SaveChanges();
+            
         }
     }
     
