@@ -1,3 +1,11 @@
 @page "/analytics"
+@using BlazorBootstrap.Components
+@using Frontend_Dashboard.Components
+@using Frontend_Dashboard.Components.Models
+@using BlazorBootstrap
+@using System.Collections.Generic
+@using Frontend_Dashboard.Components.Services
+@using System.Linq
 @rendermode InteractiveServer
-
+@inject IDetectionDataService DetectionService
+@inject DateService DateService
