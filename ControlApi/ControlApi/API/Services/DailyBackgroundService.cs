@@ -12,6 +12,8 @@ public class DailyBackgroundService : BackgroundService
     private readonly ILogger<DailyBackgroundService> _logger;
     private readonly SensoringConnector _sensoringConnector;
     private readonly bool _isTest;
+    private Boolean _failedResponse = false;
+    private int _failedResponses = 0;
     public DailyBackgroundService(
         IHttpClientFactory httpClientFactory, ILogger<DailyBackgroundService> logger, 
         ILogger<SensoringConnector> modelLogger,  IConfiguration config,
@@ -33,6 +35,25 @@ public class DailyBackgroundService : BackgroundService
         _logger.LogInformation("DailyGathering Service is running.");
         while (!stoppingToken.IsCancellationRequested)
         {
+            if (this._failedResponse)
+            {
+                if (this._failedResponses >= 5)
+                {
+                    this._logger.LogWarning($"Retried {this._failedResponses} times, skipping today...");
+                    this._failedResponse = false;
+                    this._failedResponses = 0;
+                    continue;
+                }
+                this._logger.LogInformation("Retrying to fetch...");
+                this._failedResponse = false;
+                TimeSpan oneMinute = new TimeSpan(0, 1, 0);
+                await Task.Delay(oneMinute, stoppingToken);
+                
+                await RunBackgroundTaskAsync(stoppingToken);
+                continue;
+            }
+
+            this._failedResponses = 0;
             var now = DateTime.Now;
             var targetTime = DateTime.Today.AddHours(3); // 18 PM
             if (now > targetTime)
@@ -56,14 +77,16 @@ public class DailyBackgroundService : BackgroundService
 
     private async Task RunBackgroundTaskAsync(CancellationToken stoppingToken)
     {
-        _logger.LogInformation("Running daily gathering.");
+        this._logger.LogInformation("Running daily gathering.");
         try
         {
             await _sensoringConnector.PullAsync(stoppingToken);
         }
         catch (DataException excpt)
         {
-            _logger.LogWarning($"Error whilst calling SensoringAPI: {excpt}");
+            this._logger.LogWarning($"Error whilst calling SensoringAPI: {excpt}");
+            this._failedResponse = true;
+            this._failedResponses += 1;
         }
     }
 }
