@@ -268,12 +268,31 @@ body {
 /* -----------------------------------------------
    Analytics panel
 ----------------------------------------------- */
+.analytics-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.analytics-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    width: 100%;
+}
+
 .barChart {
     flex: 2;
     min-height: 400px;
     border-radius: 8px;
     padding: 10px;
 }
+
 
 .graph {
     flex: 1;

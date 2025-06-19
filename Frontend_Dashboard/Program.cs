@@ -19,6 +19,8 @@ builder.Services.AddHttpClient("BackendApi", client =>
     client.BaseAddress = new Uri(baseUrl);
 });
 
+builder.Services.AddScoped<CalendarService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

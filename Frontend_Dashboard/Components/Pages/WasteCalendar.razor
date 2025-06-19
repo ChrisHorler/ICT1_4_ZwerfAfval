@@ -1,5 +1,6 @@
 @page "/waste-calendar"
 @rendermode InteractiveServer
+@inject CalendarService calendarService
 
 <div class="dashboard-layout">
 
@@ -129,5 +130,24 @@
                today.Month == currentMonth.Month &&
                today.Year == currentMonth.Year;
     }
+
+
+    private Dictionary<DateOnly, string> _trashPredictions = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+      //  await LoadPredictions();
+    }
+/*
+    private async Task LoadPredictions()
+    {
+        _trashPredictions = await CalendarService.GetPredictionsForMonthAsync(currentMonth.Year, currentMonth.Month);
+    }*/
+
+    private string? GetTrashLevelBadge(DateOnly date)
+    {
+        return _trashPredictions.TryGetValue(date, out var result) ? result : null;
+    }
+
 
 }
