@@ -10,7 +10,6 @@
 @inject IDetectionDataService DetectionService
 @inject DateService DateService
 
-
 <PageTitle>Analytics</PageTitle>
 
 <h1>Analytics</h1>
@@ -20,7 +19,6 @@
     <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadDataIntoChart">Load data</Button>
 
     <Graph Data="graphData" />
-
 </div>
 
 @code {
@@ -29,38 +27,19 @@
     private ChartData chartData = default!;
     private List<DetectionData> graphData = new();
 
+    private readonly string[] defaultColors = new[]
+    {
+        "rgba(255, 99, 132, 0.5)",
+        "rgba(54, 162, 235, 0.5)",
+        "rgba(255, 206, 86, 0.5)",
+        "rgba(75, 192, 192, 0.5)",
+        "rgba(153, 102, 255, 0.5)",
+        "rgba(255, 159, 64, 0.5)"
+    };
+
     protected override void OnInitialized()
     {
-        var myLabels = new List<string> { "Grote Markt", "Breda Station", "Chassé Theater", "Breda Castle", "Wilhelmina Park" };
-        var myDataSets = new List<IChartDataset>
-        {
-            new BarChartDataset()
-            {
-                Label = $"Cigarette butt",
-                Data = new List<double?> { 40, 20, 66, 49, 66},
-                BackgroundColor = new List<string> { System.Drawing.Color.OrangeRed.ToRgbString()},
-                BorderColor = new List<string> { System.Drawing.Color.OrangeRed.ToRgbString()},
-                BorderWidth = new List<double> { 0 },
-            },
-            new BarChartDataset()
-            {
-                Label = $"Can",
-                Data = new List<double?> { 20, 18, 27, 2, 40},
-                BackgroundColor = new List<string> { System.Drawing.Color.Cyan.ToRgbString()},
-                BorderColor = new List<string> { System.Drawing.Color.Cyan.ToRgbString()},
-                BorderWidth = new List<double> { 0 },
-            },
-            new BarChartDataset()
-            {
-                Label = $"Plastic Bottle",
-                Data = new List<double?> { 2, 7, 22, 13, 8},
-                BackgroundColor = new List<string> { System.Drawing.Color.BlueViolet.ToRgbString()},
-                BorderColor = new List<string> { System.Drawing.Color.BlueViolet.ToRgbString()},
-                BorderWidth = new List<double> { 0 },
-            },
-        };
-
-        chartData = new ChartData { Labels = myLabels, Datasets = myDataSets };
+        chartData = new ChartData { Labels = new List<string>(), Datasets = new List<IChartDataset>() };
         barChartOptions = new BarChartOptions
             {
                 Responsive = true,
@@ -82,31 +61,49 @@
         var data = await DetectionService.GetDetectionDataAsync();
 
         var grouped = data
-            .GroupBy(d => d.Type)
+            .GroupBy(d => new { d.Latitude, d.Longitude, d.Type })
             .Select(g => new
             {
-                Type = g.Key,
+                Location = $"{g.Key.Latitude:F4}, {g.Key.Longitude:F4}",
+                Type = g.Key.Type,
                 Count = g.Count()
             })
             .ToList();
 
-        graphData = data;
+        var topLocations = grouped
+            .GroupBy(g => g.Location)
+            .Select(g => new
+            {
+                Location = g.Key,
+                Total = g.Sum(x => x.Count)
+            })
+            .OrderByDescending(x => x.Total)
+            .Take(5)
+            .Select(x => x.Location)
+            .ToList();
+
+        var filtered = grouped.Where(g => topLocations.Contains(g.Location)).ToList();
+
+        var labels = topLocations;
+
+        var types = filtered.Select(f => f.Type).Distinct().ToList();
+
+        var datasets = types.Select((type, index) => new BarChartDataset
+            {
+                Label = type,
+                Data = labels.Select(label => (double?)filtered.FirstOrDefault(x => x.Type == type && x.Location == label)?.Count ?? (double?)0).ToList(),
+                BackgroundColor = new List<string> { defaultColors[index % defaultColors.Length] },
+                BorderColor = new List<string> { "#333" },
+                BorderWidth = new List<double> { 1 }
+            }).Cast<IChartDataset>().ToList();
 
         chartData = new ChartData
             {
-                Labels = grouped.Select(g => g.Type).ToList(),
-                Datasets = new List<IChartDataset>
-            {
-                new BarChartDataset
-                {
-                    Label = "Amount per type",
-                    Data = grouped.Select(g => (double?)g.Count).ToList(),
-                    BackgroundColor = new List<string> { "rgba(75, 192, 192, 0.2)" },
-                    BorderColor = new List<string> { "rgb(75, 192, 192)" },
-                    BorderWidth = new List<double> { 1 }
-                }
-            }
+                Labels = labels,
+                Datasets = datasets
             };
+
+        graphData = data;
 
         await barChart.UpdateAsync(chartData, barChartOptions);
     }
