@@ -34,7 +34,7 @@ builder.Services.AddHttpClient<IPredictionApiClient, PredictionApiClient>(client
 {
     client.BaseAddress = new Uri(
         Environment.GetEnvironmentVariable("PREDICTION_API"));
-    client.Timeout = TimeSpan.FromSeconds(5);
+    client.Timeout = TimeSpan.FromSeconds(15);
 });
 
 
