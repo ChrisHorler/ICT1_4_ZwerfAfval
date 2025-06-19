@@ -12,7 +12,7 @@ public class DailyBackgroundService : BackgroundService
     private readonly ILogger<DailyBackgroundService> _logger;
     private readonly SensoringConnector _sensoringConnector;
     private readonly bool _isTest;
-    private Boolean _failedResponse = false;
+    private bool _failedResponse = false;
     private int _failedResponses = 0;
     public DailyBackgroundService(
         IHttpClientFactory httpClientFactory, ILogger<DailyBackgroundService> logger, 
