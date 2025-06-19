@@ -46,7 +46,7 @@ public class DailyBackgroundService : BackgroundService
                 }
                 this._logger.LogInformation("Retrying to fetch...");
                 this._failedResponse = false;
-                TimeSpan oneMinute = new TimeSpan(0, 1, 0);
+                TimeSpan oneMinute = TimeSpan.FromMinutes(1);
                 await Task.Delay(oneMinute, stoppingToken);
                 
                 await RunBackgroundTaskAsync(stoppingToken);
