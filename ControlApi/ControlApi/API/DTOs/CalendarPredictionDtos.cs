@@ -3,6 +3,8 @@ using System.Text.Json.Serialization;
 namespace ControlApi.API.DTOs;
 
 public sealed class CalendarFeaturesRequest{
+    public DateOnly TimeStamp { get; set; }
+    
     [JsonPropertyName("feels_like_temp_celsius")]
     public float? FeelsLikeTempCelsius { get; set; }
     

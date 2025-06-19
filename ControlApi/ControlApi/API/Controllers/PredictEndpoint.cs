@@ -59,6 +59,7 @@ public sealed class PredictEndpoint : ControllerBase
         // Map every detection to a FeaturesRequest
         var featureList = detections.Select(d => new CalendarFeaturesRequest
         {
+            TimeStamp = DateOnly.FromDateTime(d.timeStamp),
             FeelsLikeTempCelsius = d.feelsLikeTempC!.Value,
             ActualTempCelsius = d.actualTempC!.Value,
             WindForceBft = d.windForceBft!.Value,
