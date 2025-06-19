@@ -21,7 +21,7 @@ namespace Frontend_Dashboard.Components.Services
                 var response = await _httpClient.GetFromJsonAsync<List<DetectionData>>("control-api/collection");
                 return response ?? new List<DetectionData>();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.Write($"[DetectionDataService] Error while fetching data");
                 return new List<DetectionData>();
