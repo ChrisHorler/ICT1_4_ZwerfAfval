@@ -55,7 +55,7 @@ public class DailyBackgroundService : BackgroundService
 
             this._failedResponses = 0;
             var now = DateTime.Now;
-            var targetTime = DateTime.Today.AddHours(3); // 18 PM
+            var targetTime = DateTime.Today.AddHours(18); // 18 PM
             if (now > targetTime)
             {
                 if (firstLoop)
