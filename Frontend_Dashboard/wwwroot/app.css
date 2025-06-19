@@ -1,17 +1,21 @@
-/* Reset basics */
+/* -----------------------------------------------
+   Global Reset & Base Styles
+----------------------------------------------- */
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    padding-top: 64px;
+    padding-top: 64px; /* offset for fixed navbar */
     font-family: 'Segoe UI', sans-serif;
     background-color: #f9fafb;
     color: #1e1e2f;
 }
 
-/* Navbar wrapper */
+/* -----------------------------------------------
+   Navbar Styles
+----------------------------------------------- */
 .custom-navbar {
     background-color: #365a84;
     position: fixed;
@@ -22,46 +26,38 @@ body {
     z-index: 1000;
 }
 
-/* Flex container */
+/* Inner navbar layout: brand left, links center */
 .nav-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
-/* Brand Piece */
+/* Brand aligned left */
 .brand {
+    position: absolute;
+    left: 1.5rem;
     font-size: 1.2rem;
     font-weight: 600;
     color: #ffffff;
     text-decoration: none;
 }
 
-/* Mobile hamburger */
-.nav-toggle {
-    display: none;
-    font-size: 1.5rem;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-/* Navigation links */
+/* Centered nav links */
 .nav-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
+/* Nav item styles */
 .nav-item {
     color: #cbd5e1;
     text-decoration: none;
     font-weight: 500;
-    position: relative;
     padding: 6px 2px;
     transition: color 0.2s ease;
 }
