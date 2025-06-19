@@ -1,2 +1,95 @@
 @page "/waste-calendar"
 @rendermode InteractiveServer
+
+<div class="dashboard-layout">
+
+    <!-- LEFT: Calendar -->
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <span class="nav">&lt;</span>
+            <span class="month-label">June 2025</span>
+            <span class="nav">&gt;</span>
+        </div>
+
+        <div class="calendar-grid">
+            @foreach (var day in Days)
+            {
+                <div class="calendar-cell">
+                    @if (day is not null) {
+                        <div class="day-number">@day</div>
+
+                        @if (day == 4 || day == 28) {
+                            <span class="badge red">@day</span>
+                        }
+                        else if (day == 27 || day == 6) {
+                            <span class="badge green">@day</span>
+                        }
+                        else if (day == 29) {
+                            <span class="badge yellow">@day</span>
+                        }
+                        else if (day == 16) {
+                            <span class="badge blue">@day</span>
+                        }
+                    }
+                </div>
+            }
+        </div>
+        
+        <!-- Legend -->
+        <div class="calendar-legend">
+            <div class="legend-item">
+                <span class="legend-color red"></span>
+                High amount of trash
+            </div>
+            <div class="legend-item">
+                <span class="legend-color yellow"></span>
+                Medium amount of trash
+            </div>
+            <div class="legend-item">
+                <span class="legend-color green"></span>
+                Low amount of trash
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <!-- RIGHT: Info box -->
+    <div class="info-panel">
+        <div class="info-item">
+            <span class="icon">📍</span>
+            <p>Where the most trash is found:<br><strong>McDonalds Breda Centrum</strong></p>
+        </div>
+
+        <div class="info-item">
+            <span class="icon">🗑️</span>
+            <p>Estimated amount of trash in Breda:<br><strong>420</strong></p>
+        </div>
+
+        <div class="info-item">
+            <span class="icon">🧺</span>
+            <p>The most common trash type in Breda:<br><strong>Cigarette booties</strong></p>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom right -->
+<div class="temperature-box">
+    Today's temperature: 28°C
+</div>
+
+
+
+
+@code{
+
+    List<int?> Days = new()
+    {
+        null, null, null, null, null, null, 1,
+        2, 3, 4, 5, 6, 7, 8,
+        9, 10, 11, 12, 13, 14, 15,
+        16, 17, 18, 19, 20, 21, 22,
+        23, 24, 25, 26, 27, 28, 29,
+        30, null, null, null, null, null, null
+    };
+}

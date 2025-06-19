@@ -7,7 +7,7 @@
 
 body {
     margin: 0;
-    padding-top: 64px; /* offset for fixed navbar */
+    padding-top: 64px;
     font-family: 'Segoe UI', sans-serif;
     background-color: #f9fafb;
     color: #1e1e2f;
@@ -26,7 +26,6 @@ body {
     z-index: 1000;
 }
 
-/* Inner navbar layout: brand left, links center */
 .nav-inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -37,7 +36,6 @@ body {
     position: relative;
 }
 
-/* Brand aligned left */
 .brand {
     position: absolute;
     left: 1.5rem;
@@ -47,13 +45,11 @@ body {
     text-decoration: none;
 }
 
-/* Centered nav links */
 .nav-links {
     display: flex;
     gap: 2rem;
 }
 
-/* Nav item styles */
 .nav-item {
     color: #cbd5e1;
     text-decoration: none;
@@ -69,4 +65,147 @@ body {
 .nav-item.active {
     color: #ffffff;
     border-bottom: 2px solid #ffffff;
+}
+
+/* -----------------------------------------------
+   Dashboard Layout
+----------------------------------------------- */
+.dashboard-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 2rem auto;
+    gap: 2rem;
+}
+
+.calendar-container {
+    flex: 0 0 60%;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* -----------------------------------------------
+   Calendar Styles
+----------------------------------------------- */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    border: 1px solid #ccc;
+    background-color: #ccc;
+}
+
+.calendar-cell {
+    background-color: #fff;
+    height: 100px;
+    padding: 0.25rem;
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+.day-number {
+    font-size: 0.9rem;
+    color: #333;
+    position: absolute;
+    top: 4px;
+    left: 6px;
+}
+
+/* Badge styles */
+.badge {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 0.75rem;
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+}
+
+.badge.red    { background-color: #e74c3c; }
+.badge.green  { background-color: #2ecc71; }
+.badge.yellow { background-color: #f1c40f; color: black; }
+
+/* -----------------------------------------------
+   Calendar Legend
+----------------------------------------------- */
+.calendar-legend {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding-left: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.legend-color.red    { background-color: #e74c3c; }
+.legend-color.yellow { background-color: #f1c40f; }
+.legend-color.green  { background-color: #2ecc71; }
+
+/* -----------------------------------------------
+   Info Panel
+----------------------------------------------- */
+.info-panel {
+    flex: 0 0 40%;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.info-item .icon {
+    font-size: 1.5rem;
+    margin-top: 0.2rem;
+}
+
+/* -----------------------------------------------
+   Temperature Box
+----------------------------------------------- */
+.temperature-box {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
