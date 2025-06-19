@@ -9,7 +9,6 @@
 <!-- <p>Labels: @string.Join(", ", chartData?.Labels ?? new())</p>
 <p>Datasets: @chartData?.Datasets?.Count</p>
 <pre>@System.Text.Json.JsonSerializer.Serialize(GetDebugChartData(), new System.Text.Json.JsonSerializerOptions { WriteIndented = true })</pre> -->
-
 @if (Data != null && Data.Any())
 {
     <ul>
