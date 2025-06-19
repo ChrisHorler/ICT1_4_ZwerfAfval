@@ -9,13 +9,9 @@ from sklearn.tree import DecisionTreeClassifier
 
 # aangepastte manier van path loaden
 DIR = os.path.dirname(__file__)
-
 modelfile = os.path.join(DIR, 'models', 'calendar_model.pkl')
-
-# Joblib is an open-source library for the Python programming language that facilitates parallel processing, result caching and task distribution.
 model: DecisionTreeClassifier = joblib.load(modelfile)[0]
 
-# initialize FastAPI
 app = FastAPI()
 
 class FeaturesCalendar(BaseModel):
@@ -26,7 +22,7 @@ class FeaturesCalendar(BaseModel):
     month: int
 
 class Prediction(BaseModel):
-    prediction: Literal['low', 'medium', 'high']
+    prediction: List[Literal['low', 'medium', 'high']]
 
 # om de applicatie te testen!
 # @app.get("/")
@@ -34,19 +30,25 @@ class Prediction(BaseModel):
 #     return {"Hello": "World"}
 
 @app.post("/predict/calendar")
-def predict(input: FeaturesCalendar) -> Prediction:
-    input_list = [
-        input.feels_like_temp_celsius,
-        input.actual_temp_celsius,
-        input.wind_force_bft,
-        input.day_of_week,
-        input.month,
-    ]
-    print(np.array(input_list))
-    predictions = model.predict(np.array([input_list]))
+def predict(inputs: List[FeaturesCalendar]) -> Prediction:
+    input_array = np.array([
+        [
+            item.feels_like_temp_celsius,
+            item.actual_temp_celsius,
+            item.wind_force_bft,
+            item.day_of_week,
+            item.month,
+        ]
+        for item in inputs
+    ])
+
+    print(input_array)
+    predictions = model.predict(input_array)
     print(predictions)
-    # print(prediction)
-    return Prediction(prediction=predictions[0])
+
+    return Prediction(predictions=predictions.tolist())
+
+## i feel defeated.
     # return {"prediction": prediction.tolist()}
 
     #### to host ->    fastapi dev trash_prediction_api\application.py
