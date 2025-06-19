@@ -100,13 +100,6 @@ public class SensoringConnector
             }
             else
             {
-                // TODO
-                //
-                // GET JWT TOKEN
-                //
-                // SOMEHOW ATTACH THE TOKEN AS BEARER TOKEN
-                // 
-                // IF TIMEOUT ERROR / WHATEVER ERROR IT WAS, SEND SIGNAL BACK TO RETRY IN 1M
                 HttpResponseMessage jwtResponse = await client.GetAsync($"{this._apiUrl}Jwt?key={this._apiToken}", cancellationToken);
                 if (!jwtResponse.IsSuccessStatusCode)
                 {
