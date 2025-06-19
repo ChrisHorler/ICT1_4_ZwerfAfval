@@ -6,11 +6,21 @@
     <!-- LEFT: Calendar -->
     <div class="calendar-container">
         <div class="calendar-header">
-            <button class="nav" @onclick="GoToPreviousMonth">&lt;</button>
+            <button class="calendar-nav-button left" @onclick="GoToPreviousMonth">←</button>
             <span class="month-label">@currentMonth.ToString("MMMM yyyy")</span>
-            <button class="nav" @onclick="GoToNextMonth">&gt;</button>
+            <button class="calendar-nav-button right" @onclick="GoToNextMonth">→</button>
         </div>
 
+        <div class="calendar-weekdays">
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+            <div>Sun</div>
+        </div>
+        
         <div class="calendar-grid">
             @foreach (var day in CalendarDays)
             {
@@ -82,7 +92,9 @@
     private DateTime currentMonth = new DateTime(2025, 6, 1);
 
     private int DaysInMonth => DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
-    private int StartDayOffset => (int)new DateTime(currentMonth.Year, currentMonth.Month, 1).DayOfWeek;
+    private int StartDayOffset =>
+        ((int)new DateTime(currentMonth.Year, currentMonth.Month, 1).DayOfWeek + 6) % 7;
+
 
     private List<int?> CalendarDays => Enumerable
         .Repeat<int?>(null, StartDayOffset)
