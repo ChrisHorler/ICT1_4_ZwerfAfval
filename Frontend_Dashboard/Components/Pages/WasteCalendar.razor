@@ -27,7 +27,7 @@
                 <div class="calendar-cell">
                     @if (day.HasValue)
                     {
-                        <div class="day-number">@day</div>
+                        <div class="day-number @(IsToday(day.Value) ? "today" : "")">@day</div>
 
                         @if (ShouldShowBadge(day.Value))
                         {
@@ -36,6 +36,7 @@
                             </span>
                         }
                     }
+
                 </div>
             }
         </div>
@@ -114,10 +115,19 @@
             _ => ""
         };
     }
+    
 
     private bool ShouldShowBadge(int day)
     {
         return day is 4 or 6 or 27 or 28 or 29;
+    }
+
+    private bool IsToday(int day)
+    {
+        var today = DateTime.Today;
+        return today.Day == day &&
+               today.Month == currentMonth.Month &&
+               today.Year == currentMonth.Year;
     }
 
 }
