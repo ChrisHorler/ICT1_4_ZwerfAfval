@@ -1,34 +1,36 @@
 @page "/waste-calendar"
+@using Frontend_Dashboard.Components.Models
+@using Frontend_Dashboard.Components.Services
 @rendermode InteractiveServer
-@inject CalendarService calendarService
+
+@inject CalendarService  calendarService
+@inject FunFactsService  funFactsService
+@inject IWebHostEnvironment env
 
 <div class="dashboard-layout">
 
-    <!-- CALENDAR ------------------------------------------------------------>
+    <!-- CALENDAR --------------------------------------------------------- -->
     <div class="calendar-container">
-
-        <!-- Header: month & nav buttons -->
         <div class="calendar-header">
             <button class="calendar-nav-button left"  @onclick="GoToPreviousMonth">←</button>
             <span   class="month-label">@currentMonth.ToString("MMMM yyyy")</span>
             <button class="calendar-nav-button right" @onclick="GoToNextMonth">→</button>
         </div>
 
-        <!-- Week-day labels -->
         <div class="calendar-weekdays">
             <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div>
             <div>Fri</div><div>Sat</div><div>Sun</div>
         </div>
 
-        <!-- Day grid -->
         <div class="calendar-grid">
             @foreach (var day in CalendarDays)
             {
-                <div class="calendar-cell">
+                <div class="calendar-cell @(IsSelected(day) ? "selected" : "")"
+                     @onclick="() => OnDayClicked(day)">
                     @if (day.HasValue)
                     {
                         var date       = new DateOnly(currentMonth.Year, currentMonth.Month, day.Value);
-                        var prediction = GetTrashLevel(date);      // "high" | "medium" | "low" | null
+                        var prediction = GetTrashLevel(date);
                         var badgeClass = prediction switch
                         {
                             "high"   => "red",
@@ -54,97 +56,112 @@
             <div class="legend-item"><span class="legend-color yellow"></span> Medium amount of trash</div>
             <div class="legend-item"><span class="legend-color green"></span>  Low amount of trash</div>
         </div>
+
+        @if (env.IsDevelopment())
+        {
+            <button class="btn btn-sm" style="margin-top:1rem"
+                    @onclick="ClearCacheAndReload">
+                🔄 Clear cache & reload
+            </button>
+        }
     </div>
 
-    <!-- INFO PANEL (placeholder) ------------------------------------------->
+    <!-- INFO PANEL -------------------------------------------------------- -->
     <div class="info-panel">
-        <div class="info-item"><span class="icon">📍</span><p>Where the most trash is found:<br><strong>McDonalds Breda Centrum</strong></p></div>
-        <div class="info-item"><span class="icon">🗑️</span><p>Estimated amount of trash in Breda:<br><strong>420</strong></p></div>
-        <div class="info-item"><span class="icon">🧺</span><p>The most common trash type in Breda:<br><strong>Cigarette booties</strong></p></div>
+        @if (funFacts is null)
+        {
+            <p>Select a day to see fun facts.</p>
+        }
+        else
+        {
+            <div class="info-item">
+                <span class="icon">🗑️</span>
+                <p>Total detections:<br><strong>@funFacts.TotalDetections</strong></p>
+            </div>
+            <div class="info-item">
+                <span class="icon">🧺</span>
+                <p>Most common trash type:<br><strong>@funFacts.MostCommonTrash</strong></p>
+            </div>
+        }
     </div>
-
 </div>
 
-<!-- Bottom-right temperature widget -->
 <div class="temperature-box">Today's temperature: 28 °C</div>
 
-<!-- Clear Cache Button -->
-<button class="btn btn-sm"
-        style="margin-top:1rem"
-        @onclick="ClearCacheAndReload">
-    🔄 Clear cache & reload
-</button>
-
-@code
-{
-    /* ---------------------------------------------------------------------
-       Date helpers
-    --------------------------------------------------------------------- */
-    // First day of the current month (no "with" syntax so it compiles everywhere)
-    private DateTime currentMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+@code {
+    /* month helpers ----------------------------------------------------- */
+    private DateTime currentMonth = new(DateTime.Today.Year, DateTime.Today.Month, 1);
 
     private int DaysInMonth    => DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
-    private int StartDayOffset => ((int)new DateTime(currentMonth.Year, currentMonth.Month, 1).DayOfWeek + 6) % 7; // Monday=0
+    private int StartDayOffset => ((int)new DateTime(currentMonth.Year, currentMonth.Month, 1).DayOfWeek + 6) % 7;
 
     private List<int?> CalendarDays => Enumerable
         .Repeat<int?>(null, StartDayOffset)
         .Concat(Enumerable.Range(1, DaysInMonth).Cast<int?>())
         .ToList();
 
-    /* ---------------------------------------------------------------------
-       Prediction cache
-    --------------------------------------------------------------------- */
-    private readonly Dictionary<DateOnly, string> _trashPredictions = new();
+    /* state ------------------------------------------------------------- */
+    private readonly Dictionary<DateOnly,string> _trashPredictions = new();
+    private DateOnly?    selectedDate;
+    private FunFactsDto? funFacts;
 
+    /* lifecycle --------------------------------------------------------- */
     protected override async Task OnInitializedAsync() => await LoadPredictions();
 
     private async Task LoadPredictions()
     {
-        var result = await calendarService.GetPredictionsForMonthAsync(currentMonth.Year, currentMonth.Month);
+        var fresh = await calendarService.GetPredictionsForMonthAsync(currentMonth.Year, currentMonth.Month);
         _trashPredictions.Clear();
-        foreach (var kvp in result)
-            _trashPredictions[kvp.Key] = kvp.Value;
-
-        StateHasChanged(); // refresh UI
+        foreach (var kv in fresh) _trashPredictions[kv.Key] = kv.Value;
+        StateHasChanged();
     }
 
-    /* ---------------------------------------------------------------------
-       Navigation
-    --------------------------------------------------------------------- */
+    /* navigation -------------------------------------------------------- */
     private async Task GoToPreviousMonth()
     {
         currentMonth = currentMonth.AddMonths(-1);
+        selectedDate = null;
+        funFacts     = null;
         await LoadPredictions();
     }
 
     private async Task GoToNextMonth()
     {
         currentMonth = currentMonth.AddMonths(1);
+        selectedDate = null;
+        funFacts     = null;
         await LoadPredictions();
     }
 
-    /* ---------------------------------------------------------------------
-       Helpers
-    --------------------------------------------------------------------- */
-    private bool IsToday(int day)
+    /* click / fun-facts -------------------------------------------------- */
+    private async Task OnDayClicked(int? maybeDay)
     {
-        var today = DateTime.Today;
-        return today.Year == currentMonth.Year &&
-               today.Month == currentMonth.Month &&
-               today.Day == day;
+        if (maybeDay is null) return;
+
+        selectedDate = new DateOnly(currentMonth.Year, currentMonth.Month, maybeDay.Value);
+        funFacts     = await funFactsService.GetFactsAsync(selectedDate.Value);
+        StateHasChanged();
     }
 
+    /* helpers ----------------------------------------------------------- */
+    private bool IsToday(int d) =>
+        DateTime.Today.Year  == currentMonth.Year &&
+        DateTime.Today.Month == currentMonth.Month &&
+        DateTime.Today.Day   == d;
+
+    private bool IsSelected(int? d) =>
+        selectedDate.HasValue && d.HasValue &&
+        selectedDate.Value.Year  == currentMonth.Year  &&
+        selectedDate.Value.Month == currentMonth.Month &&
+        selectedDate.Value.Day   == d.Value;
+
     private string? GetTrashLevel(DateOnly date) =>
-        _trashPredictions.TryGetValue(date, out var level) ? level : null;
-    
-    
-    /* ---------------------------------------------------------------------
-       Debug Functionality
-    --------------------------------------------------------------------- */
-    
+        _trashPredictions.TryGetValue(date, out var lvl) ? lvl : null;
+
+    /* dev helper -------------------------------------------------------- */
     private async Task ClearCacheAndReload()
     {
-        calendarService.ClearCache();  
-        await LoadPredictions();        
+        calendarService.ClearCache();
+        await LoadPredictions();
     }
 }

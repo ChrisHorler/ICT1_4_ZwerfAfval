@@ -175,6 +175,7 @@ body {
     border-radius: 4px;
     font-weight: 600;
 }
+.calendar-cell.selected { background:#e8f1ff; }
 
 /* Badge styles */
 .badge {
@@ -221,6 +222,7 @@ body {
     border-radius: 4px;
     display: inline-block;
 }
+
 
 .legend-color.red    { background-color: #e74c3c; }
 .legend-color.yellow { background-color: #f1c40f; }

@@ -25,7 +25,13 @@ builder.Services.AddHttpClient("BackendApi", client =>
     client.BaseAddress = new Uri(baseUrl);
 });
 
+
 builder.Services.AddHttpClient<CalendarService>(client =>
+{
+    client.BaseAddress = new Uri(apiBase);
+    client.Timeout = TimeSpan.FromSeconds(30);
+});
+builder.Services.AddHttpClient<FunFactsService>(client =>
 {
     client.BaseAddress = new Uri(apiBase);
     client.Timeout = TimeSpan.FromSeconds(30);
