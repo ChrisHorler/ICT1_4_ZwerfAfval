@@ -24,5 +24,10 @@ export function toggleTheme() {
     setTheme(current === "light" ? "dark" : "light");
 }
 
+export function getTheme() {
+    return document.documentElement.getAttribute("data-theme") || "light";
+}
+
+
 /*  apply on first load */
 setTheme(getInitialTheme());
