@@ -199,6 +199,12 @@ public class SensoringConnector
                     });
                 }
                 trashDets.Add(det);
+                if (trashDets.Count >= 25)
+                {
+                    dbContext.detections.AddRange(trashDets);
+                    dbContext.SaveChanges();
+                    trashDets = new List<Detection>();
+                }
             }
             dbContext.detections.AddRange(trashDets);
             dbContext.SaveChanges();
