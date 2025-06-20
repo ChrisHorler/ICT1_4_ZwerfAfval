@@ -852,10 +852,13 @@
         <mxCell id="qPCDG-oTBwNx-kwBJD31-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=diamondThin;endFill=1;endSize=22;" parent="1" source="qPCDG-oTBwNx-kwBJD31-7" target="qPCDG-oTBwNx-kwBJD31-12" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="qPCDG-oTBwNx-kwBJD31-7" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;CalendarPredictionBatchResponse&lt;/span&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-4020" y="-960" width="260" height="60" as="geometry">
+        <mxCell id="qPCDG-oTBwNx-kwBJD31-7" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;CalendarPredictionBatchResponse&lt;/span&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-4020" y="-900" width="260" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-28" value="+Prediction: List&amp;lt;string&amp;gt;" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="qPCDG-oTBwNx-kwBJD31-7">
+          <mxGeometry y="30" width="260" height="30" as="geometry" />
         </mxCell>
         <mxCell id="qPCDG-oTBwNx-kwBJD31-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endSize=22;endArrow=diamondThin;endFill=1;" parent="1" source="qPCDG-oTBwNx-kwBJD31-8" target="7S8ZCQFVZ5OZvFziOqp5-1" edge="1">
           <mxGeometry relative="1" as="geometry">
