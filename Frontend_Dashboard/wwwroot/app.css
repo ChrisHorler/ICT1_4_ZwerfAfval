@@ -1,7 +1,28 @@
 /* ================================================
    Color Design Tokens
 ================================================ */
+:root{
+    --c-bg         : #f9fafb;
+    --c-fg         : #1e1e2f;
+    --c-brand      : #365a84;
 
+    --c-card       : #ffffff;
+    --c-border     : #dddddd;
+
+    --c-badge-low  : #2ecc71;
+    --c-badge-med  : #f1c40f;
+    --c-badge-high : #e74c3c;
+}
+
+/* ---------- dark-mode overrides ---------- */
+:root[data-theme='dark']{
+    --c-bg         : #14161c;
+    --c-fg         : #e4e7ef;
+    --c-brand      : #1b3558;
+
+    --c-card       : #1f222d;
+    --c-border     : #3b3f4d;
+}
 
 /* -----------------------------------------------
    Global Reset & Base Styles
@@ -10,25 +31,25 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    padding-top: 64px;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f9fafb;
-    color: #1e1e2f;
+body{
+    margin:0; 
+    padding-top:64px;
+    font-family:'Segoe UI',sans-serif;
+    background: var(--c-bg);
+    color:      var(--c-fg);
 }
 
 /* -----------------------------------------------
    Navbar Styles
 ----------------------------------------------- */
-.custom-navbar {
-    background-color: #365a84;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 64px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+.custom-navbar{
+    background: var(--c-brand);
+    position:fixed; 
+    top:0; 
+    width:100%; 
+    height:64px;
+    box-shadow:0 2px 4px rgba(0,0,0,.1); 
+    z-index:1000;
 }
 
 .nav-inner {
@@ -76,13 +97,13 @@ body {
     border-bottom: 2px solid #ffffff;
 }
 
-.nav-date {
-    margin-left: auto;
-    padding: 4px 6px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #fff;
-    font: inherit;
+.nav-date{
+    margin-left:auto;
+    padding:4px 6px;
+    border:1px solid var(--c-border);
+    border-radius:4px; 
+    background:#fff;
+    font:inherit;
 }
 
 /* -----------------------------------------------
@@ -115,12 +136,12 @@ body {
 }
 
 
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
-    border: 1px solid #ccc;
-    background-color: #ccc;
+.calendar-grid{
+    display:grid; 
+    grid-template-columns:repeat(7,1fr); 
+    gap:1px;
+    border:1px solid var(--c-border); 
+    background:var(--c-border);
 }
 
 .calendar-nav-button {
@@ -155,12 +176,12 @@ body {
     font-size: 1.25rem;
 }
 
-.calendar-cell {
-    background-color: #fff;
-    height: 100px;
-    padding: 0.25rem;
-    border: 1px solid #ddd;
-    position: relative;
+.calendar-cell{
+    background:var(--c-card);
+    height:100px; 
+    padding:.25rem;
+    border:1px solid var(--c-border);
+    position:relative;
 }
 
 .month-label {
@@ -168,30 +189,30 @@ body {
     font-size: 1.25rem;
 }
 
-.calendar-weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-    background-color: #f0f2f5; /* light shading */
-    border: 1px solid #ccc;
+.calendar-weekdays{
+    display:grid; 
+    grid-template-columns:repeat(7,1fr);
+    font-weight:bold; 
+    text-align:center;
+    margin-bottom:.5rem; 
+    font-size:.95rem;
+    background: var(--c-card);
+    border:1px solid var(--c-border);
 }
-.calendar-weekdays div {
-    padding: 0.5rem 0;
-    border-right: 1px solid #ddd;
+.calendar-weekdays div{
+    padding:.5rem 0; 
+    border-right:1px solid var(--c-border);
 }
 .calendar-weekdays div:last-child {
     border-right: none;
 }
 
-.day-number.today {
-    background-color: #365a84;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: 600;
+.day-number.today{
+    background:var(--c-brand);
+    color:#fff;
+    padding:2px 6px; 
+    border-radius:4px; 
+    font-weight:600;
 }
 .calendar-cell.selected { background:#e8f1ff; }
 
@@ -214,9 +235,9 @@ body {
     color: #fff;
 }
 
-.badge.high   { background:#e74c3c; }       /* red  */
-.badge.medium { background:#f1c40f; color:#222; } /* yellow  */
-.badge.low    { background:#2ecc71; }
+.badge.low    { background:var(--c-badge-low ); }
+.badge.medium { background:var(--c-badge-med ); }
+.badge.high   { background:var(--c-badge-high); }
 
 /* -----------------------------------------------
    Calendar Legend
@@ -245,22 +266,22 @@ body {
 }
 
 
-.legend-color.red    { background-color: #e74c3c; }
-.legend-color.yellow { background-color: #f1c40f; }
-.legend-color.green  { background-color: #2ecc71; }
+.legend-color.red    { background:var(--c-badge-high); }
+.legend-color.yellow { background:var(--c-badge-med ); }
+.legend-color.green  { background:var(--c-badge-low ); }
 
 /* -----------------------------------------------
    Info Panel
 ----------------------------------------------- */
-.info-panel {
-    flex: 0 0 40%;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    font-size: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.info-panel{
+    flex:0 0 40%; 
+    padding:1rem;
+    border:1px solid var(--c-border); 
+    background:var(--c-card);
+    font-size:1rem; 
+    display:flex; 
+    flex-direction:column; 
+    gap:2rem;
 }
 
 .info-item {
@@ -277,16 +298,16 @@ body {
 /* -----------------------------------------------
    Temperature Box
 ----------------------------------------------- */
-.temperature-box {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    background: white;
-    border: 1px solid #ccc;
-    padding: 0.75rem 1.25rem;
-    font-size: 0.95rem;
-    border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+.temperature-box{
+    position:fixed; 
+    bottom:1.5rem;
+    right:1.5rem;
+    background:var(--c-card); 
+    border:1px solid var(--c-border);
+    padding:.75rem 1.25rem; 
+    font-size:.95rem; 
+    border-radius:4px;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
 }
 /* -----------------------------------------------
    Date Picker
