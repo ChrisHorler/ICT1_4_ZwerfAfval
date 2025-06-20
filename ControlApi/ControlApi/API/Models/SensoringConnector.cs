@@ -55,6 +55,11 @@ public class SensoringConnector
 
     public async Task PullAsync(CancellationToken cancellationToken)
     {
+        await this.PullAsync(cancellationToken, new PullAsyncRequestDto(false, DateTime.Now, false));
+    }
+    
+    public async Task PullAsync(CancellationToken cancellationToken, PullAsyncRequestDto overrideSettings)
+    {
         // We need to load all this inside the scope otherwise we cant use the dbcontext
         // and no we can't use dependency injection for the dbcontext, because we are running this from a BackgroundService.
         using (var scope = _scopeFactory.CreateScope())
@@ -71,10 +76,14 @@ public class SensoringConnector
             var latestItem = dbContext.detections
                 .OrderByDescending(e => e.timeStamp)
                 .FirstOrDefault();
-            if (latestItem == null)
+            if (latestItem == null || (overrideSettings.overrideLogic && overrideSettings.rePullOldItems))
             {
                 latestItem = new Detection();
                 latestItem.timeStamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            } else if (overrideSettings.overrideLogic)
+            {
+                latestItem = new Detection();
+                latestItem.timeStamp = overrideSettings.dateOverride;
             }
 
             this._logger.LogInformation("Updating our Trash Collection with the Sensoring API.\nLastUpdate: {item}",
