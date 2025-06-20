@@ -18,6 +18,8 @@ public class SensoringConnector
     private readonly ILogger<SensoringConnector> _logger;
     private readonly IJwtService _jwt;
     private readonly string _apiUrl;
+    private readonly string _testingApiUrl;
+    private readonly string _sensoringApiUrl;
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly bool _isTest;
     private readonly string _apiToken;
@@ -35,19 +37,21 @@ public class SensoringConnector
         _httpClientFactory = httpClientFactory;
         _logger = logger;
         _isTest = config.GetValue<bool>("Testing");
+        _testingApiUrl = config["TESTING_SENSORING_API"] 
+                         ?? Environment.GetEnvironmentVariable("TESTING_SENSORING_API") 
+                         ?? throw new InvalidOperationException("TESTING_SENSORING_API not found");
+        _sensoringApiUrl = config["SENSORING_API"] 
+                           ?? Environment.GetEnvironmentVariable("SENSORING_API") 
+                           ?? throw new InvalidOperationException("SENSORING_API not found");
         if (_isTest)
         {
-            _apiUrl = config["TESTING_SENSORING_API"]
-                      ?? Environment.GetEnvironmentVariable("TESTING_SENSORING_API")
-                      ?? throw new InvalidOperationException("TESTING_SENSORING_API not found");
+            _apiUrl = _testingApiUrl;
             _apiToken = "NONE";
         } else
         {
-            _apiUrl = config["SENSORING_API"]
-                      ?? Environment.GetEnvironmentVariable("SENSORING_API")
-                      ?? throw new InvalidOperationException("SENSORING_API not found");
-            _apiToken = config["SENSORING_API_AUTH"]
-                        ?? Environment.GetEnvironmentVariable("SENSORING_API_AUTH")
+            _apiUrl = _sensoringApiUrl;
+            _apiToken = config["SENSORING_API_AUTH"] 
+                        ?? Environment.GetEnvironmentVariable("SENSORING_API_AUTH") 
                         ?? throw new InvalidOperationException("SENSORING_API_AUTH not found");
         }
 
@@ -92,10 +96,13 @@ public class SensoringConnector
                 latestItem.timeStamp);
             var client = _httpClientFactory.CreateClient();
             
+            this._logger.LogInformation($"API URL USED: {this._apiUrl}\nSENSORING API URL: {this._sensoringApiUrl}\nTESTMODE API URL: {this._testingApiUrl}\n==========================================");
+            
             HttpResponseMessage response;
             List<TempDetection> trashDetections;
             if (this._isTest)
             {
+                this._logger.LogInformation($"Running as a test, this._isTest = {this._isTest}");
                 response = await client.GetAsync(this._apiUrl, cancellationToken);
                 if (response.IsSuccessStatusCode)
                 {
@@ -111,6 +118,7 @@ public class SensoringConnector
             }
             else
             {
+                this._logger.LogInformation($"Gathering JWT from $\"{this._apiUrl}Jwt?key=....");
                 HttpResponseMessage jwtResponse = await client.GetAsync($"{this._apiUrl}Jwt?key={this._apiToken}", cancellationToken);
                 if (!jwtResponse.IsSuccessStatusCode)
                 {
