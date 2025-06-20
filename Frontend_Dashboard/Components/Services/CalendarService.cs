@@ -5,15 +5,12 @@ using Microsoft.Extensions.Caching.Memory;
 public class CalendarService
 {
     private readonly HttpClient _httpClient;
-    private readonly MemoryCache _cache;
+    private readonly IMemoryCache _cache;
 
-    public CalendarService(HttpClient httpClient)
+    public CalendarService(HttpClient httpClient, IMemoryCache cache)
     {
         _httpClient = httpClient;
-        _cache = new MemoryCache(new MemoryCacheOptions
-        {
-            SizeLimit = 12
-        });
+        _cache = cache;
     }
 
     public async Task<Dictionary<DateOnly,string>> GetPredictionsForMonthAsync(int year, int month)
@@ -79,5 +76,11 @@ public class CalendarService
             _ = FetchMonthParallelAsync(next.Year, next.Month);
         
         await Task.CompletedTask;
+    }
+
+    public void ClearCache()
+    {
+        if (_cache is MemoryCache mem)
+            mem.Compact(1.0);
     }
 }

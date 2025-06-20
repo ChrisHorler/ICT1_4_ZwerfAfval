@@ -68,6 +68,13 @@
 <!-- Bottom-right temperature widget -->
 <div class="temperature-box">Today's temperature: 28 °C</div>
 
+<!-- Clear Cache Button -->
+<button class="btn btn-sm"
+        style="margin-top:1rem"
+        @onclick="ClearCacheAndReload">
+    🔄 Clear cache & reload
+</button>
+
 @code
 {
     /* ---------------------------------------------------------------------
@@ -129,4 +136,15 @@
 
     private string? GetTrashLevel(DateOnly date) =>
         _trashPredictions.TryGetValue(date, out var level) ? level : null;
+    
+    
+    /* ---------------------------------------------------------------------
+       Debug Functionality
+    --------------------------------------------------------------------- */
+    
+    private async Task ClearCacheAndReload()
+    {
+        calendarService.ClearCache();  
+        await LoadPredictions();        
+    }
 }

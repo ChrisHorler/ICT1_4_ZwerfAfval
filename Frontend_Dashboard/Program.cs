@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<DateService>();
 builder.Services.AddBlazorBootstrap();
 builder.Services.AddScoped<IDetectionDataService, DetectionDataService>();
@@ -24,7 +25,6 @@ builder.Services.AddHttpClient("BackendApi", client =>
     client.BaseAddress = new Uri(baseUrl);
 });
 
-builder.Services.AddScoped<CalendarService>();
 builder.Services.AddHttpClient<CalendarService>(client =>
 {
     client.BaseAddress = new Uri(apiBase);
