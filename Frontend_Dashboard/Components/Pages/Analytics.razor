@@ -63,7 +63,24 @@
     {
         // TODO:
         
-        var data = await AnalyticsDataService.GetBarChartDataAsync();
+        List<BarChartDto> data = await AnalyticsDataService.GetBarChartDataAsync();
+        data = data
+            .GroupBy(d => new { d.name, d.category })
+            .Select(g => new BarChartDto
+            {
+                name = g.Key.name,
+                category = g.Key.category,
+                TrashTypeCounts = g
+                    // flatten all dictionaries in the group
+                    .SelectMany(d => d.TrashTypeCounts)
+                    // group by trash‑type key and sum their values
+                    .GroupBy(kvp => kvp.Key)
+                    .ToDictionary(
+                        grp => grp.Key,
+                        grp => grp.Sum(kvp => kvp.Value)
+                    )
+            })
+            .ToList();
         
         var top5 = data
             .Select(dto => new 
