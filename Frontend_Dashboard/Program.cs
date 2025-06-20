@@ -10,7 +10,6 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddMemoryCache();
-builder.Services.AddSingleton<DateService>();
 builder.Services.AddBlazorBootstrap();
 builder.Services.AddScoped<IDetectionDataService, DetectionDataService>();
 var apiBase = builder.Configuration["BackendAPI:BaseUrl"]
