@@ -55,8 +55,15 @@ public class SensoringConnector
 
     public async Task PullAsync(CancellationToken cancellationToken)
     {
+        await this.PullAsync(cancellationToken, new PullAsyncRequestDto(false, DateTime.Now, false));
+    }
+    
+    public async Task PullAsync(CancellationToken cancellationToken, PullAsyncRequestDto overrideSettings)
+    {
         // We need to load all this inside the scope otherwise we cant use the dbcontext
         // and no we can't use dependency injection for the dbcontext, because we are running this from a BackgroundService.
+        DateTime start = DateTime.Now;
+        DateTime current = DateTime.Now;
         using (var scope = _scopeFactory.CreateScope())
         {
             // load the dbcontext from the scope
@@ -71,10 +78,14 @@ public class SensoringConnector
             var latestItem = dbContext.detections
                 .OrderByDescending(e => e.timeStamp)
                 .FirstOrDefault();
-            if (latestItem == null)
+            if (latestItem == null || (overrideSettings.overrideLogic && overrideSettings.rePullOldItems))
             {
                 latestItem = new Detection();
                 latestItem.timeStamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            } else if (overrideSettings.overrideLogic)
+            {
+                latestItem = new Detection();
+                latestItem.timeStamp = overrideSettings.dateOverride;
             }
 
             this._logger.LogInformation("Updating our Trash Collection with the Sensoring API.\nLastUpdate: {item}",
@@ -127,8 +138,38 @@ public class SensoringConnector
             }
             List<Detection> trashDets = new List<Detection>();
             _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
+            int expectedPulls = trashDetections.Count;
+            int currentPull = 0;
             foreach (var trashDetection in trashDetections)
             {
+                currentPull++;
+                current = DateTime.Now;    
+                TimeSpan elapsed = current - start; 
+                TimeSpan avgPerItem;
+                if (currentPull > 1)
+                {
+                    avgPerItem = TimeSpan.FromTicks(elapsed.Ticks / (currentPull - 1));
+                }
+                else
+                {
+                    avgPerItem = TimeSpan.Zero;
+                }
+                TimeSpan estimatedTotal, estimatedRemaining;
+                if (avgPerItem > TimeSpan.Zero)
+                {
+                    estimatedTotal   = TimeSpan.FromTicks(avgPerItem.Ticks * expectedPulls);
+                    estimatedRemaining = estimatedTotal - elapsed;
+                }
+                else
+                {
+                    estimatedTotal   = TimeSpan.Zero;
+                    estimatedRemaining = TimeSpan.Zero;
+                }
+                _logger.LogInformation($"[{currentPull} / {expectedPulls}] Pulling POI data.\n" + 
+                                       $"Time spent: {elapsed:hh\\:mm\\:ss}\n" +
+                                       $"Avg per item: {avgPerItem:hh\\:mm\\:ss}\n" + 
+                                       $"Estimated total time: {estimatedTotal:hh\\:mm\\:ss}\n" + 
+                                       $"Estimated remaining: {estimatedRemaining:hh\\:mm\\:ss}\n==========================================");
                 if (trashDetection.timeStamp <= latestItem.timeStamp)
                 {
                     continue;
@@ -158,6 +199,12 @@ public class SensoringConnector
                     });
                 }
                 trashDets.Add(det);
+                if (trashDets.Count >= 25)
+                {
+                    dbContext.detections.AddRange(trashDets);
+                    dbContext.SaveChanges();
+                    trashDets = new List<Detection>();
+                }
             }
             dbContext.detections.AddRange(trashDets);
             dbContext.SaveChanges();
@@ -186,8 +233,12 @@ public class SensoringConnector
     /// </summary>
     private async Task<List<POI>> QueryNearbyElementsAsync(double lat, double lon, int radius, ControlApiDbContext db)
     {
-        // following here is the massive ass query that our api requires.
-        string overpassQuery = $@"
+        try
+        {
+
+
+            // following here is the massive ass query that our api requires.
+            string overpassQuery = $@"
 [out:json][timeout:25];
 (
   node[amenity=restaurant](around:{radius},{lon},{lat});
@@ -257,52 +308,59 @@ out center;
 ";
 
 
-        using (var client = new HttpClient())
-        {
-            _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
-            string url = "https://overpass-api.de/api/interpreter?data=" 
-                         + Uri.EscapeDataString(overpassQuery);
-            var response = await client.GetAsync(url);
-
-            response.EnsureSuccessStatusCode();
-
-            // Parse JSON
-            var json = await response.Content.ReadAsStringAsync();
-            var root = JObject.Parse(json);
-            var elements = (JArray)root["elements"];
-
-            // Convert to list of JObject for easier handling (this is like JSON equivalent in c#, but then with typing).
-            var list = new List<JObject>();
-            foreach (var el in elements)
-                list.Add((JObject)el);
-
-            var formattedList = new List<POI>();
-            foreach (var poi in list)
+            using (var client = new HttpClient())
             {
-                var tags = poi["tags"] as JObject;
+                // _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
+                string url = "https://overpass-api.de/api/interpreter?data="
+                             + Uri.EscapeDataString(overpassQuery);
+                var response = await client.GetAsync(url);
 
-                string category = tags?["highway"]?.ToString()
-                                  ?? tags?["amenity"]?.ToString()
-                                  ?? tags?["shop"]?.ToString()
-                                  ?? "";
+                response.EnsureSuccessStatusCode();
 
-                var poiObj = await GetOrCreatePoiAsync(db, new POI
+                // Parse JSON
+                var json = await response.Content.ReadAsStringAsync();
+                var root = JObject.Parse(json);
+                var elements = (JArray)root["elements"];
+
+                // Convert to list of JObject for easier handling (this is like JSON equivalent in c#, but then with typing).
+                var list = new List<JObject>();
+                foreach (var el in elements)
+                    list.Add((JObject)el);
+
+                var formattedList = new List<POI>();
+                foreach (var poi in list)
                 {
-                    POIID = 0,
-                    category = category,
-                    osmId = poi["id"]?.Value<long>() ?? 0,
-                    name = tags?["name"]
-                        ?.ToString(),
-                    latitude = poi["lat"]?.Value<double>() ?? 0.0,
-                    longitude = poi["lon"]?.Value<double>() ?? 0.0,
-                    source = "overpass",
-                    retrievedAt = DateTime.Now,
-                    detectionPOIs = new List<DetectionPOI>(),
-                });
-                formattedList.Add(poiObj);
-            }
+                    var tags = poi["tags"] as JObject;
 
-            return formattedList;
+                    string category = tags?["highway"]?.ToString()
+                                      ?? tags?["amenity"]?.ToString()
+                                      ?? tags?["shop"]?.ToString()
+                                      ?? "";
+
+                    var poiObj = await GetOrCreatePoiAsync(db, new POI
+                    {
+                        POIID = 0,
+                        category = category,
+                        osmId = poi["id"]?.Value<long>() ?? 0,
+                        name = tags?["name"]
+                            ?.ToString(),
+                        latitude = poi["lat"]?.Value<double>() ?? 0.0,
+                        longitude = poi["lon"]?.Value<double>() ?? 0.0,
+                        source = "overpass",
+                        retrievedAt = DateTime.Now,
+                        detectionPOIs = new List<DetectionPOI>(),
+                    });
+                    formattedList.Add(poiObj);
+                }
+
+                return formattedList;
+
+            }
+        }
+        catch (Exception e)
+        {
+            _logger.LogCritical($"POI api created a crash: {e}");
+            return new List<POI>();
         }
     }
 }
