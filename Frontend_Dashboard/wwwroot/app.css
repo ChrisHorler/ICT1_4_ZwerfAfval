@@ -46,6 +46,9 @@ body {
 }
 
 .nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     gap: 2rem;
 }
@@ -65,6 +68,15 @@ body {
 .nav-item.active {
     color: #ffffff;
     border-bottom: 2px solid #ffffff;
+}
+
+.nav-date {
+    margin-left: auto;
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    font: inherit;
 }
 
 /* -----------------------------------------------
@@ -270,14 +282,7 @@ body {
 /* -----------------------------------------------
    Date Picker
 ----------------------------------------------- */
-.nav-date {
-    margin-left: auto;
-    padding: 4px 6px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #fff;
-    font: inherit;
-}
+
 
 /* -----------------------------------------------
    Analytics panel

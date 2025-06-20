@@ -115,11 +115,12 @@
     protected override void OnInitialized()
     {
         dateService.PropertyChanged += async (_, _) =>
+            InvokeAsync(async () =>
         {
             await LoadPredictions();
             selectedDate = dateService.SelectedDate;
             StateHasChanged();
-        };
+        });
         base.OnInitialized();
     }
 
@@ -128,7 +129,8 @@
         var fresh = await calendarService.GetPredictionsForMonthAsync(currentMonth.Year, currentMonth.Month);
         _trashPredictions.Clear();
         foreach (var kv in fresh) _trashPredictions[kv.Key] = kv.Value;
-        StateHasChanged();
+
+        await InvokeAsync(StateHasChanged);
     }
 
 /* ---------- navigation ---------- */

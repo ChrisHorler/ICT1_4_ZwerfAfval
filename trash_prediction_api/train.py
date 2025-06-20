@@ -7,58 +7,82 @@ import joblib
 from datetime import datetime
 import os
 import math
+from sklearn import tree
+import graphviz
 
 DIR = os.path.dirname(__file__)
 
 def load_dummy_data():
-    file_path = os.path.join(DIR, 'mock_data_varied_timestamps.json')
+    file_path = os.path.join(DIR, 'train_data_set.json')
     with open(file_path) as file:
         raw = json.load(file)
-    df = pd.DataFrame(raw)
+    df = pd.DataFrame(raw['Detection'])
     return df
 
 def preprocess_df(df):
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
-    df['day_of_week'] = df['timestamp'].dt.dayofweek
-    df['month'] = df['timestamp'].dt.month
+    df['timeStamp'] = pd.to_datetime(df['timeStamp'])
+    df['day_of_week'] = df['timeStamp'].dt.dayofweek
+    df['month'] = df['timeStamp'].dt.month
     return df
 
 def group_for_calendar(df):
-    df_grouped = df.groupby(df['timestamp'].dt.floor('d')).agg({ #grouping over the time and aggregating dictionary below here. 
-        'feels_like_temp_celsius': 'mean',
-        'actual_temp_celsius': 'mean',
-        'wind_force_bft': 'mean',
+    df_grouped = df.groupby(df['timeStamp'].dt.floor('d')).agg({ #grouping over the time and aggregating dictionary below here. 
+        'trashType': 'count',
+        'feelsLikeTempC': 'mean',
+        'actualTempC': 'mean',
+        'windForceBft': 'mean',
         'day_of_week': 'min',
         'month': 'min',
-    }).reset_index(False) #It takes the timestamp as index, I reset with this. 
-    df_grouped = df_grouped.rename(columns={'type': 'amount'})
+    }).reset_index(False) #It takes the timeStamp as index, I reset with this. 
+    df_grouped = df_grouped.rename(columns={'trashType': 'amount'})
+    df_grouped = df_grouped.drop(index=63) #removed that fuck ass day with 550+ instances because my standard deviation can't be accurate anymore.
+    
+    # print(df_grouped)
     return df_grouped
 
 def trash_level_categorize(df, alpha = 0.5):
     std = df['amount'].std()
-    mean = df['amount'].mean()
+    quantile_low = df['amount'].quantile(0.33)
+    quantile_high = df['amount'].quantile(0.67)
 
     def find_category(value):
-        if value > mean+std*alpha:
+        if value >= quantile_high:
             return 'high'
-        elif value < mean-std*alpha:
+        elif value <= quantile_low:
             return 'low'
         else:
             return 'medium'
+    print(quantile_high)
+    print(quantile_low)
     
     df['trash_level'] = df['amount'].apply(find_category)
     return df
 
-def train_calendar_classifier(df, max_depth = 2):
-    features = ['feels_like_temp_celsius','actual_temp_celsius','wind_force_bft','day_of_week','month']
+def train_calendar_classifier(df, max_depth = 3):
+    features = ['feelsLikeTempC','actualTempC','windForceBft','day_of_week','month']
     X = df[features]
     y = df['trash_level']
 
-    model = DecisionTreeClassifier(max_depth=max_depth) 
+    model = DecisionTreeClassifier(max_depth=max_depth)
     model.fit(X,y)
     return model
 
+def plot_tree_classification(model, features, class_names):
 
+    dot_data = tree.export_graphviz(model, out_file=None, 
+                          feature_names=features,  
+                          class_names=class_names,  
+                          filled=True, rounded=True,  
+                          special_characters=True)  
+
+    # Turn into graph using graphviz
+    graph = graphviz.Source(dot_data)  
+
+    # Write out a pdf
+    graph.render("decision_tree")
+
+    # Display in the notebook
+    return graph 
 
 def save_model(model, file_name):
     file_path = os.path.join(DIR, 'models', file_name)
@@ -72,4 +96,6 @@ if __name__ == '__main__':
 
     model = train_calendar_classifier(df_calendar)
     save_model(model, 'calendar_model.pkl')
+    plot_tree_classification(model=model, features=['feelsLikeTempC','actualTempC','windForceBft','day_of_week','month'], class_names=['low', 'medium', 'high'])
+
 

@@ -11,20 +11,27 @@
             <NavLink href="analytics" class="nav-item">Analytics</NavLink>
         </div>
         
-        <input type="date"
-               class="nav-date"
-               @bind-value="pickerDate"
-               @bind-value:format="yyyy-MM-dd"
-               @bind-value:event="onchange" />
+        <InputDate class="nav-date"
+                   @bind-Value="dateService.SelectedDate"
+                   format="yyyy-MM-dd"
+                   @key="dateService.SelectedDate" />
     </div>
 </nav>
 
 
-@code{
-
-    private DateOnly pickerDate
+@code
+{
+    protected override void OnInitialized()
     {
-        get => dateService.SelectedDate;         
-        set => dateService.SelectedDate = value; 
+        
+        dateService.PropertyChanged += (_, _) =>
+            InvokeAsync(StateHasChanged);
+    }
+
+   
+    public void Dispose()
+    {
+        dateService.PropertyChanged -= (_, _) =>
+            InvokeAsync(StateHasChanged);
     }
 }
