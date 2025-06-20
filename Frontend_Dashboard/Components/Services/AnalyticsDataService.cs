@@ -28,13 +28,11 @@ namespace Frontend_Dashboard.Components.Services
             {
                 // Api endpoint naam hieronder veranderen wanneer deze bekend is 
                 var response = await _httpClient.GetFromJsonAsync<List<BarChartDto>>($"{this._apiUrl}api/Detections/barchart?date=2025-06-20");
-                this._logger.LogInformation($"name: {response[0].name}");
                 return response ?? new List<BarChartDto>();
-                // return response ?? new List<DetectionData>();
             }
             catch (Exception)
             {
-                Console.Write($"[DetectionDataService] Error while fetching data");
+                this._logger.LogError($"[DetectionDataService] Error while fetching data");
                 return new List<BarChartDto>();
             }
         }
