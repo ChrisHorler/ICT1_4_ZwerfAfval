@@ -145,14 +145,31 @@ public class SensoringConnector
                 currentPull++;
                 current = DateTime.Now;    
                 TimeSpan elapsed = current - start; 
-                TimeSpan avgPerItem = TimeSpan.FromTicks(elapsed.Ticks / (currentPull - 1));
-                TimeSpan estimatedTotal = TimeSpan.FromTicks(avgPerItem.Ticks * expectedPulls);
-                TimeSpan estimatedRemaining = estimatedTotal - elapsed;
-                _logger.LogInformation($"[{currentPull} / {expectedPulls}] Pulling POI data.");
-                _logger.LogInformation($"Time spent: {elapsed:hh\\\\:mm\\\\:ss}");
-                _logger.LogInformation($"Avg per item: {avgPerItem:hh\\\\:mm\\\\:ss}");
-                _logger.LogInformation($"Estimated total time: {estimatedTotal:hh\\\\:mm\\\\:ss}");
-                _logger.LogInformation($"Estimated remaining: {estimatedRemaining:hh\\\\:mm\\\\:ss}");
+                TimeSpan avgPerItem;
+                if (currentPull > 1)
+                {
+                    avgPerItem = TimeSpan.FromTicks(elapsed.Ticks / (currentPull - 1));
+                }
+                else
+                {
+                    avgPerItem = TimeSpan.Zero;
+                }
+                TimeSpan estimatedTotal, estimatedRemaining;
+                if (avgPerItem > TimeSpan.Zero)
+                {
+                    estimatedTotal   = TimeSpan.FromTicks(avgPerItem.Ticks * expectedPulls);
+                    estimatedRemaining = estimatedTotal - elapsed;
+                }
+                else
+                {
+                    estimatedTotal   = TimeSpan.Zero;
+                    estimatedRemaining = TimeSpan.Zero;
+                }
+                _logger.LogInformation($"[{currentPull} / {expectedPulls}] Pulling POI data.\n" + 
+                                       $"Time spent: {elapsed:hh\\:mm\\:ss}\n" +
+                                       $"Avg per item: {avgPerItem:hh\\:mm\\:ss}\n" + 
+                                       $"Estimated total time: {estimatedTotal:hh\\:mm\\:ss}\n" + 
+                                       $"Estimated remaining: {estimatedRemaining:hh\\:mm\\:ss}\n==========================================");
                 if (trashDetection.timeStamp <= latestItem.timeStamp)
                 {
                     continue;
