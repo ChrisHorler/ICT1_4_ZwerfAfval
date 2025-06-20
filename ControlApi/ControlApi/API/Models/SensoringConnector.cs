@@ -18,6 +18,8 @@ public class SensoringConnector
     private readonly ILogger<SensoringConnector> _logger;
     private readonly IJwtService _jwt;
     private readonly string _apiUrl;
+    private readonly string _testingApiUrl;
+    private readonly string _sensoringApiUrl;
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly bool _isTest;
     private readonly string _apiToken;
@@ -35,19 +37,21 @@ public class SensoringConnector
         _httpClientFactory = httpClientFactory;
         _logger = logger;
         _isTest = config.GetValue<bool>("Testing");
+        _testingApiUrl = config["TESTING_SENSORING_API"] 
+                         ?? Environment.GetEnvironmentVariable("TESTING_SENSORING_API") 
+                         ?? throw new InvalidOperationException("TESTING_SENSORING_API not found");
+        _sensoringApiUrl = config["SENSORING_API"] 
+                           ?? Environment.GetEnvironmentVariable("SENSORING_API") 
+                           ?? throw new InvalidOperationException("SENSORING_API not found");
         if (_isTest)
         {
-            _apiUrl = config["TESTING_SENSORING_API"]
-                      ?? Environment.GetEnvironmentVariable("TESTING_SENSORING_API")
-                      ?? throw new InvalidOperationException("TESTING_SENSORING_API not found");
+            _apiUrl = _testingApiUrl;
             _apiToken = "NONE";
         } else
         {
-            _apiUrl = config["SENSORING_API"]
-                      ?? Environment.GetEnvironmentVariable("SENSORING_API")
-                      ?? throw new InvalidOperationException("SENSORING_API not found");
-            _apiToken = config["SENSORING_API_AUTH"]
-                        ?? Environment.GetEnvironmentVariable("SENSORING_API_AUTH")
+            _apiUrl = _sensoringApiUrl;
+            _apiToken = config["SENSORING_API_AUTH"] 
+                        ?? Environment.GetEnvironmentVariable("SENSORING_API_AUTH") 
                         ?? throw new InvalidOperationException("SENSORING_API_AUTH not found");
         }
 
@@ -62,6 +66,8 @@ public class SensoringConnector
     {
         // We need to load all this inside the scope otherwise we cant use the dbcontext
         // and no we can't use dependency injection for the dbcontext, because we are running this from a BackgroundService.
+        DateTime start = DateTime.Now;
+        DateTime current = DateTime.Now;
         using (var scope = _scopeFactory.CreateScope())
         {
             // load the dbcontext from the scope
@@ -90,10 +96,13 @@ public class SensoringConnector
                 latestItem.timeStamp);
             var client = _httpClientFactory.CreateClient();
             
+            this._logger.LogInformation($"API URL USED: {this._apiUrl}\nSENSORING API URL: {this._sensoringApiUrl}\nTESTMODE API URL: {this._testingApiUrl}\n==========================================");
+            
             HttpResponseMessage response;
             List<TempDetection> trashDetections;
             if (this._isTest)
             {
+                this._logger.LogInformation($"Running as a test, this._isTest = {this._isTest}");
                 response = await client.GetAsync(this._apiUrl, cancellationToken);
                 if (response.IsSuccessStatusCode)
                 {
@@ -109,6 +118,7 @@ public class SensoringConnector
             }
             else
             {
+                this._logger.LogInformation($"Gathering JWT from $\"{this._apiUrl}Jwt?key=....");
                 HttpResponseMessage jwtResponse = await client.GetAsync($"{this._apiUrl}Jwt?key={this._apiToken}", cancellationToken);
                 if (!jwtResponse.IsSuccessStatusCode)
                 {
@@ -136,8 +146,38 @@ public class SensoringConnector
             }
             List<Detection> trashDets = new List<Detection>();
             _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
+            int expectedPulls = trashDetections.Count;
+            int currentPull = 0;
             foreach (var trashDetection in trashDetections)
             {
+                currentPull++;
+                current = DateTime.Now;    
+                TimeSpan elapsed = current - start; 
+                TimeSpan avgPerItem;
+                if (currentPull > 1)
+                {
+                    avgPerItem = TimeSpan.FromTicks(elapsed.Ticks / (currentPull - 1));
+                }
+                else
+                {
+                    avgPerItem = TimeSpan.Zero;
+                }
+                TimeSpan estimatedTotal, estimatedRemaining;
+                if (avgPerItem > TimeSpan.Zero)
+                {
+                    estimatedTotal   = TimeSpan.FromTicks(avgPerItem.Ticks * expectedPulls);
+                    estimatedRemaining = estimatedTotal - elapsed;
+                }
+                else
+                {
+                    estimatedTotal   = TimeSpan.Zero;
+                    estimatedRemaining = TimeSpan.Zero;
+                }
+                _logger.LogInformation($"[{currentPull} / {expectedPulls}] Pulling POI data.\n" + 
+                                       $"Time spent: {elapsed:hh\\:mm\\:ss}\n" +
+                                       $"Avg per item: {avgPerItem:hh\\:mm\\:ss}\n" + 
+                                       $"Estimated total time: {estimatedTotal:hh\\:mm\\:ss}\n" + 
+                                       $"Estimated remaining: {estimatedRemaining:hh\\:mm\\:ss}\n==========================================");
                 if (trashDetection.timeStamp <= latestItem.timeStamp)
                 {
                     continue;
@@ -167,6 +207,12 @@ public class SensoringConnector
                     });
                 }
                 trashDets.Add(det);
+                if (trashDets.Count >= 25)
+                {
+                    dbContext.detections.AddRange(trashDets);
+                    dbContext.SaveChanges();
+                    trashDets = new List<Detection>();
+                }
             }
             dbContext.detections.AddRange(trashDets);
             dbContext.SaveChanges();
@@ -272,7 +318,7 @@ out center;
 
             using (var client = new HttpClient())
             {
-                _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
+                // _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
                 string url = "https://overpass-api.de/api/interpreter?data="
                              + Uri.EscapeDataString(overpassQuery);
                 var response = await client.GetAsync(url);

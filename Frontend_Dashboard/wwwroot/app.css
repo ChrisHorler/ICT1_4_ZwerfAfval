@@ -175,6 +175,7 @@ body {
     border-radius: 4px;
     font-weight: 600;
 }
+.calendar-cell.selected { background:#e8f1ff; }
 
 /* Badge styles */
 .badge {
@@ -222,6 +223,7 @@ body {
     display: inline-block;
 }
 
+
 .legend-color.red    { background-color: #e74c3c; }
 .legend-color.yellow { background-color: #f1c40f; }
 .legend-color.green  { background-color: #2ecc71; }
@@ -266,6 +268,18 @@ body {
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 /* -----------------------------------------------
+   Date Picker
+----------------------------------------------- */
+.nav-date {
+    margin-left: auto;
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    font: inherit;
+}
+
+/* -----------------------------------------------
    Analytics panel
 ----------------------------------------------- */
 .analytics-container {
@@ -280,9 +294,17 @@ body {
 .analytics-layout {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     gap: 1rem;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
     width: 100%;
 }
 
@@ -292,7 +314,6 @@ body {
     border-radius: 8px;
     padding: 10px;
 }
-
 
 .graph {
     flex: 1;

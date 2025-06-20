@@ -1,22 +1,20 @@
+namespace ControlApi.API.DTOs;
 public record DetectionDto(
-    int detectionId,
+    int? detectionId,
     DateTime timeStamp,
     string trashType,
-    double? feelsLikeTempC,
-    List<PoiDto>? pois = null 
+    float? latitude,
+    float? longitude
 );
 
-// For POI data if needed
-public record PoiDto(
-    int POIID,
-    string name,
-    double latitude,
-    double longitude
-);
+public class BarchartDto
+{
+    public string Name { get; set; }
+    public string Category { get; set; }
+    public Dictionary<string, int> TrashTypeCounts { get; set; }
+}
 
-public record FilteredDetectionsResponse(
-    List<DetectionDto> detections,
-    int totalCount,
-    DateTime? minDate = null,
-    DateTime? maxDate = null
+public record LineGraphDto(
+    int? detectionId,
+    DateTime timeStamp
 );
