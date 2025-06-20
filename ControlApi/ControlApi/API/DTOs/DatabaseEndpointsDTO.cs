@@ -3,8 +3,8 @@ public record DetectionDto(
     int? detectionId,
     DateTime timeStamp,
     string trashType,
-    double latitude,
-    double longitude
+    float? latitude,
+    float? longitude
 );
 
 public class BarchartDto
