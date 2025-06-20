@@ -21,7 +21,7 @@ public class DetectionsController : ControllerBase
 
 
     [HttpGet("facts")]
-    public async Task<ActionResult<IEnumerable<object>>> GetFactsRawData()
+public async Task<ActionResult<List<DetectionDto>>> GetFactsData()
     {
         var factData = await _db.detections
             .Select(d => new
@@ -39,7 +39,7 @@ public class DetectionsController : ControllerBase
 
 
     [HttpGet("barchart")]
-    public async Task<ActionResult<IEnumerable<object>>> GetBarchartRawData()
+    public async Task<ActionResult<IEnumerable<object>>> GetBarchartData()
     {
         var startTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         var endTime = DateTime.UtcNow.AddYears(1);
@@ -65,7 +65,7 @@ public class DetectionsController : ControllerBase
         // 2) Group in memory by POI, then build your dictionary of trash‑type counts
         var result = windowPOIs
             .GroupBy(x => new { x.PoiId, x.PoiName, x.PoiCat })
-            .Select(g => new
+            .Select(g => new BarChartDTO
             {
                 Name = g.Key.PoiName,
                 Category = g.Key.PoiCat,
@@ -83,14 +83,17 @@ public class DetectionsController : ControllerBase
     }
   
     [HttpGet("linegraphData")]
-    public async Task<ActionResult<IEnumerable<object>>> GetLineGraphRawData()
+[HttpGet("linegraphData")]
+public async Task<ActionResult<List<LineGraphDto>>> GetLineGraphData()
+
     {
         var linegraphData = await _db.detections
-            .Select(d => new
-            {
+            .Select(d => new LineGraphDto
+            (
                 d.detectionId,
                 d.timeStamp
-            })
+            ))
+
             .ToListAsync();
 
         return Ok(linegraphData);
