@@ -65,7 +65,7 @@ public async Task<ActionResult<List<DetectionDto>>> GetFactsData()
         // 2) Group in memory by POI, then build your dictionary of trash‑type counts
         var result = windowPOIs
             .GroupBy(x => new { x.PoiId, x.PoiName, x.PoiCat })
-            .Select(g => new BarChartDTO
+            .Select(g => new BarchartDto
             {
                 Name = g.Key.PoiName,
                 Category = g.Key.PoiCat,
@@ -82,7 +82,6 @@ public async Task<ActionResult<List<DetectionDto>>> GetFactsData()
         return Ok(result);
     }
   
-    [HttpGet("linegraphData")]
 [HttpGet("linegraphData")]
 public async Task<ActionResult<List<LineGraphDto>>> GetLineGraphData()
 

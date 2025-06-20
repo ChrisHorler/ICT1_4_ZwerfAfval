@@ -1,3 +1,4 @@
+namespace ControlApi.API.DTOs;
 public record DetectionDto(
     int detectionId,
     DateTime timeStamp,
@@ -6,12 +7,14 @@ public record DetectionDto(
     double longitude
 );
 public record LineGraphDto(
-    int detectionId,
+    int? detectionId,
     DateTime timeStamp
 );
 
-public record BarchartGroupDto(
-    string Name,
-    string? Category,
-    Dictionary<string, int> TrashTypeCounts
-);
+public class BarchartDto
+{
+    public string Name { get; set; }
+    public string Category { get; set; }
+    public Dictionary<string, int> TrashTypeCounts { get; set; }
+}
+
