@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
   <diagram name="Page-1" id="39hm194q-l13xccRxlsW">
-    <mxGraphModel dx="6157" dy="3063" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="6328" dy="3167" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -852,10 +852,13 @@
         <mxCell id="qPCDG-oTBwNx-kwBJD31-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=diamondThin;endFill=1;endSize=22;" parent="1" source="qPCDG-oTBwNx-kwBJD31-7" target="qPCDG-oTBwNx-kwBJD31-12" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="qPCDG-oTBwNx-kwBJD31-7" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;CalendarPredictionBatchResponse&lt;/span&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
+        <mxCell id="qPCDG-oTBwNx-kwBJD31-7" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;CalendarPredictionBatchResponse&lt;/span&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
           <mxGeometry x="-4020" y="-960" width="260" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-28" value="+Prediction: List&amp;lt;string&amp;gt;" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="qPCDG-oTBwNx-kwBJD31-7">
+          <mxGeometry y="30" width="260" height="30" as="geometry" />
         </mxCell>
         <mxCell id="qPCDG-oTBwNx-kwBJD31-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endSize=22;endArrow=diamondThin;endFill=1;" parent="1" source="qPCDG-oTBwNx-kwBJD31-8" target="7S8ZCQFVZ5OZvFziOqp5-1" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -866,20 +869,38 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="qPCDG-oTBwNx-kwBJD31-8" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;CalendarFeaturesRequest&lt;/span&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-3640" y="-960" width="260" height="60" as="geometry">
+          <mxGeometry x="-3680" y="-1120" width="260" height="210" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-29" value="+Timestamp: DateOnly" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="qPCDG-oTBwNx-kwBJD31-8">
+          <mxGeometry y="30" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-30" value="+FeelsLikeTempCelsius: float" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="qPCDG-oTBwNx-kwBJD31-8">
+          <mxGeometry y="60" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-33" value="+ActualTempCelsius: float" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="qPCDG-oTBwNx-kwBJD31-8">
+          <mxGeometry y="90" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-34" value="+WindForceBft: float" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="qPCDG-oTBwNx-kwBJD31-8">
+          <mxGeometry y="120" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-32" value="+DayOfWeek: int" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="qPCDG-oTBwNx-kwBJD31-8">
+          <mxGeometry y="150" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-31" value="+Month: int" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="qPCDG-oTBwNx-kwBJD31-8">
+          <mxGeometry y="180" width="260" height="30" as="geometry" />
         </mxCell>
         <mxCell id="qPCDG-oTBwNx-kwBJD31-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=diamondThin;endFill=1;endSize=22;" parent="1" source="qPCDG-oTBwNx-kwBJD31-9" target="7S8ZCQFVZ5OZvFziOqp5-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="-3170" y="-1110" />
+              <mxPoint x="-3170" y="-1170" />
               <mxPoint x="-3170" y="-940" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="qPCDG-oTBwNx-kwBJD31-9" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;CalendarPredictionDto&lt;/span&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-3700" y="-1140" width="260" height="60" as="geometry">
+          <mxGeometry x="-3680" y="-1200" width="260" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -887,7 +908,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qPCDG-oTBwNx-kwBJD31-12" value="&lt;span style=&quot;text-align: left;&quot;&gt;PredictionApiClient&lt;/span&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
-          <mxGeometry x="-4020" y="-800" width="260" height="90" as="geometry">
+          <mxGeometry x="-4020" y="-815" width="260" height="90" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
