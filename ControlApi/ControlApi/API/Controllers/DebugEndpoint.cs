@@ -34,14 +34,14 @@ public class DebugController : ControllerBase
 
     
     [HttpPost("pullAsync")]
-    public async Task<ActionResult<PullAsyncResponseDto>> Pull(PullAsyncRequestDto dto)
+    public async Task<ActionResult<PullAsyncResponseDto>> Pull(PullAsyncRequestDto dto, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
         try
         {
-            await _sensoringConnector.PullAsync();
+            await _sensoringConnector.PullAsync(cancellationToken, dto);
         }
         catch (DataException excpt)
         {
