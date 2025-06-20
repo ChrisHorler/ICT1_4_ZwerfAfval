@@ -35,17 +35,11 @@
                     {
                         var date       = new DateOnly(currentMonth.Year, currentMonth.Month, d);
                         var prediction = GetTrashLevel(date);
-                        var badgeClass = prediction switch
-                        {
-                            "high"   => "red",
-                            "medium" => "yellow",
-                            "low"    => "green",
-                            _        => null
-                        };
+                        var badgeClass = prediction;
 
                         <div class="day-number @(IsToday(d) ? "today" : "")">@d</div>
 
-                        @if (badgeClass is not null)
+                        @if (prediction is not null)
                         {
                             <span class="badge @badgeClass">@d</span>
                         }
@@ -61,13 +55,15 @@
             <div class="legend-item"><span class="legend-color green"></span>  Low amount of trash</div>
         </div>
 
+        <!-- Debug to check calendar caching
         @if (env.IsDevelopment())
         {
             <button class="btn btn-sm" style="margin-top:1rem"
                     @onclick="ClearCacheAndReload">
                 🔄 Clear cache & reload
             </button>
-        }
+        }-->
+        
     </div>
 
     <!-- ───── INFO PANEL ───── -->

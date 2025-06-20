@@ -1,3 +1,8 @@
+/* ================================================
+   Color Design Tokens
+================================================ */
+
+
 /* -----------------------------------------------
    Global Reset & Base Styles
 ----------------------------------------------- */
@@ -42,7 +47,8 @@ body {
     font-size: 1.2rem;
     font-weight: 600;
     color: #ffffff;
-    text-decoration: none;
+    pointer-events: none;
+    user-select: none;
 }
 
 .nav-links {
@@ -191,23 +197,26 @@ body {
 
 /* Badge styles */
 .badge {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 24px;
-    font-size: 0.75rem;
-    color: white;
-    font-weight: bold;
     position: absolute;
     bottom: 6px;
     right: 6px;
+
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;        /* ← perfect circle (use 6px for a “rounded square”) */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 0;
+    font-weight: 700;
+    color: #fff;
 }
 
-.badge.red    { background-color: #e74c3c; }
-.badge.green  { background-color: #2ecc71; }
-.badge.yellow { background-color: #f1c40f; color: black; }
+.badge.high   { background:#e74c3c; }       /* red  */
+.badge.medium { background:#f1c40f; color:#222; } /* yellow  */
+.badge.low    { background:#2ecc71; }
 
 /* -----------------------------------------------
    Calendar Legend
