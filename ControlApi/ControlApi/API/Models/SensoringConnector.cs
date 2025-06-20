@@ -52,8 +52,8 @@ public class SensoringConnector
         }
 
     }
-
-    public async Task PullAsync(CancellationToken cancellationToken)
+    
+    public async Task PullAsync(CancellationToken? cancellationToken)
     {
         // We need to load all this inside the scope otherwise we cant use the dbcontext
         // and no we can't use dependency injection for the dbcontext, because we are running this from a BackgroundService.
