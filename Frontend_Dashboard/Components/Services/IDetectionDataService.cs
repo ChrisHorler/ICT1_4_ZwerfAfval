@@ -3,8 +3,8 @@ using Frontend_Dashboard.Components.Services;
 
 namespace Frontend_Dashboard.Components.Services
 {
-    public interface IDetectionDataService
+    public interface IAnalyticsDataService
     {
-        Task<List<DetectionData>> GetDetectionDataAsync();
+        Task<List<BarChartDto>> GetBarChartDataAsync();
     }
 }

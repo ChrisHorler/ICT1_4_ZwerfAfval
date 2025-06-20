@@ -4,34 +4,38 @@ using Frontend_Dashboard.Components.Models;
 
 namespace Frontend_Dashboard.Components.Services
 {
-    public class DetectionDataService : IDetectionDataService
+    public class AnalyticsDataService : IAnalyticsDataService
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _config;
         private readonly string _apiUrl;
+        private readonly ILogger<AnalyticsDataService> _logger;
 
-        public DetectionDataService(HttpClient httpClient, IConfiguration config)
+        public AnalyticsDataService(HttpClient httpClient, IConfiguration config,
+            ILogger<AnalyticsDataService> logger)
         {
             _httpClient = httpClient;
             _config = config;
+            _logger = logger;
             _apiUrl = config["BackendAPI:BaseUrl"] 
                              ?? Environment.GetEnvironmentVariable("BackendAPI:BaseUrl") 
                              ?? throw new InvalidOperationException("'BackendAPI:BaseUrl' not found");
         }
 
-        public async Task<List<DetectionData>> GetDetectionDataAsync()
+        public async Task<List<BarChartDto>> GetBarChartDataAsync()
         {
             try
             {
                 // Api endpoint naam hieronder veranderen wanneer deze bekend is 
-                var response = await _httpClient.GetFromJsonAsync<List<DetectionData>>($"{this._apiUrl}api/Detections/barchart?date=2025-06-20");
-                Console.WriteLine(response);
-                return response ?? new List<DetectionData>();
+                var response = await _httpClient.GetFromJsonAsync<List<BarChartDto>>($"{this._apiUrl}api/Detections/barchart?date=2025-06-20");
+                this._logger.LogInformation($"name: {response[0].name}");
+                return response ?? new List<BarChartDto>();
+                // return response ?? new List<DetectionData>();
             }
             catch (Exception)
             {
                 Console.Write($"[DetectionDataService] Error while fetching data");
-                return new List<DetectionData>();
+                return new List<BarChartDto>();
             }
         }
     }

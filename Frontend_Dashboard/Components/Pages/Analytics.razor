@@ -7,7 +7,7 @@
 @using Frontend_Dashboard.Components.Services
 @using System.Linq
 @rendermode InteractiveServer
-@inject IDetectionDataService DetectionService
+@inject IAnalyticsDataService AnalyticsDataService
 @inject DateService dateService
 
 <PageTitle>Analytics</PageTitle>
@@ -61,59 +61,61 @@
 
     private async Task LoadDataIntoChart()
     {
-        var data = await DetectionService.GetDetectionDataAsync();
-
-        var grouped = data
-            .GroupBy(d => new { d.Latitude, d.Longitude, d.Type })
-            .Select(g => new
-            {
-                Location = $"{g.Key.Latitude:F4}, {g.Key.Longitude:F4}",
-                Type = g.Key.Type,
-                Count = g.Count()
-            })
-            .ToList();
-
-        var topLocations = grouped
-            .GroupBy(g => g.Location)
-            .Select(g => new
-            {
-                Location = g.Key,
-                Total = g.Sum(x => x.Count)
-            })
-            .OrderByDescending(x => x.Total)
-            .Take(5)
-            .Select(x => x.Location)
-            .ToList();
-
-        var filtered = grouped.Where(g => topLocations.Contains(g.Location)).ToList();
-
-        var labels = topLocations;
-
-        var types = filtered.Select(f => f.Type).Distinct().ToList();
-
-        var datasets = types.Select((type, index) => new BarChartDataset
-            {
-                Label = type,
-                Data = labels.Select(label => (double?)filtered.FirstOrDefault(x => x.Type == type && x.Location == label)?.Count ?? (double?)0).ToList(),
-                BackgroundColor = new List<string> { defaultColors[index % defaultColors.Length] },
-                BorderColor = new List<string> { "#333" },
-                BorderWidth = new List<double> { 1 }
-            }).Cast<IChartDataset>().ToList();
-
-        chartData = new ChartData
-            {
-                Labels = labels,
-                Datasets = datasets
-            };
-
-        graphData = data;
-
-        Console.WriteLine($"Data count: {data.Count}");
-        Console.WriteLine($"Grouped count: {grouped.Count}");
-        Console.WriteLine($"Top locations: {string.Join(", ", topLocations)}");
-        Console.WriteLine($"Types: {string.Join(", ", types)}");
+        // TODO:
         
-        await barChart.UpdateAsync(chartData, barChartOptions);
+        // var data = await AnalyticsDataService.GetBarChartDataAsync();
+        //
+        // var grouped = data
+        //     .GroupBy(d => new { d.Latitude, d.Longitude, d.Type })
+        //     .Select(g => new
+        //     {
+        //         Location = $"{g.Key.Latitude:F4}, {g.Key.Longitude:F4}",
+        //         Type = g.Key.Type,
+        //         Count = g.Count()
+        //     })
+        //     .ToList();
+        //
+        // var topLocations = grouped
+        //     .GroupBy(g => g.Location)
+        //     .Select(g => new
+        //     {
+        //         Location = g.Key,
+        //         Total = g.Sum(x => x.Count)
+        //     })
+        //     .OrderByDescending(x => x.Total)
+        //     .Take(5)
+        //     .Select(x => x.Location)
+        //     .ToList();
+        //
+        // var filtered = grouped.Where(g => topLocations.Contains(g.Location)).ToList();
+        //
+        // var labels = topLocations;
+        //
+        // var types = filtered.Select(f => f.Type).Distinct().ToList();
+        //
+        // var datasets = types.Select((type, index) => new BarChartDataset
+        //     {
+        //         Label = type,
+        //         Data = labels.Select(label => (double?)filtered.FirstOrDefault(x => x.Type == type && x.Location == label)?.Count ?? (double?)0).ToList(),
+        //         BackgroundColor = new List<string> { defaultColors[index % defaultColors.Length] },
+        //         BorderColor = new List<string> { "#333" },
+        //         BorderWidth = new List<double> { 1 }
+        //     }).Cast<IChartDataset>().ToList();
+        //
+        // chartData = new ChartData
+        //     {
+        //         Labels = labels,
+        //         Datasets = datasets
+        //     };
+        //
+        // graphData = data;
+        //
+        // Console.WriteLine($"Data count: {data.Count}");
+        // Console.WriteLine($"Grouped count: {grouped.Count}");
+        // Console.WriteLine($"Top locations: {string.Join(", ", topLocations)}");
+        // Console.WriteLine($"Types: {string.Join(", ", types)}");
+        //
+        // await barChart.UpdateAsync(chartData, barChartOptions);
         
         
 
