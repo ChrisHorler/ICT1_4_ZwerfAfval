@@ -62,6 +62,7 @@ public class SensoringConnector
     {
         // We need to load all this inside the scope otherwise we cant use the dbcontext
         // and no we can't use dependency injection for the dbcontext, because we are running this from a BackgroundService.
+
         using (var scope = _scopeFactory.CreateScope())
         {
             // load the dbcontext from the scope
@@ -136,8 +137,14 @@ public class SensoringConnector
             }
             List<Detection> trashDets = new List<Detection>();
             _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
+            int expectedPulls = trashDetections.Count;
+            int currentPull = 0;
             foreach (var trashDetection in trashDetections)
             {
+                currentPull++;
+                
+                _logger.LogInformation($"[{currentPull} / {expectedPulls}] Pulling POI data.");
+                
                 if (trashDetection.timeStamp <= latestItem.timeStamp)
                 {
                     continue;
@@ -272,7 +279,7 @@ out center;
 
             using (var client = new HttpClient())
             {
-                _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
+                // _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
                 string url = "https://overpass-api.de/api/interpreter?data="
                              + Uri.EscapeDataString(overpassQuery);
                 var response = await client.GetAsync(url);
