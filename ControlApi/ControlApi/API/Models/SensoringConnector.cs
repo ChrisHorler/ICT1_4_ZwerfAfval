@@ -55,6 +55,11 @@ public class SensoringConnector
 
     public async Task PullAsync(CancellationToken cancellationToken)
     {
+        await this.PullAsync(cancellationToken, new PullAsyncRequestDto(false, DateTime.Now, false));
+    }
+    
+    public async Task PullAsync(CancellationToken cancellationToken, PullAsyncRequestDto overrideSettings)
+    {
         // We need to load all this inside the scope otherwise we cant use the dbcontext
         // and no we can't use dependency injection for the dbcontext, because we are running this from a BackgroundService.
         using (var scope = _scopeFactory.CreateScope())
@@ -71,10 +76,14 @@ public class SensoringConnector
             var latestItem = dbContext.detections
                 .OrderByDescending(e => e.timeStamp)
                 .FirstOrDefault();
-            if (latestItem == null)
+            if (latestItem == null || (overrideSettings.overrideLogic && overrideSettings.rePullOldItems))
             {
                 latestItem = new Detection();
                 latestItem.timeStamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            } else if (overrideSettings.overrideLogic)
+            {
+                latestItem = new Detection();
+                latestItem.timeStamp = overrideSettings.dateOverride;
             }
 
             this._logger.LogInformation("Updating our Trash Collection with the Sensoring API.\nLastUpdate: {item}",
@@ -186,8 +195,12 @@ public class SensoringConnector
     /// </summary>
     private async Task<List<POI>> QueryNearbyElementsAsync(double lat, double lon, int radius, ControlApiDbContext db)
     {
-        // following here is the massive ass query that our api requires.
-        string overpassQuery = $@"
+        try
+        {
+
+
+            // following here is the massive ass query that our api requires.
+            string overpassQuery = $@"
 [out:json][timeout:25];
 (
   node[amenity=restaurant](around:{radius},{lon},{lat});
@@ -257,52 +270,59 @@ out center;
 ";
 
 
-        using (var client = new HttpClient())
-        {
-            _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
-            string url = "https://overpass-api.de/api/interpreter?data=" 
-                         + Uri.EscapeDataString(overpassQuery);
-            var response = await client.GetAsync(url);
-
-            response.EnsureSuccessStatusCode();
-
-            // Parse JSON
-            var json = await response.Content.ReadAsStringAsync();
-            var root = JObject.Parse(json);
-            var elements = (JArray)root["elements"];
-
-            // Convert to list of JObject for easier handling (this is like JSON equivalent in c#, but then with typing).
-            var list = new List<JObject>();
-            foreach (var el in elements)
-                list.Add((JObject)el);
-
-            var formattedList = new List<POI>();
-            foreach (var poi in list)
+            using (var client = new HttpClient())
             {
-                var tags = poi["tags"] as JObject;
+                _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
+                string url = "https://overpass-api.de/api/interpreter?data="
+                             + Uri.EscapeDataString(overpassQuery);
+                var response = await client.GetAsync(url);
 
-                string category = tags?["highway"]?.ToString()
-                                  ?? tags?["amenity"]?.ToString()
-                                  ?? tags?["shop"]?.ToString()
-                                  ?? "";
+                response.EnsureSuccessStatusCode();
 
-                var poiObj = await GetOrCreatePoiAsync(db, new POI
+                // Parse JSON
+                var json = await response.Content.ReadAsStringAsync();
+                var root = JObject.Parse(json);
+                var elements = (JArray)root["elements"];
+
+                // Convert to list of JObject for easier handling (this is like JSON equivalent in c#, but then with typing).
+                var list = new List<JObject>();
+                foreach (var el in elements)
+                    list.Add((JObject)el);
+
+                var formattedList = new List<POI>();
+                foreach (var poi in list)
                 {
-                    POIID = 0,
-                    category = category,
-                    osmId = poi["id"]?.Value<long>() ?? 0,
-                    name = tags?["name"]
-                        ?.ToString(),
-                    latitude = poi["lat"]?.Value<double>() ?? 0.0,
-                    longitude = poi["lon"]?.Value<double>() ?? 0.0,
-                    source = "overpass",
-                    retrievedAt = DateTime.Now,
-                    detectionPOIs = new List<DetectionPOI>(),
-                });
-                formattedList.Add(poiObj);
-            }
+                    var tags = poi["tags"] as JObject;
 
-            return formattedList;
+                    string category = tags?["highway"]?.ToString()
+                                      ?? tags?["amenity"]?.ToString()
+                                      ?? tags?["shop"]?.ToString()
+                                      ?? "";
+
+                    var poiObj = await GetOrCreatePoiAsync(db, new POI
+                    {
+                        POIID = 0,
+                        category = category,
+                        osmId = poi["id"]?.Value<long>() ?? 0,
+                        name = tags?["name"]
+                            ?.ToString(),
+                        latitude = poi["lat"]?.Value<double>() ?? 0.0,
+                        longitude = poi["lon"]?.Value<double>() ?? 0.0,
+                        source = "overpass",
+                        retrievedAt = DateTime.Now,
+                        detectionPOIs = new List<DetectionPOI>(),
+                    });
+                    formattedList.Add(poiObj);
+                }
+
+                return formattedList;
+
+            }
+        }
+        catch (Exception e)
+        {
+            _logger.LogCritical($"POI api created a crash: {e}");
+            return new List<POI>();
         }
     }
 }
