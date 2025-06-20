@@ -1,14 +1,10 @@
 namespace ControlApi.API.DTOs;
 public record DetectionDto(
-    int detectionId,
+    int? detectionId,
     DateTime timeStamp,
     string trashType,
     double latitude,
     double longitude
-);
-public record LineGraphDto(
-    int? detectionId,
-    DateTime timeStamp
 );
 
 public class BarchartDto
@@ -18,3 +14,7 @@ public class BarchartDto
     public Dictionary<string, int> TrashTypeCounts { get; set; }
 }
 
+public record LineGraphDto(
+    int? detectionId,
+    DateTime timeStamp
+);
