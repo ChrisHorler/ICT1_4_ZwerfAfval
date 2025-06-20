@@ -62,6 +62,8 @@ public class SensoringConnector
     {
         // We need to load all this inside the scope otherwise we cant use the dbcontext
         // and no we can't use dependency injection for the dbcontext, because we are running this from a BackgroundService.
+        DateTime start = DateTime.Now;
+        DateTime current = DateTime.Now;
         using (var scope = _scopeFactory.CreateScope())
         {
             // load the dbcontext from the scope
@@ -136,8 +138,38 @@ public class SensoringConnector
             }
             List<Detection> trashDets = new List<Detection>();
             _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
+            int expectedPulls = trashDetections.Count;
+            int currentPull = 0;
             foreach (var trashDetection in trashDetections)
             {
+                currentPull++;
+                current = DateTime.Now;    
+                TimeSpan elapsed = current - start; 
+                TimeSpan avgPerItem;
+                if (currentPull > 1)
+                {
+                    avgPerItem = TimeSpan.FromTicks(elapsed.Ticks / (currentPull - 1));
+                }
+                else
+                {
+                    avgPerItem = TimeSpan.Zero;
+                }
+                TimeSpan estimatedTotal, estimatedRemaining;
+                if (avgPerItem > TimeSpan.Zero)
+                {
+                    estimatedTotal   = TimeSpan.FromTicks(avgPerItem.Ticks * expectedPulls);
+                    estimatedRemaining = estimatedTotal - elapsed;
+                }
+                else
+                {
+                    estimatedTotal   = TimeSpan.Zero;
+                    estimatedRemaining = TimeSpan.Zero;
+                }
+                _logger.LogInformation($"[{currentPull} / {expectedPulls}] Pulling POI data.\n" + 
+                                       $"Time spent: {elapsed:hh\\:mm\\:ss}\n" +
+                                       $"Avg per item: {avgPerItem:hh\\:mm\\:ss}\n" + 
+                                       $"Estimated total time: {estimatedTotal:hh\\:mm\\:ss}\n" + 
+                                       $"Estimated remaining: {estimatedRemaining:hh\\:mm\\:ss}\n==========================================");
                 if (trashDetection.timeStamp <= latestItem.timeStamp)
                 {
                     continue;
@@ -272,7 +304,7 @@ out center;
 
             using (var client = new HttpClient())
             {
-                _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
+                // _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
                 string url = "https://overpass-api.de/api/interpreter?data="
                              + Uri.EscapeDataString(overpassQuery);
                 var response = await client.GetAsync(url);
