@@ -62,7 +62,8 @@ public class SensoringConnector
     {
         // We need to load all this inside the scope otherwise we cant use the dbcontext
         // and no we can't use dependency injection for the dbcontext, because we are running this from a BackgroundService.
-
+        DateTime start = DateTime.Now;
+        DateTime current = DateTime.Now;
         using (var scope = _scopeFactory.CreateScope())
         {
             // load the dbcontext from the scope
@@ -142,9 +143,16 @@ public class SensoringConnector
             foreach (var trashDetection in trashDetections)
             {
                 currentPull++;
-                
+                current = DateTime.Now;    
+                TimeSpan elapsed = current - start; 
+                TimeSpan avgPerItem = TimeSpan.FromTicks(elapsed.Ticks / (currentPull - 1));
+                TimeSpan estimatedTotal = TimeSpan.FromTicks(avgPerItem.Ticks * expectedPulls);
+                TimeSpan estimatedRemaining = estimatedTotal - elapsed;
                 _logger.LogInformation($"[{currentPull} / {expectedPulls}] Pulling POI data.");
-                
+                _logger.LogInformation($"Time spent: {elapsed:hh\\\\:mm\\\\:ss}");
+                _logger.LogInformation($"Avg per item: {avgPerItem:hh\\\\:mm\\\\:ss}");
+                _logger.LogInformation($"Estimated total time: {estimatedTotal:hh\\\\:mm\\\\:ss}");
+                _logger.LogInformation($"Estimated remaining: {estimatedRemaining:hh\\\\:mm\\\\:ss}");
                 if (trashDetection.timeStamp <= latestItem.timeStamp)
                 {
                     continue;
