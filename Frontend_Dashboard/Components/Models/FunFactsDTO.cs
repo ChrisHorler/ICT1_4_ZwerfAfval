@@ -14,4 +14,5 @@ public record FunFactsDto
     public DateOnly Date { get; init; }
     public int TotalDetections { get; init; }
     public string? MostCommonTrash { get; set; }
+    
 }

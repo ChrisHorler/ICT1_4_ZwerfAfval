@@ -6,39 +6,50 @@ namespace Frontend_Dashboard.Components.Services;
 
 public sealed class FunFactsService
 {
-    private readonly HttpClient _httpClient;
-    private readonly IMemoryCache _cache;
+    private readonly HttpClient     _http;
+    private readonly IMemoryCache   _cache;
 
-    public FunFactsService(HttpClient httpClient, IMemoryCache cache)
+    public FunFactsService(HttpClient http, IMemoryCache cache)
     {
-        _httpClient = httpClient;
+        _http  = http;
         _cache = cache;
     }
 
-    public async Task<FunFactsDto?> GetFactsAsync(DateOnly date)
+    public async Task<FunFactsDto?> GetFactsAsync(DateOnly date, CancellationToken ct = default)
     {
         var key = $"facts-{date:yyyy-MM-dd}";
-        if (_cache.TryGetValue(key, out FunFactsDto cached))
-            return cached;
+        if (_cache.TryGetValue(key, out FunFactsDto dto))
+            return dto;
+        
+        var url = $"api/Detections/facts?date={date:yyyy-MM-dd}";
 
-        var all = await _httpClient.GetFromJsonAsync<List<FactRow>>("api/Detections/facts")
-                  ?? new();
-
-        var rows = all.Where(r => DateOnly.FromDateTime(r.timeStamp) == date).ToList();
-        if (rows.Count == 0) return null;
-
-        var mostCommon = rows.GroupBy(r => r.trashType)
-            .OrderByDescending(g => g.Count())
-            .First().Key;
-
-        var dto = new FunFactsDto
+        try
         {
-            Date = date,
-            TotalDetections = rows.Count,
-            MostCommonTrash = mostCommon,
-        };
+            var rows = await _http.GetFromJsonAsync<List<DetectionData>>(url, ct)
+                       ?? new();
 
-        _cache.Set(key, dto, TimeSpan.FromMinutes(10));
-        return dto;
+            
+            if (rows.Count == 0) return null;
+
+            
+            var mostCommon = rows
+                .GroupBy(r => r.Type)
+                .OrderByDescending(g => g.Count())
+                .First().Key;
+
+            dto = new FunFactsDto
+            {
+                Date             = date,
+                TotalDetections  = rows.Count,
+                MostCommonTrash  = mostCommon
+            };
+
+            _cache.Set(key, dto, TimeSpan.FromMinutes(10));
+            return dto;
+        }
+        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            return null;
+        }
     }
 }
