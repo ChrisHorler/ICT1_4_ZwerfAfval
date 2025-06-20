@@ -19,8 +19,8 @@ app = FastAPI()
 
 class FeaturesCalendar(BaseModel):
     timestamp: date
-    feels_like_temp_celsius: float = Field(examples=[18.3, 17, 189, 32])
-    actual_temp_celsius: float = Field(examples=[18.3, 17, 189, 32])
+    feels_like_temp_celsius: float = Field(examples=[18.3])
+    actual_temp_celsius: float 
     wind_force_bft: float
     day_of_week: int
     month: int
