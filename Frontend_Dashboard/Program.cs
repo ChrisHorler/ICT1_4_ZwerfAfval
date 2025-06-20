@@ -10,6 +10,9 @@ builder.Services.AddRazorComponents()
 builder.Services.AddSingleton<DateService>();
 builder.Services.AddBlazorBootstrap();
 builder.Services.AddScoped<IDetectionDataService, DetectionDataService>();
+var apiBase = builder.Configuration["BackendAPI:BaseUrl"]
+              ?? throw new InvalidOperationException("API Base URL Not Set");
+
 builder.Services.AddHttpClient("BackendApi", client =>
 {
     var baseUrl = builder.Configuration["API_BASE_URL"];
@@ -20,6 +23,11 @@ builder.Services.AddHttpClient("BackendApi", client =>
 });
 
 builder.Services.AddScoped<CalendarService>();
+builder.Services.AddHttpClient<CalendarService>(client =>
+{
+    client.BaseAddress = new Uri(apiBase);
+    client.Timeout = TimeSpan.FromSeconds(30);
+});
 
 var app = builder.Build();
 
