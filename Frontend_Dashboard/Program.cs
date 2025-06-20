@@ -11,6 +11,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddMemoryCache();
 builder.Services.AddBlazorBootstrap();
+builder.Services.AddSingleton<DateService>();
 builder.Services.AddScoped<IDetectionDataService, DetectionDataService>();
 var apiBase = builder.Configuration["BackendAPI:BaseUrl"]
               ?? throw new InvalidOperationException("API Base URL Not Set");

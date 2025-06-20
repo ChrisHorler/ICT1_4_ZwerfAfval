@@ -3,14 +3,16 @@
 @using Frontend_Dashboard.Components.Services
 @rendermode InteractiveServer
 
-@inject CalendarService  calendarService
-@inject FunFactsService  funFactsService
+@inject CalendarService     calendarService
+@inject FunFactsService     funFactsService
+@inject DateService         dateService
 @inject IWebHostEnvironment env
 
 <div class="dashboard-layout">
 
-    <!-- CALENDAR --------------------------------------------------------- -->
+    <!-- ───── CALENDAR ───── -->
     <div class="calendar-container">
+
         <div class="calendar-header">
             <button class="calendar-nav-button left"  @onclick="GoToPreviousMonth">←</button>
             <span   class="month-label">@currentMonth.ToString("MMMM yyyy")</span>
@@ -23,13 +25,14 @@
         </div>
 
         <div class="calendar-grid">
-            @foreach (var day in CalendarDays)
+            @foreach (var day in calendarDays)
             {
                 <div class="calendar-cell @(IsSelected(day) ? "selected" : "")"
                      @onclick="() => OnDayClicked(day)">
-                    @if (day.HasValue)
+
+                    @if (day is { } d)
                     {
-                        var date       = new DateOnly(currentMonth.Year, currentMonth.Month, day.Value);
+                        var date       = new DateOnly(currentMonth.Year, currentMonth.Month, d);
                         var prediction = GetTrashLevel(date);
                         var badgeClass = prediction switch
                         {
@@ -39,11 +42,11 @@
                             _        => null
                         };
 
-                        <div class="day-number @(IsToday(day.Value) ? "today" : "")">@day</div>
+                        <div class="day-number @(IsToday(d) ? "today" : "")">@d</div>
 
                         @if (badgeClass is not null)
                         {
-                            <span class="badge @badgeClass">@day</span>
+                            <span class="badge @badgeClass">@d</span>
                         }
                     }
                 </div>
@@ -66,7 +69,7 @@
         }
     </div>
 
-    <!-- INFO PANEL -------------------------------------------------------- -->
+    <!-- ───── INFO PANEL ───── -->
     <div class="info-panel">
         @if (funFacts is null)
         {
@@ -89,24 +92,36 @@
 <div class="temperature-box">Today's temperature: 28 °C</div>
 
 @code {
-    /* month helpers ----------------------------------------------------- */
-    private DateTime currentMonth = new(DateTime.Today.Year, DateTime.Today.Month, 1);
+/* ---------- month helpers ---------- */
+    private DateTime currentMonth
+        => new(dateService.SelectedDate.Year, dateService.SelectedDate.Month, 1);
 
-    private int DaysInMonth    => DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
-    private int StartDayOffset => ((int)new DateTime(currentMonth.Year, currentMonth.Month, 1).DayOfWeek + 6) % 7;
+    private int  daysInMonth    => DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
+    private int  startDayOffset => ((int)new DateTime(currentMonth.Year, currentMonth.Month, 1).DayOfWeek + 6) % 7;
 
-    private List<int?> CalendarDays => Enumerable
-        .Repeat<int?>(null, StartDayOffset)
-        .Concat(Enumerable.Range(1, DaysInMonth).Cast<int?>())
+    private List<int?> calendarDays => Enumerable
+        .Repeat<int?>(null, startDayOffset)
+        .Concat(Enumerable.Range(1, daysInMonth).Cast<int?>())
         .ToList();
 
-    /* state ------------------------------------------------------------- */
+/* ---------- state ---------- */
     private readonly Dictionary<DateOnly,string> _trashPredictions = new();
     private DateOnly?    selectedDate;
     private FunFactsDto? funFacts;
 
-    /* lifecycle --------------------------------------------------------- */
+/* ---------- lifecycle ---------- */
     protected override async Task OnInitializedAsync() => await LoadPredictions();
+
+    protected override void OnInitialized()
+    {
+        dateService.PropertyChanged += async (_, _) =>
+        {
+            await LoadPredictions();
+            selectedDate = dateService.SelectedDate;
+            StateHasChanged();
+        };
+        base.OnInitialized();
+    }
 
     private async Task LoadPredictions()
     {
@@ -116,10 +131,13 @@
         StateHasChanged();
     }
 
-    /* navigation -------------------------------------------------------- */
+/* ---------- navigation ---------- */
     private async Task GoToPreviousMonth()
     {
-        currentMonth = currentMonth.AddMonths(-1);
+        dateService.SelectedDate = new DateOnly(
+            dateService.SelectedDate.Year,
+            dateService.SelectedDate.Month, 1).AddMonths(-1);
+
         selectedDate = null;
         funFacts     = null;
         await LoadPredictions();
@@ -127,23 +145,28 @@
 
     private async Task GoToNextMonth()
     {
-        currentMonth = currentMonth.AddMonths(1);
+        dateService.SelectedDate = new DateOnly(
+            dateService.SelectedDate.Year,
+            dateService.SelectedDate.Month, 1).AddMonths(1);
+
         selectedDate = null;
         funFacts     = null;
         await LoadPredictions();
     }
 
-    /* click / fun-facts -------------------------------------------------- */
+/* ---------- click ---------- */
     private async Task OnDayClicked(int? maybeDay)
     {
         if (maybeDay is null) return;
 
         selectedDate = new DateOnly(currentMonth.Year, currentMonth.Month, maybeDay.Value);
-        funFacts     = await funFactsService.GetFactsAsync(selectedDate.Value);
+        dateService.SelectedDate = selectedDate.Value;
+
+        funFacts = await funFactsService.GetFactsAsync(selectedDate.Value);
         StateHasChanged();
     }
 
-    /* helpers ----------------------------------------------------------- */
+/* ---------- helpers ---------- */
     private bool IsToday(int d) =>
         DateTime.Today.Year  == currentMonth.Year &&
         DateTime.Today.Month == currentMonth.Month &&
@@ -158,7 +181,7 @@
     private string? GetTrashLevel(DateOnly date) =>
         _trashPredictions.TryGetValue(date, out var lvl) ? lvl : null;
 
-    /* dev helper -------------------------------------------------------- */
+/* ---------- dev helper ---------- */
     private async Task ClearCacheAndReload()
     {
         calendarService.ClearCache();

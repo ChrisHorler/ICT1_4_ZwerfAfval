@@ -90,7 +90,7 @@ jobs:
             -e Jwt__Key='${{ secrets.JWT_KEY }}' \
             -e PREDICTION_API='${{ secrets.PREDICTION_API }}' \
             -e SENSORING_API='${{ secrets.SENSORING_API }}' \
-            -e SENSORING_API='${{ secrets.TESTING_SENSORING_API }}' \
+            -e TESTING_SENSORING_API='${{ secrets.TESTING_SENSORING_API }}' \
             -e SENSORING_API_AUTH='${{ secrets.SENSORING_API_AUTH }}' \
             "$IMAGE"
 
