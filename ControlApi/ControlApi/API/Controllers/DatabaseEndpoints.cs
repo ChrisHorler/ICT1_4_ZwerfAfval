@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ControlApi.API.DTOs;
 using ControlApi.Data;
 using ControlApi.Data.Entities;
+using System.Linq;
 
 namespace ControlApi.API.Controllers;
 
@@ -17,41 +18,45 @@ public class DetectionsController : ControllerBase
         _db = db;
     }
 
-    // Basic endpoint to get raw detection data with filtering capabilities ty Martijn
-
-
     [HttpGet("facts")]
-    public async Task<ActionResult<IEnumerable<object>>> GetFactsRawData()
+    public async Task<ActionResult<List<DetectionDto>>> GetFactsData(
+       [FromQuery] DateOnly date,
+       CancellationToken ct)
     {
+        var dateTime = date.ToDateTime(TimeOnly.MinValue);
+
         var factData = await _db.detections
-            .Select(d => new
-            {
+            .Where(d => d.timeStamp.Date == dateTime.Date)
+            .Select(d => new DetectionDto(
                 d.detectionId,
-                d.latitude,
-                d.longitude,
+                d.timeStamp,
                 d.trashType,
-                d.timeStamp
-            })
-            .ToListAsync();
+                d.latitude,
+                d.longitude
+            ))
+            .ToListAsync(ct);
+
+        if (!factData.Any())
+            return NotFound($"No detections found for {date:yyyy-MM-dd}");
 
         return Ok(factData);
     }
 
 
+
     [HttpGet("barchart")]
-    public async Task<ActionResult<IEnumerable<object>>> GetBarchartRawData()
+    public async Task<ActionResult<IEnumerable<object>>> GetBarchartData(
+        [FromQuery] DateOnly date,
+        CancellationToken ct)
     {
-        var startTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        var endTime = DateTime.UtcNow.AddYears(1);
+        var dateTime = date.ToDateTime(TimeOnly.MinValue);
 
         var windowPOIs = await _db.detectionPOIs
             .Include(dp => dp.POI)
             .Include(dp => dp.detection)
             .Where(dp =>
-                dp.timeStamp >= startTime &&
-                dp.timeStamp <= endTime &&
-                dp.detection.timeStamp >= startTime &&
-                dp.detection.timeStamp <= endTime
+                dp.timeStamp.Date == dateTime.Date &&
+                dp.detection.timeStamp.Date == dateTime.Date
             )
             .Select(dp => new
             {
@@ -60,12 +65,14 @@ public class DetectionsController : ControllerBase
                 PoiCat = dp.POI!.category,
                 TrashType = dp.detection!.trashType
             })
-            .ToListAsync();
+            .ToListAsync(ct);
 
-        // 2) Group in memory by POI, then build your dictionary of trash‑type counts
+        if (!windowPOIs.Any())
+            return NotFound($"No POI data found for {date:yyyy-MM-dd}");
+
         var result = windowPOIs
             .GroupBy(x => new { x.PoiId, x.PoiName, x.PoiCat })
-            .Select(g => new
+            .Select(g => new BarchartDto
             {
                 Name = g.Key.PoiName,
                 Category = g.Key.PoiCat,
@@ -78,21 +85,27 @@ public class DetectionsController : ControllerBase
             })
             .ToList();
 
-
         return Ok(result);
     }
-  
-    [HttpGet("linegraphData")]
-    public async Task<ActionResult<IEnumerable<object>>> GetLineGraphRawData()
+
+    [HttpGet("linegraph")]
+    public async Task<ActionResult<List<LineGraphDto>>> GetLineGraphData(
+       [FromQuery] DateOnly date,
+       CancellationToken ct)
     {
-        var linegraphData = await _db.detections
-            .Select(d => new
-            {
+        var dateTime = date.ToDateTime(TimeOnly.MinValue);
+
+        var linegraph = await _db.detections
+            .Where(d => d.timeStamp.Date == dateTime.Date)
+            .Select(d => new LineGraphDto(
                 d.detectionId,
                 d.timeStamp
-            })
-            .ToListAsync();
+            ))
+            .ToListAsync(ct);
 
-        return Ok(linegraphData);
+        if (!linegraph.Any())
+            return NotFound($"No line graph data found for {date:yyyy-MM-dd}");
+
+        return Ok(linegraph);
     }
 }
