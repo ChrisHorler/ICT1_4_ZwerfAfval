@@ -32,8 +32,23 @@ namespace Frontend_Dashboard.Components.Services
             }
             catch (Exception)
             {
-                this._logger.LogError($"[DetectionDataService] Error while fetching data");
+                this._logger.LogError($"[DetectionDataService] Error while fetching barchart data");
                 return new List<BarChartDto>();
+            }
+        }
+
+        public async Task<List<DetectionData>> GetLineGraphDataAsync()
+        {
+            try
+            {
+                // Pas de API-endpoint aan als nodig
+                var response = await _httpClient.GetFromJsonAsync<List<DetectionData>>($"{this._apiUrl}api/Detections/linegraph?date=2025-06-20");
+                return response ?? new List<DetectionData>();
+            }
+            catch (Exception)
+            {
+                this._logger.LogError("[AnalyticsDataService] Error while fetching line graph data");
+                return new List<DetectionData>();
             }
         }
     }
