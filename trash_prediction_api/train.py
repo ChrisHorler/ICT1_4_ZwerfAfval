@@ -42,20 +42,23 @@ def group_for_calendar(df):
 
 def trash_level_categorize(df, alpha = 0.5):
     std = df['amount'].std()
-    mean = df['amount'].mean()
+    quantile_low = df['amount'].quantile(0.33)
+    quantile_high = df['amount'].quantile(0.67)
 
     def find_category(value):
-        if value > mean+std*alpha:
+        if value >= quantile_high:
             return 'high'
-        elif value < mean-std*alpha:
+        elif value <= quantile_low:
             return 'low'
         else:
             return 'medium'
+    print(quantile_high)
+    print(quantile_low)
     
     df['trash_level'] = df['amount'].apply(find_category)
     return df
 
-def train_calendar_classifier(df, max_depth = 4):
+def train_calendar_classifier(df, max_depth = 3):
     features = ['feelsLikeTempC','actualTempC','windForceBft','day_of_week','month']
     X = df[features]
     y = df['trash_level']
