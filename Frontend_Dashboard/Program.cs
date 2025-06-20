@@ -1,5 +1,7 @@
 using Frontend_Dashboard.Components;
 using Frontend_Dashboard.Components.Services;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,9 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<DateService>();
 builder.Services.AddBlazorBootstrap();
 builder.Services.AddScoped<IDetectionDataService, DetectionDataService>();
+var apiBase = builder.Configuration["BackendAPI:BaseUrl"]
+              ?? throw new InvalidOperationException("API Base URL Not Set");
+
 builder.Services.AddHttpClient("BackendApi", client =>
 {
     var baseUrl = builder.Configuration["API_BASE_URL"];
@@ -19,7 +25,17 @@ builder.Services.AddHttpClient("BackendApi", client =>
     client.BaseAddress = new Uri(baseUrl);
 });
 
-builder.Services.AddScoped<CalendarService>();
+
+builder.Services.AddHttpClient<CalendarService>(client =>
+{
+    client.BaseAddress = new Uri(apiBase);
+    client.Timeout = TimeSpan.FromSeconds(30);
+});
+builder.Services.AddHttpClient<FunFactsService>(client =>
+{
+    client.BaseAddress = new Uri(apiBase);
+    client.Timeout = TimeSpan.FromSeconds(30);
+});
 
 var app = builder.Build();
 
