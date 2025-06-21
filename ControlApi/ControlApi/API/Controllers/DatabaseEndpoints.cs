@@ -45,7 +45,7 @@ public class DetectionsController : ControllerBase
 
 
     [HttpGet("barchart")]
-    public async Task<ActionResult<IEnumerable<object>>> GetBarchartData(
+    public async Task<ActionResult<IEnumerable<BarchartDto>>> GetBarchartData(
         [FromQuery] DateOnly date,
         CancellationToken ct)
     {
