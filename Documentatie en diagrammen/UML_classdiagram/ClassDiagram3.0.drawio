@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
   <diagram name="Page-1" id="39hm194q-l13xccRxlsW">
-    <mxGraphModel dx="6157" dy="3063" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="5536" dy="2686" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -822,7 +822,7 @@
         <mxCell id="qPCDG-oTBwNx-kwBJD31-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endSize=22;endArrow=diamondThin;endFill=1;" parent="1" source="qPCDG-oTBwNx-kwBJD31-3" target="7S8ZCQFVZ5OZvFziOqp5-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="-3310" y="-940" />
+              <mxPoint x="-3320" y="-940" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -894,8 +894,8 @@
         <mxCell id="qPCDG-oTBwNx-kwBJD31-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=diamondThin;endFill=1;endSize=22;" parent="1" source="qPCDG-oTBwNx-kwBJD31-9" target="7S8ZCQFVZ5OZvFziOqp5-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="-3310" y="-1170" />
-              <mxPoint x="-3310" y="-940" />
+              <mxPoint x="-3280" y="-1170" />
+              <mxPoint x="-3280" y="-940" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -949,11 +949,6 @@
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="UlhQks0yLPX1q9XYhBIK-1" value="&lt;div style=&quot;text-align: left;&quot;&gt;PredictEndpoint&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-3040" y="-1120" width="260" height="60" as="geometry">
-            <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-2" value="&lt;div style=&quot;text-align: left;&quot;&gt;BarchartDto&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
           <mxGeometry x="-4120" y="-680" width="260" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
@@ -985,7 +980,9 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-8" value="&lt;span style=&quot;font-weight: 700;&quot;&gt;&amp;lt;&amp;lt;interface&lt;/span&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;div&gt;&lt;b&gt;ISensoringDataGrabber&lt;/b&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-1400" y="-1040" width="260" height="60" as="geometry" />
+          <mxGeometry x="-1400" y="-1040" width="260" height="60" as="geometry">
+            <mxRectangle x="-1400" y="-1040" width="180" height="40" as="alternateBounds" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-9" value="&lt;b&gt;TestModeSenseringDataGrabber&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#990000;" parent="1" vertex="1">
           <mxGeometry x="-1080" y="-810" width="260" height="60" as="geometry" />
@@ -1040,10 +1037,11 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="yWFbXETGNYuAG4VHQHp2-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=diamondThin;endFill=1;strokeWidth=2;endSize=22;" edge="1" parent="1" source="UlhQks0yLPX1q9XYhBIK-21" target="UlhQks0yLPX1q9XYhBIK-1">
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=diamondThin;endFill=1;strokeWidth=2;endSize=22;" edge="1" parent="1" source="UlhQks0yLPX1q9XYhBIK-21" target="7S8ZCQFVZ5OZvFziOqp5-1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="-2490" y="-1080" />
+              <mxPoint x="-2490" y="-1170" />
+              <mxPoint x="-2800" y="-1170" />
             </Array>
           </mxGeometry>
         </mxCell>
