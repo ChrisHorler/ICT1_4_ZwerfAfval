@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
+const bool TESTING = false;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Default");
 
@@ -32,7 +34,7 @@ builder.Services.AddHttpClient<IPredictionApiClient, PredictionApiClient>(client
 {
     client.BaseAddress = new Uri(
         Environment.GetEnvironmentVariable("PREDICTION_API"));
-    client.Timeout = TimeSpan.FromSeconds(5);
+    client.Timeout = TimeSpan.FromSeconds(15);
 });
 
 
@@ -76,6 +78,10 @@ builder.Services
 
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Configuration.AddInMemoryCollection(new Dictionary<string, string>
+{
+    ["Testing"] = $"{TESTING}"  // or "false"
+});
 builder.Services.AddHostedService<DailyBackgroundService>();
 var app = builder.Build();
 

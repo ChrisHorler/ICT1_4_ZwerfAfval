@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using ControlApi.Data;
 using ControlApi.API.DTOs;
 using ControlApi.API.Services;
+using System.Linq;
+using ControlApi.Data.Entities;
 
 namespace ControlApi.API.Controllers;
 
@@ -10,43 +12,76 @@ namespace ControlApi.API.Controllers;
 [Route("api/[controller]")]
 public sealed class PredictEndpoint : ControllerBase
 {
-    private readonly ControlApiDbContext _db;
-    private readonly IPredictionApiClient _python;
+    private readonly ControlApiDbContext   _db;
+    private readonly IPredictionApiClient  _python;
 
     public PredictEndpoint(ControlApiDbContext db, IPredictionApiClient python)
     {
-        _db = db;
+        _db     = db;
         _python = python;
     }
 
+    /// <summary>
+    /// GET /api/PredictEndpoint/calendar?date=YYYY-MM-DD
+    /// Returns a single "low|medium|high" for the requested day.
+    /// </summary>
     [HttpGet("calendar")]
-    public async Task<ActionResult<CalendarPredictionResponse>> GetCalendarPrediction(
+    public async Task<ActionResult<CalendarPredictionDto>> Calendar(
         [FromQuery] DateOnly date,
-        CancellationToken ct)
+        CancellationToken   ct)
     {
-        var detection = await _db.detections
-            .Where(d => d.timeStamp.Date == date.ToDateTime(TimeOnly.MinValue))
-            .OrderBy(d => d.timeStamp)
+        var start = date.ToDateTime(TimeOnly.MinValue);
+        var end   = start.AddDays(1);
+        
+        var existing = await _db.predictions
+            .Where(p => p.predictedFor >= start && p.predictedFor < end)
+            .AsNoTracking()
             .FirstOrDefaultAsync(ct);
 
-        if (detection is null)
-            return NotFound($"No Detection for {date:yyyy-MM-dd}");
-
-        var features = new CalendarFeaturesRequest
-        {
-            FeelsLikeTempCelsius = detection.feelsLikeTempC,
-            ActualTempCelsius = detection.actualTempC,
-            WindForceBft = detection.windForceBft,
-            DayOfWeek = ((int)date.DayOfWeek + 6) % 7,
-            Month = date.Month
-        };
+        if (existing is not null)
+            return Ok(new CalendarPredictionDto { date = date, result = existing.confidence });
         
-        var pyResponse = await _python.PredictCalendarAsync(features, ct);
+        var rows = await _db.detections
+            .Where(d => d.timeStamp >= start && d.timeStamp < end &&
+                        d.feelsLikeTempC != null &&
+                        d.actualTempC    != null &&
+                        d.windForceBft   != null)
+            .OrderBy(d => d.timeStamp)
+            .ToListAsync(ct);
+
+        if (!rows.Any())
+            return NotFound($"No detections for {date:yyyy-MM-dd}");
+        
+        var features = rows.Select(d => new CalendarFeaturesRequest
+        {
+            Timestamp            = DateOnly.FromDateTime(d.timeStamp),
+            FeelsLikeTempCelsius = d.feelsLikeTempC!.Value,
+            ActualTempCelsius    = d.actualTempC!.Value,
+            WindForceBft         = d.windForceBft!.Value,
+            DayOfWeek            = ((int)d.timeStamp.DayOfWeek + 6) % 7,
+            Month                = d.timeStamp.Month
+        }).ToList();
+        
+        var batch = await _python.PredictCalendarBatchAsync(features, ct);
+        
+        var winner = batch.Prediction
+            .GroupBy(x => x)
+            .OrderByDescending(g => g.Count())
+            .First().Key;
+        
+        _db.predictions.Add(new Prediction
+        {
+            detectionId  = rows.First().detectionId,
+            predictedFor = start,
+            modelVersion = "calendar-v1",
+            confidence   = winner
+        });
+        await _db.SaveChangesAsync(ct);
 
         return Ok(new CalendarPredictionDto
         {
-            date = date,
-            prediction = pyResponse.Prediction,
+            date  = date,
+            result = winner
         });
     }
 }

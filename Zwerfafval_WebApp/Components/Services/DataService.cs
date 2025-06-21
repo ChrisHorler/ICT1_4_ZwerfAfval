@@ -1,19 +1,34 @@
 ﻿public class DateService
 {
-    public event Action? OnDateChanged;
+    private DateTime _analyticsDate = DateTime.Today;
+    private DateTime _overviewDate = DateTime.Today;
 
-    private DateTime _selectedDate = DateTime.Today;
-
-    public DateTime SelectedDate
+    public DateTime AnalyticsDate
     {
-        get => _selectedDate;
+        get => _analyticsDate;
         set
         {
-            if (_selectedDate != value)
+            if (_analyticsDate != value)
             {
-                _selectedDate = value;
-                OnDateChanged?.Invoke();
+                _analyticsDate = value;
+                OnAnalyticsDateChanged?.Invoke();
             }
         }
     }
+
+    public DateTime OverviewDate
+    {
+        get => _overviewDate;
+        set
+        {
+            if (_overviewDate != value)
+            {
+                _overviewDate = value;
+                OnOverviewDateChanged?.Invoke();
+            }
+        }
+    }
+
+    public event Action? OnAnalyticsDateChanged;
+    public event Action? OnOverviewDateChanged;
 }

@@ -1,0 +1,148 @@
+@page "/analytics"
+@using BlazorBootstrap.Components
+@using Frontend_Dashboard.Components
+@using Frontend_Dashboard.Components.Models
+@using BlazorBootstrap
+@using System.Collections.Generic
+@using Frontend_Dashboard.Components.Services
+@using System.Linq
+@rendermode InteractiveServer
+@inject IAnalyticsDataService AnalyticsDataService
+@inject DateService dateService
+
+<PageTitle>Analytics</PageTitle>
+
+<h1>Analytics</h1>
+
+<div class="analytics-container">
+    <div class="analytics-layout">
+        <BarChart @ref="barChart" Width="800" Class="mb-4 barChart"></BarChart>
+        <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadDataIntoChart">Load data</Button>
+
+        <Graph Data="graphData" />
+    </div>
+</div>
+
+
+@code {
+    private BarChart barChart = default!;
+    private BarChartOptions barChartOptions = default!;
+    private ChartData chartData = default!;
+    private List<DetectionData> graphData = new();
+
+    private readonly string[] defaultColors = new[]
+    {
+        "rgba(255, 99, 132, 0.5)",
+        "rgba(54, 162, 235, 0.5)",
+        "rgba(255, 206, 86, 0.5)",
+        "rgba(75, 192, 192, 0.5)",
+        "rgba(153, 102, 255, 0.5)",
+        "rgba(255, 159, 64, 0.5)"
+    };
+
+    protected override void OnInitialized()
+    {
+        chartData = new ChartData { Labels = new List<string>(), Datasets = new List<IChartDataset>() };
+        barChartOptions = new BarChartOptions
+            {
+                Responsive = true,
+                Interaction = new Interaction { Mode = InteractionMode.Index }
+            };
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await barChart.InitializeAsync(chartData, barChartOptions);
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async Task LoadDataIntoChart()
+    {
+        // TODO:
+        
+        List<BarChartDto> data = await AnalyticsDataService.GetBarChartDataAsync();
+        data = data
+            .GroupBy(d => new { d.name, d.category })
+            .Select(g => new BarChartDto
+            {
+                name = g.Key.name,
+                category = g.Key.category,
+                TrashTypeCounts = g
+                    // flatten all dictionaries in the group
+                    .SelectMany(d => d.TrashTypeCounts)
+                    // group by trash‑type key and sum their values
+                    .GroupBy(kvp => kvp.Key)
+                    .ToDictionary(
+                        grp => grp.Key,
+                        grp => grp.Sum(kvp => kvp.Value)
+                    )
+            })
+            .ToList();
+        
+        var top5 = data
+            .Select(dto => new 
+            {
+                Item  = dto,
+                Total = dto.TrashTypeCounts?.Values.Sum() ?? 0
+            })
+            .OrderByDescending(x => x.Total)
+            .Take(5)
+            .Select(x => x.Item)
+            .ToList();
+
+        foreach (var item in top5)
+        {
+            Console.WriteLine($"name: {item.name}, category: {item.category}, TrashTypeCounts: {item.TrashTypeCounts}");
+        }
+        var labels = data
+            .Select(dto => new
+            {
+                Name = $"{dto.category} {dto.name}",
+                TotalCount = dto.TrashTypeCounts.Values.Sum()
+            })
+            .OrderByDescending(x => x.TotalCount)
+            .ThenBy(x => x.Name)
+            .Take(5)
+            .Select(x => x.Name)
+            .ToList();
+        
+        var types = top5
+            .SelectMany(dto => dto.TrashTypeCounts.Keys)
+            .Distinct()
+            .ToList();
+
+        var datasets = types.Select((type, index) => new BarChartDataset
+        {
+            Label = type,
+            Data = top5.Select(item => 
+                item.TrashTypeCounts != null && item.TrashTypeCounts.TryGetValue(type, out var count)
+                    ? (double?)count
+                    : 0
+            ).ToList(),
+            BackgroundColor = new List<string> { defaultColors[index % defaultColors.Length] },
+            BorderColor = new List<string> { "#333" },
+            BorderWidth = new List<double> { 1 }
+        }).Cast<IChartDataset>().ToList();
+
+        // Set chart data
+        chartData = new ChartData
+        {
+            Labels = labels,
+            Datasets = datasets
+        };
+
+        // graphData = data;
+
+        // Optional debug logs
+        Console.WriteLine($"Data count: {data.Count}");
+        Console.WriteLine($"Top 5 Locations: {string.Join(", ", labels)}");
+        Console.WriteLine($"Trash Types: {string.Join(", ", types)}");
+
+        // Update the chart
+        await barChart.UpdateAsync(chartData, barChartOptions);
+        
+    }
+}

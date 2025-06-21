@@ -1,0 +1,16 @@
+﻿@inherits LayoutComponentBase
+<PageTitle>Frontend_Dashboard</PageTitle>
+
+<!-- top navigation bar -->
+<NavMenu />
+
+<!-- main page content -->
+<main class="container mt-4">
+    @Body
+</main>
+
+<!-- Chart.js (required by the chart components) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+<!-- Blazor Bootstrap’s JS interop code -->
+<script src="_content/Blazor.Bootstrap/blazor.bootstrap.js"></script>

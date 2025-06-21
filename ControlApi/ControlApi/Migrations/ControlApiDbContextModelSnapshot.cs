@@ -129,8 +129,9 @@ namespace ControlApi.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("predictionId"));
 
-                    b.Property<float>("confidence")
-                        .HasColumnType("float");
+                    b.Property<string>("confidence")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("detectionId")
                         .HasColumnType("int");
@@ -138,9 +139,6 @@ namespace ControlApi.Migrations
                     b.Property<string>("modelVersion")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<float>("predictedFillLevel")
-                        .HasColumnType("float");
 
                     b.Property<DateTime>("predictedFor")
                         .HasColumnType("datetime(6)");

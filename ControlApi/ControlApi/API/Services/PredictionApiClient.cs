@@ -5,23 +5,21 @@ namespace ControlApi.API.Services;
 
 public interface IPredictionApiClient
 {
-    Task<CalendarPredictionResponse> PredictCalendarAsync(
-        CalendarFeaturesRequest features,
-        CancellationToken        ct = default);
+    Task<CalendarPredictionBatchResponse> PredictCalendarBatchAsync(
+        List<CalendarFeaturesRequest> features,
+        CancellationToken ct = default);
 }
 
 public sealed class PredictionApiClient : IPredictionApiClient
 {
     private readonly HttpClient _http;
-
     public PredictionApiClient(HttpClient http) => _http = http;
 
-    public async Task<CalendarPredictionResponse> PredictCalendarAsync(
-        CalendarFeaturesRequest features,
-        CancellationToken       ct = default)
+    public async Task<CalendarPredictionBatchResponse> PredictCalendarBatchAsync(
+        List<CalendarFeaturesRequest> features, CancellationToken ct = default)
     {
-        using var response = await _http.PostAsJsonAsync("/predict/calendar", features, ct);
-        response.EnsureSuccessStatusCode();
-        return (await response.Content.ReadFromJsonAsync<CalendarPredictionResponse>(cancellationToken: ct))!;
+        var rsp = await _http.PostAsJsonAsync("/predict/calendar/batch", features, ct);
+        rsp.EnsureSuccessStatusCode();
+        return (await rsp.Content.ReadFromJsonAsync<CalendarPredictionBatchResponse>(cancellationToken: ct))!;
     }
 }

@@ -1,0 +1,26 @@
+<!-- ThemeToggle.razor -->
+@using Frontend_Dashboard.Components.Services
+@inject ThemeService Theme
+
+<button class="theme-toggle" @onclick="OnToggle">
+    @if (isDark) { <span>&#9728;</span> }  @* sun *@
+    else         { <span>&#9789;</span> }  @* moon *@
+</button>
+
+@code {
+    private bool isDark;
+
+    protected override async Task OnAfterRenderAsync(bool first)
+    {
+        if (first)
+        {
+            isDark = await Theme.IsDarkAsync();
+            StateHasChanged();          // now we can paint the right icon
+        }
+    }
+
+    private async Task OnToggle()
+    {
+        isDark = await Theme.ToggleAsync();
+    }
+}

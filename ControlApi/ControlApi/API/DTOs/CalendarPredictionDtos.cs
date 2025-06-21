@@ -2,31 +2,35 @@ using System.Text.Json.Serialization;
 
 namespace ControlApi.API.DTOs;
 
-public sealed class CalendarFeaturesRequest{
+public sealed class CalendarFeaturesRequest
+{
+    [JsonPropertyName("timestamp")]
+    public DateOnly Timestamp { get; set; }  
+    
     [JsonPropertyName("feels_like_temp_celsius")]
-    public float? FeelsLikeTempCelsius { get; set; }
-    
+    public float FeelsLikeTempCelsius { get; set; }
+
     [JsonPropertyName("actual_temp_celsius")]
-    public float? ActualTempCelsius { get; set; }
-    
+    public float ActualTempCelsius { get; set; }
+
     [JsonPropertyName("wind_force_bft")]
-    public float? WindForceBft { get; set; }
-    
+    public float WindForceBft { get; set; }
+
     [JsonPropertyName("day_of_week")]
     public int DayOfWeek { get; set; }
-    
+
     [JsonPropertyName("month")]
     public int Month { get; set; }
 }
 
-public sealed class CalendarPredictionResponse
+public sealed class CalendarPredictionBatchResponse
 {
-    [JsonPropertyName("prediction")]
-    public string Prediction { get; set; }
+    [JsonPropertyName("predictions")]
+    public List<string> Prediction { get; set; } = new();
 }
 
 public sealed class CalendarPredictionDto
 {
-    public DateOnly date {get; set;}
-    public string prediction { get; set; } = null!;
+    public DateOnly date  { get; set; }
+    public string   result { get; set; } = null!;       
 }

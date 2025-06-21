@@ -1,3 +1,5 @@
+using System.Data;
+using System.Net.Http.Headers;
 using System.Text;
 using ControlApi.API.DTOs;
 using ControlApi.API.Services;
@@ -16,7 +18,11 @@ public class SensoringConnector
     private readonly ILogger<SensoringConnector> _logger;
     private readonly IJwtService _jwt;
     private readonly string _apiUrl;
+    private readonly string _testingApiUrl;
+    private readonly string _sensoringApiUrl;
     private readonly IServiceScopeFactory _scopeFactory;
+    private readonly bool _isTest;
+    private readonly string _apiToken;
     
     const int DETECTION_RADIUS = 50;
 
@@ -30,16 +36,38 @@ public class SensoringConnector
         _scopeFactory = scopeFactory;
         _httpClientFactory = httpClientFactory;
         _logger = logger;
-        _apiUrl = config["SENSORING_API"]
-                  ?? Environment.GetEnvironmentVariable("SENSORING_API")
-                  ?? throw new InvalidOperationException("SENSORING_API not found");
+        _isTest = config.GetValue<bool>("Testing");
+        _testingApiUrl = config["TESTING_SENSORING_API"] 
+                         ?? Environment.GetEnvironmentVariable("TESTING_SENSORING_API") 
+                         ?? throw new InvalidOperationException("TESTING_SENSORING_API not found");
+        _sensoringApiUrl = config["SENSORING_API"] 
+                           ?? Environment.GetEnvironmentVariable("SENSORING_API") 
+                           ?? throw new InvalidOperationException("SENSORING_API not found");
+        if (_isTest)
+        {
+            _apiUrl = _testingApiUrl;
+            _apiToken = "NONE";
+        } else
+        {
+            _apiUrl = _sensoringApiUrl;
+            _apiToken = config["SENSORING_API_AUTH"] 
+                        ?? Environment.GetEnvironmentVariable("SENSORING_API_AUTH") 
+                        ?? throw new InvalidOperationException("SENSORING_API_AUTH not found");
+        }
 
     }
 
     public async Task PullAsync(CancellationToken cancellationToken)
     {
+        await this.PullAsync(cancellationToken, new PullAsyncRequestDto(false, DateTime.Now, false));
+    }
+    
+    public async Task PullAsync(CancellationToken cancellationToken, PullAsyncRequestDto overrideSettings)
+    {
         // We need to load all this inside the scope otherwise we cant use the dbcontext
         // and no we can't use dependency injection for the dbcontext, because we are running this from a BackgroundService.
+        DateTime start = DateTime.Now;
+        DateTime current = DateTime.Now;
         using (var scope = _scopeFactory.CreateScope())
         {
             // load the dbcontext from the scope
@@ -54,66 +82,141 @@ public class SensoringConnector
             var latestItem = dbContext.detections
                 .OrderByDescending(e => e.timeStamp)
                 .FirstOrDefault();
-            if (latestItem == null)
+            if (latestItem == null || (overrideSettings.overrideLogic && overrideSettings.rePullOldItems))
             {
                 latestItem = new Detection();
                 latestItem.timeStamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            } else if (overrideSettings.overrideLogic)
+            {
+                latestItem = new Detection();
+                latestItem.timeStamp = overrideSettings.dateOverride;
             }
 
             this._logger.LogInformation("Updating our Trash Collection with the Sensoring API.\nLastUpdate: {item}",
                 latestItem.timeStamp);
             var client = _httpClientFactory.CreateClient();
-
-            // THIS IS THE QUERY TO THE API URL.
-            // ONCE WE CHANGE THE API FROM MY PRIVATE API TO THE ACTUAL SENSORING ONE, WE'LL HAVE TO CHANGE A BIT OF CODE BELOW.
-            // luckily most is handled in 2 classes, `SensoringApiDtos.cs` + `SensoringConvertor.cs`
-            var response = await client.GetAsync(this._apiUrl, cancellationToken);
-            if (response.IsSuccessStatusCode)
+            
+            this._logger.LogInformation($"API URL USED: {this._apiUrl}\nSENSORING API URL: {this._sensoringApiUrl}\nTESTMODE API URL: {this._testingApiUrl}\n==========================================");
+            
+            HttpResponseMessage response;
+            List<TempDetection> trashDetections;
+            if (this._isTest)
             {
-                string data = await response.Content.ReadAsStringAsync(cancellationToken);
-                try
+                this._logger.LogInformation($"Running as a test, this._isTest = {this._isTest}");
+                response = await client.GetAsync(this._apiUrl, cancellationToken);
+                if (response.IsSuccessStatusCode)
                 {
-                    // this should still work when the api changes if I were to change the Dtos correctly.
-                    ApiResponse parsedResponse = JsonConvert.DeserializeObject<ApiResponse>(data); 
-                    
-                    _logger.LogInformation("Received data from external API: {parsedResponse}", data);
-                    List<TempDetection> trashDetections = SensoringConvertor.ConvertFullModel(parsedResponse);
-                    List<Detection> trashDets = new List<Detection>();
-                    _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
-                    foreach (var trashDetection in trashDetections)
-                    {
-                        if (await dbContext.detections.AnyAsync(d => 
-                                d.timeStamp.Date <= latestItem.timeStamp))
-                        {
-                            continue;
-                        }
-                        var responseObj = await this.QueryNearbyElementsAsync(trashDetection.latitude, trashDetection.longitude, DETECTION_RADIUS, dbContext);
-                        _logger.LogInformation("Response: {responseObj}", responseObj);
-                        Detection det = trashDetection.ConvertToDetection();
-                        foreach (var poiObj in responseObj)
-                        {
-                            det.detectionPOIs.Add(new DetectionPOI()
-                            {
-                                POIID = poiObj.POIID,
-                                detectionRadiusM = DETECTION_RADIUS,
-                                timeStamp = det.timeStamp
-                            });
-                        }
-                        trashDets.Add(det);
-                    }
-                    dbContext.detections.AddRange(trashDets);
-                    dbContext.SaveChanges();
+                    TestModeSenseringDataGrabber grabber = new TestModeSenseringDataGrabber();
+                    trashDetections = await grabber.HandleAndConvert(response, cancellationToken, this._logger);
                 }
-                catch (JsonException exception)
+                else
                 {
-                    _logger.LogError("Received data from external API, it is NOT Deserializable: {Data}", data);
+                    _logger.LogWarning("Failed to fetch data from external API. Status code: {StatusCode}",
+                        response.StatusCode);
+                    trashDetections = new List<TempDetection>();
                 }
             }
             else
             {
-                _logger.LogWarning("Failed to fetch data from external API. Status code: {StatusCode}",
-                    response.StatusCode);
+                this._logger.LogInformation($"Gathering JWT from $\"{this._apiUrl}Jwt?key=....");
+                HttpResponseMessage jwtResponse = await client.GetAsync($"{this._apiUrl}Jwt?key={this._apiToken}", cancellationToken);
+                if (!jwtResponse.IsSuccessStatusCode)
+                {
+                    _logger.LogError("Failed to fetch JWT from external API. Status code: {StatusCode}",
+                        jwtResponse.StatusCode);
+                    throw new DataException($"Failed to fetch JWT from external API. Status code: {jwtResponse.StatusCode}");
+                }
+                string jwtData = await jwtResponse.Content.ReadAsStringAsync(cancellationToken);
+                string date1 = latestItem.timeStamp.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
+                DateTime nextYear = DateTime.UtcNow.AddYears(1);
+                string date2 = nextYear.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtData);
+                response = await client.GetAsync($"{this._apiUrl}Trash?dateLeft={date1}&dateRight={date2}", cancellationToken);
+                if (response.IsSuccessStatusCode)
+                {
+                    ActualSenseringDataGrabber grabber = new ActualSenseringDataGrabber();
+                    trashDetections = await grabber.HandleAndConvert(response, cancellationToken, this._logger);
+                }
+                else
+                {
+                    _logger.LogWarning("Failed to fetch data from external API. Status code: {StatusCode}",
+                        response.StatusCode);
+                    trashDetections = new List<TempDetection>();
+                }
             }
+            List<Detection> trashDets = new List<Detection>();
+            _logger.LogInformation("Parsed data to correct format: {trashDetections}", trashDetections);
+            int expectedPulls = trashDetections.Count;
+            int currentPull = 0;
+            foreach (var trashDetection in trashDetections)
+            {
+                currentPull++;
+                current = DateTime.Now;    
+                TimeSpan elapsed = current - start; 
+                TimeSpan avgPerItem;
+                if (currentPull > 1)
+                {
+                    avgPerItem = TimeSpan.FromTicks(elapsed.Ticks / (currentPull - 1));
+                }
+                else
+                {
+                    avgPerItem = TimeSpan.Zero;
+                }
+                TimeSpan estimatedTotal, estimatedRemaining;
+                if (avgPerItem > TimeSpan.Zero)
+                {
+                    estimatedTotal   = TimeSpan.FromTicks(avgPerItem.Ticks * expectedPulls);
+                    estimatedRemaining = estimatedTotal - elapsed;
+                }
+                else
+                {
+                    estimatedTotal   = TimeSpan.Zero;
+                    estimatedRemaining = TimeSpan.Zero;
+                }
+                _logger.LogInformation($"[{currentPull} / {expectedPulls}] Pulling POI data.\n" + 
+                                       $"Time spent: {elapsed:hh\\:mm\\:ss}\n" +
+                                       $"Avg per item: {avgPerItem:hh\\:mm\\:ss}\n" + 
+                                       $"Estimated total time: {estimatedTotal:hh\\:mm\\:ss}\n" + 
+                                       $"Estimated remaining: {estimatedRemaining:hh\\:mm\\:ss}\n==========================================");
+                if (trashDetection.timeStamp <= latestItem.timeStamp)
+                {
+                    continue;
+                }
+
+                List<POI> responseObj;
+                if (trashDetection.latitude != null && trashDetection.longitude != null)
+                {
+                    double lat = trashDetection.latitude.Value;
+                    double lon = trashDetection.longitude.Value;
+    
+                    responseObj = await this.QueryNearbyElementsAsync(lat, lon, DETECTION_RADIUS, dbContext);
+                    _logger.LogInformation("Response: {responseObj}", responseObj);
+                }
+                else
+                {
+                    responseObj = new List<POI>();
+                }
+                Detection det = trashDetection.ConvertToDetection();
+                foreach (var poiObj in responseObj)
+                {
+                    det.detectionPOIs.Add(new DetectionPOI()
+                    {
+                        POIID = poiObj.POIID,
+                        detectionRadiusM = DETECTION_RADIUS,
+                        timeStamp = det.timeStamp
+                    });
+                }
+                trashDets.Add(det);
+                if (trashDets.Count >= 25)
+                {
+                    dbContext.detections.AddRange(trashDets);
+                    dbContext.SaveChanges();
+                    trashDets = new List<Detection>();
+                }
+            }
+            dbContext.detections.AddRange(trashDets);
+            dbContext.SaveChanges();
+            
         }
     }
     
@@ -138,8 +241,12 @@ public class SensoringConnector
     /// </summary>
     private async Task<List<POI>> QueryNearbyElementsAsync(double lat, double lon, int radius, ControlApiDbContext db)
     {
-        // following here is the massive ass query that our api requires.
-        string overpassQuery = $@"
+        try
+        {
+
+
+            // following here is the massive ass query that our api requires.
+            string overpassQuery = $@"
 [out:json][timeout:25];
 (
   node[amenity=restaurant](around:{radius},{lon},{lat});
@@ -209,52 +316,59 @@ out center;
 ";
 
 
-        using (var client = new HttpClient())
-        {
-            _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
-            string url = "https://overpass-api.de/api/interpreter?data=" 
-                         + Uri.EscapeDataString(overpassQuery);
-            var response = await client.GetAsync(url);
-
-            response.EnsureSuccessStatusCode();
-
-            // Parse JSON
-            var json = await response.Content.ReadAsStringAsync();
-            var root = JObject.Parse(json);
-            var elements = (JArray)root["elements"];
-
-            // Convert to list of JObject for easier handling (this is like JSON equivalent in c#, but then with typing).
-            var list = new List<JObject>();
-            foreach (var el in elements)
-                list.Add((JObject)el);
-
-            var formattedList = new List<POI>();
-            foreach (var poi in list)
+            using (var client = new HttpClient())
             {
-                var tags = poi["tags"] as JObject;
+                // _logger.LogInformation("Prompt: {overpassQuery}", overpassQuery);
+                string url = "https://overpass-api.de/api/interpreter?data="
+                             + Uri.EscapeDataString(overpassQuery);
+                var response = await client.GetAsync(url);
 
-                string category = tags?["highway"]?.ToString()
-                                  ?? tags?["amenity"]?.ToString()
-                                  ?? tags?["shop"]?.ToString()
-                                  ?? "";
+                response.EnsureSuccessStatusCode();
 
-                var poiObj = await GetOrCreatePoiAsync(db, new POI
+                // Parse JSON
+                var json = await response.Content.ReadAsStringAsync();
+                var root = JObject.Parse(json);
+                var elements = (JArray)root["elements"];
+
+                // Convert to list of JObject for easier handling (this is like JSON equivalent in c#, but then with typing).
+                var list = new List<JObject>();
+                foreach (var el in elements)
+                    list.Add((JObject)el);
+
+                var formattedList = new List<POI>();
+                foreach (var poi in list)
                 {
-                    POIID = 0,
-                    category = category,
-                    osmId = poi["id"]?.Value<long>() ?? 0,
-                    name = tags?["name"]
-                        ?.ToString(),
-                    latitude = poi["lat"]?.Value<double>() ?? 0.0,
-                    longitude = poi["lon"]?.Value<double>() ?? 0.0,
-                    source = "overpass",
-                    retrievedAt = DateTime.Now,
-                    detectionPOIs = new List<DetectionPOI>(),
-                });
-                formattedList.Add(poiObj);
-            }
+                    var tags = poi["tags"] as JObject;
 
-            return formattedList;
+                    string category = tags?["highway"]?.ToString()
+                                      ?? tags?["amenity"]?.ToString()
+                                      ?? tags?["shop"]?.ToString()
+                                      ?? "";
+
+                    var poiObj = await GetOrCreatePoiAsync(db, new POI
+                    {
+                        POIID = 0,
+                        category = category,
+                        osmId = poi["id"]?.Value<long>() ?? 0,
+                        name = tags?["name"]
+                            ?.ToString(),
+                        latitude = poi["lat"]?.Value<double>() ?? 0.0,
+                        longitude = poi["lon"]?.Value<double>() ?? 0.0,
+                        source = "overpass",
+                        retrievedAt = DateTime.Now,
+                        detectionPOIs = new List<DetectionPOI>(),
+                    });
+                    formattedList.Add(poiObj);
+                }
+
+                return formattedList;
+
+            }
+        }
+        catch (Exception e)
+        {
+            _logger.LogCritical($"POI api created a crash: {e}");
+            return new List<POI>();
         }
     }
 }
