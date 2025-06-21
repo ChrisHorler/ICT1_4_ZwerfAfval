@@ -16,7 +16,7 @@
     <ul>
         @foreach (var item in Data)
         {
-            <li>@item.Type - @item.Confidence</li>
+            <li>@item.category</li>
         }
     </ul>
 }
@@ -28,24 +28,59 @@ else
 
 @code {
     [Parameter]
-    public List<DetectionData> Data { get; set; } = new();
+    public List<LineGraphDto> Data { get; set; } = new();
 
     private LineChart lineChart = default!;
     private LineChartOptions lineChartOptions = default!;
     private ChartData chartData = default!;
 
+    private readonly string[] defaultColors = new[]
+       {
+        "rgba(255, 99, 132, 0.5)",
+        "rgba(54, 162, 235, 0.5)",
+        "rgba(255, 206, 86, 0.5)",
+        "rgba(75, 192, 192, 0.5)",
+        "rgba(153, 102, 255, 0.5)",
+        "rgba(255, 159, 64, 0.5)"
+    };
+
     protected override void OnInitialized()
     {
         if (Data != null && Data.Any())
         {
-            var grouped = Data
-                .GroupBy(d => d.Type)
-                .Select(g => new
-                {
-                    Type = g.Key,
-                    Count = g.Count()
-                })
+            // Get trash types
+            var types = Data
+                .SelectMany(d => d.TrashTypeCounts.Keys)
+                .Distinct()
                 .ToList();
+
+            // Group by timestamp 
+            var groupedByTime = Data
+                .GroupBy(d => d.TimeStamp)
+                .OrderBy(g => g.Key)
+                .ToList();
+
+            // Use timestamps as X-axis names
+            var labels = groupedByTime
+                .Select(g => g.Key.ToString("yyyy-MM-dd HH:mm"))
+                .ToList();
+
+            // Build datasets per trash type
+            var datasets = types.Select((type, index) => new LineChartDataset
+                {
+                    Label = type,
+                    Data = groupedByTime.Select(g =>
+                        g.SelectMany(d => d.TrashTypeCounts)
+                         .Where(kvp => kvp.Key == type)
+                         .Sum(kvp => kvp.Value)
+                    ).Cast<double?>().ToList(),
+
+                    BackgroundColor = defaultColors[index % defaultColors.Length],
+                    BorderColor = "#333",
+                    BorderWidth = 2,
+                    PointRadius = Enumerable.Repeat(4.0, labels.Count).ToList(),
+                    PointHoverRadius = Enumerable.Repeat(6.0, labels.Count).ToList()
+                }).Cast<IChartDataset>().ToList();
 
             chartData = new ChartData
                 {
