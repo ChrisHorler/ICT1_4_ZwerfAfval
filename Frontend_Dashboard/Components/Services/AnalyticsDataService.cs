@@ -37,18 +37,18 @@ namespace Frontend_Dashboard.Components.Services
             }
         }
 
-        public async Task<List<DetectionData>> GetLineGraphDataAsync()
+        public async Task<List<LineGraphDto>> GetLineGraphDataAsync()
         {
             try
             {
                 // Pas de API-endpoint aan als nodig
-                var response = await _httpClient.GetFromJsonAsync<List<DetectionData>>($"{this._apiUrl}api/Detections/linegraph?date=2025-06-20");
-                return response ?? new List<DetectionData>();
+                var response = await _httpClient.GetFromJsonAsync<List<LineGraphDto>>($"{this._apiUrl}api/Detections/linegraph?date=2025-06-20");
+                return response ?? new List<LineGraphDto>();
             }
             catch (Exception)
             {
-                this._logger.LogError("[AnalyticsDataService] Error while fetching line graph data");
-                return new List<DetectionData>();
+                this._logger.LogError("[LineGraphDataService] Error while fetching line graph data");
+                return new List<LineGraphDto>();
             }
         }
     }
