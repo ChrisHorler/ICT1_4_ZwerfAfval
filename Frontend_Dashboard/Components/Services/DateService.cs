@@ -11,10 +11,10 @@ public sealed class DateService : INotifyPropertyChanged
         get => _selectedDate;
         set
         {
-            if (_selectedDate != value)
+            if (value != _selectedDate)
             {
                 _selectedDate = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedDate)));
+                PropertyChanged?.Invoke(this, new(nameof(SelectedDate)));
             }
         }
     }

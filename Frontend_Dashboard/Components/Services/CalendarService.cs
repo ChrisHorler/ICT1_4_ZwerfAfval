@@ -78,6 +78,7 @@ public class CalendarService
         await Task.CompletedTask;
     }
 
+    // Debug for checking Calendar Caching
     public void ClearCache()
     {
         if (_cache is MemoryCache mem)
