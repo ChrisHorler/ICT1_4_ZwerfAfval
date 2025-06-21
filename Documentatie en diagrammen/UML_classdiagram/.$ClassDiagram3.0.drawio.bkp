@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
   <diagram name="Page-1" id="39hm194q-l13xccRxlsW">
-    <mxGraphModel dx="6471" dy="3254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="6209" dy="3095" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -780,9 +780,8 @@
             <Array as="points">
               <mxPoint x="-1740" y="-510" />
               <mxPoint x="-1499" y="-510" />
-              <mxPoint x="-1499" y="-680" />
-              <mxPoint x="-1180" y="-680" />
-              <mxPoint x="-1180" y="-790" />
+              <mxPoint x="-1499" y="-670" />
+              <mxPoint x="-1100" y="-670" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -836,18 +835,26 @@
             <mxPoint x="-1510" y="-850" as="targetPoint" />
             <mxPoint x="-1590" y="-630" as="sourcePoint" />
             <Array as="points">
-              <mxPoint x="-1550" y="-510" />
-              <mxPoint x="-1550" y="-710" />
-              <mxPoint x="-1280" y="-710" />
-              <mxPoint x="-1280" y="-880" />
+              <mxPoint x="-1500" y="-510" />
+              <mxPoint x="-1500" y="-670" />
+              <mxPoint x="-1280" y="-670" />
+              <mxPoint x="-1280" y="-930" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="iwyEC6983UlKEHwNcQ2G-73" value="&lt;b&gt;ActualSenseringDataGrabber&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#990000;" parent="1" vertex="1">
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeWidth=2;endArrow=block;endFill=0;endSize=22;" edge="1" parent="1" source="iwyEC6983UlKEHwNcQ2G-73" target="UlhQks0yLPX1q9XYhBIK-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1160" y="-870" />
+              <mxPoint x="-1160" y="-870" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iwyEC6983UlKEHwNcQ2G-73" value="&lt;b&gt;ActualSenseringDataGrabber&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
           <mxGeometry x="-1240" y="-820" width="260" height="60" as="geometry" />
         </mxCell>
         <mxCell id="iwyEC6983UlKEHwNcQ2G-74" value="&lt;span&gt;SensoringConvertor&lt;/span&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#990000;" parent="1" vertex="1">
-          <mxGeometry x="-1100" y="-920" width="260" height="60" as="geometry" />
+          <mxGeometry x="-1100" y="-960" width="260" height="60" as="geometry" />
         </mxCell>
         <mxCell id="yWFbXETGNYuAG4VHQHp2-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;strokeWidth=2;targetPerimeterSpacing=-1;endSize=22;dashed=1;" edge="1" parent="1" source="7S8ZCQFVZ5OZvFziOqp5-1" target="yWFbXETGNYuAG4VHQHp2-22">
           <mxGeometry relative="1" as="geometry">
@@ -1018,12 +1025,12 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-4" value="&lt;div style=&quot;text-align: left;&quot;&gt;TestModeApiTrashItem&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-940" y="-1170" width="260" height="60" as="geometry">
+          <mxGeometry x="-980" y="-1349" width="260" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-5" value="&lt;div style=&quot;text-align: left;&quot;&gt;TestModeApiResponse&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-940" y="-1290" width="260" height="60" as="geometry">
+          <mxGeometry x="-980" y="-1469" width="260" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -1033,16 +1040,27 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-7" value="&lt;div style=&quot;text-align: left;&quot;&gt;ApiTrashItem&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-900" y="-1050" width="260" height="60" as="geometry">
+          <mxGeometry x="-940" y="-1229" width="260" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="UlhQks0yLPX1q9XYhBIK-8" value="&lt;span style=&quot;font-weight: 700;&quot;&gt;&amp;lt;&amp;lt;interface&lt;/span&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;div&gt;&lt;b&gt;ISensoringDataGrabber&lt;/b&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-1220" y="-1050" width="260" height="60" as="geometry">
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-8" value="&lt;span style=&quot;font-weight: 700;&quot;&gt;&amp;lt;&amp;lt;interface&lt;/span&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;div&gt;&lt;b&gt;ISensoringDataGrabber&lt;/b&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-1280" y="-1120" width="530" height="60" as="geometry">
             <mxRectangle x="-1400" y="-1040" width="180" height="40" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="UlhQks0yLPX1q9XYhBIK-9" value="&lt;b&gt;TestModeSenseringDataGrabber&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#990000;" parent="1" vertex="1">
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-37" value="+HandleAndConvert(HttpResponseMessage,&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;CancellationToken, ILogger&amp;lt;SensoringConnector&amp;gt;)&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="UlhQks0yLPX1q9XYhBIK-8">
+          <mxGeometry y="30" width="530" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=0;dashed=1;endSize=22;" edge="1" parent="1" source="UlhQks0yLPX1q9XYhBIK-9" target="UlhQks0yLPX1q9XYhBIK-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-760" y="-1000" />
+              <mxPoint x="-920" y="-1000" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-9" value="&lt;b&gt;TestModeSenseringDataGrabber&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
           <mxGeometry x="-900" y="-820" width="260" height="60" as="geometry" />
         </mxCell>
         <mxCell id="yWFbXETGNYuAG4VHQHp2-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;strokeWidth=2;endSize=22;dashed=1;" edge="1" parent="1" source="UlhQks0yLPX1q9XYhBIK-11" target="UlhQks0yLPX1q9XYhBIK-12">
@@ -1129,6 +1147,17 @@
         </mxCell>
         <mxCell id="yWFbXETGNYuAG4VHQHp2-22" value="ControllerBase" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;fillColor=#f5f5f5;gradientColor=#b3b3b3;strokeColor=#666666;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="-3100" y="-1169" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=diamondThin;endFill=1;endSize=22;fillColor=#0050ef;strokeColor=#001DBC;" edge="1" parent="1" source="iwyEC6983UlKEHwNcQ2G-44" target="UlhQks0yLPX1q9XYhBIK-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-1170" y="-750" as="targetPoint" />
+            <mxPoint x="-1730" y="-550" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="-1500" y="-510" />
+              <mxPoint x="-1500" y="-670" />
+              <mxPoint x="-760" y="-670" />
+            </Array>
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>

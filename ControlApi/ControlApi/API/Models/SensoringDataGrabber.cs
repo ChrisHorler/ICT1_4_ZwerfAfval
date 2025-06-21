@@ -6,7 +6,7 @@ namespace ControlApi.SensoringConnection.Models;
 
 public interface ISensoringDataGrabber
 {
-    Task<List<TempDetection>> HandleAndConvert(HttpResponseMessage response, CancellationToken cancellationToken, ILogger<SensoringConnector> _logger);
+    public Task<List<TempDetection>> HandleAndConvert(HttpResponseMessage response, CancellationToken cancellationToken, ILogger<SensoringConnector> _logger);
 }
 
 public class TestModeSenseringDataGrabber : ISensoringDataGrabber {
