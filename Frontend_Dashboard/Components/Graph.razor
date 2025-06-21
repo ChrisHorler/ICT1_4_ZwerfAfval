@@ -43,6 +43,10 @@ else
     {
         if (Data != null && Data.Any())
         {
+            foreach (var item in Data)
+            {
+                Console.WriteLine($"name: {item.name}, category: {item.category}, timestamp: {item.TimeStamp}");
+            }
             // Get trash types
             var types = Data
                 .Where(d => d.TrashTypeCounts != null)
