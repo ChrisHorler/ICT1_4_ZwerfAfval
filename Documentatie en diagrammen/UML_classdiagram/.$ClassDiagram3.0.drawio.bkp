@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
   <diagram name="Page-1" id="39hm194q-l13xccRxlsW">
-    <mxGraphModel dx="6649" dy="3362" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="7352" dy="3788" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -975,26 +975,55 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-6" value="&lt;div style=&quot;text-align: left;&quot;&gt;TestModeApiResponseData&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-2120" y="-1000" width="260" height="60" as="geometry">
+          <mxGeometry x="-1840" y="-1340" width="260" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-7" value="&lt;div style=&quot;text-align: left;&quot;&gt;ApiTrashItem&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-2120" y="-880" width="260" height="60" as="geometry">
+          <mxGeometry x="-1080" y="-1040" width="260" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="UlhQks0yLPX1q9XYhBIK-8" value="&lt;span style=&quot;color: rgb(255, 255, 255); font-weight: 700;&quot;&gt;&amp;lt;&amp;lt;interface&lt;/span&gt;&lt;span style=&quot;color: rgb(255, 255, 255); font-weight: 700;&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;div&gt;&lt;b&gt;ISensoringDataGrabber&lt;/b&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#990000;" parent="1" vertex="1">
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-8" value="&lt;span style=&quot;font-weight: 700;&quot;&gt;&amp;lt;&amp;lt;interface&lt;/span&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;div&gt;&lt;b&gt;ISensoringDataGrabber&lt;/b&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
           <mxGeometry x="-1400" y="-1040" width="260" height="60" as="geometry" />
         </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-9" value="&lt;b&gt;TestModeSenseringDataGrabber&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#990000;" parent="1" vertex="1">
           <mxGeometry x="-1080" y="-810" width="260" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="UlhQks0yLPX1q9XYhBIK-11" value="&lt;b&gt;DailyBackgroundService&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#990000;" parent="1" vertex="1">
-          <mxGeometry x="-2120" y="-1110" width="260" height="60" as="geometry" />
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;strokeWidth=2;endSize=22;dashed=1;" edge="1" parent="1" source="UlhQks0yLPX1q9XYhBIK-11" target="UlhQks0yLPX1q9XYhBIK-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1990" y="-910" />
+              <mxPoint x="-1990" y="-910" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-11" value="&lt;b&gt;DailyBackgroundService&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-2120" y="-1160" width="300" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-16" value="-_httpClientFactory: IHttpClientFactory" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="UlhQks0yLPX1q9XYhBIK-11">
+          <mxGeometry y="30" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-17" value="-_logger: ILogger&amp;lt;DailyBackgroundService&amp;gt;" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="UlhQks0yLPX1q9XYhBIK-11">
+          <mxGeometry y="60" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-18" value="-_sensoringConnector: SensoringConnector" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="UlhQks0yLPX1q9XYhBIK-11">
+          <mxGeometry y="90" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-11" value="-_isTest: bool" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="UlhQks0yLPX1q9XYhBIK-11">
+          <mxGeometry y="120" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-12" value="-_failedResponse: bool" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="UlhQks0yLPX1q9XYhBIK-11">
+          <mxGeometry y="150" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-15" value="-_failedResponses: int" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="UlhQks0yLPX1q9XYhBIK-11">
+          <mxGeometry y="180" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-13" value="-RunBackgroundTaskAsync(CancellationToken): Task" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="UlhQks0yLPX1q9XYhBIK-11">
+          <mxGeometry y="210" width="300" height="30" as="geometry" />
         </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-12" value="BackgroundService" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;fillColor=#f5f5f5;gradientColor=#b3b3b3;strokeColor=#666666;fontColor=#000000;" parent="1" vertex="1">
-          <mxGeometry x="-1160" y="-680" width="260" height="60" as="geometry" />
+          <mxGeometry x="-2120" y="-840" width="260" height="60" as="geometry" />
         </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-15" value="&lt;div style=&quot;text-align: left;&quot;&gt;PredictConfig&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
           <mxGeometry x="-4120" y="-200" width="260" height="60" as="geometry">
