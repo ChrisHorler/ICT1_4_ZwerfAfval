@@ -20,6 +20,7 @@
         <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadDataIntoChart">Load data</Button>
 
         <Graph Data="graphData" />
+        <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadGraphData">Load graph</Button>
     </div>
 </div>
 
@@ -28,7 +29,7 @@
     private BarChart barChart = default!;
     private BarChartOptions barChartOptions = default!;
     private ChartData chartData = default!;
-    private List<DetectionData> graphData = new();
+    private List<LineGraphDto> graphData = new();
 
     private readonly string[] defaultColors = new[]
     {
@@ -144,5 +145,10 @@
         // Update the chart
         await barChart.UpdateAsync(chartData, barChartOptions);
         
+    }
+
+    private async Task LoadGraphData()
+    {
+        graphData = await AnalyticsDataService.GetLineGraphDataAsync();
     }
 }
