@@ -3,7 +3,7 @@
 git_stats.py
 
 Scan the current Git repo and output:
-  - commits.csv: one row per commit (with commit messages)
+  - commits.csv: one row per commit (with commit messages and branches)
   - author_summary.csv: aggregated stats per author
 Also prints top contributors.
 
@@ -44,6 +44,17 @@ def scan_repo(path='.'):
     for commit in repo.iter_commits('--all'):
         stats = commit.stats.total
         is_merge = len(commit.parents) > 1
+        # find branches containing this commit
+        try:
+            raw_branches = repo.git.branch('--all', '--contains', commit.hexsha).splitlines()
+            # clean branch names
+            branches = [b.strip().lstrip('* ').replace('remotes/', '') for b in raw_branches]
+        except Exception:
+            branches = []
+
+        # determine primary branch (first in sorted list)
+        primary_branch = sorted(branches)[0] if branches else None
+
         commits_data.append({
             'hexsha': commit.hexsha,
             'author_name': commit.author.name,
@@ -54,7 +65,8 @@ def scan_repo(path='.'):
             'insertions': stats['insertions'],
             'deletions': stats['deletions'],
             'total_changes': stats['insertions'] + stats['deletions'],
-            'is_merge': is_merge
+            'is_merge': is_merge,
+            'primary_branch': primary_branch
         })
 
     # Get current directory for output files
@@ -109,6 +121,6 @@ def scan_repo(path='.'):
 
 
 if __name__ == '__main__':
-    # Start from current directory
+    # Start from current directory or provided path
     repo_path = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
     scan_repo(repo_path)

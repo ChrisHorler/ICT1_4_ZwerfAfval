@@ -1,375 +1,577 @@
-hexsha,author_name,author_email,date,message,files_changed,insertions,deletions,total_changes,is_merge
-4b638de3ae2a201e246255b15bc2a1fc93787808,ChrisHorler,csh.sammt@gmail.com,2025-05-16T13:05:11+02:00,Initial commit,1,1,0,1,False
-0e8fc789c0ad05021d1c5495f2a4c8e3a4deeafc,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T12:17:41+02:00,template data,2,25,0,25,False
-455b509487e9bcea5dd8494d151090b6de6f6313,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T12:18:00+02:00,Merge branch 'feature/json_templating' into develop,2,25,0,25,True
-2f837d51a2a748908d2c26fc8bc8f73a72064f93,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T12:21:47+02:00,Add comment to clarify purpose of empty list in JSON template,1,1,1,2,False
-5d72621c38fb9b99601a6da468034e77c12b3391,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T12:22:01+02:00,Merge branch 'feature/json_templating' into develop,1,1,1,2,True
-4bd24e985bd22457250f3c16c82714c9e16ac9d7,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T12:50:57+02:00,Initialised ASP.net + Swagger,55,1221,0,1221,False
-c54a619364b7555ea424a2c7dc2e5a43490c0f9c,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T12:51:36+02:00,Merge branch 'feature/control_api_init' into develop,55,1221,0,1221,True
-b4ebc2739275620ad91b1cdd6f2664f8c9db2db9,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T13:42:02+02:00,Redo,56,94,1221,1315,False
-a398ffa336ada5482a1e9fae5064c74daac0bf95,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T13:45:13+02:00,Initialisation 2.0,6,130,0,130,False
-b8344b9f11671d130d6f5011af66045716ba09b8,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T13:47:15+02:00,"Revert ""Initialisation 2.0""  This reverts commit a398ffa336ada5482a1e9fae5064c74daac0bf95.",6,0,130,130,False
-b83f1ee8fa80472f92e393daf65c3cc6f004afa1,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T13:49:29+02:00,Initialisation 3.0,7,137,0,137,False
-89e74f8e852962ae626c36434a553254955a0238,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T13:49:53+02:00,Merge branch 'feature/control_api_init' into develop,53,118,1108,1226,True
-608a7bf5114babe4862d08c459a77f83343c044f,JurPurr,j.kempf@student.avans.nl,2025-05-28T10:51:52+02:00,Blazor initialization,30,1732,0,1732,False
-2fb7eb0572ba9eb811d6cfeea41e53da074ccd62,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-05-28T10:53:14+02:00,Merge pull request #1 from ChrisHorler/develop  Develop,53,118,1108,1226,True
-12f824700a6e9a4e2dfcd8c448f2dacd9d4470f6,JurPurr,j.kempf@student.avans.nl,2025-05-28T10:54:52+02:00,Merge branch 'feature/blazor_project_initiation' into develop,83,1850,1108,2958,True
-b96af8244d1007b14c41c21cbfe141ca837ca826,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-05-28T12:56:33+02:00,class diagram uncomplete,1,88,0,88,False
-8e66d66834a10aed19c2318445f07ef7d8079a44,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-05-28T14:22:01+02:00,class diagram,1,68,11,79,False
-fe2d5361e78d1c36dca25544c94c055779181897,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-05-28T14:34:07+02:00,Merge branch 'feature/class_diagram' into develop,1,145,0,145,True
-f5d035f93d99fd8dc132a1aeb80f9cee6b25039a,ChrisHorler,csh.sammt@gmail.com,2025-05-28T16:26:40+02:00,Created Entities  Created Entities for EF as Noted in ERD,8,96,0,96,False
-02a52a28e01be9d55ef52b6328e7267755d142d5,ChrisHorler,csh.sammt@gmail.com,2025-05-28T16:56:14+02:00,Created Configuration Files for EF,9,133,5,138,False
-4f081d03ea797048da48b8f7496a27c0bdea0cd9,ChrisHorler,csh.sammt@gmail.com,2025-05-28T17:08:05+02:00,Created ControlAPI DbContext  - Still requires registration in Program.cs,1,20,0,20,False
-77add09fbb49e4fd3e22cecca4b1cbc9faaf1b66,ChrisHorler,csh.sammt@gmail.com,2025-05-28T17:45:26+02:00,Updated Program.cs with Builder Service,2,16,2,18,False
-bd26b2b01e742ac9f5085ad505ca30bca9922407,Christian Scott Horler,82846283+ChrisHorler@users.noreply.github.com,2025-05-28T17:56:15+02:00,Merge pull request #2 from ChrisHorler/feature/foundation-EntityFramework  Feature/foundation entity framework -> Develop,17,260,2,262,True
-423ce58e5e55e42462606138b2db41d2b37bdc64,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-05-28T21:09:43+02:00,.vs folder,1,1,1,2,False
-49bfca51f033799546f2660266a067902d86ad60,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-05-28T21:11:43+02:00,Merge pull request #3 from ChrisHorler/gitignore  .vs folder,1,1,1,2,True
-5fa0965e8ed258fe099ab0249f5440b608875ccc,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-05-28T21:14:45+02:00,remove presonal files,9,0,1078,1078,False
-aa9cf4bd4a299662acbc03d1dd2a8dc517508369,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-05-28T21:15:13+02:00,Merge pull request #4 from ChrisHorler/gitignore  remove presonal files,9,0,1078,1078,True
-19c5f1c59e2689f43ba7bd8fbfbb9f0fc5456ce4,JurPurr,j.kempf@student.avans.nl,2025-05-29T10:32:34+02:00,"Changed the pages to the corresponding wireframe, providing a first draft of the layout.",8,31,84,115,False
-02d8d80038aa9cd7ae8eb172e20d23d2a23bd97d,ChrisHorler,csh.sammt@gmail.com,2025-05-29T14:12:18+02:00,Refactored EF Foundation  Moved EF to .data directory to keep things more organized,31,239,238,477,False
-0d65dec7138d22ec42da783cad676df93de92f24,ChrisHorler,csh.sammt@gmail.com,2025-05-29T14:15:21+02:00,File and Package Setup,2,13,0,13,False
-bffd031d4057902d20f11b63b83d5b6131520d44,ChrisHorler,csh.sammt@gmail.com,2025-05-29T14:17:51+02:00,Refactor Folder Structure for API setup,3,3,7,10,False
-69591e4df5c30fd990e0d024b744d19b2e9f2400,ChrisHorler,csh.sammt@gmail.com,2025-05-29T14:52:45+02:00,Created Authentication Pipeline,36,383,248,631,False
-221a51a4cbdce7d920e39541ca292fc1e3063a9d,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T12:00:27+02:00,Merge pull request #5 from ChrisHorler/feature/authentication_endpoint  Feature/authentication endpoint -> Develop,35,386,242,628,True
-94038288bfe0e8bf08c3b5b528614ec2f92928de,ChrisHorler,csh.sammt@gmail.com,2025-05-30T15:03:29+02:00,Added Dockerfile and Stack.yml,3,39,1,40,False
-391562a9d834122628d8d47c3250d582102806dc,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:03:40+02:00,Merge branch 'feature/publishing_api' into develop,3,39,1,40,True
-39c97823eb9e2a2b9f4e6c503b135a613adb8b0f,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:04:19+02:00,Merge branch 'release/initial_api_publish' into main,52,1496,0,1496,True
-0496bc0431862d87d1185a39dda879118e52b40c,ChrisHorler,csh.sammt@gmail.com,2025-05-30T15:09:41+02:00,Updated stack.yml with proper network name,1,1,1,2,False
-da6474332abd802995b25ae3e7d0fc74716eee6b,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:10:12+02:00,Merge branch 'release/updated-api-stack' into main,1,1,1,2,True
-643ba92e94d5e727946cc72ee981ba14157957bd,ChrisHorler,csh.sammt@gmail.com,2025-05-30T15:13:18+02:00,updated network name under api service,1,1,1,2,False
-f1b0236f1545981833eac3576bd44a0718a61b9b,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:13:49+02:00,Merge branch 'release/reupdate-network-name' into main,1,1,1,2,True
-9aad2dba99ede8ead05802b2cb07810bde6462be,ChrisHorler,csh.sammt@gmail.com,2025-05-30T15:23:40+02:00,Updated ConnectionString in Program.cs,1,1,1,2,False
-72424f5944a9f2969ed64c201cbd446991502237,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:24:26+02:00,Merge branch 'release/updated-connection-string' into main,1,1,1,2,True
-8b5b7d1ab9756bee4a77d89edee6a76c5d10771c,ChrisHorler,csh.sammt@gmail.com,2025-05-30T15:29:11+02:00,Fixed Controller Mapping in Program.cs,1,1,4,5,False
-c610a7f4696ff6bbdb878d0f8971ca92df5fd3a8,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:29:36+02:00,Merge branch 'release/program.cs-controllers-mapped' into main,1,1,4,5,True
-71ed0f7cb582dc2f02dbe6438f1b10752597b4c4,JurPurr,j.kempf@student.avans.nl,2025-05-30T15:37:24+02:00,Calendar  Added the calendar.,4,107,3,110,False
-5b0156828e528e96b1c27438a3ffacff795cbbb6,ChrisHorler,csh.sammt@gmail.com,2025-05-30T15:57:50+02:00,Setup Github Actions Workflow,1,17,0,17,False
-9d567927ed0685176d54e3fa8d414ea59fc2b927,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:58:19+02:00,Merge branch 'release/base-setup-github-workflow' into main,1,17,0,17,True
-48d4db894ec5b7de8afdf605eb17ea474bad255f,ChrisHorler,csh.sammt@gmail.com,2025-05-30T16:01:16+02:00,updated webhook method to POST from GET,1,1,1,2,False
-5514c04f56db5e78a547fac81677373e666b39b0,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T16:01:41+02:00,Merge branch 'release/updated-webhook-method' into main,1,1,1,2,True
-ff55c4fe0bdd3b9c515a5270c4e83e6a45c03df1,ChrisHorler,csh.sammt@gmail.com,2025-05-30T16:08:22+02:00,Changed Program.cs to test Redeployment,1,1,1,2,False
-46a18098c4387ea50dd055f66f66f67e4659fb53,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T16:09:19+02:00,Merge branch 'develop',1,1,1,2,True
-1ad6c4443d577bb0f72883a1d1fa5db0cc1ece9c,JurPurr,j.kempf@student.avans.nl,2025-06-01T21:04:54+02:00,Added LeafletForBlazor  Added the package so I can start using it for the heatmap.,4,9,6,15,False
-4b29eeece2c46e587d7d767c0455d2d73ceb1d2a,JurPurr,j.kempf@student.avans.nl,2025-06-01T21:14:54+02:00,"Calendar English  The calendar was in Dutch before. Now it is in English, including the days of the week. They start with Monday and end with Sunday in stead of Sunday till Saterday.",1,4,4,8,False
-97f145e72095a91a820b96e3701e130edf2cf6c1,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-02T11:13:46+02:00,Merge pull request #6 from ChrisHorler/develop  Develop,33,463,1086,1549,True
-b1a33446e4dc03c1206a5871bd56bf74216e256b,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-06-02T12:03:35+02:00,Allow User secrets User secrets are usable for CONN_STRING and JWT_KEY,2,22,3,25,False
-0a687496bba2e76814b76b6020d77d7fa5ff3ac1,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-02T12:19:23+02:00,Merge pull request #7 from ChrisHorler/feature/api_user_secrets  Feature/api user secrets,2,22,3,25,True
-b3b875fbd30832b22640c596414a974ea19999ba,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-02T12:20:52+02:00,Merge pull request #8 from ChrisHorler/develop  Develop,2,22,3,25,True
-e3248d3bc528f8a7a5d1f892dc10ca4029476891,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-06-02T17:47:27+02:00,class diagram created all the classes and interfaces,2,692,0,692,False
-c08edb0806c5100c947f837d69fa0f3ff057ac0d,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-06-02T17:55:07+02:00,added User secret to JwtService,1,2,1,3,False
-5eafe416a59fcf92429d9aefb3f1a9e2adc80650,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-06-02T18:23:27+02:00,Added missing classes,2,281,53,334,False
-26955f591f3cde8ff1ad287e95725b36d1585418,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-02T18:23:53+02:00,Merge pull request #9 from ChrisHorler/feature/api_user_secrets  added User secret to JwtService,1,2,1,3,True
-9f72a1a136f1e1ce6d0de1240e00f1a0ca34277b,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-02T18:24:41+02:00,Merge pull request #10 from ChrisHorler/develop  Develop,1,2,1,3,True
-12a9840420db83e5a42d64efee58869b928cf387,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T13:32:50+02:00,Progress  drawing UML arrows in the class diagram,2,366,174,540,False
-0e92485d83003ca4bbadf259f332b60631446bd1,ChrisHorler,csh.sammt@gmail.com,2025-06-03T15:00:00+02:00,Updated workflow files for CI/CD deployment,3,59,21,80,False
-dc270f03e88c61c796b0c47caf94c215ab39f3c8,JurPurr,j.kempf@student.avans.nl,2025-06-03T15:01:49+02:00,Fixed .css  Finally the css shows up again.,4,18,3,21,False
-a11f5c373344b94a74b891e0d144edcb77920d5d,Christian Scott Horler,csh.sammt@gmail.com,2025-06-03T15:17:15+02:00,Merge branch 'develop',6,83,25,108,True
-2698c60027e744f5a14de0249fdfbccbbab02ebd,ChrisHorler,csh.sammt@gmail.com,2025-06-03T15:20:14+02:00,updated user ghcr,1,1,1,2,False
-edf57a70fca631b64f7b0da4d8f299c67474c2fc,ChrisHorler,csh.sammt@gmail.com,2025-06-03T15:23:50+02:00,updated repo naming,1,5,1,6,False
-e4f95fe17502a061c3651197615a6bafe891d369,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T15:30:22+02:00,progress,2,184,44,228,False
-9ec1ba635ee283fda372472442f41191a3971369,ChrisHorler,csh.sammt@gmail.com,2025-06-03T15:36:57+02:00,Fixed TLS-BLOCK,1,3,2,5,False
-2f24eab30ec79ec11faa52db03b195fd5e184f1d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T15:58:10+02:00,"class diagram 80%  add all chris's work to the class diagram, todo: add new classes",2,202,32,234,False
-b59682e4abb78b542604d05d2819b966420f8538,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T16:12:28+02:00,Finished all there is currently,3,105,261,366,False
-8420e070302c0952a544dd4f969a3c83c7744c5c,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-03T16:15:44+02:00,Merge pull request #11 from ChrisHorler/develop  Develop,33,521,1086,1607,True
-3dbc89e18d5549f4f6aea2aabb129fbd7834780c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T16:38:39+02:00,legenda,3,386,110,496,False
-669e4fe32368e56824b3edb35b1b72fe3a061b0d,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-03T16:39:22+02:00,Merge pull request #12 from ChrisHorler/develop  Updated workflow files for CI/CD deployment,3,59,21,80,True
-0b64f2df0639da3d2f4af166384887353f2e9782,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-03T16:40:20+02:00,Merge pull request #13 from ChrisHorler/feature/class_diagram  Feature/class diagram,3,1542,0,1542,True
-7b014fc28b98d83a7d32d249806e2bc3b41199b8,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-03T16:42:59+02:00,Merge pull request #14 from ChrisHorler/develop  Develop,3,1542,0,1542,True
-d7a27d712799508326befabbb81bad3ac1d30439,ChrisHorler,csh.sammt@gmail.com,2025-06-03T17:15:00+02:00,Updated CI/CD Pipeline  Updated pipeline to be more in line with Portainer API,1,37,18,55,False
-27e548e5866e7d32a58c316a7711563f82c0e375,ChrisHorler,csh.sammt@gmail.com,2025-06-03T17:21:44+02:00,Debugging Stack Deployment,1,7,2,9,False
-32e9dbd6d51aeed6c8f78f88ce685ce6f83341c7,ChrisHorler,csh.sammt@gmail.com,2025-06-03T17:27:54+02:00,Updated Deployment Code with Update and Create Check,1,36,24,60,False
-61508c5c65b54b72c4937d6153632103c802415d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T17:39:18+02:00,user secrets setup in markdown,1,17,0,17,False
-e00e7f6d691df4f160cfc874ebd791f5dd93e95f,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T17:39:30+02:00,template for api connector,2,27,1,28,False
-fdc15a6dfdaeee71152a45f361c8bbf100bdd3dd,JurPurr,j.kempf@student.avans.nl,2025-06-04T11:36:51+02:00,Analytics lay-out  Analytics razor files added.,8,40,4,44,False
-119b0b6b53c05b58519d11f5fafdd2c408ce84cb,JurPurr,j.kempf@student.avans.nl,2025-06-04T11:45:21+02:00,Added Mudblazor  To program.cs,3,3,0,3,False
-22a2de91882a9d41d6bc26235b8ab85433903ec7,whoskhoi,khoivaniersel@gmail.com,2025-06-04T11:57:37+02:00,Added Detectopm Data Model,2,18,0,18,False
-a406654aef9f30228262ef8a510221b621963813,whoskhoi,khoivaniersel@gmail.com,2025-06-04T12:03:38+02:00,Connected analytics page to components,2,37,2,39,False
-09dcc98b53978c5b89331b301fe1237d7090bda8,JurPurr,j.kempf@student.avans.nl,2025-06-04T12:07:14+02:00,Fixing Analytics,1,2,2,4,False
-2e4ffde9ee89ae6131b73fe7d116d101f8e0940d,whoskhoi,khoivaniersel@gmail.com,2025-06-04T12:35:45+02:00,Called Bar Chart within Analytics,2,50,29,79,False
-aea90a182caddd74842b8efdd2948e2cd96d0c1e,JurPurr,j.kempf@student.avans.nl,2025-06-04T12:42:15+02:00,Graph Added  Added a Graph,1,10,2,12,False
-3927f9807e55099a931497d13ca48e54a5287517,whoskhoi,khoivaniersel@gmail.com,2025-06-04T12:42:49+02:00,Updated Bar chart code,1,10,26,36,False
-7ac7ea37c2aa28af63c4b2ce82a53966ecd4563e,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-04T13:11:27+02:00,Added logging and http client,2,20,3,23,False
-4bfb9e7e2620854b0bd34a20142025c6fbe5dd1d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-04T16:34:32+02:00,Rename,3,45,42,87,False
-5df288d932291907226f771bedd8eabf6c73684c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-04T16:52:50+02:00,Making our first api call,4,55,7,62,False
-3c505bf21ae199a2cc5a229ac07a991ee2ebb27f,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-04T16:57:39+02:00,updated to sensoring api standards,1,14,8,22,False
-47e1f127791169d9b61f5f1e7d7bb130d095984b,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-04T16:58:09+02:00,Merge branch 'feature/update_templates' into develop,1,14,8,22,True
-49cc5df0155f20544ae6300fc642adaf14c9e688,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-04T16:59:31+02:00,Merge pull request #15 from ChrisHorler/develop  Develop,1,14,8,22,True
-74e746b19d488ac7650235c2817e23c8938c0eb1,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-04T17:22:54+02:00,Add Newtonsoft.Json,1,1,4,5,False
-62ec954219f6cad227a848a8a44f95bce912aae0,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-04T17:30:50+02:00,Deserializion of Mock Data,2,34,2,36,False
-21d126e23018285228115b8178630f2d5491aa81,ChrisHorler,csh.sammt@gmail.com,2025-06-04T18:45:59+02:00,Change in Ci-CD File,1,32,47,79,False
-7bc678411d178c55401dbe172f4f31aedf008996,Christian Scott Horler,csh.sammt@gmail.com,2025-06-04T18:51:21+02:00,Merge branch 'main' into develop,1,48,22,70,True
-91e7bbf49ea7bec231e4766d8fffc2691a078d54,Angel Zeng,angelzeng08@hotmail.com,2025-06-04T19:07:54+02:00,Initialization Trash Prediction API,13,13122,0,13122,False
-031af939987a2c41ebad85065b1cbb0a5f8a5be0,Angel,angelzeng08@hotmail.com,2025-06-04T19:08:57+02:00,Merge branch 'feature/trash_prediction_api' into develop,13,13122,0,13122,True
-8a90c722c3ee3d7187a2aa41e944cb2590ead13c,JurPurr,j.kempf@student.avans.nl,2025-06-04T19:44:39+02:00,Moved code  Code for the graph in Analytics is moved to it's own .razor file.,2,16,5,21,False
-31600c8f93a28c25ee09ea41c1bf8a5f472d10ee,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-04T20:15:42+02:00,Merge pull request #17 from ChrisHorler/develop  Develop,14,13170,22,13192,True
-17c51b6ddbb242003068a8a91feaaee611ed5814,JurPurr,j.kempf@student.avans.nl,2025-06-04T20:29:33+02:00,Added Mockdata  Added mockdata to the graph and made sure you could see the x-axis labels.,2,12,4,16,False
-659558daaa697bb94f493bce1ed0962fbe3b7395,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-05T17:55:13+02:00,init README.md,1,8,0,8,False
-c867dd9f9600d1dd8dc2bf3a2c0a0990eed41e95,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-05T17:56:16+02:00,Merge pull request #18 from ChrisHorler/develop  Develop,51,15370,1094,16464,True
-58c805890cbb7b2e2b0691abb37fa16cba62dcf3,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-05T18:00:54+02:00,update paths,1,7,2,9,False
-e9bf8b761c13a1e8cb9a003c91c1c669a3978f36,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-05T18:06:46+02:00,error,2,18,3,21,False
-feab69cf184589f805789e960e50c7854d564730,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-05T19:39:37+02:00,"same error, without crashing",3,22,9,31,False
-627118c5110eb58fa910c9df318014779e05cf8c,JurPurr,j.kempf@student.avans.nl,2025-06-05T21:56:33+02:00,Fixed Wastecalendar  Now it shows randomized values and the calendar gives an indication about the amount of trash.,1,34,1,35,False
-e6a077f9d75d1c085abd437100a7652f2f672985,ChrisHorler,csh.sammt@gmail.com,2025-06-06T12:04:23+02:00,Updated CI/CD .yaml,1,9,3,12,False
-2c1ffc042a7571b739fdf9a7fe72b2ab1f235e84,ChrisHorler,csh.sammt@gmail.com,2025-06-06T12:36:42+02:00,Context Factory for EF,1,20,0,20,False
-8015adce2392c97f791e94cc9deaf2b0d188974e,ChrisHorler,csh.sammt@gmail.com,2025-06-06T12:41:04+02:00,Setup base migrations for EF,7,852,22,874,False
-d1dc32794649973957fdc63736501f4190a824e9,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T12:41:56+02:00,"same error, different approach",1,15,13,28,False
-9000196bfe2df65014cbc8649c907eae1a435b67,ChrisHorler,csh.sammt@gmail.com,2025-06-06T12:43:30+02:00,Updated Program.cs for db Migrations,1,6,1,7,False
-7b1b406ebcf61119f9afb3ec6e643fe0b45929b6,Christian Scott Horler,csh.sammt@gmail.com,2025-06-06T12:44:24+02:00,Merge branch 'feature/DbContextFactory' into develop,7,858,3,861,True
-4c641dc522bbaeed7a1e69cc2dbb1474f8f7cbe6,Christian Scott Horler,csh.sammt@gmail.com,2025-06-06T12:45:42+02:00,Merge branch 'release/Migrations+CI/CD_Update' into main,7,858,3,861,True
-0249eb92817708554f33288de872711fdc1d0dae,ChrisHorler,csh.sammt@gmail.com,2025-06-06T13:03:58+02:00,Switching exposed port for API,1,1,1,2,False
-e676e2a2173ac8d602ac58e6295bff9022459680,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T13:35:03+02:00,HostedService + Scope Factory Combo,3,31,7,38,False
-a00458b9a17695f83ee56c5640f732bf4846cded,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T13:38:43+02:00,Merge branch 'feature/api_connection_backend' into develop,6,174,1,175,True
-15a9af5fab422329231d99eab981c5c545d7dbe3,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T13:38:49+02:00,Merge pull request #19 from ChrisHorler/develop  Develop,8,869,5,874,True
-286eee4dbe003c0236bfb2efb05304eb9788f289,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T13:47:18+02:00,remove uncompleted changes,1,3,3,6,False
-41b7f0fb9a512711fc24fe81bf13dfbfd01479f8,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T13:57:01+02:00,uncomment to fix it,1,5,5,10,False
-b0dfbd60359347734d03e8f5cc5d74bf5a347568,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T13:57:30+02:00,Merge pull request #20 from ChrisHorler/feature/error_fix1  Feature/error fix1,1,8,8,16,True
-4f1bd9b06166724af6ed4b4eddd2aed921613844,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T13:58:16+02:00,Merge pull request #21 from ChrisHorler/develop  Develop,1,8,8,16,True
-40aba3216ee77b393f6c1a3fc4070cdc581f3299,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T13:59:54+02:00,Merge branch 'feature/dbcontext_issue_aproach1' into feature/api_connection_backend,3,33,9,42,True
-5802c7c76920d4f076843cddbe800ed35e78c494,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T14:00:26+02:00,Merge pull request #22 from ChrisHorler/feature/api_connection_backend  Feature/api connection backend,8,870,6,876,True
-40b2fdd979a7752374393133c03e1ffd2a958a1e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T14:04:28+02:00,idea1?,1,1,9,10,False
-c2689834fe22f74d9e96b0f94e42dae77098dc1f,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T14:08:09+02:00,setback,3,7,31,38,False
-b3e64f3348e68bfbb65074520261fc7becbb7274,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T16:48:16+02:00,file locations,6,150,150,300,False
-1c835dd8f0f32394e58db54be388e04869ffb448,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T16:48:53+02:00,Merge pull request #23 from ChrisHorler/feature/dbcontext_issue_aproach2  file locations,6,150,150,300,True
-7ad9545010243555e8291517f3b2f8713a62ded3,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T16:55:25+02:00,seperate controller idea,3,33,1,34,False
-5450c294deca3364cb28fbff4c07bad34c39c6e6,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T17:07:29+02:00,templated solution,5,44,35,79,False
-6c3724bcb855bdddfb312e84736b7d2500fec06c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T17:25:49+02:00,removed package conflicts inside ControlApi.csproj,1,5,5,10,False
-5919ccfac9b15d97d88be17cfae896cd2d9436ee,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T17:44:35+02:00,colon,1,1,1,2,False
-febc2e073ca2a9e7b436acf6394c1b0e12695330,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T17:45:00+02:00,Merge pull request #24 from ChrisHorler/troubles  Troubles,2,6,6,12,True
-ad70c136d3d2ffc15f3b06d269fc82e46c8964ae,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T18:05:50+02:00,uncomment builder.Services.AddHttpClient();,1,1,1,2,False
-5a17486449f3bf69d30354fd92719ca74631da34,JurPurr,j.kempf@student.avans.nl,2025-06-08T12:22:45+02:00,Attempt to create a heatmap using Leaflet.Heat,10,526,12,538,False
-7c5b0c9145de7eb71f7e5e3ad3ced093156f2a4f,Christian Scott Horler,csh.sammt@gmail.com,2025-06-08T13:01:21+02:00,Merge branch 'develop',6,184,11,195,True
-df08c77f700d572b8a5b642509cff6f46bfd4ff0,ChrisHorler,csh.sammt@gmail.com,2025-06-08T13:09:45+02:00,updated database connection string  Updated connection string env variable setting for docker container,1,1,1,2,False
-d3ba9f5afa2450166fdfd1d85dc6a8104cd50e81,ChrisHorler,csh.sammt@gmail.com,2025-06-08T13:24:24+02:00,Setup unit testing  Created Unit Testing Structure,4,53,0,53,False
-63e2c1ab35c6ef41d775d0cb5b2d707d6a3d31c1,ChrisHorler,csh.sammt@gmail.com,2025-06-08T13:44:46+02:00,Setup Basic Authentication Tests,1,107,0,107,False
-c8fad5d08975372824c5e584c36fdcbb023ffd65,ChrisHorler,csh.sammt@gmail.com,2025-06-08T13:52:55+02:00,Created Unit Test Document  Created document to clarify what the unit tests are testing,1,33,0,33,False
-8bcc860fd0763670d2a841a6c83e4b066b342090,Christian Scott Horler,csh.sammt@gmail.com,2025-06-08T13:53:38+02:00,Merge branch 'feature/authentication_unit_tests' into develop,6,193,0,193,True
-182ea86347b8efd60a16f798e87cd0c8431292e1,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:03:48+02:00,Fixed Email And Password Requirements,1,9,1,10,False
-13c4d2936cf1551bfc3f2842fd81dd955eb2fce8,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:16:46+02:00,Added Unit Test and Updated Endpoint  - Added Unit test for Email validation - Updated Authentication Endpoints to check for modelstate,2,35,0,35,False
-8c87891d67b3df4362362f9eeb3538aed6b9c266,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:19:41+02:00,Updated Unit Test Documentation,1,10,1,11,False
-84101b9e5347dc40618b667e3805baf5abf4889a,Christian Scott Horler,csh.sammt@gmail.com,2025-06-08T14:19:48+02:00,Merge branch 'feature/fixed_email_auth' into develop,4,54,2,56,True
-097888fe962e64e916b223c22268f395c71a8c63,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:22:26+02:00,Updated CI/CD.yml  Added Unit Tests into CI/CD Pipeline,1,11,0,11,False
-0454d8fffce9322a10d0f6c4cc35437b8ebb7856,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:24:52+02:00,Updated Restore Path,1,1,1,2,False
-3b24319d7579b8557bc0e69f096e557ed3952537,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:27:46+02:00,Reupdated the Restore and Unit Testing Paths,1,2,2,4,False
-4cdf4f8c5ae2602ef2581808422b733c8629effb,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:38:20+02:00,Updated AuthDTO  - Updated Authentication DTO to handle Authentication rules - Updated Authentication Unit Tests to use Register and Login Class instead of Record,2,28,13,41,False
-b455b06b57c0894877eb45daab5d1f1ddc7d974a,Christian Scott Horler,csh.sammt@gmail.com,2025-06-08T14:38:28+02:00,Merge branch 'feature/rework_record_authentication' into develop,2,28,13,41,True
-6bcbcf77c3edb0559dca3d6038ca665fffaa232c,Christian Scott Horler,csh.sammt@gmail.com,2025-06-08T14:38:50+02:00,Merge branch 'release/authentication_unit_tests' into main,2,28,13,41,True
-548c106c695e4bc81ae020442d0841e19639bac3,JurPurr,j.kempf@student.avans.nl,2025-06-08T15:04:04+02:00,"Tried to fix the heatmap  Changed Overview.Razor and Mainlayout.razor, but it still doesn't work.",4,20,10,30,False
-9115fa97db4765bb78efd2cf2c8d7867126b3e75,JurPurr,j.kempf@student.avans.nl,2025-06-08T15:45:26+02:00,"Removed sidebar  Removed sidebar, changed the colour of the navbar and tried to implement a datepicker.",3,16,9,25,False
-97de68e5fa35d8bea448a6625b0d79aeaa967fd3,JurPurr,j.kempf@student.avans.nl,2025-06-08T17:11:25+02:00,Tried to use Mudblazor for Datepicker,1,6,4,10,False
-53843e31198a829af36119aa43ba87dff229c652,JurPurr,j.kempf@student.avans.nl,2025-06-08T17:37:43+02:00,Changed code for DatePicker,4,29,5,34,False
-21a8e42ad6364203439a963d6ee1f104b76f1246,Christian Scott Horler,csh.sammt@gmail.com,2025-06-08T21:19:02+02:00,Merge remote-tracking branch 'origin/blazor_project_css' into develop,25,892,93,985,True
-1155fc13118793125dbe3c9f230113507e14db8b,Angel Zeng,angelzeng08@hotmail.com,2025-06-08T21:40:37+02:00,Added FastAPI functions,6,162,23,185,False
-957a2d5ef565735e0d2712841c360a8d7083ec2f,whoskhoi,khoivaniersel@gmail.com,2025-06-08T21:52:50+02:00,starting barchart,3,51,58,109,False
-3d66f296ffa952969589a0763eb1a9ba25d96695,whoskhoi,khoivaniersel@gmail.com,2025-06-08T22:12:20+02:00,attempt at fixing barchart,4,8,38,46,False
-321a1e8499dc50629cc3c3bf1762fb2908218816,whoskhoi,khoivaniersel@gmail.com,2025-06-08T22:24:39+02:00,barchart complete with mockdata,2,38,18,56,False
-63ae4d8d1c5ca832a34e04b0fbb9aebb632479c3,JurPurr,j.kempf@student.avans.nl,2025-06-09T15:25:15+02:00,Tried Fixing the DatePicker,4,39,32,71,False
-e0ab13f763ab1a49774ddd5d9fc3af67c8631239,Angel Zeng,angelzeng08@hotmail.com,2025-06-10T15:16:45+02:00,Deleted comments,1,4,5,9,False
-d28291e1527553d3a87a5e4d4a3064bee4cd64ab,whoskhoi,khoivaniersel@gmail.com,2025-06-10T15:29:17+02:00,Created razor register file,1,6,0,6,False
-9172566dc890ebff2bf7ec6e70de447cb87d1a26,whoskhoi,khoivaniersel@gmail.com,2025-06-10T16:43:20+02:00,"Added login and register  Layout could be incorrect, has to be tested in the future. Currently have a model as placeholder, could be deleted in the future.",2,68,2,70,False
-a2b74d9e323f0e4ecf4eb55284d55ff23cbaef3e,Christian Scott Horler,csh.sammt@gmail.com,2025-06-10T17:04:38+02:00,Merge remote-tracking branch 'origin/blazor_project_css' into develop,4,39,32,71,True
-59e33ddf62fbc1ec3f019411fafd43907f075396,JurPurr,j.kempf@student.avans.nl,2025-06-10T20:13:10+02:00,Made a Datepicker,6,89,11,100,False
-62820c75128a342522365c0f92ceaa3df8f9a8e0,Angel Zeng,angelzeng08@hotmail.com,2025-06-11T09:14:20+02:00,temporary changes,2,4,1,5,False
-45c2cec395e705ce0a1c2072223ddb8ffeeb17a0,JurPurr,j.kempf@student.avans.nl,2025-06-11T12:06:13+02:00,Starting to remove MudBlazor,7,214,47,261,False
-e4ba50a903d2f497aed1b0907907c786d892c914,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-11T13:17:25+02:00,Start of C4 Component diagram,2,218,0,218,False
-b6d8c274cbc8ffa6eccb83ac2b50d0ca316092ae,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-11T13:50:24+02:00,created all components nu nog connecten,2,31,11,42,False
-b25613d489f925f69acff97353782d6d42b4da92,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-11T14:45:12+02:00,accurate design,2,60,152,212,False
-66798a74ae70afc1c25a028adf34a11f0d6ea907,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-11T15:12:54+02:00,final design (hopefully),2,240,16,256,False
-5a87975128fbcd4d0d9f60ffa98dedd6e6be66eb,JurPurr,j.kempf@student.avans.nl,2025-06-11T18:54:53+02:00,Removing Mudblazor and going to Bootstrap,9,259,192,451,False
-ca9f649f12ab6b9777b9c0200f8d9f544261e312,JurPurr,j.kempf@student.avans.nl,2025-06-11T20:39:00+02:00,Tried fixing the graphs,3,41,5,46,False
-d61b46976a53a96502aa775f163e9f33f5be3385,JurPurr,j.kempf@student.avans.nl,2025-06-12T11:48:19+02:00,Commentated,2,13,13,26,False
-3ad1a7e135497c4217f0eaa4d57c7ae41f9178f7,whoskhoi,khoivaniersel@gmail.com,2025-06-12T12:32:00+02:00,"Started bootstrap changes to barchart  Not fully showing up yet, will fix later",3,164,60,224,False
-83fe880b71b1eb843984f4122aee2bffad293eb9,JurPurr,j.kempf@student.avans.nl,2025-06-12T12:42:31+02:00,Legend for Wastecalendar,1,22,4,26,False
-35cc87bc7332d48a3687728860e5a5a5fd48a1d9,whoskhoi,khoivaniersel@gmail.com,2025-06-12T12:43:13+02:00,Added first heatmap components,1,17,0,17,False
-aa64e91b4880f68eba24660dd020e6f963f8c656,JurPurr,j.kempf@student.avans.nl,2025-06-12T14:31:57+02:00,Legend for Wastecalendar,1,22,4,26,False
-a7dc13e28b1fe2c9915a5ff3f033ef4214c53f98,JurPurr,j.kempf@student.avans.nl,2025-06-12T15:01:19+02:00,Fixed the charts!,2,96,48,144,False
-920284115ddcdd1f2d8c60e4dbef0d78c39345a1,JurPurr,j.kempf@student.avans.nl,2025-06-12T15:09:19+02:00,Added new category Trash.,1,11,3,14,False
-52dc7e0565825b64b84ebc32affdf204fb8e6ee3,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-12T15:38:00+02:00,Giving the DbContext to sensoringConnector,2,12,7,19,False
-6b762787447668463709b8ba5dc67160c3a72d0a,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-12T17:08:33+02:00,Sketch,1,12,2,14,False
-32605d4f0318c94ea5d237e6a47fd73a40771f63,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-12T17:40:34+02:00,start Formatting,6,82,64,146,False
-7e93df6a1654b7d1ff696f1c9bb419032b131563,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T10:09:57+02:00,Merge branch 'feature/C4_component_mainAPI' into develop,8,481,32,513,True
-a78c08e13eeee1500d6ac9e0bb8459ad2f82a671,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:11:00+02:00,Merge pull request #25 from ChrisHorler/develop  Develop,40,1609,107,1716,True
-68d1dcd2c04a346b22c4d73261d01b36909f9a46,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:43:51+02:00,Merge pull request #26 from ChrisHorler/develop  Develop,2,370,0,370,True
-a7e989d39fc72273c925eb66d354aff9c1c296e0,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:44:59+02:00,Merge pull request #27 from ChrisHorler/feature/blazor_heatmap  Feature/blazor heatmap,2,39,4,43,True
-a5f8129ac918771a1900d3dd6d5d7874b9efe66b,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:46:15+02:00,Merge pull request #28 from ChrisHorler/develop  Develop,4,406,1,407,True
-40fd7edeb226d167497847240b6d816ec7f3e0a6,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:46:39+02:00,Merge pull request #29 from ChrisHorler/feature/project_bootgraphs  Feature/project bootgraphs,13,629,121,750,True
-0c4a0f520621031c4f9cc1cfdb82110f9e65f059,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:47:42+02:00,Merge pull request #30 from ChrisHorler/develop  Develop,13,919,251,1170,True
-1674ba60272d21566061cffede27faed7fdb27e8,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:48:05+02:00,Merge pull request #31 from ChrisHorler/feature/blazor_project_datepicker  Merge pull request #30 from ChrisHorler/develop,0,0,0,0,True
-84ec7774a7c8d4fad51db757c4d9d96fa569a02d,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:49:25+02:00,Merge pull request #32 from ChrisHorler/develop  Develop,15,668,125,793,True
-3cdecf7eb7340dbd7641b20ec195c9203bf35225,JurPurr,j.kempf@student.avans.nl,2025-06-13T13:05:25+02:00,Fixed Datepicker,1,6,76,82,False
-c5b70d00bf0303496c34ddb5d2567d9059737b79,ChrisHorler,csh.sammt@gmail.com,2025-06-13T13:46:55+02:00,Updated EF to Remove TrashTypeID  Replaced TrashTypeID with just using TrashType String. Updated Database through EF,9,368,73,441,False
-97aa372b3ea8f1cd88e9a75e9b759d4a32f4ba62,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:00:45+02:00,Merge pull request #33 from ChrisHorler/feature/update_db  Updated EF to Remove TrashTypeID,9,368,73,441,True
-ac202fa7b32aa7c98bb237022dd1ba740b99c250,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:11:41+02:00,disable changes to prepare for merge conflict,16,669,126,795,True
-039130dfbd25f72d3a0f7e6ee376a3c14a187bf8,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:11:53+02:00,Merge remote-tracking branch 'origin/feature/api_connection_backend' into feature/api_connection_backend,0,0,0,0,True
-7843b905de7120d56f04c033986c88dadcc099b4,JurPurr,j.kempf@student.avans.nl,2025-06-13T14:16:48+02:00,Preperations for data from API,1,10,0,10,False
-4ca046bec55dc61ab7de74ad2e5022ba5d28c77c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:17:15+02:00,Solve merge conflict,9,187,155,342,True
-85a35d9ed12a33fb660fc584513411efdf3a0473,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:17:32+02:00,Merge pull request #35 from ChrisHorler/develop  Develop,9,374,80,454,True
-7ad582dd9f76b8d4c8efa99acb5a805c6448c481,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:19:29+02:00,readd line,1,1,0,1,False
-fc92267f83014b1593ad58fd74b56126a5ae3221,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:19:55+02:00,Merge pull request #36 from ChrisHorler/feature/fix_develop_merge_problem  readd line,1,1,0,1,True
-67647a00464dad0265d556d0a41f9aa23bd7930e,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:20:16+02:00,Merge pull request #37 from ChrisHorler/develop  Develop,1,1,0,1,True
-84eaec3b51a66a64d20eeedf794da9b4e0404d24,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:21:49+02:00,re-enable changes,1,1,1,2,False
-06b9fc5a05399afa619b1e4c6f95adc732d1c979,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:22:37+02:00,Merge pull request #38 from ChrisHorler/develop  Develop,59,3548,141,3689,True
-25a22e3614178976761c1654eee033b479db87b0,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:25:14+02:00,add link to backend setup md file,1,1,1,2,False
-f2909c64aa55056aabfec4cd23f7380a52d9e050,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:25:50+02:00,Merge pull request #39 from ChrisHorler/feature/global_readme  Feature/global readme,1,13,0,13,True
-5217374ee84bb5f978c0f00c92573c88c9f9ca81,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:26:15+02:00,Merge pull request #40 from ChrisHorler/develop  Develop,1,13,0,13,True
-04644531350d1d9dc4dfff71d29075de74f902bb,JurPurr,j.kempf@student.avans.nl,2025-06-13T14:38:10+02:00,Made a first draft for data from API,1,29,1,30,False
-c84f3f63fffd39b3981b32715ead157b31c768f6,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:42:30+02:00,tempdetection,1,8,2,10,False
-3d69d23aa8117c2a34742666c29b467d8cbb5605,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:43:06+02:00,global nullable detectionId,1,1,2,3,False
-f9daef754f173fd3a81ab09d491578181907f192,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:53:10+02:00,sketch,2,17,7,24,False
-890552f726d60d18752b76ec5e6daf723ab846c2,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T15:36:25+02:00,template,1,59,12,71,False
-43f4c740f2387acb87cd35ad46a0cfa61fd2c25e,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T16:20:56+02:00,Merge branch 'release/Update_Deployment' into main,49,2500,323,2823,True
-7f81c5ab6b5a7631b8a521e06fdb4ef36bc5d2d4,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T16:33:46+02:00,Merge branch 'feature/trash_prediction_api' into develop,6,161,23,184,True
-90df761140981c76fd48b19562443827adc01a95,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T16:49:45+02:00,add png version,1,0,0,0,False
-bfde2e801fbcea4687919bbe955abb221c6f3569,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T16:50:27+02:00,Merge pull request #41 from ChrisHorler/feature/c4/png  add png version,1,0,0,0,True
-b7c632a509f041ea71aaf5be97bc15bd1eb87317,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T16:51:09+02:00,Merge pull request #42 from ChrisHorler/develop  Develop,10,239,39,278,True
-5c9d1e8b8a41236414a9641ff6ecb4ab9e025e79,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:02:13+02:00,Created Python API Deployment Files,2,88,0,88,False
-8e5a74dbe884d48de2d18e7f5c6e7f74881a43a9,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:02:29+02:00,Merge branch 'feature/setup_python_deployment' into develop,2,88,0,88,True
-9b5695c57178c9c6ad28cc54fa2f6f445b55f061,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:03:18+02:00,Renamed backendAPI Deployment File,2,101,101,202,False
-3a6f247d8cba77092191d24ad2cda4071e378407,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:03:40+02:00,Merge branch 'release/Setup-Python-API-Deployment' into main,11,350,124,474,True
-8d9e7170643d8ea1b529eb815c190ab3d1878791,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:04:54+02:00,Fixed Misspelling in Deployment File,1,1,1,2,False
-8b611c094dd6163fbeb9d98dedb610cd3b0234a0,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:05:01+02:00,Merge branch 'feature/setup_python_deployment' into develop,1,1,1,2,True
-ec6b1e4af8ba56b2e77f725125ba09b7e4350320,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:05:35+02:00,Merge branch 'develop',1,1,1,2,True
-4e092bd616a55281395eeb518137ce54d8b08a35,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:19:53+02:00,Added Permissions to Python Deployment,1,4,0,4,False
-ccf89f764055397d94abec63eed396d3172245cb,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:20:03+02:00,Merge branch 'develop',1,4,0,4,True
-b5c4fa22579f5e6635c58b31e0b37bd506f00ae0,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:27:05+02:00,Updated Host Port of Python API to not be Occupied,1,2,2,4,False
-e1d5e2579fde8f1e2ec7f4268800614eb7628c05,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:27:12+02:00,Merge branch 'develop',1,2,2,4,True
-bda01f30373ae3a8e6689d9a1bcecad2db2c1ead,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:35:24+02:00,Added Hopefully Missing Package,1,2,1,3,False
-e660155ed73957bbad3f7808bff4e76a28b0d8c0,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:35:33+02:00,Merge branch 'develop',1,2,1,3,True
-a4b283a8150236cb70f1924d24a97587b1ec3a98,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:58:29+02:00,Setup nginx Config Files  Setup Config Files with Self Signed SSL Configuration,2,31,0,31,False
-eccf6031a5319c743639958bdf4e6e3baf0993e3,ChrisHorler,csh.sammt@gmail.com,2025-06-13T18:00:02+02:00,Created DockerFile for DashboardApp,1,13,0,13,False
-66d18ce358c90152af5ad883eb9c5f946e1e1246,ChrisHorler,csh.sammt@gmail.com,2025-06-13T18:11:22+02:00,Setup Dashboard Deploy.yml,1,99,0,99,False
-287d2f00e298c472e33c37b8c2df4261b321a317,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T18:11:27+02:00,Merge branch 'feature/hosting_dashboard' into develop,4,143,0,143,True
-be625636d75cd3f506333872911286ebfb7f2cfc,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T18:11:37+02:00,Merge branch 'develop',4,143,0,143,True
-1a9e0f0b67b679adc4093d231002fb0728803b9f,ChrisHorler,csh.sammt@gmail.com,2025-06-13T18:14:35+02:00,Updated Dockerfile  Updated DockerFile with correct pathing,1,2,2,4,False
-d15f70d01045228ec96aa2d339bf0fa88175d8d1,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T18:14:46+02:00,Merge branch 'develop',1,2,2,4,True
-63513b215b79d9b822270efa5c367d610a299c96,ChrisHorler,csh.sammt@gmail.com,2025-06-13T18:23:10+02:00,Updated NGINX config upload,1,31,8,39,False
-eb39e4cc21c313d9c73bce00725151bbd24f069d,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T18:23:20+02:00,Merge branch 'develop',1,31,8,39,True
-fccfba7903a2ea2768043b49621ba05fa0bf6003,ChrisHorler,csh.sammt@gmail.com,2025-06-13T18:45:28+02:00,Updated Deployment,1,32,32,64,False
-40b71cd1a9386b5ebdd42a443d313957be52c882,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T18:45:39+02:00,Merge branch 'develop',1,32,32,64,True
-2df85bb9238419542b7098c3589f3d9273448911,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T18:49:14+02:00,"the api works technically, but not practically",1,29,11,40,False
-fd93f12915b1123935d3cd0f571c59ff10df46a1,whoskhoi,khoivaniersel@gmail.com,2025-06-13T19:00:10+02:00,Added detection services and model,6,54,2,56,False
-69573b756118ca0911802a096b760ec9c321e906,ChrisHorler,csh.sammt@gmail.com,2025-06-13T19:03:37+02:00,Updated DockerFile  Added a damn trailing /,1,1,1,2,False
-adc92202692339fffb226a9021b7014469b4035f,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T19:03:48+02:00,Merge branch 'develop',1,1,1,2,True
-06240cacc66906077c89281269fbda28f29bef3d,whoskhoi,khoivaniersel@gmail.com,2025-06-13T19:05:30+02:00,Http client initialiseren,1,9,0,9,False
-49203e7e83a0a4a8de436b900155858c15905941,whoskhoi,khoivaniersel@gmail.com,2025-06-13T19:12:04+02:00,Fixed missing component error,2,5,1,6,False
-fac3d0a7a523ec142c7293875697e807c261ff15,ChrisHorler,csh.sammt@gmail.com,2025-06-13T19:13:45+02:00,Updated dashboard-deploy file  Dashboard-deploy file is now fully embeded in 1 YAML file,1,12,10,22,False
-2fa787f736718b2db2c79e258bd1de4a11e570d9,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T19:13:56+02:00,Merge branch 'develop',1,12,10,22,True
-ba9a1629de9b75031629a2b65c8a0d184b6fa3af,ChrisHorler,csh.sammt@gmail.com,2025-06-13T19:19:01+02:00,Destroys default.conf on Deploy  Removed the default.conf when deploying so it doesn't pick it for the webpage.,1,1,0,1,False
-9961d83697f8ff472350bdf169996e4cd24d2957,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T19:19:14+02:00,Merge branch 'develop',1,1,0,1,True
-59baab039bb899082ee24183b331bec678c1515a,whoskhoi,khoivaniersel@gmail.com,2025-06-13T19:22:13+02:00,Added comments for clarity,2,2,1,3,False
-c391360be35a87d163a7ac8800bff3f6be2d1326,ChrisHorler,csh.sammt@gmail.com,2025-06-13T19:34:21+02:00,Moved DockerFile for WebDashboard,2,19,13,32,False
-48d55cc85e38eb1ba0cf88aca4b9f0e7ac4532fe,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T19:34:30+02:00,Merge branch 'develop',2,19,13,32,True
-3afee6013b7b8699390b54513722d5f13ea7eb35,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T19:35:22+02:00,it now actually works,2,38,15,53,False
-f4eb96564eefabef5d6c83fdd9fcec80664066bb,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T19:36:16+02:00,Merge pull request #43 from ChrisHorler/develop  Develop,9,370,102,472,True
-5cab563de88dfccefab7e16ce1c9e3b0448ee9d1,ChrisHorler,csh.sammt@gmail.com,2025-06-13T19:37:36+02:00,Reupdated docker file location  And Paths,2,18,19,37,False
-b11f9678fd751c2e8a699a7e95e01c0cea2dc785,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T19:37:51+02:00,Merge branch 'develop',2,18,19,37,True
-a8e378b2b013f531319de0e8d7c4f43bbd8d1e43,whoskhoi,khoivaniersel@gmail.com,2025-06-13T19:38:35+02:00,Deleted old code and fixed https issue,2,7,218,225,False
-7addfda9b4fb10ad43793691c00b41be20b575d2,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:02:39+02:00,Fixed Deployment to work with Blazor Server  Switched Deployment Towards Blazor Server Instead of WASM,2,43,44,87,False
-bc831ce596999d704591f4b0e168b126018c12b9,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T20:02:48+02:00,Merge branch 'develop',2,43,44,87,True
-6db4d28e573b1d665b017d27cb7c792ee6001f6c,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:14:36+02:00,Updated Deployment Files,2,2,2,4,False
-cc59d2af294d2cba9a25128f28ee556eb6d3bc4e,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T20:14:46+02:00,Merge branch 'develop',2,2,2,4,True
-ec8a92681c74a30d2492411eaffafae2be9c99fe,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:18:23+02:00,Fixed the trailing issue in Deployment File,1,1,1,2,False
-99537ac7fb9dd88269d43890361caaa303bcc6b6,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T20:18:37+02:00,Merge branch 'develop',1,1,1,2,True
-6b52e2fd3254409ae817dac4e5354085fd7d954e,JurPurr,j.kempf@student.avans.nl,2025-06-13T20:26:00+02:00,Added Models and services for Wastecalendar endpoint,4,44,1,45,False
-9537d0664847db966b500f8a0dbca3025127102e,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:35:58+02:00,Updated Deployment File  Changed Deployment file to Avoid Deployment Cache and Actually use the Modified DockerFile instead of some old bitch,1,9,0,9,False
-8242469d8cd981e1e7053c5a9f3238bea8a3ad22,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T20:36:11+02:00,Merge branch 'develop',1,9,0,9,True
-26fbd643a1d0d388bbc1e339e12028c4a85bb2cf,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:44:47+02:00,Another Attempt to Get Deployment to Read the Correct File,2,18,18,36,False
-feeda001fb3e901c1ae5a0c9d7bda0aaae09ff9b,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:45:29+02:00,Deployment Changes to Get it to Read the Correct File V2,2,11,15,26,False
-1b107b5298788aac58b0c33fdf38c86e223e5c72,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T20:45:42+02:00,Merge branch 'develop',3,14,18,32,True
-97714dc94d2df260c08b24c42fcb88b8a3ddab34,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:46:28+02:00,Fixed Sanity Check,1,1,1,2,False
-36904719dbb4d39533f0222fe3cd25bbb674e50a,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T20:46:39+02:00,Merge branch 'develop',1,1,1,2,True
-d7e2d97243f9af670fbbc223354fa165991a4b24,ChrisHorler,csh.sammt@gmail.com,2025-06-13T21:02:00+02:00,Fixed BackendAPI Dockerfile  I am stupid,1,8,8,16,False
-c6788368d0aefd558ca179355a81507cc34d3b68,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T21:02:17+02:00,Merge branch 'develop',1,8,8,16,True
-e5627a997fdcc9f113d508ab56f409318fffff72,ChrisHorler,csh.sammt@gmail.com,2025-06-13T21:05:54+02:00,Cleanup After My Curfuffle,3,13,21,34,False
-474bebafa91773cd351b348f7b71ddc995f89acc,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T21:06:04+02:00,Merge branch 'develop',3,13,21,34,True
-9d854d8813ba58da43aa84d961c8afbc86a0fd1d,JurPurr,j.kempf@student.avans.nl,2025-06-14T13:05:44+02:00,Corrected code,2,1,2,3,False
-2cb605c7d968e302fa6a8f8f551acedff3680ead,Angel Zeng,angelzeng08@hotmail.com,2025-06-14T14:51:16+02:00,Added heatmap functions,4,60,1867,1927,False
-9d6185466762ddd1321a895873c6c9c6a956e2cb,Christian Scott Horler,82846283+ChrisHorler@users.noreply.github.com,2025-06-14T15:30:28+02:00,Merge pull request #44 from ChrisHorler/feature/trash_prediction_api  Added heatmap functions,4,60,1867,1927,True
-bb83cb9a585b6fbf6ecb6a9e4cfd33dfe5bb2282,Angel Zeng,angelzeng08@hotmail.com,2025-06-14T17:07:07+02:00,Added basic trash endpoint,1,21,0,21,False
-8241fab690e5a117b159edee5c2a2f639610a509,whoskhoi,khoivaniersel@gmail.com,2025-06-15T19:33:10+02:00,"Added detection service to barchart  Not fully functional yet, still testing.",2,37,3,40,False
-2a82b83750484c29002974c3f704339abe351a37,whoskhoi,khoivaniersel@gmail.com,2025-06-15T19:39:27+02:00,Added working data load button  Currently not connected to the endpoint yet.,1,2,3,5,False
-7f19f31f6c46e0db48863774466bf53f033d1533,whoskhoi,khoivaniersel@gmail.com,2025-06-15T19:57:53+02:00,Added services to line graph,2,24,2,26,False
-eb42d34c2d7751e84cf65a38759d9a09011f58eb,whoskhoi,khoivaniersel@gmail.com,2025-06-15T20:02:01+02:00,Fixed unnecessary JSON showing up on page,1,2,2,4,False
-b0498ad833a8341b3ca93eaf25b77efd23570549,whoskhoi,khoivaniersel@gmail.com,2025-06-15T20:52:51+02:00,Fixed services barchart and graph,2,70,84,154,False
-af04ee69d29c2535b4976d271cfd39f0f749bd00,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T10:20:00+02:00,Merge pull request #45 from ChrisHorler/develop  Develop,7,112,1924,2036,True
-62a4cb26132cb9e5a95475d8426e7928450d6a6c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T10:50:19+02:00,Database stuff,5,89,3,92,False
-0a1be32b35241900056b4cc3fdd58c763ba23650,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:04:53+02:00,model update,2,5,9,14,False
-ceadf0a3218068d9edd66e36d0a4c4e70b100c1d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:05:09+02:00,Merge branch 'feature/osm_models' into develop,2,5,9,14,True
-4f7a45710594539635ed2b3b59f057065655c84e,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T11:06:11+02:00,Merge pull request #46 from ChrisHorler/develop  Develop,2,4,9,13,True
-91f669b59a0eced5a4f29f15f8c09d0e5336eca9,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:08:31+02:00,fix forgotten file,1,1,4,5,False
-573cefbcfb3a4745a127b145c6c73dff6d758434,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:08:40+02:00,Merge branch 'feature/poiConfig_err' into develop,1,1,4,5,True
-84a18c9f8c0847add7ace392b6b0924480491dde,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T11:09:38+02:00,Merge pull request #47 from ChrisHorler/develop  Develop,1,1,4,5,True
-b13db706bb6a40ca35f702a7cacd66639a48f467,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:22:46+02:00,moving things around,1,17,10,27,False
-9d253c6508212e49755b536dd79aa23eb4797a4c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:23:36+02:00,actually fixing it i am dumb lol,1,0,1,1,False
-959f52322b618d1f90fb4d417b77e7e134a1b4e7,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:23:49+02:00,Merge branch 'feature/poiConfig_err' into develop,1,0,1,1,True
-7e51f4fda79260127d7515297609cd8de295aa60,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T11:24:29+02:00,Merge pull request #48 from ChrisHorler/develop  Develop,1,0,1,1,True
-8d938372e2d3d637aad56f0a487a880fc12b404e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:41:47+02:00,create POI from api result,1,30,12,42,False
-c5d523e0d3087134294402c4cf355e16a1ca3f0e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:44:30+02:00,Update models and remove PoiCategory,5,29,27,56,False
-d8a51b532ee9c1ab57230a9815a04e9f77b40545,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:44:58+02:00,Merge branch 'feature/poi_model_changes' into develop,5,29,27,56,True
-0d34954411fa555b89360c00955849abc470ac79,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T11:45:42+02:00,Merge pull request #49 from ChrisHorler/develop  Develop,4,3,27,30,True
-685d76a5e2d65fb96cbd3fc362577ea99e5a2c6c,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-16T15:16:37+02:00,database migration,4,391,47,438,False
-ff63b41cb711e02a5cf412d647cd6596a6f0f38d,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-16T15:17:02+02:00,Merge branch 'feature/poi_model_changes' into develop,4,391,47,438,True
-fc84e0d48324d236b2ff39640e58fda90ae3629a,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T16:12:29+02:00,Merge pull request #51 from ChrisHorler/develop  Develop,4,391,47,438,True
-d65d0eb31d87d1c162c54d9b7926c25cad0c618c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T18:04:37+02:00,make the find query based on osm id (cause we dont want dupes when ppl move their places 1cm),1,1,2,3,False
-4be2067ea1d4ba491bd34e66dbf1c9e318eb7ccb,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T19:41:54+02:00,trying to use the POI in the code,1,22,2,24,False
-c9a9c3578dfd27f84706a1bacc34e90b715eb359,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T19:45:01+02:00,removing distance calculation wtf is Δφλ for black magic forkery,1,0,2,2,False
-d37d1d1e0c70ce7391c6f6d0ada1a0afc910d2e4,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T19:56:05+02:00,Migrations,3,267,6,273,False
-87d2bc6ef380e7f44c567ac4afdc90a58ba32f26,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T19:57:15+02:00,Merge branch 'feature/poiDetection_change' into develop,4,267,8,275,True
-4cbd6a6d2b21ec2b65618c039940d6ff9583bc36,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T19:58:08+02:00,Merge pull request #52 from ChrisHorler/develop  Develop,4,267,8,275,True
-ae6508b7226da27e03e18d113918dd97c4760ca2,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T20:09:15+02:00,adding the detections to db,1,8,29,37,False
-dcd2ea727db77c3f8a528f05d5d75e2aa451880c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T20:25:21+02:00,detecting duplicate data,2,6,1,7,False
-8af1f4a06ae325ecde1aaad627f18aa998c0192d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T20:36:36+02:00,comments,2,27,7,34,False
-b21beff57dabd62aee44d0b52726fc0d8fa506f9,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T21:10:50+02:00,more types of locations,1,40,14,54,False
-5624ba6d50b2504b98b948fc6a0e2401988ad08e,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T21:17:09+02:00,"Update ControlApi/ControlApi/setup.md  👆🤓 urhm actually  Co-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>",1,1,1,2,False
-48fcfed13adbac6fc35e49c9905e55bb7c9a45ea,Angel Zeng,angelzeng08@hotmail.com,2025-06-16T22:05:39+02:00,Reviewed changes,2,3,4,7,False
-2e62476bdc402a43b37125f6f991cb2a1fb182ec,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T22:07:21+02:00,byegones be byegones,1,1,24,25,False
-e08bb7e92fd90da263653378734871402c60be7d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T22:08:26+02:00,Merge branch 'feature/remove_standard_weather_api' into develop,1,1,24,25,True
-4b8577f62a20119853d96804caadb5270a8a3e98,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T22:08:51+02:00,Merge pull request #54 from ChrisHorler/feature/api_connection_backend  Feature/api connection backend,6,205,32,237,True
-1517017fb9ab77231a456eb1c6c7bcf98f34ea50,ChrisHorler,csh.sammt@gmail.com,2025-06-17T12:05:12+02:00,PredictionAPI-Endpoint,4,122,0,122,False
-24066387ce45c9e88fcc54bed38858f8fd70cc83,Christian Scott Horler,csh.sammt@gmail.com,2025-06-17T12:05:30+02:00,Merge branch 'feature/fastapi_connection_endpoint' into develop,4,122,0,122,True
-18c1d7157424502ec356ce1b1cb5908611541ccc,Christian Scott Horler,csh.sammt@gmail.com,2025-06-17T12:06:12+02:00,Merge branch 'release/feature-deployment' into main,25,1077,2015,3092,True
-2bf312a0e5960421a3c13b46ff637d4d197aa219,ChrisHorler,csh.sammt@gmail.com,2025-06-17T13:38:29+02:00,Updated Deployment File  Added Prediction API Env Variable,1,2,0,2,False
-56b2ee95ac9841c6f3a0589ac47808b7f23fbf9b,Christian Scott Horler,csh.sammt@gmail.com,2025-06-17T13:38:41+02:00,Merge branch 'develop',1,2,0,2,True
-d554041b06507453c1b5d5db3f0d2b1bd833e1f0,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-17T13:40:28+02:00,Merge pull request #55 from ChrisHorler/develop  Develop,95,16368,267,16635,True
-20fbd0e9e694f2f2af6fd68afc88607d472418b5,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-17T13:41:44+02:00,Merge pull request #56 from ChrisHorler/develop  Develop,5,125,24,149,True
-f84f887e11d5c1bf03b41f61be6c3ff50f41bf55,whoskhoi,khoivaniersel@gmail.com,2025-06-17T22:09:59+02:00,Added try catch to get request,1,11,3,14,False
-7cc9e889c374d58412b6874311ad53eecee49c9b,whoskhoi,khoivaniersel@gmail.com,2025-06-17T22:14:38+02:00,Fixed shadowing of the field chartData,1,1,1,2,False
-87b68fc335809f04e7051cb2d95d82d67848c87a,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T11:13:58+02:00,added TEST MODE,4,44,5,49,False
-e12e2dcb226ceae37af36767e365b78663ee0d33,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T11:35:37+02:00,splitting the test mode from real mode,2,51,37,88,False
-e7df773a81b8044bfc70169867e9ad4d2a12802a,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T11:38:08+02:00,added SENSORING_API_AUTH,1,4,1,5,False
-9c96d4027313cc589d7049630044212e42b4bdb4,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T11:39:38+02:00,check for SENSORING_API_AUTH,1,5,0,5,False
-d1122c6e564cfa8e5af2220a4244f432da6d427d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T12:00:49+02:00,make the TEST MODE part modular,2,51,32,83,False
-02282b7ab33cc290b7ccdaffc39f822a33b02d14,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T12:04:04+02:00,prepare for change in real api logic,1,41,27,68,False
-d5542f4783c4f5ef5cc7aead3b8460a8e8637ebd,ChrisHorler,csh.sammt@gmail.com,2025-06-18T12:47:15+02:00,Added missing {,1,1,1,2,False
-a65cd58228e03c1ae66ad66ffc90ab12ddaf3b72,Christian Scott Horler,csh.sammt@gmail.com,2025-06-18T12:47:33+02:00,Merge branch 'develop',1,1,1,2,True
-954e13273724a354dee4d9e9f0f9dbbd022e3a93,ChrisHorler,csh.sammt@gmail.com,2025-06-18T12:50:50+02:00,Fixed Deployment Rule,1,1,1,2,False
-970f02779d779c2ef9cc6dc382533bd5ebbb6a53,Christian Scott Horler,csh.sammt@gmail.com,2025-06-18T12:51:05+02:00,Merge branch 'develop',1,1,1,2,True
-2113196394e2acb850f0e38099a1b921e7fc1bee,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T12:52:40+02:00,Database 4 main endpoints shitfest,5,251,15,266,False
-cbbc6224aef8b49c94d833e023ef1a95d2e7b6b4,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:03:04+02:00,wip,3,18,0,18,False
-a546af393549018d31250d83157f9e728987fffd,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:03:11+02:00,wip,3,245,9,254,False
-5fb7d4e30b0b146e10c0067dad670915c6b2f06c,ChrisHorler,csh.sammt@gmail.com,2025-06-18T13:05:34+02:00,Added more env variables,1,3,0,3,False
-ca0f70d60d0b40a4810e5e5f8cbcf939ebc92502,Christian Scott Horler,csh.sammt@gmail.com,2025-06-18T13:05:43+02:00,Merge branch 'develop',1,3,0,3,True
-f44d9f22b6b2320b7f4ef971a91387840a3fd51c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:10:26+02:00,remove pycache,1,1,1,2,False
-d29106b8acf6c59a7cf44ddc2ab7990ac99c3d72,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:10:47+02:00,e,1,0,0,0,False
-2e628e3e180c8dd5d8328f9208481686add1274f,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T13:14:59+02:00,Removed calendar endpoint confusion,2,0,64,64,False
-b6281b0d2ac4cf13a66feaf6d503e7aee9658325,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:15:55+02:00,top level statement error fix,1,61,59,120,False
-80b907e13865b4524aa098b745a437795dbb5d61,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T13:16:28+02:00,Deletion of prediction DTO,1,0,5,5,False
-2216247e800c1d9d8f6813333800c713b8984be3,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T13:18:21+02:00,Changed DTO names to compatible ones,1,3,3,6,False
-c6d61bec6d86d0869d9a4dca1fff44e5570b32e7,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:19:52+02:00,fix the eoorrors,1,4,4,8,False
-02ebd977e122dbc87c119c04872e58ff4e04bbbd,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T13:26:34+02:00,Changed grouping from week basis to month,1,9,7,16,False
-f2d01abdd13e91f5cf7aa1c8d9265a5a6961b481,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T13:26:54+02:00,Merge remote-tracking branch 'origin/feature/fetch-db-endpoints-v2' into feature/fetch-db-endpoints-v2,1,4,4,8,True
-875767768c8cfa636ade4cf90e0317f0c93dd7ec,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T13:28:16+02:00,AGAIN MONTHS,1,3,2,5,False
-d7d47cdd08e5b79235eb858546bed03556f0ed10,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:30:19+02:00,uncopmmento,1,60,60,120,False
-546249e342cb8894bd1c218567eafad827fcdd7a,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:30:35+02:00,remoov comment,1,0,2,2,False
-08b4ffe4be9cc241f2b30c9cbb182ed0de545d43,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:46:44+02:00,rename,4,32,17,49,False
-a1234e15874d4b094454ce0e5a1485e76a43735e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:48:24+02:00,remove pycache,2,2,0,2,False
-f8abe26460599da80102eac0c8dbf22b5c13cc4b,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:48:36+02:00,Merge branch 'feature/gitignorre' into develop,2,2,0,2,True
-a4e93b008d3f0c14a7f645a69dd3980233adc503,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-18T13:49:32+02:00,Merge pull request #58 from ChrisHorler/develop  Develop,3,7,2,9,True
-5bec6d0d2bbbe2abbae2447e3c1ddbc44e288d70,ChrisHorler,csh.sammt@gmail.com,2025-06-18T13:59:07+02:00,Refactored Python Model,5,3,9,12,False
-4264e4dfbdaf3638fc3600a267504332b9293a68,Christian Scott Horler,csh.sammt@gmail.com,2025-06-18T13:59:24+02:00,Merge branch 'develop',7,5,9,14,True
-3356d79b58afecb86d8342842628e1f66838e224,JurPurr,j.kempf@student.avans.nl,2025-06-18T14:15:24+02:00,Tried fixing WasteCalendar with chosen date,4,42,11,53,False
-b89b636dd13112918a5c8718160ee47ec4c6181e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T14:20:36+02:00,starting jwt logic,2,17,1,18,False
-d5b73def9d90b08df2a4e0374e5f16da627fca87,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T14:31:13+02:00,"fix the ""none new data"" err",1,1,2,3,False
-6e4b2a967e448dde4a610cdd198a5f9499401b0e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T14:37:51+02:00,possible nulls,3,17,5,22,False
-e2aac54160e1664a0aaa9b5d38bf1f3aa8bb8158,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T14:41:39+02:00,turn < into <= I AM SO FUCKING DUUUUUMB TwT,1,1,1,2,False
-e6f545185e97ed92cafabed162075aecc362f01e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T15:20:08+02:00,jwt authentication,2,10,5,15,False
+hexsha,author_name,author_email,date,message,files_changed,insertions,deletions,total_changes,is_merge,primary_branch
+4b638de3ae2a201e246255b15bc2a1fc93787808,ChrisHorler,csh.sammt@gmail.com,2025-05-16T13:05:11+02:00,Initial commit,1,1,0,1,False,develop
+0e8fc789c0ad05021d1c5495f2a4c8e3a4deeafc,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T12:17:41+02:00,template data,2,25,0,25,False,develop
+455b509487e9bcea5dd8494d151090b6de6f6313,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T12:18:00+02:00,Merge branch 'feature/json_templating' into develop,2,25,0,25,True,develop
+2f837d51a2a748908d2c26fc8bc8f73a72064f93,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T12:21:47+02:00,Add comment to clarify purpose of empty list in JSON template,1,1,1,2,False,develop
+5d72621c38fb9b99601a6da468034e77c12b3391,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T12:22:01+02:00,Merge branch 'feature/json_templating' into develop,1,1,1,2,True,develop
+4bd24e985bd22457250f3c16c82714c9e16ac9d7,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T12:50:57+02:00,Initialised ASP.net + Swagger,55,1221,0,1221,False,develop
+c54a619364b7555ea424a2c7dc2e5a43490c0f9c,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T12:51:36+02:00,Merge branch 'feature/control_api_init' into develop,55,1221,0,1221,True,develop
+b4ebc2739275620ad91b1cdd6f2664f8c9db2db9,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T13:42:02+02:00,Redo,56,94,1221,1315,False,develop
+a398ffa336ada5482a1e9fae5064c74daac0bf95,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T13:45:13+02:00,Initialisation 2.0,6,130,0,130,False,develop
+b8344b9f11671d130d6f5011af66045716ba09b8,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T13:47:15+02:00,"Revert ""Initialisation 2.0""  This reverts commit a398ffa336ada5482a1e9fae5064c74daac0bf95.",6,0,130,130,False,develop
+b83f1ee8fa80472f92e393daf65c3cc6f004afa1,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T13:49:29+02:00,Initialisation 3.0,7,137,0,137,False,develop
+89e74f8e852962ae626c36434a553254955a0238,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-05-27T13:49:53+02:00,Merge branch 'feature/control_api_init' into develop,53,118,1108,1226,True,develop
+608a7bf5114babe4862d08c459a77f83343c044f,JurPurr,j.kempf@student.avans.nl,2025-05-28T10:51:52+02:00,Blazor initialization,30,1732,0,1732,False,develop
+2fb7eb0572ba9eb811d6cfeea41e53da074ccd62,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-05-28T10:53:14+02:00,Merge pull request #1 from ChrisHorler/develop  Develop,53,118,1108,1226,True,develop
+12f824700a6e9a4e2dfcd8c448f2dacd9d4470f6,JurPurr,j.kempf@student.avans.nl,2025-05-28T10:54:52+02:00,Merge branch 'feature/blazor_project_initiation' into develop,83,1850,1108,2958,True,develop
+b96af8244d1007b14c41c21cbfe141ca837ca826,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-05-28T12:56:33+02:00,class diagram uncomplete,1,88,0,88,False,develop
+8e66d66834a10aed19c2318445f07ef7d8079a44,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-05-28T14:22:01+02:00,class diagram,1,68,11,79,False,develop
+fe2d5361e78d1c36dca25544c94c055779181897,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-05-28T14:34:07+02:00,Merge branch 'feature/class_diagram' into develop,1,145,0,145,True,develop
+f5d035f93d99fd8dc132a1aeb80f9cee6b25039a,ChrisHorler,csh.sammt@gmail.com,2025-05-28T16:26:40+02:00,Created Entities  Created Entities for EF as Noted in ERD,8,96,0,96,False,develop
+02a52a28e01be9d55ef52b6328e7267755d142d5,ChrisHorler,csh.sammt@gmail.com,2025-05-28T16:56:14+02:00,Created Configuration Files for EF,9,133,5,138,False,develop
+4f081d03ea797048da48b8f7496a27c0bdea0cd9,ChrisHorler,csh.sammt@gmail.com,2025-05-28T17:08:05+02:00,Created ControlAPI DbContext  - Still requires registration in Program.cs,1,20,0,20,False,develop
+77add09fbb49e4fd3e22cecca4b1cbc9faaf1b66,ChrisHorler,csh.sammt@gmail.com,2025-05-28T17:45:26+02:00,Updated Program.cs with Builder Service,2,16,2,18,False,develop
+bd26b2b01e742ac9f5085ad505ca30bca9922407,Christian Scott Horler,82846283+ChrisHorler@users.noreply.github.com,2025-05-28T17:56:15+02:00,Merge pull request #2 from ChrisHorler/feature/foundation-EntityFramework  Feature/foundation entity framework -> Develop,17,260,2,262,True,develop
+423ce58e5e55e42462606138b2db41d2b37bdc64,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-05-28T21:09:43+02:00,.vs folder,1,1,1,2,False,develop
+49bfca51f033799546f2660266a067902d86ad60,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-05-28T21:11:43+02:00,Merge pull request #3 from ChrisHorler/gitignore  .vs folder,1,1,1,2,True,develop
+5fa0965e8ed258fe099ab0249f5440b608875ccc,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-05-28T21:14:45+02:00,remove presonal files,9,0,1078,1078,False,develop
+aa9cf4bd4a299662acbc03d1dd2a8dc517508369,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-05-28T21:15:13+02:00,Merge pull request #4 from ChrisHorler/gitignore  remove presonal files,9,0,1078,1078,True,develop
+19c5f1c59e2689f43ba7bd8fbfbb9f0fc5456ce4,JurPurr,j.kempf@student.avans.nl,2025-05-29T10:32:34+02:00,"Changed the pages to the corresponding wireframe, providing a first draft of the layout.",8,31,84,115,False,develop
+02d8d80038aa9cd7ae8eb172e20d23d2a23bd97d,ChrisHorler,csh.sammt@gmail.com,2025-05-29T14:12:18+02:00,Refactored EF Foundation  Moved EF to .data directory to keep things more organized,31,239,238,477,False,develop
+0d65dec7138d22ec42da783cad676df93de92f24,ChrisHorler,csh.sammt@gmail.com,2025-05-29T14:15:21+02:00,File and Package Setup,2,13,0,13,False,develop
+bffd031d4057902d20f11b63b83d5b6131520d44,ChrisHorler,csh.sammt@gmail.com,2025-05-29T14:17:51+02:00,Refactor Folder Structure for API setup,3,3,7,10,False,develop
+69591e4df5c30fd990e0d024b744d19b2e9f2400,ChrisHorler,csh.sammt@gmail.com,2025-05-29T14:52:45+02:00,Created Authentication Pipeline,36,383,248,631,False,develop
+221a51a4cbdce7d920e39541ca292fc1e3063a9d,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T12:00:27+02:00,Merge pull request #5 from ChrisHorler/feature/authentication_endpoint  Feature/authentication endpoint -> Develop,35,386,242,628,True,develop
+94038288bfe0e8bf08c3b5b528614ec2f92928de,ChrisHorler,csh.sammt@gmail.com,2025-05-30T15:03:29+02:00,Added Dockerfile and Stack.yml,3,39,1,40,False,develop
+391562a9d834122628d8d47c3250d582102806dc,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:03:40+02:00,Merge branch 'feature/publishing_api' into develop,3,39,1,40,True,develop
+39c97823eb9e2a2b9f4e6c503b135a613adb8b0f,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:04:19+02:00,Merge branch 'release/initial_api_publish' into main,52,1496,0,1496,True,develop
+0496bc0431862d87d1185a39dda879118e52b40c,ChrisHorler,csh.sammt@gmail.com,2025-05-30T15:09:41+02:00,Updated stack.yml with proper network name,1,1,1,2,False,develop
+da6474332abd802995b25ae3e7d0fc74716eee6b,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:10:12+02:00,Merge branch 'release/updated-api-stack' into main,1,1,1,2,True,develop
+643ba92e94d5e727946cc72ee981ba14157957bd,ChrisHorler,csh.sammt@gmail.com,2025-05-30T15:13:18+02:00,updated network name under api service,1,1,1,2,False,develop
+f1b0236f1545981833eac3576bd44a0718a61b9b,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:13:49+02:00,Merge branch 'release/reupdate-network-name' into main,1,1,1,2,True,develop
+9aad2dba99ede8ead05802b2cb07810bde6462be,ChrisHorler,csh.sammt@gmail.com,2025-05-30T15:23:40+02:00,Updated ConnectionString in Program.cs,1,1,1,2,False,develop
+72424f5944a9f2969ed64c201cbd446991502237,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:24:26+02:00,Merge branch 'release/updated-connection-string' into main,1,1,1,2,True,develop
+8b5b7d1ab9756bee4a77d89edee6a76c5d10771c,ChrisHorler,csh.sammt@gmail.com,2025-05-30T15:29:11+02:00,Fixed Controller Mapping in Program.cs,1,1,4,5,False,develop
+c610a7f4696ff6bbdb878d0f8971ca92df5fd3a8,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:29:36+02:00,Merge branch 'release/program.cs-controllers-mapped' into main,1,1,4,5,True,develop
+71ed0f7cb582dc2f02dbe6438f1b10752597b4c4,JurPurr,j.kempf@student.avans.nl,2025-05-30T15:37:24+02:00,Calendar  Added the calendar.,4,107,3,110,False,develop
+5b0156828e528e96b1c27438a3ffacff795cbbb6,ChrisHorler,csh.sammt@gmail.com,2025-05-30T15:57:50+02:00,Setup Github Actions Workflow,1,17,0,17,False,develop
+9d567927ed0685176d54e3fa8d414ea59fc2b927,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T15:58:19+02:00,Merge branch 'release/base-setup-github-workflow' into main,1,17,0,17,True,develop
+48d4db894ec5b7de8afdf605eb17ea474bad255f,ChrisHorler,csh.sammt@gmail.com,2025-05-30T16:01:16+02:00,updated webhook method to POST from GET,1,1,1,2,False,develop
+5514c04f56db5e78a547fac81677373e666b39b0,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T16:01:41+02:00,Merge branch 'release/updated-webhook-method' into main,1,1,1,2,True,develop
+ff55c4fe0bdd3b9c515a5270c4e83e6a45c03df1,ChrisHorler,csh.sammt@gmail.com,2025-05-30T16:08:22+02:00,Changed Program.cs to test Redeployment,1,1,1,2,False,develop
+46a18098c4387ea50dd055f66f66f67e4659fb53,Christian Scott Horler,csh.sammt@gmail.com,2025-05-30T16:09:19+02:00,Merge branch 'develop',1,1,1,2,True,develop
+1ad6c4443d577bb0f72883a1d1fa5db0cc1ece9c,JurPurr,j.kempf@student.avans.nl,2025-06-01T21:04:54+02:00,Added LeafletForBlazor  Added the package so I can start using it for the heatmap.,4,9,6,15,False,develop
+4b29eeece2c46e587d7d767c0455d2d73ceb1d2a,JurPurr,j.kempf@student.avans.nl,2025-06-01T21:14:54+02:00,"Calendar English  The calendar was in Dutch before. Now it is in English, including the days of the week. They start with Monday and end with Sunday in stead of Sunday till Saterday.",1,4,4,8,False,develop
+97f145e72095a91a820b96e3701e130edf2cf6c1,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-02T11:13:46+02:00,Merge pull request #6 from ChrisHorler/develop  Develop,33,463,1086,1549,True,develop
+b1a33446e4dc03c1206a5871bd56bf74216e256b,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-06-02T12:03:35+02:00,Allow User secrets User secrets are usable for CONN_STRING and JWT_KEY,2,22,3,25,False,develop
+0a687496bba2e76814b76b6020d77d7fa5ff3ac1,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-02T12:19:23+02:00,Merge pull request #7 from ChrisHorler/feature/api_user_secrets  Feature/api user secrets,2,22,3,25,True,develop
+b3b875fbd30832b22640c596414a974ea19999ba,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-02T12:20:52+02:00,Merge pull request #8 from ChrisHorler/develop  Develop,2,22,3,25,True,develop
+e3248d3bc528f8a7a5d1f892dc10ca4029476891,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-06-02T17:47:27+02:00,class diagram created all the classes and interfaces,2,692,0,692,False,develop
+c08edb0806c5100c947f837d69fa0f3ff057ac0d,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-06-02T17:55:07+02:00,added User secret to JwtService,1,2,1,3,False,develop
+5eafe416a59fcf92429d9aefb3f1a9e2adc80650,OldMartijntje_Frituurpan,oldmartijntje@gmail.com,2025-06-02T18:23:27+02:00,Added missing classes,2,281,53,334,False,develop
+26955f591f3cde8ff1ad287e95725b36d1585418,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-02T18:23:53+02:00,Merge pull request #9 from ChrisHorler/feature/api_user_secrets  added User secret to JwtService,1,2,1,3,True,develop
+9f72a1a136f1e1ce6d0de1240e00f1a0ca34277b,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-02T18:24:41+02:00,Merge pull request #10 from ChrisHorler/develop  Develop,1,2,1,3,True,develop
+12a9840420db83e5a42d64efee58869b928cf387,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T13:32:50+02:00,Progress  drawing UML arrows in the class diagram,2,366,174,540,False,develop
+0e92485d83003ca4bbadf259f332b60631446bd1,ChrisHorler,csh.sammt@gmail.com,2025-06-03T15:00:00+02:00,Updated workflow files for CI/CD deployment,3,59,21,80,False,develop
+dc270f03e88c61c796b0c47caf94c215ab39f3c8,JurPurr,j.kempf@student.avans.nl,2025-06-03T15:01:49+02:00,Fixed .css  Finally the css shows up again.,4,18,3,21,False,develop
+a11f5c373344b94a74b891e0d144edcb77920d5d,Christian Scott Horler,csh.sammt@gmail.com,2025-06-03T15:17:15+02:00,Merge branch 'develop',6,83,25,108,True,develop
+2698c60027e744f5a14de0249fdfbccbbab02ebd,ChrisHorler,csh.sammt@gmail.com,2025-06-03T15:20:14+02:00,updated user ghcr,1,1,1,2,False,develop
+edf57a70fca631b64f7b0da4d8f299c67474c2fc,ChrisHorler,csh.sammt@gmail.com,2025-06-03T15:23:50+02:00,updated repo naming,1,5,1,6,False,develop
+e4f95fe17502a061c3651197615a6bafe891d369,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T15:30:22+02:00,progress,2,184,44,228,False,develop
+9ec1ba635ee283fda372472442f41191a3971369,ChrisHorler,csh.sammt@gmail.com,2025-06-03T15:36:57+02:00,Fixed TLS-BLOCK,1,3,2,5,False,develop
+2f24eab30ec79ec11faa52db03b195fd5e184f1d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T15:58:10+02:00,"class diagram 80%  add all chris's work to the class diagram, todo: add new classes",2,202,32,234,False,develop
+b59682e4abb78b542604d05d2819b966420f8538,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T16:12:28+02:00,Finished all there is currently,3,105,261,366,False,develop
+8420e070302c0952a544dd4f969a3c83c7744c5c,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-03T16:15:44+02:00,Merge pull request #11 from ChrisHorler/develop  Develop,33,521,1086,1607,True,develop
+3dbc89e18d5549f4f6aea2aabb129fbd7834780c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T16:38:39+02:00,legenda,3,386,110,496,False,develop
+669e4fe32368e56824b3edb35b1b72fe3a061b0d,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-03T16:39:22+02:00,Merge pull request #12 from ChrisHorler/develop  Updated workflow files for CI/CD deployment,3,59,21,80,True,develop
+0b64f2df0639da3d2f4af166384887353f2e9782,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-03T16:40:20+02:00,Merge pull request #13 from ChrisHorler/feature/class_diagram  Feature/class diagram,3,1542,0,1542,True,develop
+7b014fc28b98d83a7d32d249806e2bc3b41199b8,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-03T16:42:59+02:00,Merge pull request #14 from ChrisHorler/develop  Develop,3,1542,0,1542,True,develop
+d7a27d712799508326befabbb81bad3ac1d30439,ChrisHorler,csh.sammt@gmail.com,2025-06-03T17:15:00+02:00,Updated CI/CD Pipeline  Updated pipeline to be more in line with Portainer API,1,37,18,55,False,develop
+27e548e5866e7d32a58c316a7711563f82c0e375,ChrisHorler,csh.sammt@gmail.com,2025-06-03T17:21:44+02:00,Debugging Stack Deployment,1,7,2,9,False,develop
+32e9dbd6d51aeed6c8f78f88ce685ce6f83341c7,ChrisHorler,csh.sammt@gmail.com,2025-06-03T17:27:54+02:00,Updated Deployment Code with Update and Create Check,1,36,24,60,False,develop
+61508c5c65b54b72c4937d6153632103c802415d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T17:39:18+02:00,user secrets setup in markdown,1,17,0,17,False,develop
+e00e7f6d691df4f160cfc874ebd791f5dd93e95f,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-03T17:39:30+02:00,template for api connector,2,27,1,28,False,develop
+fdc15a6dfdaeee71152a45f361c8bbf100bdd3dd,JurPurr,j.kempf@student.avans.nl,2025-06-04T11:36:51+02:00,Analytics lay-out  Analytics razor files added.,8,40,4,44,False,develop
+119b0b6b53c05b58519d11f5fafdd2c408ce84cb,JurPurr,j.kempf@student.avans.nl,2025-06-04T11:45:21+02:00,Added Mudblazor  To program.cs,3,3,0,3,False,develop
+22a2de91882a9d41d6bc26235b8ab85433903ec7,whoskhoi,khoivaniersel@gmail.com,2025-06-04T11:57:37+02:00,Added Detectopm Data Model,2,18,0,18,False,develop
+a406654aef9f30228262ef8a510221b621963813,whoskhoi,khoivaniersel@gmail.com,2025-06-04T12:03:38+02:00,Connected analytics page to components,2,37,2,39,False,develop
+09dcc98b53978c5b89331b301fe1237d7090bda8,JurPurr,j.kempf@student.avans.nl,2025-06-04T12:07:14+02:00,Fixing Analytics,1,2,2,4,False,develop
+2e4ffde9ee89ae6131b73fe7d116d101f8e0940d,whoskhoi,khoivaniersel@gmail.com,2025-06-04T12:35:45+02:00,Called Bar Chart within Analytics,2,50,29,79,False,develop
+aea90a182caddd74842b8efdd2948e2cd96d0c1e,JurPurr,j.kempf@student.avans.nl,2025-06-04T12:42:15+02:00,Graph Added  Added a Graph,1,10,2,12,False,develop
+3927f9807e55099a931497d13ca48e54a5287517,whoskhoi,khoivaniersel@gmail.com,2025-06-04T12:42:49+02:00,Updated Bar chart code,1,10,26,36,False,origin/feature/blazor_project_first_layout
+7ac7ea37c2aa28af63c4b2ce82a53966ecd4563e,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-04T13:11:27+02:00,Added logging and http client,2,20,3,23,False,develop
+4bfb9e7e2620854b0bd34a20142025c6fbe5dd1d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-04T16:34:32+02:00,Rename,3,45,42,87,False,develop
+5df288d932291907226f771bedd8eabf6c73684c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-04T16:52:50+02:00,Making our first api call,4,55,7,62,False,develop
+3c505bf21ae199a2cc5a229ac07a991ee2ebb27f,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-04T16:57:39+02:00,updated to sensoring api standards,1,14,8,22,False,develop
+47e1f127791169d9b61f5f1e7d7bb130d095984b,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-04T16:58:09+02:00,Merge branch 'feature/update_templates' into develop,1,14,8,22,True,develop
+49cc5df0155f20544ae6300fc642adaf14c9e688,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-04T16:59:31+02:00,Merge pull request #15 from ChrisHorler/develop  Develop,1,14,8,22,True,develop
+74e746b19d488ac7650235c2817e23c8938c0eb1,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-04T17:22:54+02:00,Add Newtonsoft.Json,1,1,4,5,False,develop
+62ec954219f6cad227a848a8a44f95bce912aae0,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-04T17:30:50+02:00,Deserializion of Mock Data,2,34,2,36,False,develop
+21d126e23018285228115b8178630f2d5491aa81,ChrisHorler,csh.sammt@gmail.com,2025-06-04T18:45:59+02:00,Change in Ci-CD File,1,32,47,79,False,develop
+7bc678411d178c55401dbe172f4f31aedf008996,Christian Scott Horler,csh.sammt@gmail.com,2025-06-04T18:51:21+02:00,Merge branch 'main' into develop,1,48,22,70,True,develop
+91e7bbf49ea7bec231e4766d8fffc2691a078d54,Angel Zeng,angelzeng08@hotmail.com,2025-06-04T19:07:54+02:00,Initialization Trash Prediction API,13,13122,0,13122,False,develop
+031af939987a2c41ebad85065b1cbb0a5f8a5be0,Angel,angelzeng08@hotmail.com,2025-06-04T19:08:57+02:00,Merge branch 'feature/trash_prediction_api' into develop,13,13122,0,13122,True,develop
+8a90c722c3ee3d7187a2aa41e944cb2590ead13c,JurPurr,j.kempf@student.avans.nl,2025-06-04T19:44:39+02:00,Moved code  Code for the graph in Analytics is moved to it's own .razor file.,2,16,5,21,False,develop
+31600c8f93a28c25ee09ea41c1bf8a5f472d10ee,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-04T20:15:42+02:00,Merge pull request #17 from ChrisHorler/develop  Develop,14,13170,22,13192,True,develop
+17c51b6ddbb242003068a8a91feaaee611ed5814,JurPurr,j.kempf@student.avans.nl,2025-06-04T20:29:33+02:00,Added Mockdata  Added mockdata to the graph and made sure you could see the x-axis labels.,2,12,4,16,False,develop
+659558daaa697bb94f493bce1ed0962fbe3b7395,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-05T17:55:13+02:00,init README.md,1,8,0,8,False,develop
+c867dd9f9600d1dd8dc2bf3a2c0a0990eed41e95,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-05T17:56:16+02:00,Merge pull request #18 from ChrisHorler/develop  Develop,51,15370,1094,16464,True,develop
+58c805890cbb7b2e2b0691abb37fa16cba62dcf3,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-05T18:00:54+02:00,update paths,1,7,2,9,False,develop
+e9bf8b761c13a1e8cb9a003c91c1c669a3978f36,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-05T18:06:46+02:00,error,2,18,3,21,False,develop
+feab69cf184589f805789e960e50c7854d564730,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-05T19:39:37+02:00,"same error, without crashing",3,22,9,31,False,develop
+627118c5110eb58fa910c9df318014779e05cf8c,JurPurr,j.kempf@student.avans.nl,2025-06-05T21:56:33+02:00,Fixed Wastecalendar  Now it shows randomized values and the calendar gives an indication about the amount of trash.,1,34,1,35,False,develop
+e6a077f9d75d1c085abd437100a7652f2f672985,ChrisHorler,csh.sammt@gmail.com,2025-06-06T12:04:23+02:00,Updated CI/CD .yaml,1,9,3,12,False,develop
+2c1ffc042a7571b739fdf9a7fe72b2ab1f235e84,ChrisHorler,csh.sammt@gmail.com,2025-06-06T12:36:42+02:00,Context Factory for EF,1,20,0,20,False,develop
+8015adce2392c97f791e94cc9deaf2b0d188974e,ChrisHorler,csh.sammt@gmail.com,2025-06-06T12:41:04+02:00,Setup base migrations for EF,7,852,22,874,False,develop
+d1dc32794649973957fdc63736501f4190a824e9,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T12:41:56+02:00,"same error, different approach",1,15,13,28,False,develop
+9000196bfe2df65014cbc8649c907eae1a435b67,ChrisHorler,csh.sammt@gmail.com,2025-06-06T12:43:30+02:00,Updated Program.cs for db Migrations,1,6,1,7,False,develop
+7b1b406ebcf61119f9afb3ec6e643fe0b45929b6,Christian Scott Horler,csh.sammt@gmail.com,2025-06-06T12:44:24+02:00,Merge branch 'feature/DbContextFactory' into develop,7,858,3,861,True,develop
+4c641dc522bbaeed7a1e69cc2dbb1474f8f7cbe6,Christian Scott Horler,csh.sammt@gmail.com,2025-06-06T12:45:42+02:00,Merge branch 'release/Migrations+CI/CD_Update' into main,7,858,3,861,True,develop
+0249eb92817708554f33288de872711fdc1d0dae,ChrisHorler,csh.sammt@gmail.com,2025-06-06T13:03:58+02:00,Switching exposed port for API,1,1,1,2,False,develop
+e676e2a2173ac8d602ac58e6295bff9022459680,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T13:35:03+02:00,HostedService + Scope Factory Combo,3,31,7,38,False,develop
+a00458b9a17695f83ee56c5640f732bf4846cded,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T13:38:43+02:00,Merge branch 'feature/api_connection_backend' into develop,6,174,1,175,True,develop
+15a9af5fab422329231d99eab981c5c545d7dbe3,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T13:38:49+02:00,Merge pull request #19 from ChrisHorler/develop  Develop,8,869,5,874,True,develop
+286eee4dbe003c0236bfb2efb05304eb9788f289,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T13:47:18+02:00,remove uncompleted changes,1,3,3,6,False,develop
+41b7f0fb9a512711fc24fe81bf13dfbfd01479f8,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T13:57:01+02:00,uncomment to fix it,1,5,5,10,False,develop
+b0dfbd60359347734d03e8f5cc5d74bf5a347568,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T13:57:30+02:00,Merge pull request #20 from ChrisHorler/feature/error_fix1  Feature/error fix1,1,8,8,16,True,develop
+4f1bd9b06166724af6ed4b4eddd2aed921613844,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T13:58:16+02:00,Merge pull request #21 from ChrisHorler/develop  Develop,1,8,8,16,True,develop
+40aba3216ee77b393f6c1a3fc4070cdc581f3299,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T13:59:54+02:00,Merge branch 'feature/dbcontext_issue_aproach1' into feature/api_connection_backend,3,33,9,42,True,develop
+5802c7c76920d4f076843cddbe800ed35e78c494,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T14:00:26+02:00,Merge pull request #22 from ChrisHorler/feature/api_connection_backend  Feature/api connection backend,8,870,6,876,True,feature/dbcontext_issue_aproach1
+40b2fdd979a7752374393133c03e1ffd2a958a1e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T14:04:28+02:00,idea1?,1,1,9,10,False,feature/dbcontext_issue_aproach1
+c2689834fe22f74d9e96b0f94e42dae77098dc1f,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T14:08:09+02:00,setback,3,7,31,38,False,develop
+b3e64f3348e68bfbb65074520261fc7becbb7274,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T16:48:16+02:00,file locations,6,150,150,300,False,develop
+1c835dd8f0f32394e58db54be388e04869ffb448,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T16:48:53+02:00,Merge pull request #23 from ChrisHorler/feature/dbcontext_issue_aproach2  file locations,6,150,150,300,True,develop
+7ad9545010243555e8291517f3b2f8713a62ded3,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T16:55:25+02:00,seperate controller idea,3,33,1,34,False,feature/dbcontext_issue_aproach2
+5450c294deca3364cb28fbff4c07bad34c39c6e6,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T17:07:29+02:00,templated solution,5,44,35,79,False,feature/dbcontext_issue_aproach2
+6c3724bcb855bdddfb312e84736b7d2500fec06c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T17:25:49+02:00,removed package conflicts inside ControlApi.csproj,1,5,5,10,False,develop
+5919ccfac9b15d97d88be17cfae896cd2d9436ee,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T17:44:35+02:00,colon,1,1,1,2,False,develop
+febc2e073ca2a9e7b436acf6394c1b0e12695330,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-06T17:45:00+02:00,Merge pull request #24 from ChrisHorler/troubles  Troubles,2,6,6,12,True,develop
+ad70c136d3d2ffc15f3b06d269fc82e46c8964ae,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-06T18:05:50+02:00,uncomment builder.Services.AddHttpClient();,1,1,1,2,False,develop
+5a17486449f3bf69d30354fd92719ca74631da34,JurPurr,j.kempf@student.avans.nl,2025-06-08T12:22:45+02:00,Attempt to create a heatmap using Leaflet.Heat,10,526,12,538,False,develop
+7c5b0c9145de7eb71f7e5e3ad3ced093156f2a4f,Christian Scott Horler,csh.sammt@gmail.com,2025-06-08T13:01:21+02:00,Merge branch 'develop',6,184,11,195,True,develop
+df08c77f700d572b8a5b642509cff6f46bfd4ff0,ChrisHorler,csh.sammt@gmail.com,2025-06-08T13:09:45+02:00,updated database connection string  Updated connection string env variable setting for docker container,1,1,1,2,False,develop
+d3ba9f5afa2450166fdfd1d85dc6a8104cd50e81,ChrisHorler,csh.sammt@gmail.com,2025-06-08T13:24:24+02:00,Setup unit testing  Created Unit Testing Structure,4,53,0,53,False,develop
+63e2c1ab35c6ef41d775d0cb5b2d707d6a3d31c1,ChrisHorler,csh.sammt@gmail.com,2025-06-08T13:44:46+02:00,Setup Basic Authentication Tests,1,107,0,107,False,develop
+c8fad5d08975372824c5e584c36fdcbb023ffd65,ChrisHorler,csh.sammt@gmail.com,2025-06-08T13:52:55+02:00,Created Unit Test Document  Created document to clarify what the unit tests are testing,1,33,0,33,False,develop
+8bcc860fd0763670d2a841a6c83e4b066b342090,Christian Scott Horler,csh.sammt@gmail.com,2025-06-08T13:53:38+02:00,Merge branch 'feature/authentication_unit_tests' into develop,6,193,0,193,True,develop
+182ea86347b8efd60a16f798e87cd0c8431292e1,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:03:48+02:00,Fixed Email And Password Requirements,1,9,1,10,False,develop
+13c4d2936cf1551bfc3f2842fd81dd955eb2fce8,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:16:46+02:00,Added Unit Test and Updated Endpoint  - Added Unit test for Email validation - Updated Authentication Endpoints to check for modelstate,2,35,0,35,False,develop
+8c87891d67b3df4362362f9eeb3538aed6b9c266,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:19:41+02:00,Updated Unit Test Documentation,1,10,1,11,False,develop
+84101b9e5347dc40618b667e3805baf5abf4889a,Christian Scott Horler,csh.sammt@gmail.com,2025-06-08T14:19:48+02:00,Merge branch 'feature/fixed_email_auth' into develop,4,54,2,56,True,develop
+097888fe962e64e916b223c22268f395c71a8c63,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:22:26+02:00,Updated CI/CD.yml  Added Unit Tests into CI/CD Pipeline,1,11,0,11,False,develop
+0454d8fffce9322a10d0f6c4cc35437b8ebb7856,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:24:52+02:00,Updated Restore Path,1,1,1,2,False,develop
+3b24319d7579b8557bc0e69f096e557ed3952537,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:27:46+02:00,Reupdated the Restore and Unit Testing Paths,1,2,2,4,False,develop
+4cdf4f8c5ae2602ef2581808422b733c8629effb,ChrisHorler,csh.sammt@gmail.com,2025-06-08T14:38:20+02:00,Updated AuthDTO  - Updated Authentication DTO to handle Authentication rules - Updated Authentication Unit Tests to use Register and Login Class instead of Record,2,28,13,41,False,develop
+b455b06b57c0894877eb45daab5d1f1ddc7d974a,Christian Scott Horler,csh.sammt@gmail.com,2025-06-08T14:38:28+02:00,Merge branch 'feature/rework_record_authentication' into develop,2,28,13,41,True,develop
+6bcbcf77c3edb0559dca3d6038ca665fffaa232c,Christian Scott Horler,csh.sammt@gmail.com,2025-06-08T14:38:50+02:00,Merge branch 'release/authentication_unit_tests' into main,2,28,13,41,True,origin/HEAD -> origin/main
+548c106c695e4bc81ae020442d0841e19639bac3,JurPurr,j.kempf@student.avans.nl,2025-06-08T15:04:04+02:00,"Tried to fix the heatmap  Changed Overview.Razor and Mainlayout.razor, but it still doesn't work.",4,20,10,30,False,develop
+9115fa97db4765bb78efd2cf2c8d7867126b3e75,JurPurr,j.kempf@student.avans.nl,2025-06-08T15:45:26+02:00,"Removed sidebar  Removed sidebar, changed the colour of the navbar and tried to implement a datepicker.",3,16,9,25,False,develop
+97de68e5fa35d8bea448a6625b0d79aeaa967fd3,JurPurr,j.kempf@student.avans.nl,2025-06-08T17:11:25+02:00,Tried to use Mudblazor for Datepicker,1,6,4,10,False,develop
+53843e31198a829af36119aa43ba87dff229c652,JurPurr,j.kempf@student.avans.nl,2025-06-08T17:37:43+02:00,Changed code for DatePicker,4,29,5,34,False,develop
+21a8e42ad6364203439a963d6ee1f104b76f1246,Christian Scott Horler,csh.sammt@gmail.com,2025-06-08T21:19:02+02:00,Merge remote-tracking branch 'origin/blazor_project_css' into develop,25,892,93,985,True,develop
+1155fc13118793125dbe3c9f230113507e14db8b,Angel Zeng,angelzeng08@hotmail.com,2025-06-08T21:40:37+02:00,Added FastAPI functions,6,162,23,185,False,develop
+957a2d5ef565735e0d2712841c360a8d7083ec2f,whoskhoi,khoivaniersel@gmail.com,2025-06-08T21:52:50+02:00,starting barchart,3,51,58,109,False,develop
+3d66f296ffa952969589a0763eb1a9ba25d96695,whoskhoi,khoivaniersel@gmail.com,2025-06-08T22:12:20+02:00,attempt at fixing barchart,4,8,38,46,False,develop
+321a1e8499dc50629cc3c3bf1762fb2908218816,whoskhoi,khoivaniersel@gmail.com,2025-06-08T22:24:39+02:00,barchart complete with mockdata,2,38,18,56,False,develop
+63ae4d8d1c5ca832a34e04b0fbb9aebb632479c3,JurPurr,j.kempf@student.avans.nl,2025-06-09T15:25:15+02:00,Tried Fixing the DatePicker,4,39,32,71,False,develop
+e0ab13f763ab1a49774ddd5d9fc3af67c8631239,Angel Zeng,angelzeng08@hotmail.com,2025-06-10T15:16:45+02:00,Deleted comments,1,4,5,9,False,develop
+d28291e1527553d3a87a5e4d4a3064bee4cd64ab,whoskhoi,khoivaniersel@gmail.com,2025-06-10T15:29:17+02:00,Created razor register file,1,6,0,6,False,develop
+9172566dc890ebff2bf7ec6e70de447cb87d1a26,whoskhoi,khoivaniersel@gmail.com,2025-06-10T16:43:20+02:00,"Added login and register  Layout could be incorrect, has to be tested in the future. Currently have a model as placeholder, could be deleted in the future.",2,68,2,70,False,develop
+a2b74d9e323f0e4ecf4eb55284d55ff23cbaef3e,Christian Scott Horler,csh.sammt@gmail.com,2025-06-10T17:04:38+02:00,Merge remote-tracking branch 'origin/blazor_project_css' into develop,4,39,32,71,True,develop
+59e33ddf62fbc1ec3f019411fafd43907f075396,JurPurr,j.kempf@student.avans.nl,2025-06-10T20:13:10+02:00,Made a Datepicker,6,89,11,100,False,develop
+62820c75128a342522365c0f92ceaa3df8f9a8e0,Angel Zeng,angelzeng08@hotmail.com,2025-06-11T09:14:20+02:00,temporary changes,2,4,1,5,False,origin/blazor_project_css
+45c2cec395e705ce0a1c2072223ddb8ffeeb17a0,JurPurr,j.kempf@student.avans.nl,2025-06-11T12:06:13+02:00,Starting to remove MudBlazor,7,214,47,261,False,develop
+e4ba50a903d2f497aed1b0907907c786d892c914,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-11T13:17:25+02:00,Start of C4 Component diagram,2,218,0,218,False,develop
+b6d8c274cbc8ffa6eccb83ac2b50d0ca316092ae,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-11T13:50:24+02:00,created all components nu nog connecten,2,31,11,42,False,develop
+b25613d489f925f69acff97353782d6d42b4da92,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-11T14:45:12+02:00,accurate design,2,60,152,212,False,develop
+66798a74ae70afc1c25a028adf34a11f0d6ea907,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-11T15:12:54+02:00,final design (hopefully),2,240,16,256,False,develop
+5a87975128fbcd4d0d9f60ffa98dedd6e6be66eb,JurPurr,j.kempf@student.avans.nl,2025-06-11T18:54:53+02:00,Removing Mudblazor and going to Bootstrap,9,259,192,451,False,develop
+ca9f649f12ab6b9777b9c0200f8d9f544261e312,JurPurr,j.kempf@student.avans.nl,2025-06-11T20:39:00+02:00,Tried fixing the graphs,3,41,5,46,False,develop
+d61b46976a53a96502aa775f163e9f33f5be3385,JurPurr,j.kempf@student.avans.nl,2025-06-12T11:48:19+02:00,Commentated,2,13,13,26,False,develop
+3ad1a7e135497c4217f0eaa4d57c7ae41f9178f7,whoskhoi,khoivaniersel@gmail.com,2025-06-12T12:32:00+02:00,"Started bootstrap changes to barchart  Not fully showing up yet, will fix later",3,164,60,224,False,develop
+83fe880b71b1eb843984f4122aee2bffad293eb9,JurPurr,j.kempf@student.avans.nl,2025-06-12T12:42:31+02:00,Legend for Wastecalendar,1,22,4,26,False,origin/blazor_project_heatmap
+35cc87bc7332d48a3687728860e5a5a5fd48a1d9,whoskhoi,khoivaniersel@gmail.com,2025-06-12T12:43:13+02:00,Added first heatmap components,1,17,0,17,False,develop
+aa64e91b4880f68eba24660dd020e6f963f8c656,JurPurr,j.kempf@student.avans.nl,2025-06-12T14:31:57+02:00,Legend for Wastecalendar,1,22,4,26,False,develop
+a7dc13e28b1fe2c9915a5ff3f033ef4214c53f98,JurPurr,j.kempf@student.avans.nl,2025-06-12T15:01:19+02:00,Fixed the charts!,2,96,48,144,False,develop
+920284115ddcdd1f2d8c60e4dbef0d78c39345a1,JurPurr,j.kempf@student.avans.nl,2025-06-12T15:09:19+02:00,Added new category Trash.,1,11,3,14,False,develop
+52dc7e0565825b64b84ebc32affdf204fb8e6ee3,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-12T15:38:00+02:00,Giving the DbContext to sensoringConnector,2,12,7,19,False,develop
+6b762787447668463709b8ba5dc67160c3a72d0a,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-12T17:08:33+02:00,Sketch,1,12,2,14,False,develop
+32605d4f0318c94ea5d237e6a47fd73a40771f63,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-12T17:40:34+02:00,start Formatting,6,82,64,146,False,develop
+7e93df6a1654b7d1ff696f1c9bb419032b131563,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T10:09:57+02:00,Merge branch 'feature/C4_component_mainAPI' into develop,8,481,32,513,True,develop
+a78c08e13eeee1500d6ac9e0bb8459ad2f82a671,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:11:00+02:00,Merge pull request #25 from ChrisHorler/develop  Develop,40,1609,107,1716,True,develop
+68d1dcd2c04a346b22c4d73261d01b36909f9a46,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:43:51+02:00,Merge pull request #26 from ChrisHorler/develop  Develop,2,370,0,370,True,develop
+a7e989d39fc72273c925eb66d354aff9c1c296e0,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:44:59+02:00,Merge pull request #27 from ChrisHorler/feature/blazor_heatmap  Feature/blazor heatmap,2,39,4,43,True,develop
+a5f8129ac918771a1900d3dd6d5d7874b9efe66b,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:46:15+02:00,Merge pull request #28 from ChrisHorler/develop  Develop,4,406,1,407,True,develop
+40fd7edeb226d167497847240b6d816ec7f3e0a6,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:46:39+02:00,Merge pull request #29 from ChrisHorler/feature/project_bootgraphs  Feature/project bootgraphs,13,629,121,750,True,develop
+0c4a0f520621031c4f9cc1cfdb82110f9e65f059,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:47:42+02:00,Merge pull request #30 from ChrisHorler/develop  Develop,13,919,251,1170,True,develop
+1674ba60272d21566061cffede27faed7fdb27e8,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:48:05+02:00,Merge pull request #31 from ChrisHorler/feature/blazor_project_datepicker  Merge pull request #30 from ChrisHorler/develop,0,0,0,0,True,develop
+84ec7774a7c8d4fad51db757c4d9d96fa569a02d,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T10:49:25+02:00,Merge pull request #32 from ChrisHorler/develop  Develop,15,668,125,793,True,develop
+3cdecf7eb7340dbd7641b20ec195c9203bf35225,JurPurr,j.kempf@student.avans.nl,2025-06-13T13:05:25+02:00,Fixed Datepicker,1,6,76,82,False,origin/feature/blazor_project_WasteCalendar
+c5b70d00bf0303496c34ddb5d2567d9059737b79,ChrisHorler,csh.sammt@gmail.com,2025-06-13T13:46:55+02:00,Updated EF to Remove TrashTypeID  Replaced TrashTypeID with just using TrashType String. Updated Database through EF,9,368,73,441,False,develop
+97aa372b3ea8f1cd88e9a75e9b759d4a32f4ba62,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:00:45+02:00,Merge pull request #33 from ChrisHorler/feature/update_db  Updated EF to Remove TrashTypeID,9,368,73,441,True,develop
+ac202fa7b32aa7c98bb237022dd1ba740b99c250,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:11:41+02:00,disable changes to prepare for merge conflict,16,669,126,795,True,develop
+039130dfbd25f72d3a0f7e6ee376a3c14a187bf8,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:11:53+02:00,Merge remote-tracking branch 'origin/feature/api_connection_backend' into feature/api_connection_backend,0,0,0,0,True,develop
+7843b905de7120d56f04c033986c88dadcc099b4,JurPurr,j.kempf@student.avans.nl,2025-06-13T14:16:48+02:00,Preperations for data from API,1,10,0,10,False,origin/feature/blazor_project_WasteCalendar
+4ca046bec55dc61ab7de74ad2e5022ba5d28c77c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:17:15+02:00,Solve merge conflict,9,187,155,342,True,develop
+85a35d9ed12a33fb660fc584513411efdf3a0473,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:17:32+02:00,Merge pull request #35 from ChrisHorler/develop  Develop,9,374,80,454,True,develop
+7ad582dd9f76b8d4c8efa99acb5a805c6448c481,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:19:29+02:00,readd line,1,1,0,1,False,develop
+fc92267f83014b1593ad58fd74b56126a5ae3221,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:19:55+02:00,Merge pull request #36 from ChrisHorler/feature/fix_develop_merge_problem  readd line,1,1,0,1,True,develop
+67647a00464dad0265d556d0a41f9aa23bd7930e,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:20:16+02:00,Merge pull request #37 from ChrisHorler/develop  Develop,1,1,0,1,True,develop
+84eaec3b51a66a64d20eeedf794da9b4e0404d24,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:21:49+02:00,re-enable changes,1,1,1,2,False,develop
+06b9fc5a05399afa619b1e4c6f95adc732d1c979,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:22:37+02:00,Merge pull request #38 from ChrisHorler/develop  Develop,59,3548,141,3689,True,develop
+25a22e3614178976761c1654eee033b479db87b0,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:25:14+02:00,add link to backend setup md file,1,1,1,2,False,develop
+f2909c64aa55056aabfec4cd23f7380a52d9e050,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:25:50+02:00,Merge pull request #39 from ChrisHorler/feature/global_readme  Feature/global readme,1,13,0,13,True,develop
+5217374ee84bb5f978c0f00c92573c88c9f9ca81,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T14:26:15+02:00,Merge pull request #40 from ChrisHorler/develop  Develop,1,13,0,13,True,develop
+04644531350d1d9dc4dfff71d29075de74f902bb,JurPurr,j.kempf@student.avans.nl,2025-06-13T14:38:10+02:00,Made a first draft for data from API,1,29,1,30,False,origin/feature/blazor_project_WasteCalendar
+c84f3f63fffd39b3981b32715ead157b31c768f6,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:42:30+02:00,tempdetection,1,8,2,10,False,develop
+3d69d23aa8117c2a34742666c29b467d8cbb5605,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:43:06+02:00,global nullable detectionId,1,1,2,3,False,develop
+f9daef754f173fd3a81ab09d491578181907f192,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T14:53:10+02:00,sketch,2,17,7,24,False,develop
+890552f726d60d18752b76ec5e6daf723ab846c2,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T15:36:25+02:00,template,1,59,12,71,False,develop
+43f4c740f2387acb87cd35ad46a0cfa61fd2c25e,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T16:20:56+02:00,Merge branch 'release/Update_Deployment' into main,49,2500,323,2823,True,origin/HEAD -> origin/main
+7f81c5ab6b5a7631b8a521e06fdb4ef36bc5d2d4,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T16:33:46+02:00,Merge branch 'feature/trash_prediction_api' into develop,6,161,23,184,True,develop
+90df761140981c76fd48b19562443827adc01a95,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T16:49:45+02:00,add png version,1,0,0,0,False,develop
+bfde2e801fbcea4687919bbe955abb221c6f3569,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T16:50:27+02:00,Merge pull request #41 from ChrisHorler/feature/c4/png  add png version,1,0,0,0,True,develop
+b7c632a509f041ea71aaf5be97bc15bd1eb87317,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T16:51:09+02:00,Merge pull request #42 from ChrisHorler/develop  Develop,10,239,39,278,True,develop
+5c9d1e8b8a41236414a9641ff6ecb4ab9e025e79,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:02:13+02:00,Created Python API Deployment Files,2,88,0,88,False,develop
+8e5a74dbe884d48de2d18e7f5c6e7f74881a43a9,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:02:29+02:00,Merge branch 'feature/setup_python_deployment' into develop,2,88,0,88,True,develop
+9b5695c57178c9c6ad28cc54fa2f6f445b55f061,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:03:18+02:00,Renamed backendAPI Deployment File,2,101,101,202,False,develop
+3a6f247d8cba77092191d24ad2cda4071e378407,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:03:40+02:00,Merge branch 'release/Setup-Python-API-Deployment' into main,11,350,124,474,True,origin/HEAD -> origin/main
+8d9e7170643d8ea1b529eb815c190ab3d1878791,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:04:54+02:00,Fixed Misspelling in Deployment File,1,1,1,2,False,develop
+8b611c094dd6163fbeb9d98dedb610cd3b0234a0,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:05:01+02:00,Merge branch 'feature/setup_python_deployment' into develop,1,1,1,2,True,develop
+ec6b1e4af8ba56b2e77f725125ba09b7e4350320,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:05:35+02:00,Merge branch 'develop',1,1,1,2,True,origin/HEAD -> origin/main
+4e092bd616a55281395eeb518137ce54d8b08a35,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:19:53+02:00,Added Permissions to Python Deployment,1,4,0,4,False,develop
+ccf89f764055397d94abec63eed396d3172245cb,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:20:03+02:00,Merge branch 'develop',1,4,0,4,True,origin/HEAD -> origin/main
+b5c4fa22579f5e6635c58b31e0b37bd506f00ae0,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:27:05+02:00,Updated Host Port of Python API to not be Occupied,1,2,2,4,False,develop
+e1d5e2579fde8f1e2ec7f4268800614eb7628c05,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:27:12+02:00,Merge branch 'develop',1,2,2,4,True,origin/HEAD -> origin/main
+bda01f30373ae3a8e6689d9a1bcecad2db2c1ead,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:35:24+02:00,Added Hopefully Missing Package,1,2,1,3,False,develop
+e660155ed73957bbad3f7808bff4e76a28b0d8c0,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T17:35:33+02:00,Merge branch 'develop',1,2,1,3,True,origin/HEAD -> origin/main
+a4b283a8150236cb70f1924d24a97587b1ec3a98,ChrisHorler,csh.sammt@gmail.com,2025-06-13T17:58:29+02:00,Setup nginx Config Files  Setup Config Files with Self Signed SSL Configuration,2,31,0,31,False,develop
+eccf6031a5319c743639958bdf4e6e3baf0993e3,ChrisHorler,csh.sammt@gmail.com,2025-06-13T18:00:02+02:00,Created DockerFile for DashboardApp,1,13,0,13,False,develop
+66d18ce358c90152af5ad883eb9c5f946e1e1246,ChrisHorler,csh.sammt@gmail.com,2025-06-13T18:11:22+02:00,Setup Dashboard Deploy.yml,1,99,0,99,False,develop
+287d2f00e298c472e33c37b8c2df4261b321a317,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T18:11:27+02:00,Merge branch 'feature/hosting_dashboard' into develop,4,143,0,143,True,develop
+be625636d75cd3f506333872911286ebfb7f2cfc,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T18:11:37+02:00,Merge branch 'develop',4,143,0,143,True,origin/HEAD -> origin/main
+1a9e0f0b67b679adc4093d231002fb0728803b9f,ChrisHorler,csh.sammt@gmail.com,2025-06-13T18:14:35+02:00,Updated Dockerfile  Updated DockerFile with correct pathing,1,2,2,4,False,develop
+d15f70d01045228ec96aa2d339bf0fa88175d8d1,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T18:14:46+02:00,Merge branch 'develop',1,2,2,4,True,origin/HEAD -> origin/main
+63513b215b79d9b822270efa5c367d610a299c96,ChrisHorler,csh.sammt@gmail.com,2025-06-13T18:23:10+02:00,Updated NGINX config upload,1,31,8,39,False,develop
+eb39e4cc21c313d9c73bce00725151bbd24f069d,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T18:23:20+02:00,Merge branch 'develop',1,31,8,39,True,origin/HEAD -> origin/main
+fccfba7903a2ea2768043b49621ba05fa0bf6003,ChrisHorler,csh.sammt@gmail.com,2025-06-13T18:45:28+02:00,Updated Deployment,1,32,32,64,False,develop
+40b71cd1a9386b5ebdd42a443d313957be52c882,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T18:45:39+02:00,Merge branch 'develop',1,32,32,64,True,origin/HEAD -> origin/main
+2df85bb9238419542b7098c3589f3d9273448911,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T18:49:14+02:00,"the api works technically, but not practically",1,29,11,40,False,develop
+fd93f12915b1123935d3cd0f571c59ff10df46a1,whoskhoi,khoivaniersel@gmail.com,2025-06-13T19:00:10+02:00,Added detection services and model,6,54,2,56,False,develop
+69573b756118ca0911802a096b760ec9c321e906,ChrisHorler,csh.sammt@gmail.com,2025-06-13T19:03:37+02:00,Updated DockerFile  Added a damn trailing /,1,1,1,2,False,develop
+adc92202692339fffb226a9021b7014469b4035f,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T19:03:48+02:00,Merge branch 'develop',1,1,1,2,True,origin/HEAD -> origin/main
+06240cacc66906077c89281269fbda28f29bef3d,whoskhoi,khoivaniersel@gmail.com,2025-06-13T19:05:30+02:00,Http client initialiseren,1,9,0,9,False,develop
+49203e7e83a0a4a8de436b900155858c15905941,whoskhoi,khoivaniersel@gmail.com,2025-06-13T19:12:04+02:00,Fixed missing component error,2,5,1,6,False,develop
+fac3d0a7a523ec142c7293875697e807c261ff15,ChrisHorler,csh.sammt@gmail.com,2025-06-13T19:13:45+02:00,Updated dashboard-deploy file  Dashboard-deploy file is now fully embeded in 1 YAML file,1,12,10,22,False,develop
+2fa787f736718b2db2c79e258bd1de4a11e570d9,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T19:13:56+02:00,Merge branch 'develop',1,12,10,22,True,origin/HEAD -> origin/main
+ba9a1629de9b75031629a2b65c8a0d184b6fa3af,ChrisHorler,csh.sammt@gmail.com,2025-06-13T19:19:01+02:00,Destroys default.conf on Deploy  Removed the default.conf when deploying so it doesn't pick it for the webpage.,1,1,0,1,False,develop
+9961d83697f8ff472350bdf169996e4cd24d2957,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T19:19:14+02:00,Merge branch 'develop',1,1,0,1,True,origin/HEAD -> origin/main
+59baab039bb899082ee24183b331bec678c1515a,whoskhoi,khoivaniersel@gmail.com,2025-06-13T19:22:13+02:00,Added comments for clarity,2,2,1,3,False,develop
+c391360be35a87d163a7ac8800bff3f6be2d1326,ChrisHorler,csh.sammt@gmail.com,2025-06-13T19:34:21+02:00,Moved DockerFile for WebDashboard,2,19,13,32,False,develop
+48d55cc85e38eb1ba0cf88aca4b9f0e7ac4532fe,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T19:34:30+02:00,Merge branch 'develop',2,19,13,32,True,origin/HEAD -> origin/main
+3afee6013b7b8699390b54513722d5f13ea7eb35,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-13T19:35:22+02:00,it now actually works,2,38,15,53,False,develop
+f4eb96564eefabef5d6c83fdd9fcec80664066bb,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-13T19:36:16+02:00,Merge pull request #43 from ChrisHorler/develop  Develop,9,370,102,472,True,develop
+5cab563de88dfccefab7e16ce1c9e3b0448ee9d1,ChrisHorler,csh.sammt@gmail.com,2025-06-13T19:37:36+02:00,Reupdated docker file location  And Paths,2,18,19,37,False,develop
+b11f9678fd751c2e8a699a7e95e01c0cea2dc785,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T19:37:51+02:00,Merge branch 'develop',2,18,19,37,True,origin/HEAD -> origin/main
+a8e378b2b013f531319de0e8d7c4f43bbd8d1e43,whoskhoi,khoivaniersel@gmail.com,2025-06-13T19:38:35+02:00,Deleted old code and fixed https issue,2,7,218,225,False,develop
+7addfda9b4fb10ad43793691c00b41be20b575d2,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:02:39+02:00,Fixed Deployment to work with Blazor Server  Switched Deployment Towards Blazor Server Instead of WASM,2,43,44,87,False,develop
+bc831ce596999d704591f4b0e168b126018c12b9,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T20:02:48+02:00,Merge branch 'develop',2,43,44,87,True,origin/HEAD -> origin/main
+6db4d28e573b1d665b017d27cb7c792ee6001f6c,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:14:36+02:00,Updated Deployment Files,2,2,2,4,False,develop
+cc59d2af294d2cba9a25128f28ee556eb6d3bc4e,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T20:14:46+02:00,Merge branch 'develop',2,2,2,4,True,origin/HEAD -> origin/main
+ec8a92681c74a30d2492411eaffafae2be9c99fe,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:18:23+02:00,Fixed the trailing issue in Deployment File,1,1,1,2,False,develop
+99537ac7fb9dd88269d43890361caaa303bcc6b6,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T20:18:37+02:00,Merge branch 'develop',1,1,1,2,True,origin/HEAD -> origin/main
+6b52e2fd3254409ae817dac4e5354085fd7d954e,JurPurr,j.kempf@student.avans.nl,2025-06-13T20:26:00+02:00,Added Models and services for Wastecalendar endpoint,4,44,1,45,False,origin/feature/blazor_project_WasteCalendar
+9537d0664847db966b500f8a0dbca3025127102e,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:35:58+02:00,Updated Deployment File  Changed Deployment file to Avoid Deployment Cache and Actually use the Modified DockerFile instead of some old bitch,1,9,0,9,False,develop
+8242469d8cd981e1e7053c5a9f3238bea8a3ad22,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T20:36:11+02:00,Merge branch 'develop',1,9,0,9,True,origin/HEAD -> origin/main
+26fbd643a1d0d388bbc1e339e12028c4a85bb2cf,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:44:47+02:00,Another Attempt to Get Deployment to Read the Correct File,2,18,18,36,False,develop
+feeda001fb3e901c1ae5a0c9d7bda0aaae09ff9b,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:45:29+02:00,Deployment Changes to Get it to Read the Correct File V2,2,11,15,26,False,develop
+1b107b5298788aac58b0c33fdf38c86e223e5c72,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T20:45:42+02:00,Merge branch 'develop',3,14,18,32,True,origin/HEAD -> origin/main
+97714dc94d2df260c08b24c42fcb88b8a3ddab34,ChrisHorler,csh.sammt@gmail.com,2025-06-13T20:46:28+02:00,Fixed Sanity Check,1,1,1,2,False,develop
+36904719dbb4d39533f0222fe3cd25bbb674e50a,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T20:46:39+02:00,Merge branch 'develop',1,1,1,2,True,origin/HEAD -> origin/main
+d7e2d97243f9af670fbbc223354fa165991a4b24,ChrisHorler,csh.sammt@gmail.com,2025-06-13T21:02:00+02:00,Fixed BackendAPI Dockerfile  I am stupid,1,8,8,16,False,develop
+c6788368d0aefd558ca179355a81507cc34d3b68,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T21:02:17+02:00,Merge branch 'develop',1,8,8,16,True,origin/HEAD -> origin/main
+e5627a997fdcc9f113d508ab56f409318fffff72,ChrisHorler,csh.sammt@gmail.com,2025-06-13T21:05:54+02:00,Cleanup After My Curfuffle,3,13,21,34,False,develop
+474bebafa91773cd351b348f7b71ddc995f89acc,Christian Scott Horler,csh.sammt@gmail.com,2025-06-13T21:06:04+02:00,Merge branch 'develop',3,13,21,34,True,origin/HEAD -> origin/main
+9d854d8813ba58da43aa84d961c8afbc86a0fd1d,JurPurr,j.kempf@student.avans.nl,2025-06-14T13:05:44+02:00,Corrected code,2,1,2,3,False,origin/feature/blazor_project_WasteCalendar
+2cb605c7d968e302fa6a8f8f551acedff3680ead,Angel Zeng,angelzeng08@hotmail.com,2025-06-14T14:51:16+02:00,Added heatmap functions,4,60,1867,1927,False,develop
+9d6185466762ddd1321a895873c6c9c6a956e2cb,Christian Scott Horler,82846283+ChrisHorler@users.noreply.github.com,2025-06-14T15:30:28+02:00,Merge pull request #44 from ChrisHorler/feature/trash_prediction_api  Added heatmap functions,4,60,1867,1927,True,develop
+bb83cb9a585b6fbf6ecb6a9e4cfd33dfe5bb2282,Angel Zeng,angelzeng08@hotmail.com,2025-06-14T17:07:07+02:00,Added basic trash endpoint,1,21,0,21,False,feature/fetch-db-endpoints
+8241fab690e5a117b159edee5c2a2f639610a509,whoskhoi,khoivaniersel@gmail.com,2025-06-15T19:33:10+02:00,"Added detection service to barchart  Not fully functional yet, still testing.",2,37,3,40,False,develop
+2a82b83750484c29002974c3f704339abe351a37,whoskhoi,khoivaniersel@gmail.com,2025-06-15T19:39:27+02:00,Added working data load button  Currently not connected to the endpoint yet.,1,2,3,5,False,develop
+7f19f31f6c46e0db48863774466bf53f033d1533,whoskhoi,khoivaniersel@gmail.com,2025-06-15T19:57:53+02:00,Added services to line graph,2,24,2,26,False,develop
+eb42d34c2d7751e84cf65a38759d9a09011f58eb,whoskhoi,khoivaniersel@gmail.com,2025-06-15T20:02:01+02:00,Fixed unnecessary JSON showing up on page,1,2,2,4,False,develop
+b0498ad833a8341b3ca93eaf25b77efd23570549,whoskhoi,khoivaniersel@gmail.com,2025-06-15T20:52:51+02:00,Fixed services barchart and graph,2,70,84,154,False,develop
+af04ee69d29c2535b4976d271cfd39f0f749bd00,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T10:20:00+02:00,Merge pull request #45 from ChrisHorler/develop  Develop,7,112,1924,2036,True,develop
+62a4cb26132cb9e5a95475d8426e7928450d6a6c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T10:50:19+02:00,Database stuff,5,89,3,92,False,develop
+0a1be32b35241900056b4cc3fdd58c763ba23650,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:04:53+02:00,model update,2,5,9,14,False,develop
+ceadf0a3218068d9edd66e36d0a4c4e70b100c1d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:05:09+02:00,Merge branch 'feature/osm_models' into develop,2,5,9,14,True,develop
+4f7a45710594539635ed2b3b59f057065655c84e,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T11:06:11+02:00,Merge pull request #46 from ChrisHorler/develop  Develop,2,4,9,13,True,develop
+91f669b59a0eced5a4f29f15f8c09d0e5336eca9,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:08:31+02:00,fix forgotten file,1,1,4,5,False,develop
+573cefbcfb3a4745a127b145c6c73dff6d758434,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:08:40+02:00,Merge branch 'feature/poiConfig_err' into develop,1,1,4,5,True,develop
+84a18c9f8c0847add7ace392b6b0924480491dde,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T11:09:38+02:00,Merge pull request #47 from ChrisHorler/develop  Develop,1,1,4,5,True,develop
+b13db706bb6a40ca35f702a7cacd66639a48f467,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:22:46+02:00,moving things around,1,17,10,27,False,develop
+9d253c6508212e49755b536dd79aa23eb4797a4c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:23:36+02:00,actually fixing it i am dumb lol,1,0,1,1,False,develop
+959f52322b618d1f90fb4d417b77e7e134a1b4e7,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:23:49+02:00,Merge branch 'feature/poiConfig_err' into develop,1,0,1,1,True,develop
+7e51f4fda79260127d7515297609cd8de295aa60,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T11:24:29+02:00,Merge pull request #48 from ChrisHorler/develop  Develop,1,0,1,1,True,develop
+8d938372e2d3d637aad56f0a487a880fc12b404e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:41:47+02:00,create POI from api result,1,30,12,42,False,develop
+c5d523e0d3087134294402c4cf355e16a1ca3f0e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:44:30+02:00,Update models and remove PoiCategory,5,29,27,56,False,develop
+d8a51b532ee9c1ab57230a9815a04e9f77b40545,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T11:44:58+02:00,Merge branch 'feature/poi_model_changes' into develop,5,29,27,56,True,develop
+0d34954411fa555b89360c00955849abc470ac79,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T11:45:42+02:00,Merge pull request #49 from ChrisHorler/develop  Develop,4,3,27,30,True,develop
+685d76a5e2d65fb96cbd3fc362577ea99e5a2c6c,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-16T15:16:37+02:00,database migration,4,391,47,438,False,develop
+ff63b41cb711e02a5cf412d647cd6596a6f0f38d,OldMartijntje_ubuntu,oldmartijntje@gmail.com,2025-06-16T15:17:02+02:00,Merge branch 'feature/poi_model_changes' into develop,4,391,47,438,True,develop
+fc84e0d48324d236b2ff39640e58fda90ae3629a,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T16:12:29+02:00,Merge pull request #51 from ChrisHorler/develop  Develop,4,391,47,438,True,develop
+d65d0eb31d87d1c162c54d9b7926c25cad0c618c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T18:04:37+02:00,make the find query based on osm id (cause we dont want dupes when ppl move their places 1cm),1,1,2,3,False,develop
+4be2067ea1d4ba491bd34e66dbf1c9e318eb7ccb,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T19:41:54+02:00,trying to use the POI in the code,1,22,2,24,False,develop
+c9a9c3578dfd27f84706a1bacc34e90b715eb359,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T19:45:01+02:00,removing distance calculation wtf is Δφλ for black magic forkery,1,0,2,2,False,develop
+d37d1d1e0c70ce7391c6f6d0ada1a0afc910d2e4,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T19:56:05+02:00,Migrations,3,267,6,273,False,develop
+87d2bc6ef380e7f44c567ac4afdc90a58ba32f26,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T19:57:15+02:00,Merge branch 'feature/poiDetection_change' into develop,4,267,8,275,True,develop
+4cbd6a6d2b21ec2b65618c039940d6ff9583bc36,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T19:58:08+02:00,Merge pull request #52 from ChrisHorler/develop  Develop,4,267,8,275,True,develop
+ae6508b7226da27e03e18d113918dd97c4760ca2,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T20:09:15+02:00,adding the detections to db,1,8,29,37,False,develop
+dcd2ea727db77c3f8a528f05d5d75e2aa451880c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T20:25:21+02:00,detecting duplicate data,2,6,1,7,False,develop
+8af1f4a06ae325ecde1aaad627f18aa998c0192d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T20:36:36+02:00,comments,2,27,7,34,False,develop
+b21beff57dabd62aee44d0b52726fc0d8fa506f9,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T21:10:50+02:00,more types of locations,1,40,14,54,False,develop
+5624ba6d50b2504b98b948fc6a0e2401988ad08e,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T21:17:09+02:00,"Update ControlApi/ControlApi/setup.md  👆🤓 urhm actually  Co-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>",1,1,1,2,False,develop
+48fcfed13adbac6fc35e49c9905e55bb7c9a45ea,Angel Zeng,angelzeng08@hotmail.com,2025-06-16T22:05:39+02:00,Reviewed changes,2,3,4,7,False,develop
+2e62476bdc402a43b37125f6f991cb2a1fb182ec,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T22:07:21+02:00,byegones be byegones,1,1,24,25,False,develop
+e08bb7e92fd90da263653378734871402c60be7d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-16T22:08:26+02:00,Merge branch 'feature/remove_standard_weather_api' into develop,1,1,24,25,True,develop
+4b8577f62a20119853d96804caadb5270a8a3e98,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-16T22:08:51+02:00,Merge pull request #54 from ChrisHorler/feature/api_connection_backend  Feature/api connection backend,6,205,32,237,True,develop
+1517017fb9ab77231a456eb1c6c7bcf98f34ea50,ChrisHorler,csh.sammt@gmail.com,2025-06-17T12:05:12+02:00,PredictionAPI-Endpoint,4,122,0,122,False,develop
+24066387ce45c9e88fcc54bed38858f8fd70cc83,Christian Scott Horler,csh.sammt@gmail.com,2025-06-17T12:05:30+02:00,Merge branch 'feature/fastapi_connection_endpoint' into develop,4,122,0,122,True,develop
+18c1d7157424502ec356ce1b1cb5908611541ccc,Christian Scott Horler,csh.sammt@gmail.com,2025-06-17T12:06:12+02:00,Merge branch 'release/feature-deployment' into main,25,1077,2015,3092,True,origin/HEAD -> origin/main
+2bf312a0e5960421a3c13b46ff637d4d197aa219,ChrisHorler,csh.sammt@gmail.com,2025-06-17T13:38:29+02:00,Updated Deployment File  Added Prediction API Env Variable,1,2,0,2,False,develop
+56b2ee95ac9841c6f3a0589ac47808b7f23fbf9b,Christian Scott Horler,csh.sammt@gmail.com,2025-06-17T13:38:41+02:00,Merge branch 'develop',1,2,0,2,True,origin/HEAD -> origin/main
+d554041b06507453c1b5d5db3f0d2b1bd833e1f0,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-17T13:40:28+02:00,Merge pull request #55 from ChrisHorler/develop  Develop,95,16368,267,16635,True,develop
+20fbd0e9e694f2f2af6fd68afc88607d472418b5,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-17T13:41:44+02:00,Merge pull request #56 from ChrisHorler/develop  Develop,5,125,24,149,True,develop
+f84f887e11d5c1bf03b41f61be6c3ff50f41bf55,whoskhoi,khoivaniersel@gmail.com,2025-06-17T22:09:59+02:00,Added try catch to get request,1,11,3,14,False,develop
+7cc9e889c374d58412b6874311ad53eecee49c9b,whoskhoi,khoivaniersel@gmail.com,2025-06-17T22:14:38+02:00,Fixed shadowing of the field chartData,1,1,1,2,False,develop
+87b68fc335809f04e7051cb2d95d82d67848c87a,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T11:13:58+02:00,added TEST MODE,4,44,5,49,False,develop
+e12e2dcb226ceae37af36767e365b78663ee0d33,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T11:35:37+02:00,splitting the test mode from real mode,2,51,37,88,False,develop
+e7df773a81b8044bfc70169867e9ad4d2a12802a,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T11:38:08+02:00,added SENSORING_API_AUTH,1,4,1,5,False,develop
+9c96d4027313cc589d7049630044212e42b4bdb4,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T11:39:38+02:00,check for SENSORING_API_AUTH,1,5,0,5,False,develop
+d1122c6e564cfa8e5af2220a4244f432da6d427d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T12:00:49+02:00,make the TEST MODE part modular,2,51,32,83,False,develop
+02282b7ab33cc290b7ccdaffc39f822a33b02d14,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T12:04:04+02:00,prepare for change in real api logic,1,41,27,68,False,develop
+d5542f4783c4f5ef5cc7aead3b8460a8e8637ebd,ChrisHorler,csh.sammt@gmail.com,2025-06-18T12:47:15+02:00,Added missing {,1,1,1,2,False,develop
+a65cd58228e03c1ae66ad66ffc90ab12ddaf3b72,Christian Scott Horler,csh.sammt@gmail.com,2025-06-18T12:47:33+02:00,Merge branch 'develop',1,1,1,2,True,origin/HEAD -> origin/main
+954e13273724a354dee4d9e9f0f9dbbd022e3a93,ChrisHorler,csh.sammt@gmail.com,2025-06-18T12:50:50+02:00,Fixed Deployment Rule,1,1,1,2,False,develop
+970f02779d779c2ef9cc6dc382533bd5ebbb6a53,Christian Scott Horler,csh.sammt@gmail.com,2025-06-18T12:51:05+02:00,Merge branch 'develop',1,1,1,2,True,origin/HEAD -> origin/main
+2113196394e2acb850f0e38099a1b921e7fc1bee,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T12:52:40+02:00,Database 4 main endpoints shitfest,5,251,15,266,False,feature/fetch-db-endpoints
+cbbc6224aef8b49c94d833e023ef1a95d2e7b6b4,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:03:04+02:00,wip,3,18,0,18,False,develop
+a546af393549018d31250d83157f9e728987fffd,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:03:11+02:00,wip,3,245,9,254,False,develop
+5fb7d4e30b0b146e10c0067dad670915c6b2f06c,ChrisHorler,csh.sammt@gmail.com,2025-06-18T13:05:34+02:00,Added more env variables,1,3,0,3,False,develop
+ca0f70d60d0b40a4810e5e5f8cbcf939ebc92502,Christian Scott Horler,csh.sammt@gmail.com,2025-06-18T13:05:43+02:00,Merge branch 'develop',1,3,0,3,True,origin/HEAD -> origin/main
+f44d9f22b6b2320b7f4ef971a91387840a3fd51c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:10:26+02:00,remove pycache,1,1,1,2,False,develop
+d29106b8acf6c59a7cf44ddc2ab7990ac99c3d72,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:10:47+02:00,e,1,0,0,0,False,develop
+2e628e3e180c8dd5d8328f9208481686add1274f,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T13:14:59+02:00,Removed calendar endpoint confusion,2,0,64,64,False,develop
+b6281b0d2ac4cf13a66feaf6d503e7aee9658325,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:15:55+02:00,top level statement error fix,1,61,59,120,False,develop
+80b907e13865b4524aa098b745a437795dbb5d61,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T13:16:28+02:00,Deletion of prediction DTO,1,0,5,5,False,develop
+2216247e800c1d9d8f6813333800c713b8984be3,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T13:18:21+02:00,Changed DTO names to compatible ones,1,3,3,6,False,develop
+c6d61bec6d86d0869d9a4dca1fff44e5570b32e7,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:19:52+02:00,fix the eoorrors,1,4,4,8,False,develop
+02ebd977e122dbc87c119c04872e58ff4e04bbbd,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T13:26:34+02:00,Changed grouping from week basis to month,1,9,7,16,False,develop
+f2d01abdd13e91f5cf7aa1c8d9265a5a6961b481,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T13:26:54+02:00,Merge remote-tracking branch 'origin/feature/fetch-db-endpoints-v2' into feature/fetch-db-endpoints-v2,1,4,4,8,True,develop
+875767768c8cfa636ade4cf90e0317f0c93dd7ec,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T13:28:16+02:00,AGAIN MONTHS,1,3,2,5,False,develop
+d7d47cdd08e5b79235eb858546bed03556f0ed10,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:30:19+02:00,uncopmmento,1,60,60,120,False,develop
+546249e342cb8894bd1c218567eafad827fcdd7a,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:30:35+02:00,remoov comment,1,0,2,2,False,develop
+08b4ffe4be9cc241f2b30c9cbb182ed0de545d43,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:46:44+02:00,rename,4,32,17,49,False,develop
+a1234e15874d4b094454ce0e5a1485e76a43735e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:48:24+02:00,remove pycache,2,2,0,2,False,develop
+f8abe26460599da80102eac0c8dbf22b5c13cc4b,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T13:48:36+02:00,Merge branch 'feature/gitignorre' into develop,2,2,0,2,True,develop
+a4e93b008d3f0c14a7f645a69dd3980233adc503,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-18T13:49:32+02:00,Merge pull request #58 from ChrisHorler/develop  Develop,3,7,2,9,True,develop
+5bec6d0d2bbbe2abbae2447e3c1ddbc44e288d70,ChrisHorler,csh.sammt@gmail.com,2025-06-18T13:59:07+02:00,Refactored Python Model,5,3,9,12,False,develop
+4264e4dfbdaf3638fc3600a267504332b9293a68,Christian Scott Horler,csh.sammt@gmail.com,2025-06-18T13:59:24+02:00,Merge branch 'develop',7,5,9,14,True,origin/HEAD -> origin/main
+3356d79b58afecb86d8342842628e1f66838e224,JurPurr,j.kempf@student.avans.nl,2025-06-18T14:15:24+02:00,Tried fixing WasteCalendar with chosen date,4,42,11,53,False,origin/feature/blazor_project_WasteCalendar
+b89b636dd13112918a5c8718160ee47ec4c6181e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T14:20:36+02:00,starting jwt logic,2,17,1,18,False,develop
+d5b73def9d90b08df2a4e0374e5f16da627fca87,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T14:31:13+02:00,"fix the ""none new data"" err",1,1,2,3,False,develop
+6e4b2a967e448dde4a610cdd198a5f9499401b0e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T14:37:51+02:00,possible nulls,3,17,5,22,False,develop
+e2aac54160e1664a0aaa9b5d38bf1f3aa8bb8158,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T14:41:39+02:00,turn < into <= I AM SO FUCKING DUUUUUMB TwT,1,1,1,2,False,develop
+e6f545185e97ed92cafabed162075aecc362f01e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T15:20:08+02:00,jwt authentication,2,10,5,15,False,develop
+c7ebf476ceca1477f2f19ac09de8ffb160b479a6,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T15:51:40+02:00,funny,4,1089,0,1089,False,develop
+458adbb7fb39b6e7e2ba3ec51a71b3fdaca278d7,ChrisHorler,csh.sammt@gmail.com,2025-06-18T15:52:34+02:00,Modified Entity Framework,4,277,7,284,False,develop
+29ed2daf1b5f21b5e07aba4b620b67f3658c6fb3,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T16:05:04+02:00,datascience,1,249,99,348,False,develop
+812c1a6ef8d8dc530bd97549e1520216bc56622b,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T16:05:20+02:00,Merge branch 'feature/commit' into develop,4,1239,0,1239,True,develop
+58293b5ffec8ae4cf29b476f364e37a039947c7f,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-18T16:06:49+02:00,Merge pull request #59 from ChrisHorler/develop  Develop,9,1242,9,1251,True,develop
+fc4a2c3d53e808fd9883e24651c2e36381d4c084,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T16:27:35+02:00,add time to poidetection,5,266,2,268,False,develop
+53372f94db3727c68d27d486f378cdad1df18ec9,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T16:28:07+02:00,Merge branch 'feature/add_datetime_to_detectionPOI' into develop,5,266,2,268,True,develop
+257965c2c2a4afba283255f95927bf1a447604df,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T16:28:58+02:00,Added proper endpoints from db,2,64,148,212,False,develop
+12ecb70623d1b102aadd42e3f82aca5349b94264,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T16:29:01+02:00,Merge remote-tracking branch 'origin/feature/fetch-db-endpoints-v2' into feature/fetch-db-endpoints-v2,1,59,61,120,True,develop
+8d0e389256c9298f9e59baa4ea979a07192e39f4,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-18T16:29:55+02:00,Merge pull request #60 from ChrisHorler/develop  Develop,16,1515,13,1528,True,develop
+3332ba3a2e7c6f8fb5b316b2d7d875eb9710ab8c,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-18T16:42:27+02:00,Merge branch 'feature/api_connection_backend' into browning_the_git,8,198,58,256,True,develop
+1dcb2900f27ed24f4a1031fbce4ae14f2d1476dd,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-18T16:42:35+02:00,Merge pull request #61 from ChrisHorler/browning_the_git  Develop,4,264,1,265,True,develop
+1039d275ab629f8194c159dba158e2583be51953,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T16:44:47+02:00,fix merge conflict,2,4,3,7,False,develop
+4482f4b3811787f13b11c66966cea2fd2b1ecb26,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T16:56:15+02:00,Completed the main endpoints db>frontend,1,35,19,54,False,develop
+4bc362cf0fdb4a0200b5f4766b8ce8f972a71bf3,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T17:15:22+02:00,Losing my mind over some fuckass file name,4,19,17,36,False,origin/feature/trash_prediction_api
+a7b7cc7754b63881e7413002df5c4d3f0a9bf7d0,ChrisHorler,csh.sammt@gmail.com,2025-06-18T17:28:47+02:00,Updated Python API for Features,1,19,17,36,False,develop
+7fe8ee1629c1cdd094da8c4534e65fca378e3dec,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T17:40:08+02:00,adding actual translation models,2,12,2,14,False,develop
+85d3c0b11bf8a1890052bf3a37a32f4f44018991,JurPurr,j.kempf@student.avans.nl,2025-06-18T17:50:03+02:00,Changed a few things,4,20,6,26,False,origin/feature/blazor_project_WasteCalendar
+461997bd7644663a5c4900ab970177d212beec4e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-18T18:11:37+02:00,semicolon,1,1,1,2,False,develop
+1f3959b0e5598c9e884aa1c943f9e870f1559cfe,whoskhoi,khoivaniersel@gmail.com,2025-06-18T21:07:59+02:00,Placed enviromental variable,1,7,6,13,False,develop
+5659df02adcbfc8987c844fadda4a15cfac33380,Angel Zeng,angelzeng08@hotmail.com,2025-06-18T21:15:09+02:00,Finalized two endpoints > one input & multiple inputs,2,27,64,91,False,develop
+e3a922e1c3c5d2de9771c1f62c6851570e49b4fa,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T10:21:42+02:00,datascience,4,1321,385,1706,False,develop
+0eb1510eb0d7f87015e495499a9fdb928cfc14fe,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T10:22:02+02:00,Merge branch 'feature/datascience' into develop,4,1321,385,1706,True,develop
+3a063f5cdc4983774ea71fd4f6087a325aabb648,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T10:49:01+02:00,retry when specific error,1,25,2,27,False,develop
+b1c20f1d057c5cec3dad4441d1d48f6c66f8fce3,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T10:49:23+02:00,remove comments,1,0,7,7,False,develop
+df9f4b15745a0714a3c053d2f073864548f34cf4,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T10:49:38+02:00,remove unused DTO,1,1,3,4,False,develop
+b441122a0d677410a9bb4552e9deb3f15ac4b563,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T10:49:58+02:00,finish the actual sensoring api support,2,43,5,48,False,develop
+01b1fb4916d2a2274ab5fd8088fd31f18c99c4ad,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T10:50:45+02:00,Merge pull request #62 from ChrisHorler/develop  Develop,5,1340,402,1742,True,develop
+964b75a8401a28b24d61ee35b887d388e5206d12,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T11:05:18+02:00,Merge pull request #64 from ChrisHorler/develop  Develop,19,2470,30,2500,True,develop
+ab4df35fb5dffb86ffa39b50d9794bef28f9a995,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T11:06:38+02:00,"☝️🤓 Uhm actually  copilot typo fix  Co-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>",1,1,1,2,False,develop
+a1507015a425e5e6eb830b35f46b5cb7287ba053,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T11:07:34+02:00,☝️🤓 copilot typo suggestion 2  Co-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>,1,1,1,2,False,develop
+f18d738dc2d8d8b9fa06b70595f0f921641d4204,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T11:07:50+02:00,☝️🤓 copilot typo suggestion 3  Co-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>,1,1,1,2,False,develop
+082d748992bdd92f597641bb360c0f918d578315,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T11:11:04+02:00,run after 6PM,1,1,1,2,False,develop
+8aa57f2670a532bcc5db980999c5808f36dfe8a0,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T11:18:07+02:00,Actual good copilot suggestion  Co-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>,1,1,1,2,False,develop
+92eeeba79878a5d5f0254383b998cca4606f1da9,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T11:18:33+02:00,☝️🤓 improve readability  Co-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>,1,1,1,2,False,develop
+6d230da6e28a6604b70522fa0e72c657c354a0ca,whoskhoi,khoivaniersel@gmail.com,2025-06-19T11:30:41+02:00,Replaced code to show top 5 locations  Running into some issues kms,1,44,47,91,False,develop
+c4148520a4817cf3bb1c005e39daa458d363cd86,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T11:42:03+02:00,Merge pull request #65 from ChrisHorler/feature/api_connection_backend  Feature/api connection backend,8,262,59,321,True,develop
+f41083dc509c1d77832a7bd5efd613e0aae9e598,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T11:43:53+02:00,Merge pull request #67 from ChrisHorler/develop  Develop,8,262,59,321,True,develop
+579af23b608e9c347a2977fddcecc036e7784042,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T11:48:08+02:00,start of doing it again red == unvalidated,1,1,1,2,False,develop
+ff992b2cb96f6fd0c39a0c1ee918a5da9feb4732,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T11:55:00+02:00,AuthControllerTests,3,1575,771,2346,False,develop
+a8390b9ea029077d9660a643dcbffaa243716411,whoskhoi,khoivaniersel@gmail.com,2025-06-19T11:56:51+02:00,This shit isnt working  bear with me i was testing stuff,1,1,2,3,False,develop
+7c1fadbb78a2d93c94a1fa378b3c191d1dc576c7,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T12:01:43+02:00,AuthDtos,2,80,24,104,False,develop
+be3d2a98fb43590032ea9ef6f21a5cf9987cdecf,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T12:07:55+02:00,user section,2,105,54,159,False,develop
+8e330eefc82515743ce04ce069a4a0b76468d576,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T12:21:39+02:00,Validated ControlApiDbContext,2,139,60,199,False,develop
+262aa9d32206e21279a4e790546b840e5caf298d,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T12:26:20+02:00,Merge branch 'feature/update_ef' into develop,4,277,7,284,True,develop
+9ea26865db9f83cde04f9dda3e69adea09f97975,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T12:30:06+02:00,Merge branch 'feature/trash_prediction_api_v3' into develop,2,27,64,91,True,develop
+539fe831536207a8bd9998ce9a92782c682d6e29,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T12:43:56+02:00,Detection class,2,273,314,587,False,develop
+c5f8fc35166dae07d8c80718466edc77f89741d7,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T12:45:25+02:00,Merge pull request #68 from ChrisHorler/develop  Develop,6,304,71,375,True,develop
+a6cd69208d63573cc30c1e22c17963e83e75b973,ChrisHorler,csh.sammt@gmail.com,2025-06-19T13:29:46+02:00,Setup Caching and DB Check,5,98,33,131,False,develop
+d794f13d4285e867996676fbbbb8100c0ab4db71,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T13:29:51+02:00,Merge branch 'feature/setup_post_aggregation' into develop,5,98,33,131,True,develop
+dc84f84861d64d31744eff949c22a1e27e197d48,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T13:30:06+02:00,Merge branch 'develop',26,3105,163,3268,True,origin/HEAD -> origin/main
+247679b742bc6badd5259b8043388a1440479d52,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T13:32:37+02:00,Merge pull request #69 from ChrisHorler/develop  Develop,5,98,33,131,True,develop
+1809b04ac29f9f8c8f97102addb0c433bf374c23,ChrisHorler,csh.sammt@gmail.com,2025-06-19T13:39:41+02:00,Fixed 422 Error Cause  Added TimeStamp to FeatureList,2,3,0,3,False,develop
+eadf34b1d78c961783e863775b814ed253b91762,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T13:39:50+02:00,Merge branch 'develop',2,3,0,3,True,origin/HEAD -> origin/main
+a583d3f86c842c5910b5e4383d6437fcbcbaa835,ChrisHorler,csh.sammt@gmail.com,2025-06-19T13:44:52+02:00,Fixed Pascal Case Issue  Specified JSON property name,1,2,0,2,False,develop
+6f4d31d065eea1e7dce3d4382d8a59fe33302970,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T13:45:02+02:00,Merge branch 'develop',1,2,0,2,True,origin/HEAD -> origin/main
+2f363ac0e514c382d7694d96aaeee855c50146c7,Angel Zeng,angelzeng08@hotmail.com,2025-06-19T13:53:29+02:00,Moved existing documentation into new folder,35,15195,0,15195,False,develop
+6c1dde381f9734cf9fc65b9b2cbeaa2d0ff28db4,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T13:57:32+02:00,POI & DetectionPOI,2,135,184,319,False,develop
+cbe9579791aa4af329f4b50910420bdbb7b545d5,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T14:03:07+02:00,Merge pull request #70 from ChrisHorler/develop  Develop,22,1990,548,2538,True,develop
+284669af8d9e4a9b5f837d9a680b5ccc571c7ad2,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T14:06:04+02:00,Merge pull request #71 from ChrisHorler/feature/C4_diagrams  Feature/c4 diagrams,35,15195,0,15195,True,develop
+8109759a9f05a8d61785a7b7d07a7d9410d4b513,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T14:06:45+02:00,Merge pull request #72 from ChrisHorler/develop  Develop,37,15200,0,15200,True,develop
+9e039db88daa669fabca9ec7e7b7d2007de75433,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T14:09:22+02:00,moving files,7,1624,2587,4211,False,develop
+0813759520aea240d2633588aa3e1995b86e2625,Angel Zeng,angelzeng08@hotmail.com,2025-06-19T14:16:52+02:00,Dikke whoops in documentation teehee,30,1277,14375,15652,False,origin/feature/C4_diagrams
+fc1b8ec695fb1009103130beadf58d653cb2c3ef,ChrisHorler,csh.sammt@gmail.com,2025-06-19T14:37:44+02:00,Overthrowing And Reworking my Existence,5,69,106,175,False,develop
+952cd3e2ebe6eae0552ee35cbd90d2be46bdc4c4,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T14:37:58+02:00,Merge branch 'develop',40,15264,106,15370,True,origin/HEAD -> origin/main
+9d624e114ee3db79d5d29fdbceb7f1bb074405c6,ChrisHorler,csh.sammt@gmail.com,2025-06-19T14:49:23+02:00,Fixed Typos,2,5,1,6,False,develop
+de170b88c6f86e3d7b124b9e708c060ec888d602,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T14:49:37+02:00,Merge branch 'develop',2,5,1,6,True,origin/HEAD -> origin/main
+c22a26e5037d50851fa0adc471167827e4ee7fc3,ChrisHorler,csh.sammt@gmail.com,2025-06-19T15:51:07+02:00,Added New ERD,1,0,0,0,False,origin/feature/C4_diagrams
+bbf292a8329cc1b1ad0e1333c4a9f82531b8cd7e,Angel Zeng,angelzeng08@hotmail.com,2025-06-19T16:00:16+02:00,Started fixing date picker in nav menu,2,56,24,80,False,develop
+a38019385408d02bd3ea9f99c32edcd4092e5b14,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T16:07:31+02:00,Merge remote-tracking branch 'origin/feature/date_picker_analytics' into develop,2,56,24,80,True,develop
+79f9e1865ddd225ff1873863a3ac7f428a0cd711,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T17:02:09+02:00,Merge remote-tracking branch 'origin/feature/blazor-graphs-functional' into develop,8,213,312,525,True,develop
+971ca9244dcc197f3fcc90fc05cb95664e21ec78,ChrisHorler,csh.sammt@gmail.com,2025-06-19T17:04:25+02:00,Created New Frontend Project FIles  - This is so that we can work of of a clean board,20,574,0,574,False,develop
+627d6daaef24f58225f7ba0e13c381e3c5ffdb71,ChrisHorler,csh.sammt@gmail.com,2025-06-19T17:08:29+02:00,Folder Restructuring,41,648,574,1222,False,develop
+acdacced1015e643f391e907a5dff07a01c25fe1,whoskhoi,khoivaniersel@gmail.com,2025-06-19T17:15:07+02:00,Added frontend documentation,2,0,0,0,False,develop
+05176e475de01a8868a8b83c1062e6899aaafbd5,ChrisHorler,csh.sammt@gmail.com,2025-06-19T17:27:42+02:00,More File Cleanup and Setup,6,4,127,131,False,develop
+f340ff28075ab09ab8885121c5321b72c2d8d459,ChrisHorler,csh.sammt@gmail.com,2025-06-19T17:27:46+02:00,Merge remote-tracking branch 'origin/develop' into develop,2,0,0,0,True,develop
+8763a8579b8c589e760c256dd3ea5b1b83beda6e,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T17:55:03+02:00,Merge pull request #73 from ChrisHorler/develop  Develop,37,866,441,1307,True,develop
+9f0541ff67a426342376b79df1df32f5c647a7b4,ChrisHorler,csh.sammt@gmail.com,2025-06-19T17:55:04+02:00,Foundation Frontend Rework,4,80,74,154,False,develop
+5be3dc98165dcd0f22dcf9b4af8f2be894353e5c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T17:57:12+02:00,¯\_(ツ)_/¯,1,54,52,106,False,develop
+7579700a22678190cd93d7cde501fdd787a8643f,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T18:02:28+02:00,working on prediction class,1,10,7,17,False,develop
+e056bc956cdb93f34451878673a2979f30e21a72,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T18:03:18+02:00,working on prediction class,1,68,63,131,False,develop
+41657e01d6bef90d18ea415e6161e19ef05589e0,ChrisHorler,csh.sammt@gmail.com,2025-06-19T18:03:34+02:00,Centered Buttons,2,20,33,53,False,develop
+3810520d4e0999ec2d71e7375719c3948d5509b7,whoskhoi,khoivaniersel@gmail.com,2025-06-19T18:37:06+02:00,Added files from the old code  Added services and models from previous frontend code.,9,117,6,123,False,develop
+6d45e271d0843f5d9fcb0e8174c9117717c21320,whoskhoi,khoivaniersel@gmail.com,2025-06-19T18:43:17+02:00,Added more old code  In program.cs and from the graph and barchart,5,209,1,210,False,develop
+8f6a9e7c7505750b7abd2108543d51b87d61f36d,ChrisHorler,csh.sammt@gmail.com,2025-06-19T18:53:23+02:00,Waste Calendar Non-Functional Frontend,3,240,7,247,False,develop
+b4dce2d010fa826cb594868d4386033885f40f75,whoskhoi,khoivaniersel@gmail.com,2025-06-19T18:56:40+02:00,Deleted barchart.razor,2,1,0,1,False,develop
+06b44a643191784a7c5ddff53190c796f42a243b,ChrisHorler,csh.sammt@gmail.com,2025-06-19T19:05:19+02:00,Functional Calendar  Created Functional Calendar,1,40,24,64,False,develop
+cb2575ea17ba164733dd3b32a9de04fe18333ce7,whoskhoi,khoivaniersel@gmail.com,2025-06-19T19:06:15+02:00,Added files from the old code  Added services and models from previous frontend code.,9,116,6,122,False,develop
+ba302da00b2b103a4b000b5a76a2eb0505685452,whoskhoi,khoivaniersel@gmail.com,2025-06-19T19:06:15+02:00,Added more old code  In program.cs and from the graph and barchart,5,209,1,210,False,develop
+a30ef0c95e99cbf05af3b0a267067e95d281cb27,whoskhoi,khoivaniersel@gmail.com,2025-06-19T19:06:15+02:00,Deleted barchart.razor,2,1,0,1,False,develop
+2168eb8cd7df4d1b4fa424438cca850c1bbc2883,ChrisHorler,csh.sammt@gmail.com,2025-06-19T19:07:35+02:00,Catchup Merge,3,255,7,262,True,develop
+80d4c05acab2952a2be945a7719b4a4cf2554b82,whoskhoi,khoivaniersel@gmail.com,2025-06-19T19:08:14+02:00,Merge remote-tracking branch 'origin/feature/frontend-analytics' into feature/frontend-analytics,2,41,25,66,True,develop
+91699c0b79898fec69ee992efa893cfa27fdbc88,ChrisHorler,csh.sammt@gmail.com,2025-06-19T19:23:54+02:00,Calendar Stepping,2,66,7,73,False,develop
+dae7a35e666211d9bc142e4e9fdd241e58bbe4da,ChrisHorler,csh.sammt@gmail.com,2025-06-19T19:37:49+02:00,Added More Calendar Functionality,2,26,7,33,False,develop
+aabc2c5b6bed97ffe44b3c6797d7ac0a75c92c52,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T19:49:02+02:00,Merge remote-tracking branch 'origin/feature/frontend-analytics' into feature/waste_page_functionality,9,324,5,329,True,develop
+532505ddfb7aed2b720f1eb7404bc5b55467b02a,whoskhoi,khoivaniersel@gmail.com,2025-06-19T19:49:25+02:00,Removed variable in try catch,1,1,1,2,False,develop
+bb15e97b5d8f35272d9c5cf44188d537c1a53705,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T19:50:38+02:00,Merge remote-tracking branch 'origin/feature/frontend-analytics' into feature/waste_page_functionality,1,1,1,2,True,develop
+93f81117600a459a9a4032f8ce5905f394864fd4,ChrisHorler,csh.sammt@gmail.com,2025-06-19T20:03:48+02:00,Setup CalendarService,2,44,0,44,False,develop
+0d20d48e4b6254c2ab795a62806d25794c131341,whoskhoi,khoivaniersel@gmail.com,2025-06-19T20:13:56+02:00,Changed css,1,14,0,14,False,develop
+0ba1914c36e18d6dd00cbf67172c311718c3d7b6,ChrisHorler,csh.sammt@gmail.com,2025-06-19T20:38:24+02:00,I come in to save the day once again,5,63,5,68,False,develop
+f8ca355dd223b9c21396c764fe487a7c93762065,ChrisHorler,csh.sammt@gmail.com,2025-06-19T20:58:52+02:00,Fixing Shit and THings,1,18,36,54,False,develop
+0278e151848c9d0c3be5cf35b0d524a4e9777acf,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T20:59:26+02:00,Merge remote-tracking branch 'origin/develop',39,1531,336,1867,True,origin/HEAD -> origin/main
+cb55f08db6c661bbb5857e135be77bfd7deded81,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T21:01:45+02:00,color an arrow,2,11,11,22,False,develop
+78df5c3f9d7ca70862ad622e12ccb81b493ac44e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T21:11:33+02:00,Prediction class,2,10,10,20,False,develop
+ebbf54431a752eed77002d8ee1254947a710722f,whoskhoi,khoivaniersel@gmail.com,2025-06-19T21:12:26+02:00,Fixed graph and chart css,2,11,4,15,False,develop
+d210b1e6138f8ca24f475452829b6010a19af946,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-19T21:24:19+02:00,PredictEndpoint,2,145,37,182,False,develop
+1a119130d31332f916e3f2698353375946ccf222,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-19T21:26:09+02:00,Merge pull request #74 from ChrisHorler/develop  Develop,15,816,79,895,True,develop
+81f4822bf8078fab36d99766badd256dac0126f5,Christian Scott Horler,csh.sammt@gmail.com,2025-06-19T21:28:32+02:00,Merge remote-tracking branch 'origin/feature/fetch-db-endpoints-v2' into develop,3,121,1,122,True,develop
+28d0ead435d9aa504a23c6358768a69ab0531d40,ChrisHorler,csh.sammt@gmail.com,2025-06-20T12:57:12+02:00,Calendar Connected to Backend API Endpoint,3,78,72,150,False,develop
+84ae23d12c6028a3b0ee315bb02483bc7d1367b5,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-20T13:20:26+02:00,Merge pull request #75 from ChrisHorler/develop  Develop,3,121,1,122,True,develop
+ad52fecfd4d60c1749c7cfcf2fafba0912e49f47,ChrisHorler,csh.sammt@gmail.com,2025-06-20T13:36:11+02:00,The Speed Run Strat,2,58,10,68,False,develop
+f853fe45ee69c70f0d1b7ab642718a2399cfcbf9,Angel Zeng,angelzeng08@hotmail.com,2025-06-20T13:56:52+02:00,Fixed DTO file,1,9,14,23,False,develop
+db296b9021466e3917ab4a6cec2fabd00f3cbf38,Angel Zeng,angelzeng08@hotmail.com,2025-06-20T14:09:54+02:00,I SURE HOPE THE DTO'S ARE BEING USED,1,10,7,17,False,develop
+9eca11fe16d02cdbbe92f102380146ac14515f55,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T14:14:33+02:00,"updated something in the class diagram idk it was staged for 30m, i forgor",2,73,27,100,False,develop
+2c0a8579fb1d87065165148af4b23815faef1b1b,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T14:31:37+02:00,stach changes,3,61,2,63,False,develop
+f1333eb293ffa7562bc7cf42191d87bbafc9189c,Angel Zeng,angelzeng08@hotmail.com,2025-06-20T14:37:59+02:00,I ensure that the DTO's are matching up with the endpoints,2,10,8,18,False,develop
+d645d8e5bc090b967561d0ae5f226a7ba40478dc,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T14:59:11+02:00,Degug enpoint with overrides,2,13,4,17,False,develop
+a8603be4460fad38c91ca78dfababcdaf90e334e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T15:00:53+02:00,Merge branch 'feature/manual_override' into develop,3,69,1,70,True,develop
+2305f543b7b2b5dfa4e19984919ceda895b419eb,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T15:08:53+02:00,actively handle errors  this shouldve been added 1 week ago xD,1,53,42,95,False,develop
+d413b6fa82210225965f99f92cb126f909675e1f,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T15:09:13+02:00,Merge branch 'feature/safely_handling_rate_limits' into develop,1,53,42,95,True,develop
+a2b20435f56c3275c25c507e88213a8bec7abece,ChrisHorler,csh.sammt@gmail.com,2025-06-20T15:28:55+02:00,Added Global Memory Caching,3,28,7,35,False,develop
+88371a1b140aa585a1e8e992328a5e7becec7655,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-20T15:42:48+02:00,Merge pull request #76 from ChrisHorler/develop  Develop,3,122,43,165,True,develop
+979a9b811da522f17bc68f4d69a53c736f237896,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T15:56:05+02:00,Estimated items,1,8,1,9,False,develop
+38f3f498f830472a18709dc11f66053c39be18c5,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T15:56:27+02:00,estimated time,1,11,3,14,False,develop
+f51e5c39eab0430390dcd9a2c883152fe619c9c4,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T16:13:05+02:00,it now works it required summoning my inner shulker,1,25,8,33,False,develop
+169bf3cd8ec35e62d9fdf94e84883dada6b6817f,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T16:13:21+02:00,Merge branch 'feature/pully_counter' into develop,1,33,1,34,True,develop
+b33a9e16d6d609e7bd6c04628f462edb8cde0119,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T16:18:43+02:00,periodically saving to the db,1,6,0,6,False,develop
+a0c4a01ac009176ffedbef672bf234f8ecf2ccec,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T16:18:50+02:00,Merge branch 'feature/operation_db_fix' into develop,1,6,0,6,True,develop
+50a10eea05fb1abdc0b77c0d9c1b66067b37e6da,ChrisHorler,csh.sammt@gmail.com,2025-06-20T16:18:50+02:00,Broken Ah Calendar Fun Facts,5,144,58,202,False,develop
+dbda9f6b39e5bc34a8a54308e83429be35fcb8ee,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-20T16:22:32+02:00,Merge pull request #77 from ChrisHorler/develop  Develop,6,281,44,325,True,origin/HEAD -> origin/main
+e03b84fff6ee7bd8d83f9e72f4b81a4a22ed7a78,whoskhoi,khoivaniersel@gmail.com,2025-06-20T16:34:30+02:00,Removed DataService.cs,2,0,35,35,False,develop
+cbb72c3f8cde2382230fb7ded020065305ab1e0b,Christian Scott Horler,82846283+ChrisHorler@users.noreply.github.com,2025-06-20T16:36:13+02:00,Merge pull request #78 from ChrisHorler/feature/frontend-analytics  Merge frontend-analytics to develop,4,11,39,50,True,develop
+b5463f7de1362845730c0a2ef3475b9e2fb25512,Christian Scott Horler,csh.sammt@gmail.com,2025-06-20T16:36:50+02:00,Merge branch 'feature/waste_page_functionality' into develop,7,244,83,327,True,develop
+03e65c4e2aa0e11fd773fd20231024b562c7452e,ChrisHorler,csh.sammt@gmail.com,2025-06-20T16:37:24+02:00,Removed Shit Singleton,1,0,1,1,False,develop
+b3f7b3109a58a150f2ecbee967c5f0c99fbe54f7,Angel Zeng,angelzeng08@hotmail.com,2025-06-20T17:02:21+02:00,Added time query function I stole from Chris' PredictionEndpoint code,2,45,34,79,False,develop
+2dacac6c624c818fd311e62cf47fa068e0f049ca,ChrisHorler,csh.sammt@gmail.com,2025-06-20T17:07:40+02:00,Added Scuffed DatePicker to NavBar,5,106,27,133,False,develop
+e247615379ffd35fc9e1fa134af5141a3e651a81,Christian Scott Horler,csh.sammt@gmail.com,2025-06-20T17:07:56+02:00,Merge branch 'feature/fetch-db-endpoints-v2' into develop,2,56,45,101,True,develop
+43f6d4f95dfbcd9423733cf66d7bfd7c42eb686a,Christian Scott Horler,csh.sammt@gmail.com,2025-06-20T17:08:31+02:00,Merge branch 'develop',12,311,168,479,True,origin/HEAD -> origin/main
+19e759d1577dd5decb565440b4acef793ca4ce31,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T17:18:48+02:00,add more logging to try n fix api issue,1,16,8,24,False,develop
+450e98f229a47e55f7a6535ef407af4ecfc34b0b,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T17:18:57+02:00,Merge branch 'feature/logging' into develop,1,16,8,24,True,develop
+dc7a9b3fb483074734c0eaa2c91f64151ddb0d6a,ChrisHorler,csh.sammt@gmail.com,2025-06-20T17:39:23+02:00,"Fixed, Endpoint Issues, Let's stop using older features just incase",1,2,2,4,False,develop
+a9985076c0fcd5ec6a4c8ef772341f4059718320,Christian Scott Horler,csh.sammt@gmail.com,2025-06-20T17:39:36+02:00,Merge branch 'develop',2,18,10,28,True,origin/HEAD -> origin/main
+395f2076b595d86fd1e8bc735ba43332535d62b6,Christian Scott Horler,csh.sammt@gmail.com,2025-06-20T17:41:54+02:00,Merge branch 'feature/waste_page_functionality' into develop,5,106,27,133,True,develop
+89b22879adbddd836cdc3e12a896c15e12416327,ChrisHorler,csh.sammt@gmail.com,2025-06-20T17:50:22+02:00,Fixed Mistake in .YML file,1,1,1,2,False,develop
+6a2476885c24a3c6ade03ae17a681698961c2183,Christian Scott Horler,csh.sammt@gmail.com,2025-06-20T17:50:33+02:00,Merge branch 'develop',6,107,28,135,True,origin/HEAD -> origin/main
+370bcbec357ed999a451e724a24b40acfe5d10ad,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-20T18:26:08+02:00,Merge pull request #79 from ChrisHorler/develop  Develop,16,454,186,640,True,develop
+8db228b404787257cea70351f62c5df2a0a83251,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T18:55:37+02:00,initiating all (CURRENT) classes,2,152,54,206,False,develop
+ab1c57bb3ce703ca09c29b67a9b5d7b6a4367191,ChrisHorler,csh.sammt@gmail.com,2025-06-20T19:08:57+02:00,Shitty Ass Code Changes,6,73,47,120,False,develop
+9200d8e029ba882f31f5ef6bdb5486f4d4cf9982,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T19:31:39+02:00,PredictionApiCLient,2,88,19,107,False,develop
+4cc0356b175a26c4f8d6ca3a27e614b2c15a71cc,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T19:35:29+02:00,CalendarPredictionBatchResponse,2,21,5,26,False,develop
+c59c2aa628b3393e40d6c06da5179bf87709ecc3,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T19:54:46+02:00,CalendarFeaturesRequest,2,52,13,65,False,develop
+895f0b608fbf42755c9795c683787d55517cdc0c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T19:58:57+02:00,CalendarFeaturesRequest,2,2,2,4,False,develop
+9a0f07e9707e9b15e3a54795c98a217bdecd1bed,Angel Zeng,angelzeng08@hotmail.com,2025-06-20T20:09:27+02:00,"Changed entire model, fixed to corresponding variable names,  Also removed that fuckass instance of 527 instances in a day, that messes up my goddamn standard deviation and wants to fuck my model in the ass. Thank you",8,13821,22,13843,False,develop
+abd11b4f3214ec9201a0778b3540267073fe5420,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T20:32:20+02:00,idfk lmao,2,2,2,4,False,develop
+0b0984aa03893744e167654f37ba1a60eb287210,whoskhoi,khoivaniersel@gmail.com,2025-06-20T20:32:39+02:00,Injected DateService,1,1,0,1,False,develop
+9552947526866b17837f3eaef0ecee04a2998b91,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T21:01:59+02:00,Reach the api touchdown,1,9,2,11,False,develop
+637075222d5381f9745d18d739e919d0f384ef02,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T21:03:29+02:00,redundency,1,0,3,3,False,develop
+8a73b85aa5b1569f17b3ca20a4303a3895160724,Angel Zeng,angelzeng08@hotmail.com,2025-06-20T21:05:35+02:00,Changed model from mean+std*alpha to using quantiles.,6,30,44,74,False,develop
+b2bb8188ca2632e968e82f13d4cb24075de76ebe,Christian Scott Horler,csh.sammt@gmail.com,2025-06-20T21:19:15+02:00,Merge branch 'feature/adding_testdata_trashprediction_api' into develop,8,13821,22,13843,True,develop
+d7753ad489611bfcd522113ff690d55b79c595ed,Christian Scott Horler,csh.sammt@gmail.com,2025-06-20T21:21:21+02:00,Merge remote-tracking branch 'origin/feature/adding_testdata_trashprediction_api' into develop,6,30,44,74,True,develop
+979abfc70d04707fed67ca69f7f854832ad454c8,Christian Scott Horler,csh.sammt@gmail.com,2025-06-20T21:22:27+02:00,Merge branch 'develop',12,13885,74,13959,True,origin/HEAD -> origin/main
+bcb6b2d019fb317ff5f5f405a7937b461bee9886,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T21:29:38+02:00,rename files teehee,6,111,94,205,False,develop
+ad3b39936bbe6ad466557338c9630a95939b9077,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T21:31:11+02:00,remove comments,1,1,3,4,False,develop
+198672a4e72ac0976df603e828c97a57abf65f0f,ChrisHorler,csh.sammt@gmail.com,2025-06-20T21:56:36+02:00,"Removed Template Home, Now it be da calendar now overview",4,194,200,394,False,develop
+281bb97363b3f91ff3732ca86086aaadaba57afd,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T22:04:12+02:00,Fixg graph,1,61,53,114,False,develop
+d794ad0abdeea0d2aa24beb13f6fff7aaddaff4c,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-20T22:24:11+02:00,merge same named places,1,18,1,19,False,develop
+8908776bd0b88c7bf4ac1af66da4bd06c2e32876,whoskhoi,khoivaniersel@gmail.com,2025-06-20T22:58:49+02:00,Added linegraph dto,4,37,11,48,False,develop
+5dd6866faa9dc1565dd8509101520de61368d2ea,ChrisHorler,csh.sammt@gmail.com,2025-06-20T23:02:19+02:00,Calendar my changes,4,29,23,52,False,develop
+dbc753a21f71081b0c657506975ed6f3c1e20b4d,whoskhoi,khoivaniersel@gmail.com,2025-06-20T23:05:16+02:00,Added timestamp field,1,1,3,4,False,develop
+21b65e7154689afb747aac6669247aae173f1239,Christian Scott Horler,82846283+ChrisHorler@users.noreply.github.com,2025-06-20T23:15:57+02:00,Merge pull request #80 from ChrisHorler/feature/frontend-analytics-graph-barchart  Merge to develop,9,154,85,239,True,develop
+5aa9abc7fcdf4c0d501828f00a4438106ac13b8f,ChrisHorler,csh.sammt@gmail.com,2025-06-20T23:16:52+02:00,Added Work In Progress Dark Mode,5,140,76,216,False,develop
+028bcf0dece0f26890e4120489692cb954d83cb6,ChrisHorler,csh.sammt@gmail.com,2025-06-21T00:25:29+02:00,"A Sort of Kinda Functioning Dark Mode, Careful he do bite",8,127,44,171,False,develop
+88da344eb1694d8a475c1ee04262691341762844,whoskhoi,khoivaniersel@gmail.com,2025-06-21T11:13:41+02:00,Added linegraph to services,3,7,5,12,False,feature/frontend-analytics-graph-barchart
+85649b84d23f94b085900a7531077d1813d0faaf,whoskhoi,khoivaniersel@gmail.com,2025-06-21T11:23:48+02:00,Added service injections,1,3,0,3,False,feature/frontend-analytics-graph-barchart
+bced93e68cc7ed2e6dcf51701996f1d5fe409b88,whoskhoi,khoivaniersel@gmail.com,2025-06-21T11:33:25+02:00,Changed OnInitialized method  Also added colours to make angel proud,1,44,9,53,False,feature/frontend-analytics-graph-barchart
+36652ad57eaf487e73d146a5d41e17dad1f008b1,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-21T11:40:45+02:00,Merge pull request #81 from ChrisHorler/develop  Develop,28,14465,438,14903,True,develop
+46a1ecb0beab2b9323ec6c652b1ee4f416394720,whoskhoi,khoivaniersel@gmail.com,2025-06-21T12:02:17+02:00,Added graph data loading  this shit is being funky,2,9,15,24,False,feature/frontend-analytics-graph-barchart
+43b9c3a78896f327ffcc95880d87537322a7cc4d,whoskhoi,khoivaniersel@gmail.com,2025-06-21T12:08:07+02:00,Changed error line,1,1,1,2,False,feature/frontend-analytics-graph-barchart
+9af70c06081d373d0b6db682d03865cd9d13a992,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T12:44:17+02:00,connect graph to analytics page,2,15,10,25,False,feature/frontend-analytics-graph-barchart
+b4499663db701c4e3ec64c4f30fcce6644ec532e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T12:55:51+02:00,logging,1,4,0,4,False,feature/frontend-analytics-graph-barchart
+3e5f417844596ea76fc4020f17570010ddb1e359,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T12:58:13+02:00,button superiority,1,3,3,6,False,feature/frontend-analytics-graph-barchart
+b99e825a267e47e27df73dbae1c1c1c39c7db3fc,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T15:10:13+02:00,cancellationToken,2,174,96,270,False,develop
+fa2287aee3971f1ca0bdfccd6850ecb95a6932bd,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T15:22:11+02:00,DailyBackgroundService,2,72,14,86,False,develop
+69f39a0b44a088ce5b796b289f27504344eb0a77,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T15:23:58+02:00,bold,2,22,22,44,False,develop
+aafc1c68d3718664443114a65412306f4581602d,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T15:40:02+02:00,remove doubles,2,38,42,80,False,develop
+88a9fd4dd3a3195c9cea4f1a329fb7ee41f4eb89,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T16:11:02+02:00,SensoringConnector,2,174,44,218,False,develop
+84a061415e6c7a433162969fe47589e27a43f4df,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T16:23:59+02:00,ISensoringDataGrabber,3,105,32,137,False,develop
+0de6f038b11e34765a8ff0ec173455b1bc90a4d4,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T16:29:03+02:00,SensoringConvertor,2,66,16,82,False,develop
+8fea11b20cd104eedfa964c6c8bf6a75372f9ece,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T16:41:39+02:00,SensoringApiDtos,2,148,17,165,False,develop
+749bff3d78f100547b798fbbe845b7064ba5f4e1,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T17:04:06+02:00,DatabaseEndpointsDTO.cs,3,138,34,172,False,develop
+04765c2d59e59123237423c91e4ffdd5391499fa,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T17:09:58+02:00,Done?,2,49,23,72,False,develop
+3126980ca14111b01d9e9ad356c2b08d5523e3ce,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T17:12:20+02:00,exported,4,0,0,0,False,develop
+582cee3fbcd0c428c81c379df6c961eea42cdebd,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T17:13:09+02:00,remove pdf cause it sucks ass,1,0,0,0,False,develop
+a3fcb7cae5577e95fb8d64d111a9c4dcf1fd03ac,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T17:13:33+02:00,Merge branch 'feature/class_diagram' into develop,12,2659,1690,4349,True,develop
+354d8b17ff1e945f986d374e47b32da17d38ca41,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T17:28:40+02:00,Start van da klote C4 code model,2,152,0,152,False,develop
+df0e030938610a96e5d6a6f3efd39b761d885c5a,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T17:49:20+02:00,Hopelijk is deze shit nu af ._.,2,184,86,270,False,develop
+47f337c3ad24834191fc517e0d153d4136cb360a,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T17:49:56+02:00,png,1,0,0,0,False,develop
+4e8a522068fe22157e64ad11730c262805fe852e,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T17:50:24+02:00,Merge branch 'feature/c4/backend/code-level' into develop,3,250,0,250,True,develop
+6b62a1e19204008b8373e147214e686be68cf393,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T17:52:03+02:00,"whoops, wrong folder",2,0,0,0,False,develop
+982e62ee51ec6e32bf66eba6f0ba9ac4378a44f6,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T17:54:02+02:00,update old c4 component level,3,66,66,132,False,develop
+1b7a2a6a657cc1b5af11336c15d5f7bf30a61651,oldmartijntje_TH,oldmartijntje@gmail.com,2025-06-21T17:54:08+02:00,Merge branch 'feature/c4/backend/component-level/update' into develop,5,66,66,132,True,develop
+435fb58d4d62b8f646eaf0e6206d49b2d4a1b581,Martijn,64547812+oldmartijntje@users.noreply.github.com,2025-06-21T19:45:19+02:00,Merge pull request #82 from ChrisHorler/develop  Develop,121,34843,2267,37110,True,feature/datascience
