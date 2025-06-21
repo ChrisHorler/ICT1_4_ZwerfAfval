@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
   <diagram name="Page-1" id="39hm194q-l13xccRxlsW">
-    <mxGraphModel dx="5986" dy="2959" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="6649" dy="3362" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -309,7 +309,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="iMFxXNbG9mVQUTvpo4ha-43" value="DbContextOptions" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;fillColor=#f5f5f5;gradientColor=#b3b3b3;strokeColor=#666666;fontColor=#000000;" parent="1" vertex="1">
-          <mxGeometry x="-1440" y="-230" width="260" height="60" as="geometry" />
+          <mxGeometry x="-1440" y="-240" width="260" height="60" as="geometry" />
         </mxCell>
         <mxCell id="iMFxXNbG9mVQUTvpo4ha-93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=none;endFill=0;startArrow=diamondThin;startFill=0;startSize=22;exitX=1;exitY=0.25;exitDx=0;exitDy=0;fontColor=#FF0000;" parent="1" source="iMFxXNbG9mVQUTvpo4ha-50" target="e_NueUDCwhWNqrkMhHox-14" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -870,7 +870,7 @@
         <mxCell id="yWFbXETGNYuAG4VHQHp2-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endSize=22;endArrow=diamondThin;endFill=1;" edge="1" parent="1" source="iwyEC6983UlKEHwNcQ2G-74" target="UlhQks0yLPX1q9XYhBIK-9">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="-800" y="-565" />
+              <mxPoint x="-860" y="-620" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -1057,25 +1057,83 @@
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="UlhQks0yLPX1q9XYhBIK-4" value="&lt;div style=&quot;text-align: left;&quot;&gt;TestModeApiTrashItem&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-980" y="-1349" width="260" height="60" as="geometry">
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=diamondThin;endFill=1;strokeWidth=2;endSize=22;fontColor=default;" edge="1" parent="1" source="UlhQks0yLPX1q9XYhBIK-4" target="UlhQks0yLPX1q9XYhBIK-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-530" y="-250" />
+              <mxPoint x="-530" y="-250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-4" value="&lt;div style=&quot;text-align: left;&quot;&gt;TestModeApiTrashItem&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-760" y="-240" width="480" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="UlhQks0yLPX1q9XYhBIK-5" value="&lt;div style=&quot;text-align: left;&quot;&gt;TestModeApiResponse&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-980" y="-1469" width="260" height="60" as="geometry">
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-56" value="+TestModeApiTrashItem(string, string, float, float?, float? float, float, float, float): record" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="UlhQks0yLPX1q9XYhBIK-4">
+          <mxGeometry y="30" width="480" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=diamondThin;endFill=1;endSize=22;" edge="1" parent="1" source="UlhQks0yLPX1q9XYhBIK-5" target="iwyEC6983UlKEHwNcQ2G-74">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1080" y="-450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=diamondThin;endFill=1;endSize=22;" edge="1" parent="1" source="UlhQks0yLPX1q9XYhBIK-5" target="UlhQks0yLPX1q9XYhBIK-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-810" y="-700" />
+              <mxPoint x="-810" y="-700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-5" value="&lt;div style=&quot;text-align: left;&quot;&gt;TestModeApiResponse&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-960" y="-480" width="380" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="UlhQks0yLPX1q9XYhBIK-6" value="&lt;div style=&quot;text-align: left;&quot;&gt;TestModeApiResponseData&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-1630" y="-1440" width="260" height="60" as="geometry">
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-52" value="+TestModeApiResponse(List&amp;lt;TestModeApiResponseData&amp;gt;): record" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="UlhQks0yLPX1q9XYhBIK-5">
+          <mxGeometry y="30" width="380" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=diamondThin;endFill=1;strokeWidth=2;endSize=22;" edge="1" parent="1" source="UlhQks0yLPX1q9XYhBIK-6" target="iwyEC6983UlKEHwNcQ2G-74">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1120" y="-330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-6" value="&lt;div style=&quot;text-align: left;&quot;&gt;TestModeApiResponseData&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-760" y="-360" width="460" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="UlhQks0yLPX1q9XYhBIK-7" value="&lt;div style=&quot;text-align: left;&quot;&gt;ApiTrashItem&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=#FF0000;" parent="1" vertex="1">
-          <mxGeometry x="-940" y="-1229" width="260" height="60" as="geometry">
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-55" value="+TestModeApiResponseData(string, string, int, int, TestModeApiTrashItem): record" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="UlhQks0yLPX1q9XYhBIK-6">
+          <mxGeometry y="30" width="460" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#60a917;strokeColor=#2D7600;strokeWidth=2;endArrow=diamondThin;endFill=1;endSize=22;" edge="1" parent="1" source="UlhQks0yLPX1q9XYhBIK-7" target="iwyEC6983UlKEHwNcQ2G-74">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-940" y="-570" />
+              <mxPoint x="-940" y="-570" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#60a917;strokeColor=#2D7600;strokeWidth=2;endArrow=diamondThin;endFill=1;targetPerimeterSpacing=-1;endSize=22;" edge="1" parent="1" source="UlhQks0yLPX1q9XYhBIK-7" target="iwyEC6983UlKEHwNcQ2G-73">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-680" y="-700" />
+              <mxPoint x="-1040" y="-700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UlhQks0yLPX1q9XYhBIK-7" value="&lt;div style=&quot;text-align: left;&quot;&gt;ApiTrashItem&lt;/div&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-760" y="-600" width="480" height="60" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="yWFbXETGNYuAG4VHQHp2-54" value="+TestModeApiResponse(string, string, float, float?, float? float, float, float, float): record" style="text;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="UlhQks0yLPX1q9XYhBIK-7">
+          <mxGeometry y="30" width="480" height="30" as="geometry" />
         </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-8" value="&lt;span style=&quot;font-weight: 700;&quot;&gt;&amp;lt;&amp;lt;interface&lt;/span&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;div&gt;&lt;b&gt;ISensoringDataGrabber&lt;/b&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
           <mxGeometry x="-1280" y="-1120" width="530" height="60" as="geometry">
