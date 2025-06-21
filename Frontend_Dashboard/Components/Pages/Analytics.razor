@@ -17,10 +17,9 @@
 <div class="analytics-container">
     <div class="analytics-layout">
         <BarChart @ref="barChart" Width="800" Class="mb-4 barChart"></BarChart>
-        <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadDataIntoChart">Load data</Button>
+        <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadData">Load data</Button>
 
         <Graph Data="graphData" @ref="graphComponent" />
-        <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadGraphData">Load graph</Button>
     </div>
 </div>
 
@@ -146,8 +145,9 @@
         
     }
 
-    private async Task LoadGraphData()
+    private async Task LoadData()
     {
+        await LoadDataIntoChart();
         graphData = await AnalyticsDataService.GetLineGraphDataAsync();
         if (graphComponent != null)
         { 
