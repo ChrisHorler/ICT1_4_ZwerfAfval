@@ -19,7 +19,7 @@
         <BarChart @ref="barChart" Width="800" Class="mb-4 barChart"></BarChart>
         <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadDataIntoChart">Load data</Button>
 
-        <Graph Data="graphData" />
+        <Graph Data="graphData" @ref="graphComponent" />
         <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadGraphData">Load graph</Button>
     </div>
 </div>
@@ -30,6 +30,7 @@
     private BarChartOptions barChartOptions = default!;
     private ChartData chartData = default!;
     private List<LineGraphDto> graphData = new();
+    private Graph? graphComponent;
 
     private readonly string[] defaultColors = new[]
     {
@@ -62,8 +63,6 @@
 
     private async Task LoadDataIntoChart()
     {
-        // TODO:
-        
         List<BarChartDto> data = await AnalyticsDataService.GetBarChartDataAsync();
         data = data
             .GroupBy(d => new { d.name, d.category })
@@ -150,5 +149,10 @@
     private async Task LoadGraphData()
     {
         graphData = await AnalyticsDataService.GetLineGraphDataAsync();
+        if (graphComponent != null)
+        { 
+            graphComponent.LoadDataIntoGraph();
+        }
+        
     }
 }

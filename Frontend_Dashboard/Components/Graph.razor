@@ -13,12 +13,7 @@
 
 @if (Data != null && Data.Any())
 {
-    <ul>
-        @foreach (var item in Data)
-        {
-            <li>@item.category</li>
-        }
-    </ul>
+    <p> data currently loaded</p>
 }
 else
 {
@@ -44,12 +39,13 @@ else
         "rgba(255, 159, 64, 0.5)"
     };
 
-    protected override void OnInitialized()
+    public void LoadDataIntoGraph()
     {
         if (Data != null && Data.Any())
         {
             // Get trash types
             var types = Data
+                .Where(d => d.TrashTypeCounts != null)
                 .SelectMany(d => d.TrashTypeCounts.Keys)
                 .Distinct()
                 .ToList();
@@ -107,6 +103,11 @@ else
                 },
                 Responsive = true
             };
+    }
+
+    protected override void OnInitialized()
+    {
+        this.LoadDataIntoGraph();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
