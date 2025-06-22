@@ -1,7 +1,8 @@
-@page "/"
 @page "/overview"
+@attribute [Authorize]
 @using Frontend_Dashboard.Components.Models
 @using Frontend_Dashboard.Components.Services
+@using Microsoft.AspNetCore.Authorization
 @rendermode InteractiveServer
 
 @inject CalendarService     calendarService

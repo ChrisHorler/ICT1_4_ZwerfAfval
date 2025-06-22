@@ -1,0 +1,44 @@
+@page "/"
+@attribute [AllowAnonymous]
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+@using Frontend_Dashboard.Components.Models
+@using Frontend_Dashboard.Components.Services
+@using Microsoft.AspNetCore.Authorization
+
+<h2>Login</h2>
+
+@if (!string.IsNullOrEmpty(Error))
+{
+    <p style="color:red">@Error</p>
+}
+
+<EditForm Model="_model" OnValidSubmit="HandleLogin">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <InputText @bind-Value="_model.email" placeholder="E-mail" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <InputText @bind-Value="_model.password" type="password" placeholder="Password" class="form-control" />
+    </div>
+
+    <button class="btn btn-primary w-100">Login</button>
+</EditForm>
+
+@code
+{
+    private readonly LoginDto _model = new();
+    private string?  Error;
+
+    private async Task HandleLogin()
+    {
+        Error = null;
+        var ok = await Auth.LoginAsync(_model.email, _model.password);
+        if (ok) Nav.NavigateTo("/overview");
+        else    Error = "Invalid e-mail or password";
+    }
+}

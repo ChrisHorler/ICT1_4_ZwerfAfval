@@ -1,4 +1,44 @@
-﻿<!DOCTYPE html>
+﻿@using Frontend_Dashboard.Components.Layout
+@using Frontend_Dashboard.Components.Services
+@inject AuthService Auth
+@inject JwtAuthStateProvider AuthState
+
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="data">
+            <AuthorizeRouteView RouteData="@data"
+                                DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    @if (!Auth.IsAuthenticated)
+                    {
+                        <RedirectToLogin />
+                    }
+                    else
+                    {
+                        <p class="text-danger">You are not allowed to see this page.</p>
+                    }
+                </NotAuthorized>
+            </AuthorizeRouteView>
+        </Found>
+
+        <NotFound>
+            <p>Sorry, nothing at this address.</p>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+
+        await Auth.LoadFromStorageAsync();
+        AuthState.NotifyUserChanged();
+        StateHasChanged();
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>

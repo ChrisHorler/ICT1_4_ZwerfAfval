@@ -1,0 +1,29 @@
+@page "/register"
+@attribute [AllowAnonymous]
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+@using Frontend_Dashboard.Components.Services
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+
+<CascadingAuthenticationState>
+    ...
+    <AuthorizeView>
+        <Authorized>
+            <button class="btn btn-sm btn-outline-light" @onclick="Logout">Logout</button>
+        </Authorized>
+        <NotAuthorized>
+            <a href="login"     class="btn btn-sm btn-outline-light me-2">Login</a>
+            <a href="register"  class="btn btn-sm btn-light">Sign up</a>
+        </NotAuthorized>
+    </AuthorizeView>
+</CascadingAuthenticationState>
+
+@code {
+    private async Task Logout()
+    {
+        await Auth.LogoutAsync();
+        Nav.NavigateTo("/");
+    }
+}

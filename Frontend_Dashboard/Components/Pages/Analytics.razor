@@ -1,4 +1,5 @@
 @page "/analytics"
+@attribute [Authorize]
 @using BlazorBootstrap.Components
 @using Frontend_Dashboard.Components
 @using Frontend_Dashboard.Components.Models
@@ -7,6 +8,7 @@
 @using System.ComponentModel
 @using Frontend_Dashboard.Components.Services
 @using System.Linq
+@using Microsoft.AspNetCore.Authorization
 @rendermode InteractiveServer
 @inject IAnalyticsDataService AnalyticsDataService
 @inject DateService dateService
