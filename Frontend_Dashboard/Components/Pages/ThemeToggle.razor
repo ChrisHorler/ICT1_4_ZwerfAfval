@@ -2,9 +2,8 @@
 @using Frontend_Dashboard.Components.Services
 @inject ThemeService Theme
 
-<button class="theme-toggle" @onclick="OnToggle">
-    @if (isDark) { <span>&#9728;</span> }  @* sun *@
-    else         { <span>&#9789;</span> }  @* moon *@
+<button class="theme-toggle" @onclick="OnToggleAsync">
+    <span>@(isDark ? "🌙" : "☀️")</span>
 </button>
 
 @code {
@@ -15,12 +14,13 @@
         if (first)
         {
             isDark = await Theme.IsDarkAsync();
-            StateHasChanged();          // now we can paint the right icon
+            await InvokeAsync(StateHasChanged);
         }
     }
 
-    private async Task OnToggle()
+    private async Task OnToggleAsync()
     {
         isDark = await Theme.ToggleAsync();
+        await InvokeAsync(StateHasChanged);
     }
 }

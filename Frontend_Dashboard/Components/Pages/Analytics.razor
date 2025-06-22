@@ -4,6 +4,7 @@
 @using Frontend_Dashboard.Components.Models
 @using BlazorBootstrap
 @using System.Collections.Generic
+@using System.ComponentModel
 @using Frontend_Dashboard.Components.Services
 @using System.Linq
 @rendermode InteractiveServer
@@ -17,9 +18,9 @@
 <div class="analytics-container">
     <div class="analytics-layout">
         <BarChart @ref="barChart" Width="800" Class="mb-4 barChart"></BarChart>
-        <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadDataIntoChart">Load data</Button>
+        <Button Color="ButtonColor.Primary" Size="ButtonSize.Medium" Class="mb-3" @onclick="LoadData">Load data</Button>
 
-        <Graph Data="graphData" />
+        <Graph Data="graphData" @ref="graphComponent" />
     </div>
 </div>
 
@@ -28,7 +29,8 @@
     private BarChart barChart = default!;
     private BarChartOptions barChartOptions = default!;
     private ChartData chartData = default!;
-    private List<DetectionData> graphData = new();
+    private List<LineGraphDto> graphData = new();
+    private Graph? graphComponent;
 
     private readonly string[] defaultColors = new[]
     {
@@ -48,22 +50,37 @@
                 Responsive = true,
                 Interaction = new Interaction { Mode = InteractionMode.Index }
             };
+
+        dateService.PropertyChanged += DateChangedHandler;
     }
 
+    public void Dispose()
+    {
+        dateService.PropertyChanged -= DateChangedHandler;
+    }
+
+    private void DateChangedHandler(object? _, PropertyChangedEventArgs __)
+    {
+        _ = InvokeAsync(async () =>
+        {
+            await LoadData();
+            StateHasChanged();
+        });
+    }
+    
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             await barChart.InitializeAsync(chartData, barChartOptions);
+            await LoadData();
         }
         await base.OnAfterRenderAsync(firstRender);
     }
 
     private async Task LoadDataIntoChart()
     {
-        // TODO:
-        
-        List<BarChartDto> data = await AnalyticsDataService.GetBarChartDataAsync();
+        var data = await AnalyticsDataService.GetBarChartDataAsync(dateService.SelectedDate);
         data = data
             .GroupBy(d => new { d.name, d.category })
             .Select(g => new BarChartDto
@@ -144,5 +161,21 @@
         // Update the chart
         await barChart.UpdateAsync(chartData, barChartOptions);
         
+    }
+
+    private async Task LoadData()
+    {
+        await LoadDataIntoChart();
+
+        var from = new DateOnly(dateService.SelectedDate.Year, dateService.SelectedDate.Month, 1);
+        var to = from.AddMonths(1).AddDays(-1);
+        
+        graphData = await AnalyticsDataService.GetLineGraphDataAsync(from, to);
+        
+        if (graphComponent is not null)
+            graphComponent.BuildChartData();
+        
+        await InvokeAsync(StateHasChanged);
+
     }
 }

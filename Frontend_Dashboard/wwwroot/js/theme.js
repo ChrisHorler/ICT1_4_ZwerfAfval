@@ -18,16 +18,15 @@ export function setTheme(theme) {
     localStorage.setItem(STORAGE_KEY, theme);
 }
 
-/*  toggle helper for convenience */
-export function toggleTheme() {
-    const current = document.documentElement.getAttribute("data-theme") || "light";
-    setTheme(current === "light" ? "dark" : "light");
-}
-
 export function getTheme() {
     return document.documentElement.getAttribute("data-theme") || "light";
 }
 
+/*  toggle helper for convenience */
+export function toggleTheme() {
+    const next = getTheme() === "dark" ? "light" : "dark";
+    setTheme(next);
+    return next;                
+}
 
-/*  apply on first load */
 setTheme(getInitialTheme());

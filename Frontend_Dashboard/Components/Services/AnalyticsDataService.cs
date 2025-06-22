@@ -22,12 +22,12 @@ namespace Frontend_Dashboard.Components.Services
                              ?? throw new InvalidOperationException("'BackendAPI:BaseUrl' not found");
         }
 
-        public async Task<List<BarChartDto>> GetBarChartDataAsync()
+        public async Task<List<BarChartDto>> GetBarChartDataAsync(DateOnly date)
         {
             try
             {
-                // Api endpoint naam hieronder veranderen wanneer deze bekend is 
-                var response = await _httpClient.GetFromJsonAsync<List<BarChartDto>>($"{this._apiUrl}api/Detections/barchart?date=2025-06-20");
+                var url = $"{_apiUrl}api/Detections/barchart?date={date:yyyy-MM-dd}";
+                var response = await _httpClient.GetFromJsonAsync<List<BarChartDto>>(url);
                 return response ?? new List<BarChartDto>();
             }
             catch (Exception)
@@ -37,18 +37,36 @@ namespace Frontend_Dashboard.Components.Services
             }
         }
 
-        public async Task<List<DetectionData>> GetLineGraphDataAsync()
+        public async Task<List<LineGraphDto>> GetLineGraphDataAsync(DateOnly from,
+            DateOnly to)
+        {
+            var all = new List<LineGraphDto>();
+
+            // Fire the whole months worth of requests
+            var tasks = Enumerable.Range(0, to.DayNumber - from.DayNumber + 1)
+                .Select(i => FetchDayAsync(from.AddDays(i)))
+                .ToList();
+
+            var results = await Task.WhenAll(tasks);
+
+            foreach (var list in results)
+                all.AddRange(list);
+
+            return all;
+        }
+        
+        private async Task<List<LineGraphDto>> FetchDayAsync(DateOnly day)
         {
             try
             {
-                // Pas de API-endpoint aan als nodig
-                var response = await _httpClient.GetFromJsonAsync<List<DetectionData>>($"{this._apiUrl}api/Detections/linegraph?date=2025-06-20");
-                return response ?? new List<DetectionData>();
+                var url = $"{_apiUrl}api/Detections/linegraph?date={day:yyyy-MM-dd}";
+                return await _httpClient.GetFromJsonAsync<List<LineGraphDto>>(url) ?? new();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                this._logger.LogError("[AnalyticsDataService] Error while fetching line graph data");
-                return new List<DetectionData>();
+                _logger.LogWarning(ex,
+                    "[Analytics] failed line-graph call for {Date}", day);
+                return new();
             }
         }
     }

@@ -2,8 +2,7 @@
 
 public class LineGraphDto
 {
-    public string? name { get; set; }
-    public string category { get; set; } = string.Empty;
+    public int detectionId { get; set; }
     public DateTime TimeStamp { get; set; }
-    public Dictionary<string, int> TrashTypeCounts { get; set; }
+
 }

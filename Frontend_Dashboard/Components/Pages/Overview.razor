@@ -123,10 +123,12 @@
 
     private async Task HandleDateChangeAsync()
     {
-        selectedDate = dateService.SelectedDate;
-        await LoadPredictions();
-        
-        await InvokeAsync(StateHasChanged);
+        await InvokeAsync(async () =>
+        {
+            selectedDate = dateService.SelectedDate;
+            await LoadPredictions();
+            StateHasChanged();
+        });
     }
     
     private async Task LoadPredictions()

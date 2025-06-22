@@ -5,6 +5,7 @@ namespace Frontend_Dashboard.Components.Services
 {
     public interface IAnalyticsDataService
     {
-        Task<List<BarChartDto>> GetBarChartDataAsync();
+        Task<List<BarChartDto>> GetBarChartDataAsync(DateOnly date);
+        Task<List<LineGraphDto>> GetLineGraphDataAsync(DateOnly from, DateOnly to);
     }
 }
