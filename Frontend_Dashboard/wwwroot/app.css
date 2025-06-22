@@ -2,26 +2,33 @@
    Color Design Tokens
 ================================================ */
 :root{
-    --c-bg         : #f9fafb;
-    --c-fg         : #1e1e2f;
-    --c-brand      : #365a84;
+    --c-bg         : #f7f9fa;
+    --c-fg         : #19202f;
+    --c-brand      : #315370;
 
     --c-card       : #ffffff;
     --c-border     : #dddddd;
 
-    --c-badge-low  : #2ecc71;
-    --c-badge-med  : #f1c40f;
-    --c-badge-high : #e74c3c;
+    --c-badge-low  : #5a9f6e;
+    --c-badge-med  : #fac059;
+    --c-badge-high : #f37453;
+    
+    --c-selected-light: #e8f1ff;
+    --c-selected-dark: #394b6d;
+    
+    --c-selected : var(--c-selected-light);
 }
 
 /* ---------- dark-mode overrides ---------- */
 :root[data-theme='dark']{
-    --c-bg         : #14161c;
-    --c-fg         : #e4e7ef;
-    --c-brand      : #1b3558;
+    --c-bg         : #19202f;
+    --c-fg         : #f7f9fa;
+    --c-brand      : #315370;
 
     --c-card       : #1f222d;
     --c-border     : #3b3f4d;
+    
+    --c-selected   : var(--c-selected-dark);
 }
 
 /* -----------------------------------------------
@@ -235,7 +242,13 @@ body{
     border-radius:4px; 
     font-weight:600;
 }
-.calendar-cell.selected { background:#e8f1ff; }
+.calendar-cell.selected {   
+    background: var(--c-selected);
+}
+.calendar-cell.selected .day-number {
+    color:var(--c-fg);
+}
+
 
 /* Badge styles */
 .badge {

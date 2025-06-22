@@ -107,27 +107,36 @@
     private FunFactsDto? funFacts;
 
 /* ---------- lifecycle ---------- */
-    protected override async Task OnInitializedAsync() => await LoadPredictions();
+    protected override async Task OnInitializedAsync()
+    {
+        selectedDate = dateService.SelectedDate;
+        await LoadPredictions();
+    }
 
     protected override void OnInitialized()
     {
         dateService.PropertyChanged += async (_, _) =>
-            InvokeAsync(async () =>
-        {
-            await LoadPredictions();
-            selectedDate = dateService.SelectedDate;
-            StateHasChanged();
-        });
+            _ = InvokeAsync(HandleDateChangeAsync);
+        
         base.OnInitialized();
     }
 
+    private async Task HandleDateChangeAsync()
+    {
+        selectedDate = dateService.SelectedDate;
+        await LoadPredictions();
+        
+        await InvokeAsync(StateHasChanged);
+    }
+    
     private async Task LoadPredictions()
     {
-        var fresh = await calendarService.GetPredictionsForMonthAsync(currentMonth.Year, currentMonth.Month);
+        var fresh = await calendarService
+            .GetPredictionsForMonthAsync(currentMonth.Year, currentMonth.Month);
+        
         _trashPredictions.Clear();
-        foreach (var kv in fresh) _trashPredictions[kv.Key] = kv.Value;
-
-        await InvokeAsync(StateHasChanged);
+        foreach (var kv in fresh)
+            _trashPredictions[kv.Key] = kv.Value;
     }
 
 /* ---------- navigation ---------- */
