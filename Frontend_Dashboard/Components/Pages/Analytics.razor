@@ -166,11 +166,16 @@
     private async Task LoadData()
     {
         await LoadDataIntoChart();
-        graphData = await AnalyticsDataService.GetLineGraphDataAsync(dateService.SelectedDate);
-        if (graphComponent != null)
-        { 
-            graphComponent.LoadDataIntoGraph();
-        }
+
+        var from = new DateOnly(dateService.SelectedDate.Year, dateService.SelectedDate.Month, 1);
+        var to = from.AddMonths(1).AddDays(-1);
         
+        graphData = await AnalyticsDataService.GetLineGraphDataAsync(from, to);
+        
+        if (graphComponent is not null)
+            graphComponent.BuildChartData();
+        
+        await InvokeAsync(StateHasChanged);
+
     }
 }

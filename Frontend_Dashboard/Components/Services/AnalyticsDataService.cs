@@ -37,18 +37,36 @@ namespace Frontend_Dashboard.Components.Services
             }
         }
 
-        public async Task<List<LineGraphDto>> GetLineGraphDataAsync(DateOnly date)
+        public async Task<List<LineGraphDto>> GetLineGraphDataAsync(DateOnly from,
+            DateOnly to)
+        {
+            var all = new List<LineGraphDto>();
+
+            // Fire the whole months worth of requests
+            var tasks = Enumerable.Range(0, to.DayNumber - from.DayNumber + 1)
+                .Select(i => FetchDayAsync(from.AddDays(i)))
+                .ToList();
+
+            var results = await Task.WhenAll(tasks);
+
+            foreach (var list in results)
+                all.AddRange(list);
+
+            return all;
+        }
+        
+        private async Task<List<LineGraphDto>> FetchDayAsync(DateOnly day)
         {
             try
             {
-                var url = $"{_apiUrl}api/Detections/linegraph?date={date:yyyy-MM-dd}";
-                var response = await _httpClient.GetFromJsonAsync<List<LineGraphDto>>(url);
-                return response ?? new List<LineGraphDto>();
+                var url = $"{_apiUrl}api/Detections/linegraph?date={day:yyyy-MM-dd}";
+                return await _httpClient.GetFromJsonAsync<List<LineGraphDto>>(url) ?? new();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                this._logger.LogError("[LineGraphDataService] Error while fetching line graph data");
-                return new List<LineGraphDto>();
+                _logger.LogWarning(ex,
+                    "[Analytics] failed line-graph call for {Date}", day);
+                return new();
             }
         }
     }
