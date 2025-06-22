@@ -1,7 +1,10 @@
 @using BlazorBootstrap
 @using BlazorBootstrap.Components
 @using Frontend_Dashboard.Components.Models
+@using Frontend_Dashboard.Components.Services
 @using Microsoft.AspNetCore.Components
+@inject IAnalyticsDataService AnalyticsDataService
+@inject DateService dateService
 
 <div class="analytics-layout">
     <LineChart @ref="lineChart" Width="800" Height="400" />
@@ -9,56 +12,79 @@
 
 @if (Data != null && Data.Any())
 {
-    <ul>
-        @foreach (var item in Data)
-        {
-            <li>@item.Type - @item.Confidence</li>
-        }
-    </ul>
+    <p>data currently loaded</p>
 }
 else
 {
-    <p>No data available..</p>
+    <p>No data currently loaded</p>
 }
-
 
 @code {
     [Parameter]
-    public List<DetectionData> Data { get; set; } = new();
+    public List<LineGraphDto> Data { get; set; } = new();
 
     private LineChart lineChart = default!;
     private LineChartOptions lineChartOptions = default!;
     private ChartData chartData = default!;
 
-    protected override void OnInitialized()
+    private readonly string[] defaultColors = new[]
+    {
+        "rgba(255, 99, 132, 0.5)",
+        "rgba(54, 162, 235, 0.5)",
+        "rgba(255, 206, 86, 0.5)",
+        "rgba(75, 192, 192, 0.5)",
+        "rgba(153, 102, 255, 0.5)",
+        "rgba(255, 159, 64, 0.5)"
+    };
+
+    // Processes the data and prepares it for graph
+    public void LoadDataIntoGraph()
     {
         if (Data != null && Data.Any())
         {
-            var grouped = Data
-                .GroupBy(d => d.Type)
-                .Select(g => new
-                {
-                    Type = g.Key,
-                    Count = g.Count()
-                })
-                .ToList();
+            // Create a dictionary to count how many detections happened per day
+            var dayCounts = new Dictionary<DateTime, int>();
 
+            foreach (var item in Data)
+            {
+                var day = item.TimeStamp.Date;
+
+                if (dayCounts.ContainsKey(day))
+                {
+                    dayCounts[day]++;
+                }
+                else
+                {
+                    dayCounts[day] = 1;
+                }
+            }
+
+            // Log the count results to the console cause im cool
+            foreach (var kvp in dayCounts.OrderBy(kvp => kvp.Key))
+            {
+                Console.WriteLine($"{kvp.Key:yyyy-MM-dd}: {kvp.Value} items");
+            }
+
+            // Chart labels = ordered dates formatted as strings
+            var orderedDays = dayCounts.Keys.OrderBy(d => d).ToList();
+            var labels = orderedDays.Select(d => d.ToString("yyyy-MM-dd")).ToList();
+
+            var dataset = new LineChartDataset
+                {
+                    Label = "Detections per day",
+                    Data = orderedDays.Select(day => (double?)dayCounts[day]).ToList(),
+                    BackgroundColor = defaultColors[0],
+                    BorderColor = "#333",
+                    BorderWidth = 2,
+                    PointRadius = Enumerable.Repeat(4.0, labels.Count).ToList(),
+                    PointHoverRadius = Enumerable.Repeat(6.0, labels.Count).ToList()
+                };
+
+            // Final chart data with labels and dataset
             chartData = new ChartData
                 {
-                    Labels = grouped.Select(g => g.Type).ToList(),
-                    Datasets = new List<IChartDataset>
-                {
-                    new LineChartDataset
-                    {
-                        Label = "Amount per type",
-                        Data = grouped.Select(g => (double?)g.Count).ToList(),
-                        BackgroundColor = "rgba(75, 192, 192, 0.2)",
-                        BorderColor = "rgb(75, 192, 192)",
-                        BorderWidth = 2,
-                        PointRadius = grouped.Select(g => 5.0).ToList(),
-                        PointHoverRadius = grouped.Select(g => 8.0).ToList()
-                    }
-                }
+                    Labels = labels,
+                    Datasets = new List<IChartDataset> { dataset }
                 };
         }
         else
@@ -80,6 +106,12 @@ else
                 },
                 Responsive = true
             };
+    }
+
+    // Initializes the chart with data
+    protected override void OnInitialized()
+    {
+        this.LoadDataIntoGraph();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

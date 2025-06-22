@@ -6,5 +6,6 @@ namespace Frontend_Dashboard.Components.Services
     public interface IAnalyticsDataService
     {
         Task<List<BarChartDto>> GetBarChartDataAsync();
+        Task<List<LineGraphDto>> GetLineGraphDataAsync();
     }
 }
