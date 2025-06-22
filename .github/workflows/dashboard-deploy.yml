@@ -70,6 +70,7 @@ jobs:
               --network backend-network \
               --restart unless-stopped \
               -p 0:${{ env.APP_PORT }} \
+              -e BackendAPI:BaseUrl='${{ secrets.BACKENDAPI_PATH }}
               "$IMAGE"
             
             # ---------- nginx reverse-proxy ----------
