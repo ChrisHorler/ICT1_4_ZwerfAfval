@@ -1,20 +1,26 @@
 ﻿@using Frontend_Dashboard.Components.Services
 @inject DateService dateService
+@rendermode InteractiveServer
 
 
 <nav class="custom-navbar">
     <div class="nav-inner">
-        <a class="brand" href="/">Trash Prediction Dashboard</a>
-        
+        <span class="brand">Trashboard</span>
+
         <div class="nav-links">
-            <NavLink href="waste-calendar" class="nav-item" Match="NavLinkMatch.All">Waste Calendar</NavLink>
+            <NavLink href="/"         class="nav-item" Match="NavLinkMatch.All">Overview</NavLink>
             <NavLink href="analytics" class="nav-item">Analytics</NavLink>
         </div>
-        
-        <InputDate class="nav-date"
-                   @bind-Value="dateService.SelectedDate"
-                   format="yyyy-MM-dd"
-                   @key="dateService.SelectedDate" />
+
+        <!-- wrap date-picker + toggle in a small flex box on the right -->
+        <div class="nav-right">
+            <InputDate class="nav-date"
+                       @bind-Value="dateService.SelectedDate"
+                       format="yyyy-MM-dd"
+                       @key="dateService.SelectedDate" />
+
+            <ThemeToggle @rendermode="InteractiveServer" />
+        </div>
     </div>
 </nav>
 

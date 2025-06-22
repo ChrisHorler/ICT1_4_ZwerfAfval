@@ -9,7 +9,7 @@ namespace ControlApi.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController : ControllerBase
+public class AuthController : ControllerBase 
 {
     private readonly ControlApiDbContext _db;
     private readonly IJwtService _jwt;

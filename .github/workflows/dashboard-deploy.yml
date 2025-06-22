@@ -3,7 +3,7 @@ name: Build & Deploy Dashboard (Self-signed HTTPS)
 on:
   push:
     paths:
-      - 'Zwerfafval_WebApp/**'
+      - 'Frontend_Dashboard/**'
       - 'nginx/conf.d/dashboard.conf'
       - '.github/workflows/dashboard-deploy.yml'
     branches: [ main ]
@@ -40,7 +40,7 @@ jobs:
       - name: Build & Push Dashboard Image
         uses: docker/build-push-action@v5
         with:
-          context: Zwerfafval_WebApp
+          context: Frontend_Dashboard
           push: true
           tags: |
             ${{ env.IMAGE_NAME }}:${{ github.sha }}

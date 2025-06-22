@@ -1,3 +1,36 @@
+/* ================================================
+   Color Design Tokens
+================================================ */
+:root{
+    --c-bg         : #f7f9fa;
+    --c-fg         : #19202f;
+    --c-brand      : #315370;
+
+    --c-card       : #ffffff;
+    --c-border     : #dddddd;
+
+    --c-badge-low  : #5a9f6e;
+    --c-badge-med  : #fac059;
+    --c-badge-high : #f37453;
+    
+    --c-selected-light: #e8f1ff;
+    --c-selected-dark: #394b6d;
+    
+    --c-selected : var(--c-selected-light);
+}
+
+/* ---------- dark-mode overrides ---------- */
+:root[data-theme='dark']{
+    --c-bg         : #19202f;
+    --c-fg         : #f7f9fa;
+    --c-brand      : #315370;
+
+    --c-card       : #1f222d;
+    --c-border     : #3b3f4d;
+    
+    --c-selected   : var(--c-selected-dark);
+}
+
 /* -----------------------------------------------
    Global Reset & Base Styles
 ----------------------------------------------- */
@@ -5,25 +38,39 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    padding-top: 64px;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f9fafb;
-    color: #1e1e2f;
+body{
+    margin:0; 
+    padding-top:64px;
+    font-family:'Segoe UI',sans-serif;
+    background: var(--c-bg);
+    color:      var(--c-fg);
+}
+
+.theme-toggle{
+    margin-left:.75rem;
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-size:1.35rem;
+    line-height:1;
+    color:#fff;
+    transition:transform .2s;
+}
+.theme-toggle:hover{
+    transform:scale(1.15);
 }
 
 /* -----------------------------------------------
    Navbar Styles
 ----------------------------------------------- */
-.custom-navbar {
-    background-color: #365a84;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 64px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+.custom-navbar{
+    background: var(--c-brand);
+    position:fixed; 
+    top:0; 
+    width:100%; 
+    height:64px;
+    box-shadow:0 2px 4px rgba(0,0,0,.1); 
+    z-index:1000;
 }
 
 .nav-inner {
@@ -42,7 +89,8 @@ body {
     font-size: 1.2rem;
     font-weight: 600;
     color: #ffffff;
-    text-decoration: none;
+    pointer-events: none;
+    user-select: none;
 }
 
 .nav-links {
@@ -51,6 +99,13 @@ body {
     transform: translateX(-50%);
     display: flex;
     gap: 2rem;
+}
+.nav-right{
+    margin-left:auto;     
+    display:flex;   
+    align-items:center;
+    gap:.75rem;
+    z-index: auto;
 }
 
 .nav-item {
@@ -70,13 +125,13 @@ body {
     border-bottom: 2px solid #ffffff;
 }
 
-.nav-date {
-    margin-left: auto;
-    padding: 4px 6px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #fff;
-    font: inherit;
+.nav-date{
+    margin-left:auto;
+    padding:4px 6px;
+    border:1px solid var(--c-border);
+    border-radius:4px; 
+    background:#fff;
+    font:inherit;
 }
 
 /* -----------------------------------------------
@@ -109,12 +164,12 @@ body {
 }
 
 
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
-    border: 1px solid #ccc;
-    background-color: #ccc;
+.calendar-grid{
+    display:grid; 
+    grid-template-columns:repeat(7,1fr); 
+    gap:1px;
+    border:1px solid var(--c-border); 
+    background:var(--c-border);
 }
 
 .calendar-nav-button {
@@ -149,12 +204,12 @@ body {
     font-size: 1.25rem;
 }
 
-.calendar-cell {
-    background-color: #fff;
-    height: 100px;
-    padding: 0.25rem;
-    border: 1px solid #ddd;
-    position: relative;
+.calendar-cell{
+    background:var(--c-card);
+    height:100px; 
+    padding:.25rem;
+    border:1px solid var(--c-border);
+    position:relative;
 }
 
 .month-label {
@@ -162,52 +217,61 @@ body {
     font-size: 1.25rem;
 }
 
-.calendar-weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-    background-color: #f0f2f5; /* light shading */
-    border: 1px solid #ccc;
+.calendar-weekdays{
+    display:grid; 
+    grid-template-columns:repeat(7,1fr);
+    font-weight:bold; 
+    text-align:center;
+    margin-bottom:.5rem; 
+    font-size:.95rem;
+    background: var(--c-card);
+    border:1px solid var(--c-border);
 }
-.calendar-weekdays div {
-    padding: 0.5rem 0;
-    border-right: 1px solid #ddd;
+.calendar-weekdays div{
+    padding:.5rem 0; 
+    border-right:1px solid var(--c-border);
 }
 .calendar-weekdays div:last-child {
     border-right: none;
 }
 
-.day-number.today {
-    background-color: #365a84;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: 600;
+.day-number.today{
+    background:var(--c-brand);
+    color:#fff;
+    padding:2px 6px; 
+    border-radius:4px; 
+    font-weight:600;
 }
-.calendar-cell.selected { background:#e8f1ff; }
+.calendar-cell.selected {   
+    background: var(--c-selected);
+}
+.calendar-cell.selected .day-number {
+    color:var(--c-fg);
+}
+
 
 /* Badge styles */
 .badge {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 24px;
-    font-size: 0.75rem;
-    color: white;
-    font-weight: bold;
     position: absolute;
     bottom: 6px;
     right: 6px;
+
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;        /* ← perfect circle (use 6px for a “rounded square”) */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 0;
+    font-weight: 700;
+    color: #fff;
 }
 
-.badge.red    { background-color: #e74c3c; }
-.badge.green  { background-color: #2ecc71; }
-.badge.yellow { background-color: #f1c40f; color: black; }
+.badge.low    { background:var(--c-badge-low ); }
+.badge.medium { background:var(--c-badge-med ); }
+.badge.high   { background:var(--c-badge-high); }
 
 /* -----------------------------------------------
    Calendar Legend
@@ -236,22 +300,22 @@ body {
 }
 
 
-.legend-color.red    { background-color: #e74c3c; }
-.legend-color.yellow { background-color: #f1c40f; }
-.legend-color.green  { background-color: #2ecc71; }
+.legend-color.red    { background:var(--c-badge-high); }
+.legend-color.yellow { background:var(--c-badge-med ); }
+.legend-color.green  { background:var(--c-badge-low ); }
 
 /* -----------------------------------------------
    Info Panel
 ----------------------------------------------- */
-.info-panel {
-    flex: 0 0 40%;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    font-size: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.info-panel{
+    flex:0 0 40%; 
+    padding:1rem;
+    border:1px solid var(--c-border); 
+    background:var(--c-card);
+    font-size:1rem; 
+    display:flex; 
+    flex-direction:column; 
+    gap:2rem;
 }
 
 .info-item {
@@ -268,16 +332,16 @@ body {
 /* -----------------------------------------------
    Temperature Box
 ----------------------------------------------- */
-.temperature-box {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    background: white;
-    border: 1px solid #ccc;
-    padding: 0.75rem 1.25rem;
-    font-size: 0.95rem;
-    border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+.temperature-box{
+    position:fixed; 
+    bottom:1.5rem;
+    right:1.5rem;
+    background:var(--c-card); 
+    border:1px solid var(--c-border);
+    padding:.75rem 1.25rem; 
+    font-size:.95rem; 
+    border-radius:4px;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
 }
 /* -----------------------------------------------
    Date Picker

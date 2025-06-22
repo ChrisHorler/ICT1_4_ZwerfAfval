@@ -1,4 +1,5 @@
-@page "/waste-calendar"
+@page "/"
+@page "/overview"
 @using Frontend_Dashboard.Components.Models
 @using Frontend_Dashboard.Components.Services
 @rendermode InteractiveServer
@@ -34,17 +35,11 @@
                     {
                         var date       = new DateOnly(currentMonth.Year, currentMonth.Month, d);
                         var prediction = GetTrashLevel(date);
-                        var badgeClass = prediction switch
-                        {
-                            "high"   => "red",
-                            "medium" => "yellow",
-                            "low"    => "green",
-                            _        => null
-                        };
+                        var badgeClass = prediction;
 
                         <div class="day-number @(IsToday(d) ? "today" : "")">@d</div>
 
-                        @if (badgeClass is not null)
+                        @if (prediction is not null)
                         {
                             <span class="badge @badgeClass">@d</span>
                         }
@@ -60,13 +55,15 @@
             <div class="legend-item"><span class="legend-color green"></span>  Low amount of trash</div>
         </div>
 
+        <!-- Debug to check calendar caching
         @if (env.IsDevelopment())
         {
             <button class="btn btn-sm" style="margin-top:1rem"
                     @onclick="ClearCacheAndReload">
                 🔄 Clear cache & reload
             </button>
-        }
+        }-->
+        
     </div>
 
     <!-- ───── INFO PANEL ───── -->
@@ -110,27 +107,36 @@
     private FunFactsDto? funFacts;
 
 /* ---------- lifecycle ---------- */
-    protected override async Task OnInitializedAsync() => await LoadPredictions();
+    protected override async Task OnInitializedAsync()
+    {
+        selectedDate = dateService.SelectedDate;
+        await LoadPredictions();
+    }
 
     protected override void OnInitialized()
     {
         dateService.PropertyChanged += async (_, _) =>
-            InvokeAsync(async () =>
-        {
-            await LoadPredictions();
-            selectedDate = dateService.SelectedDate;
-            StateHasChanged();
-        });
+            _ = InvokeAsync(HandleDateChangeAsync);
+        
         base.OnInitialized();
     }
 
+    private async Task HandleDateChangeAsync()
+    {
+        selectedDate = dateService.SelectedDate;
+        await LoadPredictions();
+        
+        await InvokeAsync(StateHasChanged);
+    }
+    
     private async Task LoadPredictions()
     {
-        var fresh = await calendarService.GetPredictionsForMonthAsync(currentMonth.Year, currentMonth.Month);
+        var fresh = await calendarService
+            .GetPredictionsForMonthAsync(currentMonth.Year, currentMonth.Month);
+        
         _trashPredictions.Clear();
-        foreach (var kv in fresh) _trashPredictions[kv.Key] = kv.Value;
-
-        await InvokeAsync(StateHasChanged);
+        foreach (var kv in fresh)
+            _trashPredictions[kv.Key] = kv.Value;
     }
 
 /* ---------- navigation ---------- */
