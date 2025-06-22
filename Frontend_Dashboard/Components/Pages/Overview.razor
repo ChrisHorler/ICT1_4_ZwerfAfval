@@ -75,18 +75,22 @@
         else
         {
             <div class="info-item">
+                <span class="icon">📍</span>
+                <p>Where the most trash is found:<br>
+                    <strong>@funFacts.TopPOIName</strong>
+                    </p>
+            </div>
+            <div class="info-item">
                 <span class="icon">🗑️</span>
-                <p>Total detections:<br><strong>@funFacts.TotalDetections</strong></p>
+                <p>Estimated amount of trash in Breda:<br><strong>@funFacts.TotalDetections</strong></p>
             </div>
             <div class="info-item">
                 <span class="icon">🧺</span>
-                <p>Most common trash type:<br><strong>@funFacts.MostCommonTrash</strong></p>
+                <p>The most common trash type found in Breda:<br><strong>@funFacts.MostCommonTrash</strong></p>
             </div>
         }
     </div>
 </div>
-
-<div class="temperature-box">Today's temperature: 28 °C</div>
 
 @code {
 /* ---------- month helpers ---------- */
@@ -172,7 +176,21 @@
         selectedDate = new DateOnly(currentMonth.Year, currentMonth.Month, maybeDay.Value);
         dateService.SelectedDate = selectedDate.Value;
 
-        funFacts = await funFactsService.GetFactsAsync(selectedDate.Value);
+        var factsTask = funFactsService.GetFactsAsync(selectedDate.Value);
+        var poiTask = funFactsService.GetTopPoiAsync(selectedDate.Value);
+
+        await Task.WhenAll(factsTask, poiTask);
+
+        var facts = factsTask.Result;
+        var (poiName, cnt) = poiTask.Result;
+
+        if (facts != null)
+        {
+            facts.TopPOIName = poiName;
+            facts.TopPoiDetections = cnt;
+        }
+
+        funFacts = facts;
         StateHasChanged();
     }
 
