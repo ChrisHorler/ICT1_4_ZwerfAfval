@@ -15,4 +15,7 @@ public record FunFactsDto
     public int TotalDetections { get; init; }
     public string? MostCommonTrash { get; set; }
     
+    public string? TopPOIName { get; set; }
+    public int TopPoiDetections { get; set; }
+    
 }
