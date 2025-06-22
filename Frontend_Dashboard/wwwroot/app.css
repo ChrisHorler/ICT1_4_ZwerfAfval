@@ -47,7 +47,7 @@ body{
 }
 
 .theme-toggle{
-    margin-left:.75rem;
+    margin-left:1rem;
     background:none;
     border:none;
     cursor:pointer;
@@ -130,8 +130,9 @@ body{
     padding:4px 6px;
     border:1px solid var(--c-border);
     border-radius:4px; 
-    background:#fff;
+    background:var(--c-card);
     font:inherit;
+    color:inherit;
 }
 
 /* -----------------------------------------------
@@ -176,9 +177,9 @@ body{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #fff;
-    border: 1px solid #ccc;
-    color: #333;
+    background:var(--c-card);
+    border: 1px solid var(--c-border);
+    color: var(--c-fg);
     font-size: 1.1rem;
     padding: 0.25rem 0.75rem;
     border-radius: 4px;
@@ -187,8 +188,7 @@ body{
 }
 
 .calendar-nav-button:hover {
-    background-color: #f0f0f0;
-    border-color: #999;
+    background:var(--c-selected-light);
 }
 
 .calendar-nav-button.left {
@@ -258,7 +258,7 @@ body{
 
     width: 26px;
     height: 26px;
-    border-radius: 6px;        /* ← perfect circle (use 6px for a “rounded square”) */
+    border-radius: 6px;
 
     display: flex;
     align-items: center;
@@ -385,6 +385,15 @@ body{
 }
 
 .graph {
+    background:var(--c-card);
+    color:var(--c-fg);
+    border:1px solid var(--c-border);
     flex: 1;
     min-width: 300px;
 }
+
+canvas {
+    background: var(--c-card);
+}
+.barchart {flex:2; min-height:400px; padding:10px;}
+.graph {flex:1; min-width:300px;}

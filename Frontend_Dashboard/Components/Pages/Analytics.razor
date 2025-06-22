@@ -4,6 +4,7 @@
 @using Frontend_Dashboard.Components.Models
 @using BlazorBootstrap
 @using System.Collections.Generic
+@using System.ComponentModel
 @using Frontend_Dashboard.Components.Services
 @using System.Linq
 @rendermode InteractiveServer
@@ -49,20 +50,37 @@
                 Responsive = true,
                 Interaction = new Interaction { Mode = InteractionMode.Index }
             };
+
+        dateService.PropertyChanged += DateChangedHandler;
     }
 
+    public void Dispose()
+    {
+        dateService.PropertyChanged -= DateChangedHandler;
+    }
+
+    private void DateChangedHandler(object? _, PropertyChangedEventArgs __)
+    {
+        _ = InvokeAsync(async () =>
+        {
+            await LoadData();
+            StateHasChanged();
+        });
+    }
+    
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             await barChart.InitializeAsync(chartData, barChartOptions);
+            await LoadData();
         }
         await base.OnAfterRenderAsync(firstRender);
     }
 
     private async Task LoadDataIntoChart()
     {
-        List<BarChartDto> data = await AnalyticsDataService.GetBarChartDataAsync();
+        var data = await AnalyticsDataService.GetBarChartDataAsync(dateService.SelectedDate);
         data = data
             .GroupBy(d => new { d.name, d.category })
             .Select(g => new BarChartDto
@@ -148,7 +166,7 @@
     private async Task LoadData()
     {
         await LoadDataIntoChart();
-        graphData = await AnalyticsDataService.GetLineGraphDataAsync();
+        graphData = await AnalyticsDataService.GetLineGraphDataAsync(dateService.SelectedDate);
         if (graphComponent != null)
         { 
             graphComponent.LoadDataIntoGraph();

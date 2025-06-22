@@ -22,12 +22,12 @@ namespace Frontend_Dashboard.Components.Services
                              ?? throw new InvalidOperationException("'BackendAPI:BaseUrl' not found");
         }
 
-        public async Task<List<BarChartDto>> GetBarChartDataAsync()
+        public async Task<List<BarChartDto>> GetBarChartDataAsync(DateOnly date)
         {
             try
             {
-                // Api endpoint naam hieronder veranderen wanneer deze bekend is 
-                var response = await _httpClient.GetFromJsonAsync<List<BarChartDto>>($"{this._apiUrl}api/Detections/barchart?date=2025-06-20");
+                var url = $"{_apiUrl}api/Detections/barchart?date={date:yyyy-MM-dd}";
+                var response = await _httpClient.GetFromJsonAsync<List<BarChartDto>>(url);
                 return response ?? new List<BarChartDto>();
             }
             catch (Exception)
@@ -37,12 +37,12 @@ namespace Frontend_Dashboard.Components.Services
             }
         }
 
-        public async Task<List<LineGraphDto>> GetLineGraphDataAsync()
+        public async Task<List<LineGraphDto>> GetLineGraphDataAsync(DateOnly date)
         {
             try
             {
-                // Pas de API-endpoint aan als nodig
-                var response = await _httpClient.GetFromJsonAsync<List<LineGraphDto>>($"{this._apiUrl}api/Detections/linegraph?date=2025-06-20");
+                var url = $"{_apiUrl}api/Detections/linegraph?date={date:yyyy-MM-dd}";
+                var response = await _httpClient.GetFromJsonAsync<List<LineGraphDto>>(url);
                 return response ?? new List<LineGraphDto>();
             }
             catch (Exception)
