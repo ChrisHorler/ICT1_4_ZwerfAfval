@@ -43,11 +43,11 @@ else
         if (Data != null && Data.Any())
         {
             // Create a dictionary to count how many detections happened per day
-            var dayCounts = new Dictionary<string, int>();
+            var dayCounts = new Dictionary<DateTime, int>();
 
             foreach (var item in Data)
             {
-                var day = item.TimeStamp.Date.ToString("yyyy-MM-dd");
+                var day = item.TimeStamp.Date;
 
                 if (dayCounts.ContainsKey(day))
                 {
@@ -60,19 +60,19 @@ else
             }
 
             // Log the count results to the console cause im cool
-            foreach (var kvp in dayCounts)
+            foreach (var kvp in dayCounts.OrderBy(kvp => kvp.Key))
             {
-                Console.WriteLine($"{kvp.Key}: {kvp.Value} items");
+                Console.WriteLine($"{kvp.Key:yyyy-MM-dd}: {kvp.Value} items");
             }
 
-            // Chart labels = days
-            var labels = dayCounts.Keys.OrderBy(d => d).ToList();
+            // Chart labels = ordered dates formatted as strings
+            var orderedDays = dayCounts.Keys.OrderBy(d => d).ToList();
+            var labels = orderedDays.Select(d => d.ToString("yyyy-MM-dd")).ToList();
 
-            // Build one dataset showing the number of detections per day
             var dataset = new LineChartDataset
                 {
                     Label = "Detections per day",
-                    Data = labels.Select(day => (double?)dayCounts[day]).ToList(),
+                    Data = orderedDays.Select(day => (double?)dayCounts[day]).ToList(),
                     BackgroundColor = defaultColors[0],
                     BorderColor = "#333",
                     BorderWidth = 2,
