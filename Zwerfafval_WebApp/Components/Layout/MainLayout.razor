@@ -59,7 +59,7 @@
     protected override void OnInitialized()
     {
         // Initialize dropdown values from the DateService
-        var date = DateService.SelectedDate;
+        var date = DateService.AnalyticsDate;
         SelectedDay = date.Day;
         SelectedMonth = date.Month;
         SelectedYear = date.Year;
@@ -102,6 +102,6 @@
     // Updates the shared date in the DateService
     private void UpdateDateService()
     {
-        DateService.SelectedDate = new DateTime(SelectedYear, SelectedMonth, SelectedDay);
+        DateService.AnalyticsDate = new DateTime(SelectedYear, SelectedMonth, SelectedDay);
     }
 }
