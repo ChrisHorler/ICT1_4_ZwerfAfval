@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
   <diagram name="Page-1" id="39hm194q-l13xccRxlsW">
-    <mxGraphModel dx="6344" dy="3176" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="6114" dy="3036" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -730,6 +730,14 @@
         <mxCell id="iwyEC6983UlKEHwNcQ2G-29" value="&lt;span style=&quot;font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;+CreateDbContext(): ControlApiDbContext&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontColor=default;" parent="iwyEC6983UlKEHwNcQ2G-28" vertex="1">
           <mxGeometry y="30" width="260" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="VmTyKb6b7TcR62kLf1Y4-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=diamondThin;endFill=1;endSize=22;" edge="1" parent="1" source="iwyEC6983UlKEHwNcQ2G-38" target="UlhQks0yLPX1q9XYhBIK-11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1800" y="-1040" />
+              <mxPoint x="-1800" y="-1040" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="iwyEC6983UlKEHwNcQ2G-38" value="&lt;span&gt;SensoringConnector&lt;/span&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
           <mxGeometry x="-1810" y="-1160" width="490" height="390" as="geometry">
             <mxRectangle x="-1720" y="-980" width="160" height="30" as="alternateBounds" />
@@ -1220,7 +1228,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="UlhQks0yLPX1q9XYhBIK-11" value="&lt;b&gt;DailyBackgroundService&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;align=center;labelBackgroundColor=none;fontColor=default;" parent="1" vertex="1">
-          <mxGeometry x="-2140" y="-1160" width="300" height="240" as="geometry" />
+          <mxGeometry x="-2150" y="-1160" width="300" height="240" as="geometry" />
         </mxCell>
         <mxCell id="yWFbXETGNYuAG4VHQHp2-16" value="-_httpClientFactory: IHttpClientFactory" style="text;whiteSpace=wrap;html=1;fontColor=default;" parent="UlhQks0yLPX1q9XYhBIK-11" vertex="1">
           <mxGeometry y="30" width="300" height="30" as="geometry" />
