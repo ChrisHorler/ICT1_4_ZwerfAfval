@@ -1,11 +1,12 @@
-author_name,total_commits,total_merges,insertions,deletions,total_changes,most_commits,most_merges,most_changes
+author_name,total_commits,total_merges,insertions,deletions,total_changes,top_total_commits,top_total_merges,top_total_changes
 Angel,1,1,13122,0,13122,False,False,False
 Angel Zeng,28,2,44303,16837,61140,False,False,False
 ChrisHorler,109,2,6918,2689,9607,False,False,False
+Christian Horler,19,8,6471,5204,11675,False,False,False
 Christian Scott Horler,82,82,60112,6697,66809,False,True,False
 JurPurr,36,1,5423,1722,7145,False,False,False
-Martijn,81,74,155000,14009,169009,False,False,True
+Martijn,83,76,158002,17035,175037,False,False,True
 OldMartijntje_Frituurpan,8,1,1298,1146,2444,False,False,False
-OldMartijntje_ubuntu,21,5,4430,2810,7240,False,False,False
-oldmartijntje_TH,164,22,19550,9431,28981,True,False,False
-whoskhoi,46,1,1566,731,2297,False,False,False
+OldMartijntje_ubuntu,26,7,4436,6798,11234,False,False,False
+oldmartijntje_TH,179,28,30023,17386,47409,True,False,False
+whoskhoi,51,2,1612,1193,2805,False,False,False
